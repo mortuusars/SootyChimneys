@@ -1,0 +1,10 @@
+{
+  "variants": {
+    "dirty=false": {
+      "model": "sootychimneys:block/brick_chimney"
+    },
+    "dirty=true": {
+      "model": "sootychimneys:block/brick_chimney_dirty"
+    }
+  }
+}
