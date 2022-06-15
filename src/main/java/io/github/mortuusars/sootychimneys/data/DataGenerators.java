@@ -1,7 +1,8 @@
-package io.github.mortuusars.sootychimneys.datagen;
+package io.github.mortuusars.sootychimneys.data;
 
 import io.github.mortuusars.sootychimneys.SootyChimneys;
 import net.minecraft.data.DataGenerator;
+import net.minecraft.data.recipes.RecipeProvider;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.forge.event.lifecycle.GatherDataEvent;
@@ -17,6 +18,7 @@ public class DataGenerators {
             generator.addProvider(blockTagsGenerator);
             generator.addProvider(new ModItemTagsProvider(generator, blockTagsGenerator, event.getExistingFileHelper()));
             generator.addProvider(new ModLootTablesProvider(generator));
+            generator.addProvider(new ModRecipeProvider(generator));
         }
 
         if (event.includeClient()){

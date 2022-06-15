@@ -1,4 +1,4 @@
-package io.github.mortuusars.sootychimneys.datagen;
+package io.github.mortuusars.sootychimneys.data;
 
 import io.github.mortuusars.sootychimneys.SootyChimneys;
 import io.github.mortuusars.sootychimneys.blocks.BrickChimneyBlock;

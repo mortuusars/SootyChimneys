@@ -1,4 +1,4 @@
-package io.github.mortuusars.sootychimneys.datagen;
+package io.github.mortuusars.sootychimneys.data;
 
 import io.github.mortuusars.sootychimneys.setup.Registry;
 import net.minecraft.data.DataGenerator;

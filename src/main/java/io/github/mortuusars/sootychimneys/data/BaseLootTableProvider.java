@@ -1,4 +1,4 @@
-package io.github.mortuusars.sootychimneys.datagen;
+package io.github.mortuusars.sootychimneys.data;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
