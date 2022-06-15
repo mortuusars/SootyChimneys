@@ -38,6 +38,7 @@ public class ModBlockStatesProvider extends BlockStateProvider {
 
     private BlockModelBuilder createBrickChimneyCleanModel() {
         return models().getBuilder(Registry.BRICK_CHIMNEY.get().getRegistryName().getPath())
+                .parent(models().getExistingFile(mcLoc("block")))
                 .texture("particle", _brickChimneyTexture)
                 .texture("texture", _brickChimneyTexture)
                 .texture("inside", _brickChimneySootTexture)
@@ -74,6 +75,7 @@ public class ModBlockStatesProvider extends BlockStateProvider {
 
     private BlockModelBuilder createBrickChimneyDirtyModel() {
         return models().getBuilder(Registry.BRICK_CHIMNEY.get().getRegistryName().getPath() + "_dirty")
+                .parent(models().getExistingFile(mcLoc("block")))
                 .texture("particle", _brickChimneySootTexture)
                 .texture("texture", _brickChimneyTexture)
                 .texture("overlay", _brickChimneySootSideTexture)

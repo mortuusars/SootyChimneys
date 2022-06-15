@@ -13,6 +13,6 @@ public class ModItemModelsProvider extends ItemModelProvider {
 
     @Override
     protected void registerModels() {
-        withExistingParent(Registry.BRICK_CHIMNEY_ITEM.get().getRegistryName().getPath(), mcLoc("block/bricks"));
+        withExistingParent(Registry.BRICK_CHIMNEY_ITEM.get().getRegistryName().getPath(), modLoc("block/brick_chimney"));
     }
 }
