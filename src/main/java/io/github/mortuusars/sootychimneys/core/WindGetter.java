@@ -1,5 +1,6 @@
 package io.github.mortuusars.sootychimneys.core;
 
+import io.github.mortuusars.sootychimneys.config.CommonConfig;
 import net.minecraft.network.chat.TextComponent;
 import net.minecraft.world.level.Level;
 import net.minecraftforge.event.TickEvent;
@@ -9,7 +10,7 @@ import net.minecraftforge.eventbus.api.SubscribeEvent;
 import java.util.Random;
 
 public class WindGetter {
-    private final static Wind _wind = new Wind(0, 0.05f);
+    private final static Wind _wind = new Wind(0, 0f);
 
     public static Wind getWind(){
         return _wind;
@@ -17,6 +18,9 @@ public class WindGetter {
 
     @SubscribeEvent
     public static void onPlayerTick(TickEvent.PlayerTickEvent event){
+        if (!CommonConfig.WIND_ENABLED.get())
+            return;
+
         Level level = event.player.getLevel();
         if (level.isClientSide() && level.getGameTime() % 5L == 0)
             updateWind(level);

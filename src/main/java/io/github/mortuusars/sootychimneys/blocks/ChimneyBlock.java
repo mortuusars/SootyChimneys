@@ -1,6 +1,8 @@
 package io.github.mortuusars.sootychimneys.blocks;
 
+import com.mojang.logging.LogUtils;
 import com.mojang.math.Vector3f;
+import io.github.mortuusars.sootychimneys.config.CommonConfig;
 import io.github.mortuusars.sootychimneys.core.Wind;
 import io.github.mortuusars.sootychimneys.core.WindGetter;
 import io.github.mortuusars.sootychimneys.setup.Registry;
@@ -136,8 +138,9 @@ public abstract class ChimneyBlock extends Block implements EntityBlock {
 
     @Override
     public void randomTick(BlockState pState, ServerLevel pLevel, BlockPos pPos, Random pRandom) {
-        if (pState.getValue(LIT) && !pState.getValue(DIRTY) && pRandom.nextFloat() < 0.5f)
+        if (pState.getValue(LIT) && !pState.getValue(DIRTY) && pRandom.nextDouble(0.00001d, 1.0d) < CommonConfig.DIRTY_CHANCE.get()){
             pLevel.setBlock(pPos, pState.setValue(DIRTY, true), Block.UPDATE_CLIENTS);
+        }
     }
 
     @Override

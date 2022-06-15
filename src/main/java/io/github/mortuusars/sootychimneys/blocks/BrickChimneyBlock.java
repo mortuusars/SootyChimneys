@@ -11,8 +11,8 @@ import net.minecraft.world.phys.shapes.VoxelShape;
 
 public class BrickChimneyBlock extends ChimneyBlock{
 
-    private static final Vector3f _particleOriginOffset = new Vector3f(0.5f, 1.15f, 0.5f);
-    private static final Vector3f _particleMaxRandomOffset = new Vector3f(0.15f, 0.1f, 0.15f);
+    private static final Vector3f _particleOriginOffset = new Vector3f(0.5f, 1f, 0.5f);
+    private static final Vector3f _particleMaxRandomOffset = new Vector3f(0.15f, 0.05f, 0.15f);
     private static final VoxelShape _shape = Shapes.or(
             Block.box(1d, 0d, 1d, 15d,11d,15d),
             Block.box(0d, 11d, 0d, 16d,16d,16d));
