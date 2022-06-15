@@ -8,6 +8,7 @@ import io.github.mortuusars.sootychimneys.utils.RandomOffset;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.level.Level;
@@ -20,6 +21,7 @@ import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BooleanProperty;
+import net.minecraft.world.level.material.FluidState;
 import net.minecraftforge.common.ToolAction;
 import net.minecraftforge.common.ToolActions;
 import org.jetbrains.annotations.Nullable;
@@ -108,8 +110,11 @@ public abstract class ChimneyBlock extends Block implements EntityBlock {
     @Nullable
     @Override
     public BlockState getToolModifiedState(BlockState state, UseOnContext context, ToolAction toolAction, boolean simulate) {
-        if (state.getValue(DIRTY) && toolAction == ToolActions.AXE_SCRAPE)
+        if (state.getValue(DIRTY) && toolAction == ToolActions.AXE_SCRAPE){
+            if (context.getPlayer().getLevel().isClientSide)
+                makeSootParticles(context.getPlayer().getLevel(), context.getClickedPos());
             return state.cycle(DIRTY);
+        }
 
         return null;
     }
@@ -134,4 +139,30 @@ public abstract class ChimneyBlock extends Block implements EntityBlock {
         if (pState.getValue(LIT) && !pState.getValue(DIRTY) && pRandom.nextFloat() < 0.5f)
             pLevel.setBlock(pPos, pState.setValue(DIRTY, true), Block.UPDATE_CLIENTS);
     }
+
+    @Override
+    public boolean onDestroyedByPlayer(BlockState state, Level level, BlockPos pos, Player player, boolean willHarvest, FluidState fluid) {
+        boolean isDestroyed = super.onDestroyedByPlayer(state, level, pos, player, willHarvest, fluid);
+
+        if (isDestroyed && level.isClientSide && state.getValue(DIRTY))
+            makeSootParticles(level, pos);
+
+        return isDestroyed;
+    }
+
+    private void makeSootParticles(Level level, BlockPos pos) {
+        Random random = level.getRandom();
+        double x = pos.getX() + 0.5;
+        double y = pos.getY() + 0.5;
+        double z = pos.getZ() + 0.5;
+
+        for (int i = 0; i < random.nextInt(12, 20); i++) {
+            level.addParticle(ParticleTypes.LARGE_SMOKE,
+                    RandomOffset.offset(x, 1.2d, random),
+                    RandomOffset.offset(y, 1.2d, random),
+                    RandomOffset.offset(z, 1.2d, random),
+                    0,0,0);
+        }
+    }
+
 }
