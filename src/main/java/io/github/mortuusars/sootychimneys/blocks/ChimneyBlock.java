@@ -26,6 +26,9 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.Random;
 
+/**
+ * Base block for chimneys. Contains common functionality.
+ */
 public abstract class ChimneyBlock extends Block implements EntityBlock {
 
     public static final BooleanProperty LIT = RedstoneTorchBlock.LIT;
@@ -128,7 +131,7 @@ public abstract class ChimneyBlock extends Block implements EntityBlock {
 
     @Override
     public void randomTick(BlockState pState, ServerLevel pLevel, BlockPos pPos, Random pRandom) {
-        if (pState.getValue(LIT) && !pState.getValue(DIRTY) && pRandom.nextFloat() < 0.2f)
+        if (pState.getValue(LIT) && !pState.getValue(DIRTY) && pRandom.nextFloat() < 0.5f)
             pLevel.setBlock(pPos, pState.setValue(DIRTY, true), Block.UPDATE_CLIENTS);
     }
 }
