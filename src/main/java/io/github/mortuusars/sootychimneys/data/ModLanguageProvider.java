@@ -1,7 +1,7 @@
 package io.github.mortuusars.sootychimneys.data;
 
 import io.github.mortuusars.sootychimneys.SootyChimneys;
-import io.github.mortuusars.sootychimneys.setup.Registry;
+import io.github.mortuusars.sootychimneys.setup.ModBlocks;
 import net.minecraft.data.DataGenerator;
 import net.minecraftforge.common.data.LanguageProvider;
 
@@ -24,10 +24,12 @@ public class ModLanguageProvider extends LanguageProvider {
     }
 
     private void genEN_US(){
-        add(Registry.BRICK_CHIMNEY.get(), "Brick Chimney");
+        add(ModBlocks.BRICK_CHIMNEY.get(), "Brick Chimney");
+        add(ModBlocks.DIRTY_BRICK_CHIMNEY.get(), "Dirty Brick Chimney");
     }
 
     private void genUK_UA() {
-        add(Registry.BRICK_CHIMNEY.get(), "Цегляний Димоход");
+        add(ModBlocks.BRICK_CHIMNEY.get(), "Цегляний Димоход");
+        add(ModBlocks.DIRTY_BRICK_CHIMNEY.get(), "Брудний Цегляний Димоход");
     }
 }

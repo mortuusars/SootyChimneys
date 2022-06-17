@@ -3,7 +3,7 @@ package io.github.mortuusars.sootychimneys.data;
 import io.github.mortuusars.sootychimneys.SootyChimneys;
 import io.github.mortuusars.sootychimneys.blocks.BrickChimneyBlock;
 import io.github.mortuusars.sootychimneys.blocks.ChimneyBlock;
-import io.github.mortuusars.sootychimneys.setup.Registry;
+import io.github.mortuusars.sootychimneys.setup.ModBlocks;
 import net.minecraft.core.Direction;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.resources.ResourceLocation;
@@ -28,16 +28,21 @@ public class ModBlockStatesProvider extends BlockStateProvider {
         BlockModelBuilder brickChimneyCleanModel = createBrickChimneyCleanModel();
         BlockModelBuilder brickChimneyDirtyModel = createBrickChimneyDirtyModel();
 
-        getVariantBuilder(Registry.BRICK_CHIMNEY.get())
+        getVariantBuilder(ModBlocks.BRICK_CHIMNEY.get())
                 .forAllStatesExcept(state ->
                         ConfiguredModel.builder()
-                            .modelFile(state.getValue(ChimneyBlock.DIRTY) ?
-                                    brickChimneyDirtyModel : brickChimneyCleanModel)
+                            .modelFile(brickChimneyCleanModel)
                             .build(), BrickChimneyBlock.LIT);
+
+        getVariantBuilder(ModBlocks.DIRTY_BRICK_CHIMNEY.get())
+                .forAllStatesExcept(state ->
+                        ConfiguredModel.builder()
+                                .modelFile(brickChimneyDirtyModel)
+                                .build(), BrickChimneyBlock.LIT);
     }
 
     private BlockModelBuilder createBrickChimneyCleanModel() {
-        return models().getBuilder(Registry.BRICK_CHIMNEY.get().getRegistryName().getPath())
+        return models().getBuilder(ModBlocks.BRICK_CHIMNEY.get().getRegistryName().getPath())
                 .parent(models().getExistingFile(mcLoc("block")))
                 .texture("particle", _brickChimneyTexture)
                 .texture("texture", _brickChimneyTexture)
@@ -74,9 +79,9 @@ public class ModBlockStatesProvider extends BlockStateProvider {
     }
 
     private BlockModelBuilder createBrickChimneyDirtyModel() {
-        return models().getBuilder(Registry.BRICK_CHIMNEY.get().getRegistryName().getPath() + "_dirty")
+        return models().getBuilder("dirty_" + ModBlocks.BRICK_CHIMNEY.get().getRegistryName().getPath())
                 .parent(models().getExistingFile(mcLoc("block")))
-                .texture("particle", _brickChimneySootTexture)
+                .texture("particle", _brickChimneyTexture)
                 .texture("texture", _brickChimneyTexture)
                 .texture("overlay", _brickChimneySootSideTexture)
                 .texture("overlayfull", _brickChimneySootTexture)

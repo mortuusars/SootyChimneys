@@ -1,12 +1,11 @@
 package io.github.mortuusars.sootychimneys.data;
 
-import io.github.mortuusars.sootychimneys.setup.Registry;
+import io.github.mortuusars.sootychimneys.setup.ModBlocks;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.data.recipes.FinishedRecipe;
 import net.minecraft.data.recipes.RecipeProvider;
 import net.minecraft.data.recipes.ShapedRecipeBuilder;
 import net.minecraft.world.item.Items;
-import net.minecraftforge.common.Tags;
 
 import java.util.function.Consumer;
 
@@ -18,7 +17,7 @@ public class ModRecipeProvider extends RecipeProvider {
     @Override
     protected void buildCraftingRecipes(Consumer<FinishedRecipe> pFinishedRecipeConsumer) {
 
-        ShapedRecipeBuilder.shaped(Registry.BRICK_CHIMNEY.get())
+        ShapedRecipeBuilder.shaped(ModBlocks.BRICK_CHIMNEY.get())
                 .pattern("b b")
                 .pattern("B B")
                 .pattern("BCB")
@@ -29,7 +28,7 @@ public class ModRecipeProvider extends RecipeProvider {
                 .unlockedBy("has_brick", has(Items.BRICK))
                 .save(pFinishedRecipeConsumer, "brick_chimney_coal");
 
-        ShapedRecipeBuilder.shaped(Registry.BRICK_CHIMNEY.get())
+        ShapedRecipeBuilder.shaped(ModBlocks.BRICK_CHIMNEY.get())
                 .pattern("b b")
                 .pattern("B B")
                 .pattern("BCB")

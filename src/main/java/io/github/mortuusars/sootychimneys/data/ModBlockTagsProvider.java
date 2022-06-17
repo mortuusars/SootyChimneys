@@ -1,6 +1,7 @@
 package io.github.mortuusars.sootychimneys.data;
 
 import io.github.mortuusars.sootychimneys.SootyChimneys;
+import io.github.mortuusars.sootychimneys.setup.ModBlocks;
 import io.github.mortuusars.sootychimneys.setup.Registry;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.data.tags.BlockTagsProvider;
@@ -16,9 +17,9 @@ public class ModBlockTagsProvider extends BlockTagsProvider {
     @Override
     protected void addTags() {
         tag(BlockTags.MINEABLE_WITH_PICKAXE)
-                .add(Registry.BRICK_CHIMNEY.get());
+                .add(ModBlocks.BRICK_CHIMNEY.get());
 
         tag(Registry.CHIMNEY_BLOCK_TAG)
-                .add(Registry.BRICK_CHIMNEY.get());
+                .add(ModBlocks.BRICK_CHIMNEY.get());
     }
 }

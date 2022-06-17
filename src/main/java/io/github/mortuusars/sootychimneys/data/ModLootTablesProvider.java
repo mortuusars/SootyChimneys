@@ -1,6 +1,7 @@
 package io.github.mortuusars.sootychimneys.data;
 
-import io.github.mortuusars.sootychimneys.setup.Registry;
+import io.github.mortuusars.sootychimneys.setup.ModBlockEntities;
+import io.github.mortuusars.sootychimneys.setup.ModBlocks;
 import net.minecraft.data.DataGenerator;
 
 public class ModLootTablesProvider extends BaseLootTableProvider {
@@ -11,6 +12,7 @@ public class ModLootTablesProvider extends BaseLootTableProvider {
 
     @Override
     protected void addTables() {
-        lootTables.put(Registry.BRICK_CHIMNEY.get(), createStandardTable("brick_chimney", Registry.BRICK_CHIMNEY.get(), Registry.CHIMNEY_BLOCK_ENTITY.get()));
+        lootTables.put(ModBlocks.BRICK_CHIMNEY.get(), createStandardTable("brick_chimney", ModBlocks.BRICK_CHIMNEY.get(), ModBlockEntities.CHIMNEY_BLOCK_ENTITY.get()));
+        lootTables.put(ModBlocks.DIRTY_BRICK_CHIMNEY.get(), createStandardTable("dirty_brick_chimney", ModBlocks.DIRTY_BRICK_CHIMNEY.get(), ModBlockEntities.CHIMNEY_BLOCK_ENTITY.get()));
     }
 }
