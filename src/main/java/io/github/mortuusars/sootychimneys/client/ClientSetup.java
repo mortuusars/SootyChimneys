@@ -3,10 +3,8 @@ package io.github.mortuusars.sootychimneys.client;
 import net.minecraftforge.eventbus.api.IEventBus;
 
 public class ClientSetup {
-    private IEventBus _modEventBus;
-
+    private final IEventBus _modEventBus;
     public ClientSetup(IEventBus modEventBus) {
-
         _modEventBus = modEventBus;
     }
 

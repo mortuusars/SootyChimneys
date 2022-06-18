@@ -26,10 +26,16 @@ public class ModLanguageProvider extends LanguageProvider {
     private void genEN_US(){
         add(ModBlocks.BRICK_CHIMNEY.get(), "Brick Chimney");
         add(ModBlocks.DIRTY_BRICK_CHIMNEY.get(), "Dirty Brick Chimney");
+
+        add(ModBlocks.STONE_BRICK_CHIMNEY.get(), "Stone Brick Chimney");
+        add(ModBlocks.DIRTY_STONE_BRICK_CHIMNEY.get(), "Dirty Stone Brick Chimney");
     }
 
     private void genUK_UA() {
         add(ModBlocks.BRICK_CHIMNEY.get(), "Цегляний Димоход");
         add(ModBlocks.DIRTY_BRICK_CHIMNEY.get(), "Брудний Цегляний Димоход");
+
+        add(ModBlocks.STONE_BRICK_CHIMNEY.get(), "Димоход з Кам'яної Цегли");
+        add(ModBlocks.DIRTY_STONE_BRICK_CHIMNEY.get(), "Брудний Димоход з Кам'яної Цегли");
     }
 }

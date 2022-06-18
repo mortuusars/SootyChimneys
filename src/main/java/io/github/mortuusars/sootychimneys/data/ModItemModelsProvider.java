@@ -15,5 +15,8 @@ public class ModItemModelsProvider extends ItemModelProvider {
     protected void registerModels() {
         withExistingParent(ModItems.BRICK_CHIMNEY.get().getRegistryName().getPath(), modLoc("block/brick_chimney"));
         withExistingParent(ModItems.DIRTY_BRICK_CHIMNEY.get().getRegistryName().getPath(), modLoc("block/dirty_brick_chimney"));
+
+        withExistingParent(ModItems.STONE_BRICK_CHIMNEY.get().getRegistryName().getPath(), modLoc("block/stone_brick_chimney"));
+        withExistingParent(ModItems.DIRTY_STONE_BRICK_CHIMNEY.get().getRegistryName().getPath(), modLoc("block/dirty_stone_brick_chimney"));
     }
 }

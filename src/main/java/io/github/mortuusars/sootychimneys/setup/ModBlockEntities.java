@@ -8,13 +8,13 @@ import net.minecraftforge.registries.RegistryObject;
 public class ModBlockEntities {
     public static final RegistryObject<BlockEntityType<ChimneyBlockEntity>> CHIMNEY_BLOCK_ENTITY =
             Registry.BLOCK_ENTITIES.register("brick_chimney",
-                    () -> BlockEntityType.Builder.of(ChimneyBlockEntity::new,
-                            // valid blocks for this block entity
-                            new Block[] {
-                                    ModBlocks.BRICK_CHIMNEY.get(),
-                                    ModBlocks.DIRTY_BRICK_CHIMNEY.get()
-                            }
-                            ).build(null));
+                    () -> BlockEntityType.Builder.of(ChimneyBlockEntity::new, getValidChimneys())
+                            .build(null));
 
     public static void init(){}
+
+    private static Block[] getValidChimneys(){
+        Block[] arr = new Block[ModBlocks.CHIMNEYS_LIST.size()];
+        return ModBlocks.CHIMNEYS_LIST.stream().map(RegistryObject::get).toList().toArray(arr);
+    }
 }

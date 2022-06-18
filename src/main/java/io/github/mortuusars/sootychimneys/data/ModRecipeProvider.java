@@ -38,5 +38,26 @@ public class ModRecipeProvider extends RecipeProvider {
                 .group("brick_chimney")
                 .unlockedBy("has_brick", has(Items.BRICK))
                 .save(pFinishedRecipeConsumer, "brick_chimney_charcoal");
+
+
+        ShapedRecipeBuilder.shaped(ModBlocks.STONE_BRICK_CHIMNEY.get())
+                .pattern("B B")
+                .pattern("B B")
+                .pattern("BCB")
+                .define('B', Items.STONE_BRICKS)
+                .define('C', Items.COAL)
+                .group("brick_chimney")
+                .unlockedBy("has_bricks", has(Items.STONE_BRICKS))
+                .save(pFinishedRecipeConsumer, "stone_bricks_chimney_coal");
+
+        ShapedRecipeBuilder.shaped(ModBlocks.STONE_BRICK_CHIMNEY.get())
+                .pattern("B B")
+                .pattern("B B")
+                .pattern("BCB")
+                .define('B', Items.STONE_BRICKS)
+                .define('C', Items.CHARCOAL)
+                .group("brick_chimney")
+                .unlockedBy("has_bricks", has(Items.STONE_BRICKS))
+                .save(pFinishedRecipeConsumer, "stone_bricks_chimney_charcoal");
     }
 }

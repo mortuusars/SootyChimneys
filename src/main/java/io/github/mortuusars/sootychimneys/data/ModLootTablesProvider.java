@@ -12,7 +12,12 @@ public class ModLootTablesProvider extends BaseLootTableProvider {
 
     @Override
     protected void addTables() {
-        lootTables.put(ModBlocks.BRICK_CHIMNEY.get(), createStandardTable("brick_chimney", ModBlocks.BRICK_CHIMNEY.get(), ModBlockEntities.CHIMNEY_BLOCK_ENTITY.get()));
-        lootTables.put(ModBlocks.DIRTY_BRICK_CHIMNEY.get(), createStandardTable("dirty_brick_chimney", ModBlocks.DIRTY_BRICK_CHIMNEY.get(), ModBlockEntities.CHIMNEY_BLOCK_ENTITY.get()));
+
+        ModBlocks.CHIMNEYS_LIST.forEach(
+                chimney -> lootTables.put(chimney.get(), createStandardTable(chimney.get().getRegistryName().getPath(), chimney.get(), ModBlockEntities.CHIMNEY_BLOCK_ENTITY.get())
+        ));
+
+//        lootTables.put(ModBlocks.BRICK_CHIMNEY.get(), createStandardTable("brick_chimney", ModBlocks.BRICK_CHIMNEY.get(), ModBlockEntities.CHIMNEY_BLOCK_ENTITY.get()));
+//        lootTables.put(ModBlocks.DIRTY_BRICK_CHIMNEY.get(), createStandardTable("dirty_brick_chimney", ModBlocks.DIRTY_BRICK_CHIMNEY.get(), ModBlockEntities.CHIMNEY_BLOCK_ENTITY.get()));
     }
 }

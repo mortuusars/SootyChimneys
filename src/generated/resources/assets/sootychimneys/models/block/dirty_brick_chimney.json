@@ -3,8 +3,8 @@
   "textures": {
     "particle": "minecraft:block/bricks",
     "texture": "minecraft:block/bricks",
-    "overlay": "sootychimneys:block/brick_chimney_soot_side_overlay",
-    "overlayfull": "sootychimneys:block/brick_chimney_soot_overlay"
+    "overlay": "sootychimneys:block/bricks_soot_side",
+    "overlayfull": "sootychimneys:block/bricks_soot"
   },
   "elements": [
     {
