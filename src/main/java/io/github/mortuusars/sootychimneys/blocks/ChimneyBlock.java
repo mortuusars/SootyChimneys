@@ -92,8 +92,11 @@ public abstract class ChimneyBlock extends Block implements EntityBlock {
             pLevel.setBlock(pPos, pState.setValue(LIT, !pLevel.hasNeighborSignal(pPos)), Block.UPDATE_CLIENTS);
     }
 
-    public static void emitParticles(Level level, BlockPos pos, BlockState state){
+    public void emitParticles(Level level, BlockPos pos, BlockState state){
         Random random = level.getRandom();
+
+        if (random.nextFloat() > getSmokeIntensity())
+            return;
 
         ChimneyBlock chimney = ((ChimneyBlock)state.getBlock());
 
@@ -108,9 +111,9 @@ public abstract class ChimneyBlock extends Block implements EntityBlock {
         double zSpeed = (wind.getYCoordinate() * wind.getStrength()) * windStrengthModifier;
         double ySpeed = 0.05d * chimney.getSmokeSpeed();
 
-                Vector3f maxRandomOffset = chimney.getParticleMaxRandomOffset();
+        Vector3f maxRandomOffset = chimney.getParticleMaxRandomOffset();
 
-        for (int i = 0; i < random.nextInt((int)(2 * chimney.getSmokeIntensity())); i++) {
+        for (int i = 0; i < random.nextInt(4); i++) {
             level.addAlwaysVisibleParticle(ParticleTypes.CAMPFIRE_COSY_SMOKE, true,
                     RandomOffset.offset(x, maxRandomOffset.x(), random),
                     RandomOffset.offset(y, maxRandomOffset.y(), random),

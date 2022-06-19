@@ -13,6 +13,6 @@ public class BlockRendering {
     }
 
     private static void setChimneysRenderType() {
-        ModBlocks.CHIMNEYS_LIST.forEach(block -> ItemBlockRenderTypes.setRenderLayer(block.get(), RenderType.translucent()));
+        ModBlocks.CHIMNEYS.forEach(block -> ItemBlockRenderTypes.setRenderLayer(block.get(), RenderType.translucent()));
     }
 }

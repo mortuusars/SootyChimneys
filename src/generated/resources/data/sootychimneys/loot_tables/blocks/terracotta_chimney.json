@@ -2,7 +2,7 @@
   "type": "minecraft:block",
   "pools": [
     {
-      "name": "dirty_stone_brick_chimney",
+      "name": "terracotta_chimney",
       "rolls": 1.0,
       "bonus_rolls": 0.0,
       "entries": [
@@ -45,7 +45,7 @@
               ]
             }
           ],
-          "name": "sootychimneys:dirty_stone_brick_chimney"
+          "name": "sootychimneys:terracotta_chimney"
         }
       ]
     }

@@ -29,13 +29,19 @@ public class ModLanguageProvider extends LanguageProvider {
 
         add(ModBlocks.STONE_BRICK_CHIMNEY.get(), "Stone Brick Chimney");
         add(ModBlocks.DIRTY_STONE_BRICK_CHIMNEY.get(), "Dirty Stone Brick Chimney");
+
+        add(ModBlocks.TERRACOTTA_CHIMNEY.get(), "Terracotta Chimney");
+        add(ModBlocks.DIRTY_TERRACOTTA_CHIMNEY.get(), "Dirty Terracotta Chimney");
     }
 
     private void genUK_UA() {
-        add(ModBlocks.BRICK_CHIMNEY.get(), "Цегляний Димоход");
-        add(ModBlocks.DIRTY_BRICK_CHIMNEY.get(), "Брудний Цегляний Димоход");
+        add(ModBlocks.BRICK_CHIMNEY.get(), "Цегляний Димохід");
+        add(ModBlocks.DIRTY_BRICK_CHIMNEY.get(), "Брудний Цегляний Димохід");
 
-        add(ModBlocks.STONE_BRICK_CHIMNEY.get(), "Димоход з Кам'яної Цегли");
-        add(ModBlocks.DIRTY_STONE_BRICK_CHIMNEY.get(), "Брудний Димоход з Кам'яної Цегли");
+        add(ModBlocks.STONE_BRICK_CHIMNEY.get(), "Димохід з Кам'яної Цегли");
+        add(ModBlocks.DIRTY_STONE_BRICK_CHIMNEY.get(), "Брудний Димохід з Кам'яної Цегли");
+
+        add(ModBlocks.TERRACOTTA_CHIMNEY.get(), "Теракотовий Димохід");
+        add(ModBlocks.DIRTY_TERRACOTTA_CHIMNEY.get(), "Брудний Теракотовий Димохід");
     }
 }

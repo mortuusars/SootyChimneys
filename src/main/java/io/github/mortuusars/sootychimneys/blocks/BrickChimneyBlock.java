@@ -13,7 +13,7 @@ import org.jetbrains.annotations.NotNull;
 
 public class BrickChimneyBlock extends ChimneyBlock implements ISootyChimney{
     private static final Vector3f _particleOriginOffset = new Vector3f(0.5f, 1f, 0.5f);
-    private static final Vector3f _particleMaxRandomOffset = new Vector3f(0.15f, 0.05f, 0.15f);
+    private static final Vector3f _particleMaxRandomOffset = new Vector3f(0.25f, 0.1f, 0.25f);
     private static final VoxelShape _shape = Shapes.or(
             Block.box(1d, 0d, 1d, 15d,11d,15d),
             Block.box(0d, 11d, 0d, 16d,16d,16d));
@@ -35,7 +35,7 @@ public class BrickChimneyBlock extends ChimneyBlock implements ISootyChimney{
     }
 
     @Override
-    public VoxelShape getShape(BlockState pState, BlockGetter pLevel, BlockPos pPos, CollisionContext pContext) {
+    public @NotNull VoxelShape getShape(BlockState pState, BlockGetter pLevel, BlockPos pPos, CollisionContext pContext) {
         return _shape;
     }
 
@@ -51,7 +51,7 @@ public class BrickChimneyBlock extends ChimneyBlock implements ISootyChimney{
 
     @Override
     public float getSmokeIntensity() {
-        return 2f;
+        return 1f;
     }
 
     @Override

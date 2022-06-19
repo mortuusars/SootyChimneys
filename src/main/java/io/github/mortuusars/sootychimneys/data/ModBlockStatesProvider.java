@@ -8,10 +8,7 @@ import net.minecraft.core.Direction;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.block.Block;
-import net.minecraftforge.client.model.generators.BlockModelBuilder;
-import net.minecraftforge.client.model.generators.BlockStateProvider;
-import net.minecraftforge.client.model.generators.ConfiguredModel;
-import net.minecraftforge.client.model.generators.ModelBuilder;
+import net.minecraftforge.client.model.generators.*;
 import net.minecraftforge.common.data.ExistingFileHelper;
 
 import java.util.Objects;
@@ -27,6 +24,10 @@ public class ModBlockStatesProvider extends BlockStateProvider {
     private final ResourceLocation _stoneChimneySootTexture = modLoc("block/stone_bricks_soot");
     private final ResourceLocation _stoneChimneySootSideTexture = modLoc("block/stone_bricks_soot_side");
 
+    private final ResourceLocation _terracottaChimneyTexture = modLoc("block/terracotta");
+    private final ResourceLocation _terracottaChimneySootTexture = modLoc("block/terracotta_soot");
+    private final ResourceLocation _terracottaChimneySootSideTexture = modLoc("block/terracotta_soot_side");
+
     public ModBlockStatesProvider(DataGenerator gen, ExistingFileHelper exFileHelper) {
         super(gen, SootyChimneys.MOD_ID, exFileHelper);
     }
@@ -34,25 +35,22 @@ public class ModBlockStatesProvider extends BlockStateProvider {
     @Override
     protected void registerStatesAndModels() {
 
-        BlockModelBuilder brickChimneyCleanModel = createBrickChimneyCleanModel();
-        BlockModelBuilder brickChimneyDirtyModel = createBrickChimneyDirtyModel();
-
         getVariantBuilder(ModBlocks.BRICK_CHIMNEY.get())
                 .forAllStatesExcept(state ->
                         ConfiguredModel.builder()
-                                .modelFile(brickChimneyCleanModel)
-                                .build(), BrickChimneyBlock.LIT);
+                                .modelFile(createBrickChimneyCleanModel())
+                                .build(), ChimneyBlock.LIT);
 
         getVariantBuilder(ModBlocks.DIRTY_BRICK_CHIMNEY.get())
                 .forAllStatesExcept(state ->
                         ConfiguredModel.builder()
-                                .modelFile(brickChimneyDirtyModel)
-                                .build(), BrickChimneyBlock.LIT);
+                                .modelFile(createBrickChimneyDirtyModel())
+                                .build(), ChimneyBlock.LIT);
 
         getVariantBuilder(ModBlocks.STONE_BRICK_CHIMNEY.get())
                 .forAllStatesExcept(state -> ConfiguredModel.builder().modelFile(
                                         createStoneChimneyCleanModel(getBuilderFor(ModBlocks.STONE_BRICK_CHIMNEY.get())))
-                                .build(), BrickChimneyBlock.LIT);
+                                .build(), ChimneyBlock.LIT);
 
         getVariantBuilder(ModBlocks.DIRTY_STONE_BRICK_CHIMNEY.get())
                 .forAllStatesExcept(state ->
@@ -60,7 +58,17 @@ public class ModBlockStatesProvider extends BlockStateProvider {
                                 .modelFile(createStoneChimneyDirtyModel(
                                         createStoneChimneyCleanModel(
                                                 getBuilderFor(ModBlocks.DIRTY_STONE_BRICK_CHIMNEY.get()))))
-                                .build(), BrickChimneyBlock.LIT);
+                                .build(), ChimneyBlock.LIT);
+
+        getVariantBuilder(ModBlocks.TERRACOTTA_CHIMNEY.get())
+                .forAllStatesExcept(state -> ConfiguredModel.builder()
+                        .modelFile(models().getExistingFile(modLoc("block/terracotta_chimney")))
+                        .build(), ChimneyBlock.LIT);
+
+        getVariantBuilder(ModBlocks.DIRTY_TERRACOTTA_CHIMNEY.get())
+                .forAllStatesExcept(state -> ConfiguredModel.builder()
+                        .modelFile(models().getExistingFile(modLoc("block/dirty_terracotta_chimney")))
+                        .build(), ChimneyBlock.LIT);
     }
 
     private BlockModelBuilder getBuilderFor(Block block) {

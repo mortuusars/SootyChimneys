@@ -1,6 +1,11 @@
 {
   "replace": false,
   "values": [
-    "sootychimneys:brick_chimney"
+    "sootychimneys:brick_chimney",
+    "sootychimneys:dirty_brick_chimney",
+    "sootychimneys:stone_brick_chimney",
+    "sootychimneys:dirty_stone_brick_chimney",
+    "sootychimneys:terracotta_chimney",
+    "sootychimneys:dirty_terracotta_chimney"
   ]
 }

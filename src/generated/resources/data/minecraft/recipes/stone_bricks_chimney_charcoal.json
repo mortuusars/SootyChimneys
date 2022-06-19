@@ -1,6 +1,6 @@
 {
   "type": "minecraft:crafting_shaped",
-  "group": "brick_chimney",
+  "group": "stone_brick_chimney",
   "pattern": [
     "B B",
     "B B",

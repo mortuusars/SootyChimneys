@@ -36,7 +36,7 @@
             },
             {
               "function": "minecraft:set_contents",
-              "type": "sootychimneys:brick_chimney",
+              "type": "sootychimneys:chimney_block_entity",
               "entries": [
                 {
                   "type": "minecraft:dynamic",

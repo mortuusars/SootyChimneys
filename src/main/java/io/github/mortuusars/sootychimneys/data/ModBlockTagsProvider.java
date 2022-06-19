@@ -16,10 +16,9 @@ public class ModBlockTagsProvider extends BlockTagsProvider {
 
     @Override
     protected void addTags() {
-        tag(BlockTags.MINEABLE_WITH_PICKAXE)
-                .add(ModBlocks.BRICK_CHIMNEY.get());
-
-        tag(Registry.CHIMNEY_BLOCK_TAG)
-                .add(ModBlocks.BRICK_CHIMNEY.get());
+        ModBlocks.CHIMNEYS.forEach((chimney) -> {
+            tag(BlockTags.MINEABLE_WITH_PICKAXE).add(chimney.get());
+            tag(Registry.CHIMNEY_BLOCK_TAG).add(chimney.get());
+        });
     }
 }
