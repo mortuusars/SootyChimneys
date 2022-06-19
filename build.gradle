@@ -18,7 +18,7 @@ plugins {
 apply plugin: 'net.minecraftforge.gradle'
 apply plugin: 'org.parchmentmc.librarian.forgegradle'
 
-version = '0.2.0'
+version = '0.3.0'
 group = 'io.github.mortuusars.sootychimneys' // http://maven.apache.org/guides/mini/guide-naming-conventions.html
 archivesBaseName = 'sootychimneys'
 
