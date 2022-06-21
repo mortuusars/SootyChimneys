@@ -1,12 +1,11 @@
 {
 	"parent": "minecraft:block/block",
 	"textures": {
-		"texture": "sootychimneys:block/terracotta",
+		"texture": "sootychimneys:block/terracotta_chimney",
 		"particle": "minecraft:block/terracotta"
 	},
 	"elements": [
 		{
-			"name": "Inside",
 			"from": [6, 0, 6],
 			"to": [10, 1, 10],
 			"faces": {
@@ -15,22 +14,20 @@
 			}
 		},
 		{
-			"name": "East",
 			"from": [10, 0, 6],
 			"to": [11, 8, 10],
 			"faces": {
 				"east": {"uv": [1, 0, 5, 8], "texture": "#texture"},
-				"west": {"uv": [1, 0, 5, 8], "texture": "#texture"},
+				"west": {"uv": [7, 8, 11, 16], "rotation": 180, "texture": "#texture"},
 				"up": {"uv": [11, 1, 12, 5], "texture": "#texture"},
 				"down": {"uv": [11, 1, 12, 5], "texture": "#texture"}
 			}
 		},
 		{
-			"name": "South",
 			"from": [5, 0, 10],
 			"to": [11, 8, 11],
 			"faces": {
-				"north": {"uv": [0, 0, 6, 8], "texture": "#texture"},
+				"north": {"uv": [6, 8, 12, 16], "rotation": 180, "texture": "#texture"},
 				"east": {"uv": [0, 0, 1, 8], "texture": "#texture"},
 				"south": {"uv": [0, 0, 6, 8], "texture": "#texture"},
 				"west": {"uv": [5, 0, 6, 8], "texture": "#texture"},
@@ -39,38 +36,26 @@
 			}
 		},
 		{
-			"name": "West",
 			"from": [5, 0, 6],
 			"to": [6, 8, 10],
 			"faces": {
-				"east": {"uv": [1, 0, 5, 8], "texture": "#texture"},
+				"east": {"uv": [7, 8, 11, 16], "rotation": 180, "texture": "#texture"},
 				"west": {"uv": [1, 0, 5, 8], "texture": "#texture"},
 				"up": {"uv": [6, 1, 7, 5], "texture": "#texture"},
 				"down": {"uv": [6, 1, 7, 5], "texture": "#texture"}
 			}
 		},
 		{
-			"name": "North",
 			"from": [5, 0, 5],
 			"to": [11, 8, 6],
 			"faces": {
 				"north": {"uv": [0, 0, 6, 8], "texture": "#texture"},
 				"east": {"uv": [5, 0, 6, 8], "texture": "#texture"},
-				"south": {"uv": [0, 0, 6, 8], "texture": "#texture"},
+				"south": {"uv": [6, 8, 12, 16], "rotation": 180, "texture": "#texture"},
 				"west": {"uv": [0, 0, 1, 8], "texture": "#texture"},
 				"up": {"uv": [6, 0, 12, 1], "texture": "#texture"},
 				"down": {"uv": [6, 0, 12, 1], "texture": "#texture"}
 			}
-		}
-	],
-	"display": {},
-	"groups": [
-		0,
-		{
-			"name": "Main",
-			"origin": [0, 0, 0],
-			"color": 0,
-			"children": [1, 2, 3, 4]
 		}
 	]
 }

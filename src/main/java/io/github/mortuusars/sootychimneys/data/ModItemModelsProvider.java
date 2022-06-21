@@ -6,6 +6,8 @@ import net.minecraft.data.DataGenerator;
 import net.minecraftforge.client.model.generators.ItemModelProvider;
 import net.minecraftforge.common.data.ExistingFileHelper;
 
+import java.util.Objects;
+
 public class ModItemModelsProvider extends ItemModelProvider {
     public ModItemModelsProvider(DataGenerator generator, ExistingFileHelper existingFileHelper) {
         super(generator, SootyChimneys.MOD_ID, existingFileHelper);
@@ -14,7 +16,7 @@ public class ModItemModelsProvider extends ItemModelProvider {
     @Override
     protected void registerModels() {
         ModItems.CHIMNEYS.forEach((chimneyItem) -> {
-            String path = chimneyItem.get().getRegistryName().getPath();
+            String path = Objects.requireNonNull(chimneyItem.get().getRegistryName()).getPath();
             withExistingParent(path, modLoc("block/" + path));
         });
     }

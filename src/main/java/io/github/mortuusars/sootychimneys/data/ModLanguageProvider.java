@@ -32,6 +32,9 @@ public class ModLanguageProvider extends LanguageProvider {
 
         add(ModBlocks.TERRACOTTA_CHIMNEY.get(), "Terracotta Chimney");
         add(ModBlocks.DIRTY_TERRACOTTA_CHIMNEY.get(), "Dirty Terracotta Chimney");
+
+        add(ModBlocks.COPPER_CHIMNEY.get(), "Copper Chimney");
+        add(ModBlocks.DIRTY_COPPER_CHIMNEY.get(), "Dirty Copper Chimney");
     }
 
     private void genUK_UA() {
@@ -43,5 +46,8 @@ public class ModLanguageProvider extends LanguageProvider {
 
         add(ModBlocks.TERRACOTTA_CHIMNEY.get(), "Теракотовий Димохід");
         add(ModBlocks.DIRTY_TERRACOTTA_CHIMNEY.get(), "Брудний Теракотовий Димохід");
+
+        add(ModBlocks.COPPER_CHIMNEY.get(), "Мідний Димохід");
+        add(ModBlocks.DIRTY_COPPER_CHIMNEY.get(), "Брудний Мідний Димохід");
     }
 }

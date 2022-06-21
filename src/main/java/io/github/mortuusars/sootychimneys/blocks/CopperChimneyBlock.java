@@ -15,16 +15,18 @@ import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import org.jetbrains.annotations.NotNull;
 
-public class StoneBrickChimneyBlock extends ChimneyBlock implements ISootyChimney{
+public class CopperChimneyBlock extends ChimneyBlock implements ISootyChimney {
+
+    private static final VoxelShape _shape = Shapes.or(
+            Block.box(5,0,5, 11,4,11),
+            Block.box(6,4,6, 10,16,10),
+            Block.box(5,10,5, 11,14,11));
 
     private static final Vector3f _particleOriginOffset = new Vector3f(0.5f, 1.2f, 0.5f);
     private static final Vector3f _particleMaxRandomOffset = new Vector3f(0.025f, 0.05f, 0.025f);
-    private static final VoxelShape  _shape = Shapes.or(
-            Block.box(5,0,5, 11,9,11),
-            Block.box(4, 9, 4, 12, 16, 12));
 
-    public StoneBrickChimneyBlock() {
-        super(BlockBehaviour.Properties.of(Material.STONE, MaterialColor.COLOR_GRAY).sound(SoundType.BASALT));
+    public CopperChimneyBlock() {
+        super(BlockBehaviour.Properties.of(Material.METAL, MaterialColor.COLOR_ORANGE).sound(SoundType.COPPER));
     }
 
     @Override
@@ -33,8 +35,23 @@ public class StoneBrickChimneyBlock extends ChimneyBlock implements ISootyChimne
     }
 
     @Override
+    public Block getCleanVariant() {
+        return ModBlocks.COPPER_CHIMNEY.get();
+    }
+
+    @Override
+    public Block getDirtyVariant() {
+        return ModBlocks.DIRTY_COPPER_CHIMNEY.get();
+    }
+
+    @Override
     public float getSmokeIntensity() {
         return 0.5f;
+    }
+
+    @Override
+    public float getSmokeSpeed() {
+        return 1.2f;
     }
 
     @Override
@@ -45,15 +62,5 @@ public class StoneBrickChimneyBlock extends ChimneyBlock implements ISootyChimne
     @Override
     public Vector3f getParticleMaxRandomOffset() {
         return _particleMaxRandomOffset;
-    }
-
-    @Override
-    public Block getCleanVariant() {
-        return ModBlocks.STONE_BRICK_CHIMNEY.get();
-    }
-
-    @Override
-    public Block getDirtyVariant() {
-        return ModBlocks.DIRTY_STONE_BRICK_CHIMNEY.get();
     }
 }

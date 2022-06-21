@@ -4,7 +4,9 @@ import com.mojang.logging.LogUtils;
 import io.github.mortuusars.sootychimneys.client.ClientSetup;
 import io.github.mortuusars.sootychimneys.config.CommonConfig;
 import io.github.mortuusars.sootychimneys.core.WindGetter;
+import io.github.mortuusars.sootychimneys.setup.ModBlocks;
 import io.github.mortuusars.sootychimneys.setup.Registry;
+import net.minecraft.world.level.block.WeatheringCopper;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.DistExecutor;
@@ -32,7 +34,8 @@ public class SootyChimneys
         if (debug)
             MinecraftForge.EVENT_BUS.addListener(WindGetter::onRightClick);
 
-        final ClientSetup clientSetup = new ClientSetup(FMLJavaModLoadingContext.get().getModEventBus());
-        DistExecutor.safeRunWhenOn(Dist.CLIENT, () -> clientSetup::registerClientOnlyEvents);
+        // Not used for now.
+        // final ClientSetup clientSetup = new ClientSetup(FMLJavaModLoadingContext.get().getModEventBus());
+        // DistExecutor.safeRunWhenOn(Dist.CLIENT, () -> clientSetup::registerClientOnlyEvents);
     }
 }

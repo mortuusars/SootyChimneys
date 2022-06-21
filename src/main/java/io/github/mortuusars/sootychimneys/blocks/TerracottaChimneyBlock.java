@@ -5,9 +5,14 @@ import io.github.mortuusars.sootychimneys.setup.ModBlocks;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.SoundType;
+import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.material.Material;
+import net.minecraft.world.level.material.MaterialColor;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
+import net.minecraftforge.common.data.SoundDefinition;
 import org.jetbrains.annotations.NotNull;
 
 public class TerracottaChimneyBlock extends ChimneyBlock implements ISootyChimney{
@@ -16,8 +21,8 @@ public class TerracottaChimneyBlock extends ChimneyBlock implements ISootyChimne
     private static final Vector3f _particleOriginOffset = new Vector3f(0.5f, 0.75f, 0.5f);
     private static final Vector3f _particleMaxRandomOffset = new Vector3f(0.02f, 0.05f, 0.02f);
 
-    public TerracottaChimneyBlock(Properties properties) {
-        super(properties);
+    public TerracottaChimneyBlock() {
+        super(BlockBehaviour.Properties.of(Material.STONE, MaterialColor.COLOR_ORANGE).sound(SoundType.DRIPSTONE_BLOCK));
     }
 
     @Override

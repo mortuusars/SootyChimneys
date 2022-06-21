@@ -27,6 +27,12 @@ public class ModItems {
     public static final RegistryObject<BlockItem> DIRTY_TERRACOTTA_CHIMNEY = chimneyBlockItem("dirty_terracotta_chimney",
             () -> new BlockItem(ModBlocks.DIRTY_TERRACOTTA_CHIMNEY.get(), new Item.Properties().tab(CreativeModeTab.TAB_DECORATIONS)));
 
+    public static final RegistryObject<BlockItem> COPPER_CHIMNEY = chimneyBlockItem("copper_chimney",
+            () -> new BlockItem(ModBlocks.COPPER_CHIMNEY.get(), new Item.Properties().tab(CreativeModeTab.TAB_DECORATIONS)));
+
+    public static final RegistryObject<BlockItem> DIRTY_COPPER_CHIMNEY = chimneyBlockItem("dirty_copper_chimney",
+            () -> new BlockItem(ModBlocks.DIRTY_COPPER_CHIMNEY.get(), new Item.Properties().tab(CreativeModeTab.TAB_DECORATIONS)));
+
     public static void init() { }
 
     private static RegistryObject<BlockItem> chimneyBlockItem(String registryName, Supplier<BlockItem> blockSupplier){

@@ -13,6 +13,7 @@ public class BlockRendering {
     }
 
     private static void setChimneysRenderType() {
-        ModBlocks.CHIMNEYS.forEach(block -> ItemBlockRenderTypes.setRenderLayer(block.get(), RenderType.translucent()));
+        // Chimneys are not using translucent overlays anymore. But this can stay for now.
+        // ModBlocks.CHIMNEYS.forEach(block -> ItemBlockRenderTypes.setRenderLayer(block.get(), RenderType.translucent()));
     }
 }

@@ -60,6 +60,7 @@ public class ModRecipeProvider extends RecipeProvider {
                 .unlockedBy("has_stone_bricks", has(Items.STONE_BRICKS))
                 .save(pFinishedRecipeConsumer, "stone_bricks_chimney_charcoal");
 
+
         ShapedRecipeBuilder.shaped(ModBlocks.TERRACOTTA_CHIMNEY.get())
                 .pattern("   ")
                 .pattern("T T")
@@ -79,5 +80,26 @@ public class ModRecipeProvider extends RecipeProvider {
                 .group("terracotta_chimney")
                 .unlockedBy("has_terracotta", has(Items.TERRACOTTA))
                 .save(pFinishedRecipeConsumer, "terracotta_chimney_charcoal");
+
+
+        ShapedRecipeBuilder.shaped(ModBlocks.COPPER_CHIMNEY.get())
+                .pattern("   ")
+                .pattern("B B")
+                .pattern("BCB")
+                .define('B', Items.COPPER_BLOCK)
+                .define('C', Items.COAL)
+                .group("copper_chimney")
+                .unlockedBy("has_copper", has(Items.COPPER_INGOT))
+                .save(pFinishedRecipeConsumer, "copper_chimney_coal");
+
+        ShapedRecipeBuilder.shaped(ModBlocks.COPPER_CHIMNEY.get())
+                .pattern("   ")
+                .pattern("B B")
+                .pattern("BCB")
+                .define('B', Items.COPPER_BLOCK)
+                .define('C', Items.CHARCOAL)
+                .group("copper_chimney")
+                .unlockedBy("has_copper", has(Items.COPPER_INGOT))
+                .save(pFinishedRecipeConsumer, "copper_chimney_charcoal");
     }
 }

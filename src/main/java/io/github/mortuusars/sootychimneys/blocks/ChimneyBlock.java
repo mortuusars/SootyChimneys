@@ -39,8 +39,8 @@ public abstract class ChimneyBlock extends Block implements EntityBlock {
 
     public ChimneyBlock(Properties properties) {
         super(properties
-                .randomTicks()
                 .strength(2f, 2f)
+                .destroyTime(2f)
                 .requiresCorrectToolForDrops());
         this.registerDefaultState(defaultBlockState()
                 .setValue(LIT, true));
@@ -135,6 +135,10 @@ public abstract class ChimneyBlock extends Block implements EntityBlock {
             return type == ModBlockEntities.CHIMNEY_BLOCK_ENTITY.get() ? ChimneyBlockEntity::particleTick : null;
 
         return null;
+    }
+
+    public boolean isRandomlyTicking(BlockState pState) {
+        return pState.getBlock() instanceof ISootyChimney chimney && chimney.isClean() && pState.getValue(LIT);
     }
 
     @Override
