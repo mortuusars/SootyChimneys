@@ -20,8 +20,8 @@ public class StoneBrickChimneyBlock extends ChimneyBlock implements ISootyChimne
     private static final Vector3f _particleOriginOffset = new Vector3f(0.5f, 1.2f, 0.5f);
     private static final Vector3f _particleMaxRandomOffset = new Vector3f(0.025f, 0.05f, 0.025f);
     private static final VoxelShape  _shape = Shapes.or(
-            Block.box(5,0,5, 11,9,11),
-            Block.box(4, 9, 4, 12, 16, 12));
+            Block.box(4,0,4, 12,11,12),
+            Block.box(3, 11, 3, 13, 16, 13));
 
     public StoneBrickChimneyBlock() {
         super(BlockBehaviour.Properties.of(Material.STONE, MaterialColor.COLOR_GRAY).sound(SoundType.BASALT));
