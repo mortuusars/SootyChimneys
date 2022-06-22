@@ -1,6 +1,6 @@
 package io.github.mortuusars.sootychimneys.data;
 
-import io.github.mortuusars.sootychimneys.setup.ModBlocks;
+import io.github.mortuusars.sootychimneys.setup.ModItems;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.data.recipes.FinishedRecipe;
 import net.minecraft.data.recipes.RecipeProvider;
@@ -17,7 +17,7 @@ public class ModRecipeProvider extends RecipeProvider {
     @Override
     protected void buildCraftingRecipes(Consumer<FinishedRecipe> pFinishedRecipeConsumer) {
 
-        ShapedRecipeBuilder.shaped(ModBlocks.BRICK_CHIMNEY.get())
+        ShapedRecipeBuilder.shaped(ModItems.BRICK_CHIMNEY.get())
                 .pattern("b b")
                 .pattern("B B")
                 .pattern("BCB")
@@ -28,7 +28,7 @@ public class ModRecipeProvider extends RecipeProvider {
                 .unlockedBy("has_brick", has(Items.BRICK))
                 .save(pFinishedRecipeConsumer, "brick_chimney_coal");
 
-        ShapedRecipeBuilder.shaped(ModBlocks.BRICK_CHIMNEY.get())
+        ShapedRecipeBuilder.shaped(ModItems.BRICK_CHIMNEY.get())
                 .pattern("b b")
                 .pattern("B B")
                 .pattern("BCB")
@@ -40,7 +40,7 @@ public class ModRecipeProvider extends RecipeProvider {
                 .save(pFinishedRecipeConsumer, "brick_chimney_charcoal");
 
 
-        ShapedRecipeBuilder.shaped(ModBlocks.STONE_BRICK_CHIMNEY.get())
+        ShapedRecipeBuilder.shaped(ModItems.STONE_BRICK_CHIMNEY.get())
                 .pattern("B B")
                 .pattern("B B")
                 .pattern("BCB")
@@ -50,7 +50,7 @@ public class ModRecipeProvider extends RecipeProvider {
                 .unlockedBy("has_stone_bricks", has(Items.STONE_BRICKS))
                 .save(pFinishedRecipeConsumer, "stone_bricks_chimney_coal");
 
-        ShapedRecipeBuilder.shaped(ModBlocks.STONE_BRICK_CHIMNEY.get())
+        ShapedRecipeBuilder.shaped(ModItems.STONE_BRICK_CHIMNEY.get())
                 .pattern("B B")
                 .pattern("B B")
                 .pattern("BCB")
@@ -61,7 +61,7 @@ public class ModRecipeProvider extends RecipeProvider {
                 .save(pFinishedRecipeConsumer, "stone_bricks_chimney_charcoal");
 
 
-        ShapedRecipeBuilder.shaped(ModBlocks.TERRACOTTA_CHIMNEY.get())
+        ShapedRecipeBuilder.shaped(ModItems.TERRACOTTA_CHIMNEY.get())
                 .pattern("   ")
                 .pattern("T T")
                 .pattern("TCT")
@@ -71,7 +71,7 @@ public class ModRecipeProvider extends RecipeProvider {
                 .unlockedBy("has_terracotta", has(Items.TERRACOTTA))
                 .save(pFinishedRecipeConsumer, "terracotta_chimney_coal");
 
-        ShapedRecipeBuilder.shaped(ModBlocks.TERRACOTTA_CHIMNEY.get())
+        ShapedRecipeBuilder.shaped(ModItems.TERRACOTTA_CHIMNEY.get())
                 .pattern("   ")
                 .pattern("T T")
                 .pattern("TCT")
@@ -82,21 +82,23 @@ public class ModRecipeProvider extends RecipeProvider {
                 .save(pFinishedRecipeConsumer, "terracotta_chimney_charcoal");
 
 
-        ShapedRecipeBuilder.shaped(ModBlocks.COPPER_CHIMNEY.get())
+        ShapedRecipeBuilder.shaped(ModItems.COPPER_CHIMNEY.get())
                 .pattern("   ")
-                .pattern("B B")
+                .pattern("I I")
                 .pattern("BCB")
                 .define('B', Items.COPPER_BLOCK)
+                .define('I', Items.COPPER_INGOT)
                 .define('C', Items.COAL)
                 .group("copper_chimney")
                 .unlockedBy("has_copper", has(Items.COPPER_INGOT))
                 .save(pFinishedRecipeConsumer, "copper_chimney_coal");
 
-        ShapedRecipeBuilder.shaped(ModBlocks.COPPER_CHIMNEY.get())
+        ShapedRecipeBuilder.shaped(ModItems.COPPER_CHIMNEY.get())
                 .pattern("   ")
-                .pattern("B B")
+                .pattern("I I")
                 .pattern("BCB")
                 .define('B', Items.COPPER_BLOCK)
+                .define('I', Items.COPPER_INGOT)
                 .define('C', Items.CHARCOAL)
                 .group("copper_chimney")
                 .unlockedBy("has_copper", has(Items.COPPER_INGOT))
