@@ -4,12 +4,16 @@ import com.mojang.math.Vector3f;
 import io.github.mortuusars.sootychimneys.config.CommonConfig;
 import io.github.mortuusars.sootychimneys.core.Wind;
 import io.github.mortuusars.sootychimneys.core.WindGetter;
+import io.github.mortuusars.sootychimneys.loot.ModLootTables;
 import io.github.mortuusars.sootychimneys.setup.ModBlockEntities;
 import io.github.mortuusars.sootychimneys.utils.RandomOffset;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.Vec3i;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.level.Level;
@@ -28,6 +32,7 @@ import net.minecraftforge.common.ToolActions;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+import java.util.List;
 import java.util.Random;
 
 /**
@@ -157,9 +162,32 @@ public abstract class ChimneyBlock extends Block implements EntityBlock {
         Block block = state.getBlock();
         if (toolAction == ToolActions.AXE_SCRAPE && block instanceof ISootyChimney sootyChimney && sootyChimney.isDirty()){
             sootyChimney.makeSootParticles(context.getLevel(), context.getClickedPos());
-            return sootyChimney.getCleanVariant().defaultBlockState();
+
+            if (!context.getLevel().isClientSide){
+                ServerLevel level = (ServerLevel)context.getLevel();
+
+                BlockPos pos = context.getClickedPos();
+                // Offset item spawning pos, depending on clicked face, to spawn items closer to the player.
+                // Items shooting in opposite direction is not fun.
+                Vec3i faceNormal = context.getClickedFace().getNormal();
+                Vector3f itemSpawnPosition = new Vector3f(pos.getX() + 0.5f + faceNormal.getX() * 0.65f,
+                                            pos.getY() + 0.6f + faceNormal.getY() * 0.65f,
+                                            pos.getZ() + 0.5f + faceNormal.getZ() * 0.65f);
+
+                List<ItemStack> items = ModLootTables.getSootScrapingLootFor(state, level);
+                spawnSootScrapingItems(itemSpawnPosition, level, items);
+            }
+
+            return sootyChimney.getCleanVariant().withPropertiesOf(state);
         }
         return null;
+    }
+
+    public void spawnSootScrapingItems(Vector3f pos, ServerLevel level, List<ItemStack> items){
+        for (ItemStack itemStack : items) {
+            ItemEntity entity = new ItemEntity(level, pos.x(), pos.y(), pos.z(), itemStack);
+            entity.spawnAtLocation(itemStack);
+        }
     }
 
     @Override

@@ -39,7 +39,8 @@ public abstract class BaseLootTableProvider extends LootTableProvider {
     private static final Logger LOGGER = LogManager.getLogger();
     private static final Gson GSON = new GsonBuilder().setPrettyPrinting().disableHtmlEscaping().create();
 
-    protected final Map<Block, LootTable.Builder> lootTables = new HashMap<>();
+    protected final Map<Block, LootTable.Builder> blockLootTables = new HashMap<>();
+    protected final Map<ResourceLocation, LootTable> customLootTables = new HashMap<>();
     private final DataGenerator generator;
 
     public BaseLootTableProvider(DataGenerator dataGeneratorIn) {
@@ -96,9 +97,14 @@ public abstract class BaseLootTableProvider extends LootTableProvider {
         addTables();
 
         Map<ResourceLocation, LootTable> tables = new HashMap<>();
-        for (Map.Entry<Block, LootTable.Builder> entry : lootTables.entrySet()) {
+        //Blocks
+        for (Map.Entry<Block, LootTable.Builder> entry : blockLootTables.entrySet()) {
             tables.put(entry.getKey().getLootTable(), entry.getValue().setParamSet(LootContextParamSets.BLOCK).build());
         }
+
+        //Custom
+        tables.putAll(customLootTables);
+
         writeTables(cache, tables);
     }
 

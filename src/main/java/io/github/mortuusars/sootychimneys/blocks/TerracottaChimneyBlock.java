@@ -59,4 +59,9 @@ public class TerracottaChimneyBlock extends ChimneyBlock implements ISootyChimne
     public Block getDirtyVariant() {
         return ModBlocks.DIRTY_TERRACOTTA_CHIMNEY.get();
     }
+
+    @Override
+    public float getScrapingDropChance() {
+        return 0.4f;
+    }
 }

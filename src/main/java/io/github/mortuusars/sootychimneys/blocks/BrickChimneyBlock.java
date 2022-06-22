@@ -39,6 +39,11 @@ public class BrickChimneyBlock extends ChimneyBlock implements ISootyChimney{
     }
 
     @Override
+    public float getScrapingDropChance() {
+        return 0.75f;
+    }
+
+    @Override
     public @NotNull VoxelShape getShape(BlockState pState, BlockGetter pLevel, BlockPos pPos, CollisionContext pContext) {
         return _shape;
     }

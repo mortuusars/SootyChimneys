@@ -34,4 +34,8 @@ public interface ISootyChimney{
                     0,0,0);
         }
     }
+
+    default float getScrapingDropChance(){
+        return 0.5f;
+    }
 }
