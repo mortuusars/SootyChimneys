@@ -22,7 +22,7 @@ public class CopperChimneyBlock extends ChimneyBlock implements ISootyChimney {
             Block.box(6,4,6, 10,16,10),
             Block.box(5,10,5, 11,14,11));
 
-    private static final Vector3f _particleOriginOffset = new Vector3f(0.5f, 1.2f, 0.5f);
+    private static final Vector3f _particleOriginOffset = new Vector3f(0.5f, 1.25f, 0.5f);
     private static final Vector3f _particleMaxRandomOffset = new Vector3f(0.025f, 0.05f, 0.025f);
 
     public CopperChimneyBlock() {
