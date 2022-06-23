@@ -14,7 +14,7 @@
       "item": "minecraft:copper_ingot"
     },
     "C": {
-      "item": "minecraft:coal"
+      "tag": "minecraft:coals"
     }
   },
   "result": {
