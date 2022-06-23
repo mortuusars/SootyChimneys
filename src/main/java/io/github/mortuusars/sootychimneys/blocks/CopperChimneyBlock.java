@@ -29,6 +29,7 @@ public class CopperChimneyBlock extends ChimneyBlock implements ISootyChimney {
         super(BlockBehaviour.Properties.of(Material.METAL, MaterialColor.COLOR_ORANGE).sound(SoundType.COPPER));
     }
 
+    @SuppressWarnings("deprecation")
     @Override
     public @NotNull VoxelShape getShape(BlockState pState, BlockGetter pLevel, BlockPos pPos, CollisionContext pContext) {
         return _shape;
