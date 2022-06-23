@@ -9,7 +9,7 @@
 </div>
 
 <br>
-<h1 align=center>Adds several variants of chimneys that emit smoke particles.</h1>
+<h2 align=center>Adds several variants of chimneys that emit smoke particles.</h1>
 <br>    
     
 <div align=center>
