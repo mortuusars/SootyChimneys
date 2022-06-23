@@ -2,17 +2,17 @@
   "parent": "minecraft:recipes/root",
   "rewards": {
     "recipes": [
-      "minecraft:brick_chimney_charcoal"
+      "minecraft:terracotta_chimney"
     ]
   },
   "criteria": {
-    "has_brick": {
+    "has_terracotta": {
       "trigger": "minecraft:inventory_changed",
       "conditions": {
         "items": [
           {
             "items": [
-              "minecraft:brick"
+              "minecraft:terracotta"
             ]
           }
         ]
@@ -21,13 +21,13 @@
     "has_the_recipe": {
       "trigger": "minecraft:recipe_unlocked",
       "conditions": {
-        "recipe": "minecraft:brick_chimney_charcoal"
+        "recipe": "minecraft:terracotta_chimney"
       }
     }
   },
   "requirements": [
     [
-      "has_brick",
+      "has_terracotta",
       "has_the_recipe"
     ]
   ]

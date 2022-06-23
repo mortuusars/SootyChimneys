@@ -11,7 +11,7 @@
       "item": "minecraft:terracotta"
     },
     "C": {
-      "item": "minecraft:coal"
+      "tag": "minecraft:coals"
     }
   },
   "result": {

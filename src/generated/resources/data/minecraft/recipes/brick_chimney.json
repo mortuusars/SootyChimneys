@@ -14,7 +14,7 @@
       "item": "minecraft:bricks"
     },
     "C": {
-      "item": "minecraft:charcoal"
+      "tag": "minecraft:coals"
     }
   },
   "result": {

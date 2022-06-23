@@ -11,7 +11,7 @@
       "item": "minecraft:stone_bricks"
     },
     "C": {
-      "item": "minecraft:charcoal"
+      "tag": "minecraft:coals"
     }
   },
   "result": {

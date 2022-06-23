@@ -2,17 +2,17 @@
   "parent": "minecraft:recipes/root",
   "rewards": {
     "recipes": [
-      "minecraft:copper_chimney_coal"
+      "minecraft:brick_chimney"
     ]
   },
   "criteria": {
-    "has_copper": {
+    "has_brick": {
       "trigger": "minecraft:inventory_changed",
       "conditions": {
         "items": [
           {
             "items": [
-              "minecraft:copper_ingot"
+              "minecraft:brick"
             ]
           }
         ]
@@ -21,13 +21,13 @@
     "has_the_recipe": {
       "trigger": "minecraft:recipe_unlocked",
       "conditions": {
-        "recipe": "minecraft:copper_chimney_coal"
+        "recipe": "minecraft:brick_chimney"
       }
     }
   },
   "requirements": [
     [
-      "has_copper",
+      "has_brick",
       "has_the_recipe"
     ]
   ]

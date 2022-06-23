@@ -2,17 +2,17 @@
   "parent": "minecraft:recipes/root",
   "rewards": {
     "recipes": [
-      "minecraft:stone_bricks_chimney_charcoal"
+      "minecraft:stone_brick_chimney"
     ]
   },
   "criteria": {
-    "has_stone_bricks": {
+    "has_stone": {
       "trigger": "minecraft:inventory_changed",
       "conditions": {
         "items": [
           {
             "items": [
-              "minecraft:stone_bricks"
+              "minecraft:stone"
             ]
           }
         ]
@@ -21,13 +21,13 @@
     "has_the_recipe": {
       "trigger": "minecraft:recipe_unlocked",
       "conditions": {
-        "recipe": "minecraft:stone_bricks_chimney_charcoal"
+        "recipe": "minecraft:stone_brick_chimney"
       }
     }
   },
   "requirements": [
     [
-      "has_stone_bricks",
+      "has_stone",
       "has_the_recipe"
     ]
   ]
