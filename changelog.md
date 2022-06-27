@@ -1,4 +1,7 @@
-Changed recipes to use minecraft:coals tag. Thanks *cosmicgelatin* for a correction.
+### 2022-06-27 - 0.5.1
+
+- Changed recipes to use minecraft:coals tag. Thanks *cosmicgelatin* for a correction.
+- Fixed client crash when teleporting away from chimneys.
 
 ### 2022-06-23 - 0.5.0
 
