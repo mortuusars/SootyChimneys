@@ -15,10 +15,11 @@ plugins {
     id 'eclipse'
     id 'maven-publish'
 }
+
 apply plugin: 'net.minecraftforge.gradle'
 apply plugin: 'org.parchmentmc.librarian.forgegradle'
 
-version = '0.5.1'
+version = '0.6.0'
 group = 'io.github.mortuusars.sootychimneys' // http://maven.apache.org/guides/mini/guide-naming-conventions.html
 archivesBaseName = 'sootychimneys'
 
@@ -49,6 +50,10 @@ minecraft {
     runs {
         client {
             workingDirectory project.file('run')
+
+            property 'mixin.env.remapRefMap', 'true'
+            property 'mixin.env.refMapRemappingFile', "${projectDir}/build/createSrgToMcp/output.srg"
+//            args "--debug", "--stacktrace", "--scan", "-mixin.config=sootychimneys.mixins.json".toString()
 
             // Recommended logging data for a userdev environment
             // The markers can be added/remove as needed separated by commas.
@@ -158,6 +163,12 @@ repositories {
         name = "ModMaven"
         url = "https://modmaven.dev"
     }
+    maven {
+        url 'https://www.cursemaven.com'
+        content {
+            includeGroup "curse.maven"
+        }
+    }
 }
 
 dependencies {
@@ -169,7 +180,12 @@ dependencies {
     // Real mod deobf dependency examples - these get remapped to your current mappings
     // compileOnly fg.deobf("mezz.jei:jei-1.18.2:9.7.0.196:api") // Adds JEI API as a compile dependency
      runtimeOnly fg.deobf("mezz.jei:jei-1.18.2:9.7.0.196") // Adds the full JEI mod as a runtime dependency
-    // implementation fg.deobf("com.tterrag.registrate:Registrate:MC${mc_version}-${registrate_version}") // Adds registrate as a dependency
+
+    // Create
+    implementation fg.deobf("curse.maven:create-328085:3872145")
+    implementation fg.deobf("curse.maven:flywheel-486392:3871082")
+
+    annotationProcessor "org.spongepowered:mixin:${mixin_version}:processor"
 
     // Examples using mod jars from ./libs
     // implementation fg.deobf("blank:coolmod-${mc_version}:${coolmod_version}")
