@@ -40,7 +40,7 @@ public class ModLootTablesProvider extends BaseLootTableProvider {
                     blockLootTables.put(chimneyBlock, createStandardTable(path, chimneyBlock, ModBlockEntities.CHIMNEY_BLOCK_ENTITY.get()));
 
                     // Soot Scraping:
-                    if (chimneyBlock instanceof ISootyChimney sootyChimney)
+                    if (chimneyBlock instanceof ISootyChimney sootyChimney && sootyChimney.isDirty())
                         customLootTables.put(
                                 new ResourceLocation(SootyChimneys.MOD_ID + ":soot_scraping/" + path),
                                 createSootLootTable(Items.BLACK_DYE, ConstantValue.exactly(1), sootyChimney.getScrapingDropChance()));

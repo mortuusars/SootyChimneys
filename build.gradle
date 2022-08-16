@@ -19,7 +19,7 @@ plugins {
 apply plugin: 'net.minecraftforge.gradle'
 apply plugin: 'org.parchmentmc.librarian.forgegradle'
 
-version = '0.6.0'
+version = '0.6.1'
 group = 'io.github.mortuusars.sootychimneys' // http://maven.apache.org/guides/mini/guide-naming-conventions.html
 archivesBaseName = 'sootychimneys'
 
@@ -124,6 +124,9 @@ minecraft {
 
         data {
             workingDirectory project.file('run')
+
+            property 'mixin.env.remapRefMap', 'true'
+            property 'mixin.env.refMapRemappingFile', "${projectDir}/build/createSrgToMcp/output.srg"
 
             property 'forge.logging.markers', 'REGISTRIES'
 
