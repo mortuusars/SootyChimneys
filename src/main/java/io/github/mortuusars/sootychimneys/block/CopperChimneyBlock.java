@@ -1,6 +1,7 @@
-package io.github.mortuusars.sootychimneys.blocks;
+package io.github.mortuusars.sootychimneys.block;
 
-import com.mojang.math.Vector3f;
+import io.github.mortuusars.sootychimneys.core.ChimneySmokeProperties;
+import io.github.mortuusars.sootychimneys.core.ISootyChimney;
 import io.github.mortuusars.sootychimneys.setup.ModBlocks;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.BlockGetter;
@@ -15,6 +16,7 @@ import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import org.jetbrains.annotations.NotNull;
 
+@SuppressWarnings("NullableProblems")
 public class CopperChimneyBlock extends ChimneyBlock implements ISootyChimney {
 
     private static final VoxelShape _shape = Shapes.or(
@@ -22,11 +24,15 @@ public class CopperChimneyBlock extends ChimneyBlock implements ISootyChimney {
             Block.box(6,4,6, 10,16,10),
             Block.box(5,10,5, 11,14,11));
 
-    private static final Vector3f _particleOriginOffset = new Vector3f(0.5f, 1.25f, 0.5f);
-    private static final Vector3f _particleMaxRandomOffset = new Vector3f(0.025f, 0.05f, 0.025f);
-
     public CopperChimneyBlock() {
-        super(BlockBehaviour.Properties.of(Material.METAL, MaterialColor.COLOR_ORANGE).sound(SoundType.COPPER));
+        super(new ChimneySmokeProperties(0.5f, 1.25f, 0.5f, 0.025f, 0.05f, 0.025f)
+                .setIntensity(0.5f)
+                .setSpeed(1.2f),
+            BlockBehaviour.Properties.of(Material.METAL, MaterialColor.COLOR_ORANGE)
+                    .sound(SoundType.COPPER)
+                    .strength(2f, 2f)
+                    .destroyTime(2f)
+                    .requiresCorrectToolForDrops());
     }
 
     @SuppressWarnings("deprecation")
@@ -43,25 +49,5 @@ public class CopperChimneyBlock extends ChimneyBlock implements ISootyChimney {
     @Override
     public Block getDirtyVariant() {
         return ModBlocks.DIRTY_COPPER_CHIMNEY.get();
-    }
-
-    @Override
-    public float getSmokeIntensity() {
-        return 0.5f;
-    }
-
-    @Override
-    public float getSmokeSpeed() {
-        return 1.2f;
-    }
-
-    @Override
-    public Vector3f getParticleOriginOffset() {
-        return _particleOriginOffset;
-    }
-
-    @Override
-    public Vector3f getParticleMaxRandomOffset() {
-        return _particleMaxRandomOffset;
     }
 }

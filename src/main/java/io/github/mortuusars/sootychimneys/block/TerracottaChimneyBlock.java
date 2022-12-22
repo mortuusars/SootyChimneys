@@ -1,6 +1,7 @@
-package io.github.mortuusars.sootychimneys.blocks;
+package io.github.mortuusars.sootychimneys.block;
 
-import com.mojang.math.Vector3f;
+import io.github.mortuusars.sootychimneys.core.ChimneySmokeProperties;
+import io.github.mortuusars.sootychimneys.core.ISootyChimney;
 import io.github.mortuusars.sootychimneys.setup.ModBlocks;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.BlockGetter;
@@ -12,37 +13,21 @@ import net.minecraft.world.level.material.Material;
 import net.minecraft.world.level.material.MaterialColor;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
-import net.minecraftforge.common.data.SoundDefinition;
 import org.jetbrains.annotations.NotNull;
 
-public class TerracottaChimneyBlock extends ChimneyBlock implements ISootyChimney{
-
+@SuppressWarnings({"NullableProblems", "deprecation"})
+public class TerracottaChimneyBlock extends ChimneyBlock implements ISootyChimney {
     private static final VoxelShape _shape = Block.box(5,0,5, 11,8,11);
-    private static final Vector3f _particleOriginOffset = new Vector3f(0.5f, 0.75f, 0.5f);
-    private static final Vector3f _particleMaxRandomOffset = new Vector3f(0.02f, 0.05f, 0.02f);
 
     public TerracottaChimneyBlock() {
-        super(BlockBehaviour.Properties.of(Material.STONE, MaterialColor.COLOR_ORANGE).sound(SoundType.DRIPSTONE_BLOCK));
-    }
-
-    @Override
-    public float getSmokeIntensity() {
-        return 0.2f;
-    }
-
-    @Override
-    public float getSmokeSpeed() {
-        return 0.65f;
-    }
-
-    @Override
-    public Vector3f getParticleOriginOffset() {
-        return _particleOriginOffset;
-    }
-
-    @Override
-    public Vector3f getParticleMaxRandomOffset() {
-        return _particleMaxRandomOffset;
+        super(new ChimneySmokeProperties(0.5f, 0.75f, 0.5f, 0.02f, 0.05f, 0.02f)
+                .setIntensity(0.2f)
+                .setSpeed(0.65f),
+            BlockBehaviour.Properties.of(Material.STONE, MaterialColor.COLOR_ORANGE)
+                    .sound(SoundType.DRIPSTONE_BLOCK)
+                    .strength(2f, 2f)
+                    .destroyTime(0.6f)
+                    .requiresCorrectToolForDrops());
     }
 
     @Override

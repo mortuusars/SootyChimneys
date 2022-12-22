@@ -24,6 +24,8 @@ public class ModLanguageProvider extends LanguageProvider {
     }
 
     private void genEN_US(){
+        add("message." + SootyChimneys.MOD_ID + ".blocked", "Smoke blocked");
+        add("message." + SootyChimneys.MOD_ID + ".open", "Smoke flow restored");
         add(ModBlocks.BRICK_CHIMNEY.get(), "Brick Chimney");
         add(ModBlocks.DIRTY_BRICK_CHIMNEY.get(), "Dirty Brick Chimney");
 
@@ -38,6 +40,8 @@ public class ModLanguageProvider extends LanguageProvider {
     }
 
     private void genUK_UA() {
+        add("message." + SootyChimneys.MOD_ID + ".blocked", "Вихід диму перекрито");
+        add("message." + SootyChimneys.MOD_ID + ".open", "Вихід диму відновлено");
         add(ModBlocks.BRICK_CHIMNEY.get(), "Цегляний Димохід");
         add(ModBlocks.DIRTY_BRICK_CHIMNEY.get(), "Брудний Цегляний Димохід");
 

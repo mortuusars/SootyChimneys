@@ -1,8 +1,10 @@
 {
+	"credit": "Made with Blockbench",
 	"parent": "minecraft:block/block",
 	"textures": {
-		"texture": "minecraft:block/stone_bricks",
-		"particle": "minecraft:block/stone_bricks"
+		"particle": "sootychimneys:block/stone_brick_chimney",
+		"texture": "sootychimneys:block/stone_brick_chimney",
+		"sooty": "sootychimneys:block/dirty_stone_brick_chimney"
 	},
 	"elements": [
 		{
@@ -13,7 +15,7 @@
 				"east": {"uv": [3, 5, 11, 16], "texture": "#texture"},
 				"south": {"uv": [3, 5, 11, 16], "texture": "#texture"},
 				"west": {"uv": [3, 5, 11, 16], "texture": "#texture"},
-				"up": {"uv": [8, 0, 16, 8], "texture": "#texture"},
+				"up": {"uv": [8, 0, 16, 8], "texture": "#sooty"},
 				"down": {"uv": [0, 0, 8, 8], "texture": "#texture", "cullface": "down"}
 			}
 		},
@@ -22,7 +24,7 @@
 			"to": [5, 16, 13],
 			"faces": {
 				"north": {"uv": [11, 0, 13, 5], "texture": "#texture"},
-				"east": {"uv": [0, 0, 10, 5], "texture": "#texture"},
+				"east": {"uv": [0, 12, 10, 7], "texture": "#sooty"},
 				"south": {"uv": [0, 0, 2, 5], "texture": "#texture"},
 				"west": {"uv": [0, 0, 10, 5], "texture": "#texture"},
 				"up": {"uv": [3, 4, 13, 6], "rotation": 90, "texture": "#texture"},
@@ -36,7 +38,7 @@
 				"north": {"uv": [0, 0, 2, 5], "texture": "#texture"},
 				"east": {"uv": [0, 0, 10, 5], "texture": "#texture"},
 				"south": {"uv": [11, 0, 13, 5], "texture": "#texture"},
-				"west": {"uv": [0, 0, 10, 5], "texture": "#texture"},
+				"west": {"uv": [0, 12, 10, 7], "texture": "#sooty"},
 				"up": {"uv": [2, 3, 12, 5], "rotation": 90, "texture": "#texture"},
 				"down": {"uv": [0, 0, 2, 10], "texture": "#texture"}
 			}
@@ -45,7 +47,7 @@
 			"from": [5, 11, 11],
 			"to": [11, 16, 13],
 			"faces": {
-				"north": {"uv": [0, 0, 6, 5], "texture": "#texture"},
+				"north": {"uv": [0, 12, 6, 7], "texture": "#sooty"},
 				"east": {"uv": [0, 0, 2, 5], "texture": "#texture"},
 				"south": {"uv": [2, 0, 8, 5], "texture": "#texture"},
 				"west": {"uv": [0, 0, 2, 5], "texture": "#texture"},
@@ -59,7 +61,7 @@
 			"faces": {
 				"north": {"uv": [2, 0, 8, 5], "texture": "#texture"},
 				"east": {"uv": [0, 0, 2, 5], "texture": "#texture"},
-				"south": {"uv": [0, 0, 6, 5], "texture": "#texture"},
+				"south": {"uv": [2, 12, 8, 7], "texture": "#sooty"},
 				"west": {"uv": [0, 0, 2, 5], "texture": "#texture"},
 				"up": {"uv": [2, 2, 8, 4], "texture": "#texture"},
 				"down": {"uv": [0, 0, 6, 2], "texture": "#texture"}

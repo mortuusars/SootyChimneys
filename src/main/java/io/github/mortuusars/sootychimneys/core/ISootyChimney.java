@@ -1,4 +1,4 @@
-package io.github.mortuusars.sootychimneys.blocks;
+package io.github.mortuusars.sootychimneys.core;
 
 import io.github.mortuusars.sootychimneys.utils.RandomOffset;
 import net.minecraft.core.BlockPos;
@@ -8,7 +8,7 @@ import net.minecraft.world.level.block.Block;
 
 import java.util.Random;
 
-public interface ISootyChimney{
+public interface ISootyChimney {
     Block getCleanVariant();
     Block getDirtyVariant();
 

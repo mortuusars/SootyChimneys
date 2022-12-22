@@ -1,9 +1,6 @@
 package io.github.mortuusars.sootychimneys.setup;
 
-import io.github.mortuusars.sootychimneys.blocks.*;
-import net.minecraft.world.level.block.WeatheringCopper;
-import net.minecraft.world.level.block.state.BlockBehaviour;
-import net.minecraft.world.level.material.Material;
+import io.github.mortuusars.sootychimneys.block.*;
 import net.minecraftforge.registries.RegistryObject;
 
 import java.util.ArrayList;

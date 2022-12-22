@@ -2,7 +2,7 @@ package io.github.mortuusars.sootychimneys.loot;
 
 import com.mojang.logging.LogUtils;
 import io.github.mortuusars.sootychimneys.SootyChimneys;
-import io.github.mortuusars.sootychimneys.blocks.ISootyChimney;
+import io.github.mortuusars.sootychimneys.core.ISootyChimney;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.item.ItemStack;

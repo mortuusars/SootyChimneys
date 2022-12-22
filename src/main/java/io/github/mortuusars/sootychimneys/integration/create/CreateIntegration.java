@@ -1,10 +1,9 @@
-package io.github.mortuusars.sootychimneys.compat.create;
+package io.github.mortuusars.sootychimneys.integration.create;
 
 import com.simibubi.create.AllMovementBehaviours;
-import com.simibubi.create.content.contraptions.components.actors.CampfireMovementBehaviour;
 import io.github.mortuusars.sootychimneys.setup.ModBlocks;
 
-public class CreateCompat {
+public class CreateIntegration {
 
     public static void registerMovingBehaviors() {
         ChimneyMovementBehaviour chimneyMovementBehaviour = new ChimneyMovementBehaviour();

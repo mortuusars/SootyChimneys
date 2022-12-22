@@ -6,5 +6,7 @@
   "block.sootychimneys.dirty_stone_brick_chimney": "Dirty Stone Brick Chimney",
   "block.sootychimneys.dirty_terracotta_chimney": "Dirty Terracotta Chimney",
   "block.sootychimneys.stone_brick_chimney": "Stone Brick Chimney",
-  "block.sootychimneys.terracotta_chimney": "Terracotta Chimney"
+  "block.sootychimneys.terracotta_chimney": "Terracotta Chimney",
+  "message.sootychimneys.blocked": "Smoke blocked",
+  "message.sootychimneys.open": "Smoke flow restored"
 }

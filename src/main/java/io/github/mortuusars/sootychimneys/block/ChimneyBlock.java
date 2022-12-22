@@ -1,7 +1,9 @@
-package io.github.mortuusars.sootychimneys.blocks;
+package io.github.mortuusars.sootychimneys.block;
 
 import com.mojang.math.Vector3f;
 import io.github.mortuusars.sootychimneys.config.CommonConfig;
+import io.github.mortuusars.sootychimneys.core.ChimneySmokeProperties;
+import io.github.mortuusars.sootychimneys.core.ISootyChimney;
 import io.github.mortuusars.sootychimneys.core.Wind;
 import io.github.mortuusars.sootychimneys.core.WindGetter;
 import io.github.mortuusars.sootychimneys.loot.ModLootTables;
@@ -10,7 +12,12 @@ import io.github.mortuusars.sootychimneys.utils.RandomOffset;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Vec3i;
 import net.minecraft.core.particles.ParticleTypes;
+import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.sounds.SoundEvents;
+import net.minecraft.sounds.SoundSource;
+import net.minecraft.world.InteractionHand;
+import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
@@ -27,6 +34,7 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BooleanProperty;
 import net.minecraft.world.level.material.FluidState;
+import net.minecraft.world.phys.BlockHitResult;
 import net.minecraftforge.common.ToolAction;
 import net.minecraftforge.common.ToolActions;
 import org.jetbrains.annotations.NotNull;
@@ -38,45 +46,70 @@ import java.util.Random;
 /**
  * Base block for chimneys. Contains common functionality.
  */
+@SuppressWarnings({"NullableProblems", "deprecation"})
 public abstract class ChimneyBlock extends Block implements EntityBlock {
 
     public static final BooleanProperty LIT = RedstoneTorchBlock.LIT;
+    public static final BooleanProperty BLOCKED = BooleanProperty.create("blocked");
 
-    public ChimneyBlock(Properties properties) {
-        super(properties
-                .strength(2f, 2f)
-                .destroyTime(2f)
-                .requiresCorrectToolForDrops());
+    private final ChimneySmokeProperties smokeProperties;
+
+    public ChimneyBlock(ChimneySmokeProperties smokeProperties, Properties properties) {
+        super(properties);
+        this.smokeProperties = smokeProperties;
+
         this.registerDefaultState(defaultBlockState()
-                .setValue(LIT, true));
+                .setValue(LIT, true)
+                .setValue(BLOCKED, false));
     }
 
-    public Vector3f getParticleOriginOffset(){
-        return new Vector3f(0.5f, 1f, 0.5f);
-    }
-
-    public Vector3f getParticleMaxRandomOffset(){
-        return new Vector3f(0.15f, 0.1f, 0.15f);
-    }
-
-    public float getSmokeIntensity(){
-        return 1f;
-    }
-
-    public float getSmokeSpeed(){
-        return 1f;
+    public ChimneySmokeProperties getSmokeProperties() {
+        return this.smokeProperties;
     }
 
     @Override
-    protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> pBuilder) {
-        super.createBlockStateDefinition(pBuilder);
-        pBuilder.add(LIT);
+    protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
+        builder
+            .add(LIT)
+            .add(BLOCKED);
+    }
+
+    /**
+     * Expects a ChimneyBlock block state. May fail if not Chimney.
+     */
+    public boolean isEmittingSmoke(BlockState blockState) {
+        return blockState.getValue(LIT) && !blockState.getValue(BLOCKED);
+    }
+
+    @Override
+    public InteractionResult use(BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult blockHitResult) {
+        if (!player.getItemInHand(InteractionHand.MAIN_HAND).isEmpty())
+            return InteractionResult.PASS;
+
+        boolean newBlockedValue = !state.getValue(BLOCKED);
+
+        if (level.isClientSide) {
+            String messageTranslationKey = "message.sootychimneys." + (newBlockedValue ? "blocked" : "open");
+            player.displayClientMessage(new TranslatableComponent(messageTranslationKey), true);
+        }
+        else {
+            Vector3f particleOrigin = getSmokeProperties().getParticleOrigin();
+            Random random = level.getRandom();
+            for (int i = 0; i < random.nextInt(5); i++) {
+                ((ServerLevel) level).sendParticles(ParticleTypes.SMOKE,
+                        pos.getX() + particleOrigin.x(), pos.getY() + particleOrigin.y() - 0.1, pos.getZ() + particleOrigin.z(),
+                        1, random.nextGaussian() * 0.1d, random.nextGaussian() * 0.1d, random.nextGaussian() * 0.1d, 0);
+            }
+            level.playSound(null, pos, newBlockedValue ? SoundEvents.LANTERN_FALL : SoundEvents.LANTERN_HIT, SoundSource.BLOCKS,
+                    0.8f, 0.85f + random.nextFloat() * 0.05f);
+            level.setBlock(pos, state.setValue(BLOCKED, newBlockedValue), Block.UPDATE_ALL);
+        }
+
+        return InteractionResult.sidedSuccess(level.isClientSide);
     }
 
     @Override
     public void onPlace(BlockState pState, Level pLevel, BlockPos pPos, BlockState pOldState, boolean pIsMoving) {
-        super.onPlace(pState, pLevel, pPos, pOldState, pIsMoving);
-
         if(pLevel.isClientSide)
             return;
 
@@ -97,15 +130,14 @@ public abstract class ChimneyBlock extends Block implements EntityBlock {
             pLevel.setBlock(pPos, pState.setValue(LIT, !pLevel.hasNeighborSignal(pPos)), Block.UPDATE_CLIENTS);
     }
 
+    @SuppressWarnings("unused")
     public void emitParticles(Level level, BlockPos pos, BlockState state){
         Random random = level.getRandom();
 
-        if (random.nextFloat() > getSmokeIntensity())
+        if (random.nextFloat() > getSmokeProperties().getIntensity())
             return;
 
-        ChimneyBlock chimney = ((ChimneyBlock)state.getBlock());
-
-        Vector3f particleOffset = chimney.getParticleOriginOffset();
+        Vector3f particleOffset = getSmokeProperties().getParticleOrigin();
         float x = pos.getX() + particleOffset.x();
         float y = pos.getY() + particleOffset.y();
         float z = pos.getZ() + particleOffset.z();
@@ -114,15 +146,17 @@ public abstract class ChimneyBlock extends Block implements EntityBlock {
         float windStrengthModifier = 0.1f;
         double xSpeed = (wind.getXCoordinate() * wind.getStrength()) * windStrengthModifier;
         double zSpeed = (wind.getYCoordinate() * wind.getStrength()) * windStrengthModifier;
-        double ySpeed = 0.05d * chimney.getSmokeSpeed();
+        double ySpeed = 0.05d * getSmokeProperties().getSpeed();
 
-        Vector3f maxRandomOffset = chimney.getParticleMaxRandomOffset();
+        Vector3f particleSpread = getSmokeProperties().getParticleSpread();
 
-        for (int i = 0; i < random.nextInt(4); i++) {
+        int maxParticles = ((int) (4 * Math.max(getSmokeProperties().getIntensity(), 0.5f)));
+
+        for (int i = 0; i < random.nextInt(maxParticles); i++) {
             level.addAlwaysVisibleParticle(ParticleTypes.CAMPFIRE_COSY_SMOKE, true,
-                    RandomOffset.offset(x, maxRandomOffset.x(), random),
-                    RandomOffset.offset(y, maxRandomOffset.y(), random),
-                    RandomOffset.offset(z, maxRandomOffset.z(), random),
+                    RandomOffset.offset(x, particleSpread.x(), random),
+                    RandomOffset.offset(y, particleSpread.y(), random),
+                    RandomOffset.offset(z, particleSpread.z(), random),
                     xSpeed, ySpeed, zSpeed);
         }
     }
@@ -136,23 +170,21 @@ public abstract class ChimneyBlock extends Block implements EntityBlock {
     @Nullable
     @Override
     public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level level, BlockState state, BlockEntityType<T> type) {
-        if (level.isClientSide() && state.getValue(LIT))
-            return type == ModBlockEntities.CHIMNEY_BLOCK_ENTITY.get() ? ChimneyBlockEntity::particleTick : null;
-
-        return null;
+        return level.isClientSide() && isEmittingSmoke(state) && type == ModBlockEntities.CHIMNEY_BLOCK_ENTITY.get()
+                ? ChimneyBlockEntity::particleTick : null;
     }
 
-    public boolean isRandomlyTicking(BlockState pState) {
-        return pState.getBlock() instanceof ISootyChimney chimney && chimney.isClean() && pState.getValue(LIT);
+    public boolean isRandomlyTicking(BlockState blockState) {
+        return blockState.getBlock() instanceof ISootyChimney chimney && chimney.isClean() && isEmittingSmoke(blockState);
     }
 
     @Override
-    public void randomTick(BlockState pState, ServerLevel pLevel, BlockPos pPos, Random pRandom) {
-        if (pState.getBlock() instanceof ISootyChimney sootyChimney
+    public void randomTick(BlockState blockState, ServerLevel level, BlockPos pos, Random random) {
+        if (blockState.getBlock() instanceof ISootyChimney sootyChimney
                 && sootyChimney.isClean()
-                && pState.getValue(LIT)
-                && pRandom.nextDouble(0.00001d, 1.0d) < CommonConfig.DIRTY_CHANCE.get()){
-            pLevel.setBlock(pPos, sootyChimney.getDirtyVariant().defaultBlockState(), Block.UPDATE_CLIENTS);
+                && isEmittingSmoke(blockState)
+                && random.nextDouble() < CommonConfig.DIRTY_CHANCE.get()){
+            level.setBlock(pos, sootyChimney.getDirtyVariant().defaultBlockState(), Block.UPDATE_CLIENTS);
         }
     }
 

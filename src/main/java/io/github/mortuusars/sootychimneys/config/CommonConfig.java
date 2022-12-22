@@ -1,6 +1,5 @@
 package io.github.mortuusars.sootychimneys.config;
 
-import net.minecraftforge.common.ForgeConfig;
 import net.minecraftforge.common.ForgeConfigSpec;
 
 public class CommonConfig {
@@ -18,7 +17,7 @@ public class CommonConfig {
                 .defineInRange("SmokeChance", 1.0d, 0d, 1.0d);
 
         DIRTY_CHANCE = builder
-                .comment("Chimneys get dirty when a random tick occurs. (Chimney must be working (LIT))")
+                .comment("Chimneys get dirty when a random tick occurs. (Chimney must be working (LIT) and not blocked.)")
                 .comment("and when random tick occurs - this value controls the chance of a chimney becoming dirty.")
                 .comment("1.0 - dirty on first random tick.")
                 .comment("0.0 - chimney will never get dirty.")

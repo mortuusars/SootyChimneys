@@ -1,7 +1,7 @@
 package io.github.mortuusars.sootychimneys.data;
 
 import io.github.mortuusars.sootychimneys.SootyChimneys;
-import io.github.mortuusars.sootychimneys.blocks.ChimneyBlock;
+import io.github.mortuusars.sootychimneys.block.ChimneyBlock;
 import io.github.mortuusars.sootychimneys.setup.ModBlocks;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.world.level.block.Block;
@@ -37,6 +37,6 @@ public class ModBlockStatesProvider extends BlockStateProvider {
         getVariantBuilder(block)
                 .forAllStatesExcept(state -> ConfiguredModel.builder()
                         .modelFile(models().getExistingFile(modLoc("block/" + path)))
-                        .build(), ChimneyBlock.LIT);
+                        .build(), ChimneyBlock.LIT, ChimneyBlock.BLOCKED);
     }
 }

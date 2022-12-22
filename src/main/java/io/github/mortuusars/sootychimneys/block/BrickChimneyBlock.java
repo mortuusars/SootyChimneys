@@ -1,6 +1,7 @@
-package io.github.mortuusars.sootychimneys.blocks;
+package io.github.mortuusars.sootychimneys.block;
 
-import com.mojang.math.Vector3f;
+import io.github.mortuusars.sootychimneys.core.ChimneySmokeProperties;
+import io.github.mortuusars.sootychimneys.core.ISootyChimney;
 import io.github.mortuusars.sootychimneys.setup.ModBlocks;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.BlockGetter;
@@ -15,15 +16,25 @@ import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import org.jetbrains.annotations.NotNull;
 
-public class BrickChimneyBlock extends ChimneyBlock implements ISootyChimney{
-    private static final Vector3f _particleOriginOffset = new Vector3f(0.5f, 1f, 0.5f);
-    private static final Vector3f _particleMaxRandomOffset = new Vector3f(0.25f, 0.1f, 0.25f);
+@SuppressWarnings({"deprecation", "NullableProblems"})
+public class BrickChimneyBlock extends ChimneyBlock implements ISootyChimney {
     private static final VoxelShape _shape = Shapes.or(
             Block.box(1d, 0d, 1d, 15d,11d,15d),
             Block.box(0d, 11d, 0d, 16d,16d,16d));
 
     public BrickChimneyBlock() {
-        super(BlockBehaviour.Properties.of(Material.STONE, MaterialColor.COLOR_ORANGE).sound(SoundType.DEEPSLATE_BRICKS));
+        super(new ChimneySmokeProperties(0.5f, 1f, 0.5f, 0.25f, 0.1f, 0.25f)
+                        .setSpeed(1.2f),
+                BlockBehaviour.Properties.of(Material.STONE, MaterialColor.COLOR_ORANGE)
+                        .sound(SoundType.DEEPSLATE_BRICKS)
+                        .strength(2f, 2f)
+                        .destroyTime(2.2f)
+                        .requiresCorrectToolForDrops());
+    }
+
+    @Override
+    public @NotNull VoxelShape getShape(BlockState pState, BlockGetter pLevel, BlockPos pPos, CollisionContext pContext) {
+        return _shape;
     }
 
     @NotNull
@@ -42,30 +53,4 @@ public class BrickChimneyBlock extends ChimneyBlock implements ISootyChimney{
     public float getScrapingDropChance() {
         return 0.75f;
     }
-
-    @Override
-    public @NotNull VoxelShape getShape(BlockState pState, BlockGetter pLevel, BlockPos pPos, CollisionContext pContext) {
-        return _shape;
-    }
-
-    @Override
-    public Vector3f getParticleOriginOffset() {
-        return _particleOriginOffset;
-    }
-
-    @Override
-    public Vector3f getParticleMaxRandomOffset() {
-        return _particleMaxRandomOffset;
-    }
-
-    @Override
-    public float getSmokeIntensity() {
-        return 1f;
-    }
-
-    @Override
-    public float getSmokeSpeed() {
-        return 1.2f;
-    }
-
 }

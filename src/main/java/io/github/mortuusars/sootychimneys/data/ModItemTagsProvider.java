@@ -2,7 +2,7 @@ package io.github.mortuusars.sootychimneys.data;
 
 import io.github.mortuusars.sootychimneys.SootyChimneys;
 import io.github.mortuusars.sootychimneys.setup.ModItems;
-import io.github.mortuusars.sootychimneys.setup.Registry;
+import io.github.mortuusars.sootychimneys.setup.ModTags;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.data.tags.BlockTagsProvider;
 import net.minecraft.data.tags.ItemTagsProvider;
@@ -16,8 +16,7 @@ public class ModItemTagsProvider extends ItemTagsProvider {
 
     @Override
     protected void addTags() {
-        ModItems.CHIMNEYS.forEach((chimneyItem) -> {
-            tag(Registry.CHIMNEY_ITEM_TAG).add(chimneyItem.get());
-        });
+        ModItems.CHIMNEYS.forEach((chimneyItem) ->
+                tag(ModTags.Items.CHIMNEY).add(chimneyItem.get()));
     }
 }
