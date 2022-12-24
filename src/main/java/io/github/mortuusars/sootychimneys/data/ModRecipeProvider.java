@@ -20,8 +20,6 @@ public class ModRecipeProvider extends RecipeProvider {
     @Override
     protected void buildCraftingRecipes(@NotNull Consumer<FinishedRecipe> recipeConsumer) {
 
-        SootScrapingRecipes.register(recipeConsumer);
-
         ShapedRecipeBuilder.shaped(ModItems.BRICK_CHIMNEY.get())
                 .pattern("b b")
                 .pattern("B B")

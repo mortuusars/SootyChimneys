@@ -9,6 +9,9 @@ public class CommonConfig {
     public static final ForgeConfigSpec.DoubleValue DIRTY_CHANCE;
     public static final ForgeConfigSpec.BooleanValue WIND_ENABLED;
 
+    public static final ForgeConfigSpec.BooleanValue ADD_SOOT_SCRAPING_TO_JEI;
+    public static final ForgeConfigSpec.BooleanValue DISPLAY_JEI_SCRAPING_BYPRODUCTS_INFO;
+
     static{
         ForgeConfigSpec.Builder builder = new ForgeConfigSpec.Builder();
 
@@ -26,6 +29,18 @@ public class CommonConfig {
         WIND_ENABLED = builder
                 .comment("Enable/disable wind effect on smoke particles:")
                 .define("Wind", true);
+
+        builder.push("JEI");
+
+        ADD_SOOT_SCRAPING_TO_JEI = builder
+                .comment("Soot Scraping category will be added to JEI.")
+                .define("JEISootScraping", true);
+
+        DISPLAY_JEI_SCRAPING_BYPRODUCTS_INFO = builder
+                .comment("Enables/disables 'May produce a byproduct' info in JEI Soot Scraping recipes.", "Useful when scraping loot is removed.")
+                .define("DisplayJEIScrapingByproductInfo", true);
+
+        builder.pop();
 
         SPEC = builder.build();
     }

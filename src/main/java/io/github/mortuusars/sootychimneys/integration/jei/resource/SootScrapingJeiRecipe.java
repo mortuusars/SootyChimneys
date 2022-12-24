@@ -1,12 +1,11 @@
 package io.github.mortuusars.sootychimneys.integration.jei.resource;
 
-import io.github.mortuusars.sootychimneys.SootyChimneys;
-import net.minecraft.client.Minecraft;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.level.storage.loot.LootTable;
+import net.minecraft.world.item.crafting.Ingredient;
+import net.minecraftforge.common.ToolActions;
+import net.minecraftforge.registries.ForgeRegistries;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class SootScrapingJeiRecipe {
@@ -14,26 +13,29 @@ public class SootScrapingJeiRecipe {
     private final Item dirtyChimney;
     private final Item cleanChimney;
 
+    private final ItemStack dirtyChimneyStack;
+    private final ItemStack cleanChimneyStack;
+
     public SootScrapingJeiRecipe(Item dirtyChimney, Item cleanChimney) {
 
         this.dirtyChimney = dirtyChimney;
         this.cleanChimney = cleanChimney;
+        this.dirtyChimneyStack = new ItemStack(dirtyChimney);
+        this.cleanChimneyStack = new ItemStack(cleanChimney);
     }
 
     public ItemStack getIngredientChimney() {
-        return new ItemStack(dirtyChimney);
+        return dirtyChimneyStack;
     }
 
     public ItemStack getResultChimney() {
-        return new ItemStack(cleanChimney);
+        return cleanChimneyStack;
     }
 
-    public List<ItemStack> getScrapeDrops() {
-        LootTable lootTable = Minecraft.getInstance().level.getServer().getLootTables()
-                .get(SootyChimneys.resource("soot_scraping/" + dirtyChimney.getRegistryName().getPath()));
-
-//        lootTable.get
-
-        return null;
+    public List<ItemStack> getTools() {
+        return ForgeRegistries.ITEMS.getValues().stream()
+                .map(ItemStack::new)
+                .filter(stack -> stack.canPerformAction(ToolActions.AXE_SCRAPE))
+                .toList();
     }
 }
