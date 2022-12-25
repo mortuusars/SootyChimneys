@@ -1,5 +1,6 @@
 package io.github.mortuusars.sootychimneys.data;
 
+import io.github.mortuusars.sootychimneys.data.recipe.SootScrapingRecipes;
 import io.github.mortuusars.sootychimneys.setup.ModItems;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.data.recipes.FinishedRecipe;
@@ -17,7 +18,7 @@ public class ModRecipeProvider extends RecipeProvider {
     }
 
     @Override
-    protected void buildCraftingRecipes(@NotNull Consumer<FinishedRecipe> pFinishedRecipeConsumer) {
+    protected void buildCraftingRecipes(@NotNull Consumer<FinishedRecipe> recipeConsumer) {
 
         ShapedRecipeBuilder.shaped(ModItems.BRICK_CHIMNEY.get())
                 .pattern("b b")
@@ -28,7 +29,7 @@ public class ModRecipeProvider extends RecipeProvider {
                 .define('C', ItemTags.COALS)
                 .group("brick_chimney")
                 .unlockedBy("has_brick", has(Items.BRICK))
-                .save(pFinishedRecipeConsumer, "brick_chimney");
+                .save(recipeConsumer, "brick_chimney");
 
         ShapedRecipeBuilder.shaped(ModItems.STONE_BRICK_CHIMNEY.get())
                 .pattern("B B")
@@ -38,7 +39,7 @@ public class ModRecipeProvider extends RecipeProvider {
                 .define('C', ItemTags.COALS)
                 .group("stone_brick_chimney")
                 .unlockedBy("has_stone", has(Items.STONE))
-                .save(pFinishedRecipeConsumer, "stone_brick_chimney");
+                .save(recipeConsumer, "stone_brick_chimney");
 
 
         ShapedRecipeBuilder.shaped(ModItems.TERRACOTTA_CHIMNEY.get())
@@ -49,7 +50,7 @@ public class ModRecipeProvider extends RecipeProvider {
                 .define('C', ItemTags.COALS)
                 .group("terracotta_chimney")
                 .unlockedBy("has_terracotta", has(Items.TERRACOTTA))
-                .save(pFinishedRecipeConsumer, "terracotta_chimney");
+                .save(recipeConsumer, "terracotta_chimney");
 
 
         ShapedRecipeBuilder.shaped(ModItems.COPPER_CHIMNEY.get())
@@ -61,6 +62,6 @@ public class ModRecipeProvider extends RecipeProvider {
                 .define('C', ItemTags.COALS)
                 .group("copper_chimney")
                 .unlockedBy("has_copper", has(Items.COPPER_INGOT))
-                .save(pFinishedRecipeConsumer, "copper_chimney");
+                .save(recipeConsumer, "copper_chimney");
     }
 }

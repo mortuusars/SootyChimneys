@@ -1,3 +1,10 @@
+### 2022-12-25 - 1.0.0
+- Added smoke blocking mechanic: right click chimney with an empty hand to enable/disable smoke.
+- Added JEI/REI compatibility.
+
+### 2022-08-07 - 0.6.0
+- Added compatibility with Create. Chimneys will now emit smoke when on a contraption.
+
 ### 2022-06-27 - 0.5.1
 
 - Changed recipes to use minecraft:coals tag. Thanks *cosmicgelatin* for a correction.
