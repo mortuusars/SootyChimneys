@@ -39,6 +39,7 @@ public class ModLanguageProvider extends LanguageProvider {
         add("message." + SootyChimneys.MOD_ID + ".blocked", "Smoke blocked");
         add("message." + SootyChimneys.MOD_ID + ".open", "Smoke flow restored");
 
+        add("jei." + SootyChimneys.MOD_ID + ".category.soot_covering", "Soot Covering");
         add("jei." + SootyChimneys.MOD_ID + ".category.soot_scraping", "Soot Scraping");
         add("jei." + SootyChimneys.MOD_ID + ".category.soot_scraping.soot_items_info", "May produce a byproduct");
 
@@ -60,6 +61,7 @@ public class ModLanguageProvider extends LanguageProvider {
         add("message." + SootyChimneys.MOD_ID + ".blocked", "Вихід диму перекрито");
         add("message." + SootyChimneys.MOD_ID + ".open", "Вихід диму відновлено");
 
+        add("jei." + SootyChimneys.MOD_ID + ".category.soot_covering", "Забруднення Сажею");
         add("jei." + SootyChimneys.MOD_ID + ".category.soot_scraping", "Зішкріб Сажі");
         add("jei." + SootyChimneys.MOD_ID + ".category.soot_scraping.soot_items_info", "Може мати додатковий продукт");
     }

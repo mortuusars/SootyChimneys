@@ -1,8 +1,7 @@
-package io.github.mortuusars.sootychimneys.integration.jei.resource;
+package io.github.mortuusars.sootychimneys.integration.jei.recipe;
 
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraftforge.common.ToolActions;
 import net.minecraftforge.registries.ForgeRegistries;
 
