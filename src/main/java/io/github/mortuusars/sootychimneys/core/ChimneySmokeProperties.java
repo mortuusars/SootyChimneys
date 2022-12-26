@@ -1,6 +1,7 @@
 package io.github.mortuusars.sootychimneys.core;
 
-import com.mojang.math.Vector3f;
+
+import org.joml.Vector3f;
 
 public class ChimneySmokeProperties {
     private final Vector3f particleOrigin;

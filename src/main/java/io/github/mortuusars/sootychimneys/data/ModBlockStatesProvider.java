@@ -15,7 +15,7 @@ import java.util.Objects;
 public class ModBlockStatesProvider extends BlockStateProvider {
 
     public ModBlockStatesProvider(DataGenerator gen, ExistingFileHelper exFileHelper) {
-        super(gen, SootyChimneys.MOD_ID, exFileHelper);
+        super(gen.getPackOutput(), SootyChimneys.MOD_ID, exFileHelper);
     }
 
     @Override

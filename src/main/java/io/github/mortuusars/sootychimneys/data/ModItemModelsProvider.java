@@ -10,7 +10,7 @@ import java.util.Objects;
 
 public class ModItemModelsProvider extends ItemModelProvider {
     public ModItemModelsProvider(DataGenerator generator, ExistingFileHelper existingFileHelper) {
-        super(generator, SootyChimneys.MOD_ID, existingFileHelper);
+        super(generator.getPackOutput(), SootyChimneys.MOD_ID, existingFileHelper);
     }
 
     @Override

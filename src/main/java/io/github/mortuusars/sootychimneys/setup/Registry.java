@@ -16,7 +16,7 @@ public class Registry {
     public static final DeferredRegister<Item> ITEMS = DeferredRegister.create(ForgeRegistries.ITEMS, SootyChimneys.MOD_ID);
     public static final DeferredRegister<BlockEntityType<?>> BLOCK_ENTITIES = DeferredRegister.create(ForgeRegistries.BLOCK_ENTITY_TYPES, SootyChimneys.MOD_ID);
     public static final DeferredRegister<RecipeSerializer<?>> RECIPE_SERIALIZERS = DeferredRegister.create(ForgeRegistries.RECIPE_SERIALIZERS, SootyChimneys.MOD_ID);
-    public static final DeferredRegister<RecipeType<?>> RECIPE_TYPES = DeferredRegister.create(net.minecraft.core.Registry.RECIPE_TYPE.key(), SootyChimneys.MOD_ID);
+    public static final DeferredRegister<RecipeType<?>> RECIPE_TYPES = DeferredRegister.create(ForgeRegistries.RECIPE_TYPES, SootyChimneys.MOD_ID);
 
 
     public static void init(){

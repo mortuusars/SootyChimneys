@@ -10,7 +10,7 @@ public class ModLanguageProvider extends LanguageProvider {
     private final String _locale;
 
     public ModLanguageProvider(DataGenerator gen, String locale) {
-        super(gen, SootyChimneys.MOD_ID, locale);
+        super(gen.getPackOutput(), SootyChimneys.MOD_ID, locale);
         _locale = locale;
     }
 

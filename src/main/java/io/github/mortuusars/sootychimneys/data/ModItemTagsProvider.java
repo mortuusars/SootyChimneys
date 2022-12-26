@@ -1,21 +1,21 @@
 package io.github.mortuusars.sootychimneys.data;
 
-import io.github.mortuusars.sootychimneys.SootyChimneys;
 import io.github.mortuusars.sootychimneys.setup.ModItems;
 import io.github.mortuusars.sootychimneys.setup.ModTags;
+import net.minecraft.core.HolderLookup;
 import net.minecraft.data.DataGenerator;
-import net.minecraft.data.tags.BlockTagsProvider;
-import net.minecraft.data.tags.ItemTagsProvider;
-import net.minecraftforge.common.data.ExistingFileHelper;
-import org.jetbrains.annotations.Nullable;
+import net.minecraft.data.registries.VanillaRegistries;
+import net.minecraft.data.tags.VanillaItemTagsProvider;
 
-public class ModItemTagsProvider extends ItemTagsProvider {
-    public ModItemTagsProvider(DataGenerator pGenerator, BlockTagsProvider pBlockTagsProvider, @Nullable ExistingFileHelper existingFileHelper) {
-        super(pGenerator, pBlockTagsProvider, SootyChimneys.MOD_ID, existingFileHelper);
+import java.util.concurrent.CompletableFuture;
+
+public class ModItemTagsProvider extends VanillaItemTagsProvider {
+    public ModItemTagsProvider(DataGenerator pGenerator, ModBlockTagsProvider pBlockTagsProvider) {
+        super(pGenerator.getPackOutput(), CompletableFuture.supplyAsync(VanillaRegistries::createLookup), pBlockTagsProvider);
     }
 
     @Override
-    protected void addTags() {
+    protected void addTags(HolderLookup.Provider pProvider) {
         ModItems.CHIMNEYS.forEach((chimneyItem) ->
                 tag(ModTags.Items.CHIMNEY).add(chimneyItem.get()));
     }

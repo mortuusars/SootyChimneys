@@ -2,25 +2,29 @@ package io.github.mortuusars.sootychimneys.data;
 
 import io.github.mortuusars.sootychimneys.data.recipe.SootScrapingRecipes;
 import io.github.mortuusars.sootychimneys.setup.ModItems;
+import net.minecraft.data.CachedOutput;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.data.recipes.FinishedRecipe;
+import net.minecraft.data.recipes.RecipeCategory;
 import net.minecraft.data.recipes.RecipeProvider;
 import net.minecraft.data.recipes.ShapedRecipeBuilder;
+import net.minecraft.data.recipes.packs.VanillaRecipeProvider;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.world.item.Items;
 import org.jetbrains.annotations.NotNull;
 
+import java.util.concurrent.CompletableFuture;
 import java.util.function.Consumer;
 
-public class ModRecipeProvider extends RecipeProvider {
-    public ModRecipeProvider(DataGenerator pGenerator) {
-        super(pGenerator);
+public class ModRecipeProvider extends VanillaRecipeProvider {
+    public ModRecipeProvider(DataGenerator generator) {
+        super(generator.getPackOutput());
     }
 
     @Override
-    protected void buildCraftingRecipes(@NotNull Consumer<FinishedRecipe> recipeConsumer) {
+    protected void buildRecipes(Consumer<FinishedRecipe> recipeConsumer) {
 
-        ShapedRecipeBuilder.shaped(ModItems.BRICK_CHIMNEY.get())
+        ShapedRecipeBuilder.shaped(RecipeCategory.DECORATIONS, ModItems.BRICK_CHIMNEY.get())
                 .pattern("b b")
                 .pattern("B B")
                 .pattern("BCB")
@@ -31,7 +35,7 @@ public class ModRecipeProvider extends RecipeProvider {
                 .unlockedBy("has_brick", has(Items.BRICK))
                 .save(recipeConsumer, "brick_chimney");
 
-        ShapedRecipeBuilder.shaped(ModItems.STONE_BRICK_CHIMNEY.get())
+        ShapedRecipeBuilder.shaped(RecipeCategory.DECORATIONS, ModItems.STONE_BRICK_CHIMNEY.get())
                 .pattern("B B")
                 .pattern("B B")
                 .pattern("BCB")
@@ -42,7 +46,7 @@ public class ModRecipeProvider extends RecipeProvider {
                 .save(recipeConsumer, "stone_brick_chimney");
 
 
-        ShapedRecipeBuilder.shaped(ModItems.TERRACOTTA_CHIMNEY.get())
+        ShapedRecipeBuilder.shaped(RecipeCategory.DECORATIONS, ModItems.TERRACOTTA_CHIMNEY.get())
                 .pattern("   ")
                 .pattern("T T")
                 .pattern("TCT")
@@ -53,7 +57,7 @@ public class ModRecipeProvider extends RecipeProvider {
                 .save(recipeConsumer, "terracotta_chimney");
 
 
-        ShapedRecipeBuilder.shaped(ModItems.COPPER_CHIMNEY.get())
+        ShapedRecipeBuilder.shaped(RecipeCategory.DECORATIONS, ModItems.COPPER_CHIMNEY.get())
                 .pattern("   ")
                 .pattern("I I")
                 .pattern("BCB")

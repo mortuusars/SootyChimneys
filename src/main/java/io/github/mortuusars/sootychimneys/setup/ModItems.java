@@ -13,25 +13,25 @@ public class ModItems {
     public static final ArrayList<RegistryObject<? extends Item>> CHIMNEYS = new ArrayList<>();
 
     public static final RegistryObject<BlockItem> BRICK_CHIMNEY = chimneyBlockItem("brick_chimney",
-            () -> new BlockItem(ModBlocks.BRICK_CHIMNEY.get(), new Item.Properties().tab(CreativeModeTab.TAB_DECORATIONS)));
+            () -> new BlockItem(ModBlocks.BRICK_CHIMNEY.get(), new Item.Properties()));
     public static final RegistryObject<BlockItem> DIRTY_BRICK_CHIMNEY = chimneyBlockItem("dirty_brick_chimney",
-            () -> new BlockItem(ModBlocks.DIRTY_BRICK_CHIMNEY.get(), new Item.Properties().tab(CreativeModeTab.TAB_DECORATIONS)));
+            () -> new BlockItem(ModBlocks.DIRTY_BRICK_CHIMNEY.get(), new Item.Properties()));
 
     public static final RegistryObject<BlockItem> STONE_BRICK_CHIMNEY = chimneyBlockItem("stone_brick_chimney",
-            () -> new BlockItem(ModBlocks.STONE_BRICK_CHIMNEY.get(), new Item.Properties().tab(CreativeModeTab.TAB_DECORATIONS)));
+            () -> new BlockItem(ModBlocks.STONE_BRICK_CHIMNEY.get(), new Item.Properties()));
     public static final RegistryObject<BlockItem> DIRTY_STONE_BRICK_CHIMNEY = chimneyBlockItem("dirty_stone_brick_chimney",
-            () -> new BlockItem(ModBlocks.DIRTY_STONE_BRICK_CHIMNEY.get(), new Item.Properties().tab(CreativeModeTab.TAB_DECORATIONS)));
+            () -> new BlockItem(ModBlocks.DIRTY_STONE_BRICK_CHIMNEY.get(), new Item.Properties()));
 
     public static final RegistryObject<BlockItem> TERRACOTTA_CHIMNEY = chimneyBlockItem("terracotta_chimney",
-            () -> new BlockItem(ModBlocks.TERRACOTTA_CHIMNEY.get(), new Item.Properties().tab(CreativeModeTab.TAB_DECORATIONS)));
+            () -> new BlockItem(ModBlocks.TERRACOTTA_CHIMNEY.get(), new Item.Properties()));
     public static final RegistryObject<BlockItem> DIRTY_TERRACOTTA_CHIMNEY = chimneyBlockItem("dirty_terracotta_chimney",
-            () -> new BlockItem(ModBlocks.DIRTY_TERRACOTTA_CHIMNEY.get(), new Item.Properties().tab(CreativeModeTab.TAB_DECORATIONS)));
+            () -> new BlockItem(ModBlocks.DIRTY_TERRACOTTA_CHIMNEY.get(), new Item.Properties()));
 
     public static final RegistryObject<BlockItem> COPPER_CHIMNEY = chimneyBlockItem("copper_chimney",
-            () -> new BlockItem(ModBlocks.COPPER_CHIMNEY.get(), new Item.Properties().tab(CreativeModeTab.TAB_DECORATIONS)));
+            () -> new BlockItem(ModBlocks.COPPER_CHIMNEY.get(), new Item.Properties()));
 
     public static final RegistryObject<BlockItem> DIRTY_COPPER_CHIMNEY = chimneyBlockItem("dirty_copper_chimney",
-            () -> new BlockItem(ModBlocks.DIRTY_COPPER_CHIMNEY.get(), new Item.Properties().tab(CreativeModeTab.TAB_DECORATIONS)));
+            () -> new BlockItem(ModBlocks.DIRTY_COPPER_CHIMNEY.get(), new Item.Properties()));
 
     public static void init() { }
 
