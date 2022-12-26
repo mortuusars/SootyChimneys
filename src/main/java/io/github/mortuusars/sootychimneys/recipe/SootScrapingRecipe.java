@@ -18,7 +18,6 @@ import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.item.crafting.RecipeType;
 import net.minecraft.world.level.Level;
 import net.minecraftforge.items.wrapper.RecipeWrapper;
-import net.minecraftforge.registries.ForgeRegistryEntry;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -106,10 +105,9 @@ public class SootScrapingRecipe implements Recipe<RecipeWrapper> {
         return ModRecipeTypes.SOOT_SCRAPING.get();
     }
 
-    public static class Serializer extends ForgeRegistryEntry<RecipeSerializer<?>> implements RecipeSerializer<SootScrapingRecipe> {
+    public static class Serializer implements RecipeSerializer<SootScrapingRecipe> {
         @Override
         public @NotNull SootScrapingRecipe fromJson(@NotNull ResourceLocation recipeId, @NotNull JsonObject json) {
-
             final String group = GsonHelper.getAsString(json, "group", "");
 
             final Ingredient ingredient = Ingredient.fromJson(json.getAsJsonObject("ingredient"));
@@ -125,7 +123,7 @@ public class SootScrapingRecipe implements Recipe<RecipeWrapper> {
                 for (JsonElement result : resultsJsonArray) {
                     results.add(ChanceResult.fromJson(result));
                 }
-                if (results.size() > 4) {
+                if (results.size() > MAX_RESULTS) {
                     throw new JsonParseException("Too many results for soot scraping recipe! The maximum quantity of unique results is 4");
                 } else {
                     return new SootScrapingRecipe(recipeId, group, ingredient, tool, results);

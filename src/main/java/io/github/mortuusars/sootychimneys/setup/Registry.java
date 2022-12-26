@@ -14,7 +14,7 @@ import net.minecraftforge.registries.ForgeRegistries;
 public class Registry {
     public static final DeferredRegister<Block> BLOCKS = DeferredRegister.create(ForgeRegistries.BLOCKS, SootyChimneys.MOD_ID);
     public static final DeferredRegister<Item> ITEMS = DeferredRegister.create(ForgeRegistries.ITEMS, SootyChimneys.MOD_ID);
-    public static final DeferredRegister<BlockEntityType<?>> BLOCK_ENTITIES = DeferredRegister.create(ForgeRegistries.BLOCK_ENTITIES, SootyChimneys.MOD_ID);
+    public static final DeferredRegister<BlockEntityType<?>> BLOCK_ENTITIES = DeferredRegister.create(ForgeRegistries.BLOCK_ENTITY_TYPES, SootyChimneys.MOD_ID);
     public static final DeferredRegister<RecipeSerializer<?>> RECIPE_SERIALIZERS = DeferredRegister.create(ForgeRegistries.RECIPE_SERIALIZERS, SootyChimneys.MOD_ID);
     public static final DeferredRegister<RecipeType<?>> RECIPE_TYPES = DeferredRegister.create(net.minecraft.core.Registry.RECIPE_TYPE.key(), SootyChimneys.MOD_ID);
 
@@ -23,12 +23,10 @@ public class Registry {
         ModBlocks.init();
         ModItems.init();
         ModBlockEntities.init();
-//        ModRecipeTypes.init();
 
         IEventBus bus = FMLJavaModLoadingContext.get().getModEventBus();
         BLOCKS.register(bus);
         ITEMS.register(bus);
         BLOCK_ENTITIES.register(bus);
-//        RECIPE_TYPES.register(bus);
     }
 }

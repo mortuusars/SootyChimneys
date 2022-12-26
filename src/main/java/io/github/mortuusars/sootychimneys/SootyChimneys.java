@@ -13,10 +13,14 @@ import net.minecraftforge.fml.config.ModConfig;
 import net.minecraftforge.fml.event.lifecycle.InterModEnqueueEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 
+import java.util.Random;
+
 @Mod(SootyChimneys.MOD_ID)
 public class SootyChimneys
 {
     public static final String MOD_ID = "sootychimneys";
+
+    public static final Random RANDOM = new Random();
 
     public static boolean debug = false;
 

@@ -12,10 +12,11 @@ import io.github.mortuusars.sootychimneys.utils.RandomOffset;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Vec3i;
 import net.minecraft.core.particles.ParticleTypes;
-import net.minecraft.network.chat.TranslatableComponent;
+import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.item.ItemEntity;
@@ -41,7 +42,6 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
-import java.util.Random;
 
 /**
  * Base block for chimneys. Contains common functionality.
@@ -90,11 +90,12 @@ public abstract class ChimneyBlock extends Block implements EntityBlock {
 
         if (level.isClientSide) {
             String messageTranslationKey = "message.sootychimneys." + (newBlockedValue ? "blocked" : "open");
-            player.displayClientMessage(new TranslatableComponent(messageTranslationKey), true);
+
+            player.displayClientMessage(Component.translatable(messageTranslationKey), true);
         }
         else {
             Vector3f particleOrigin = getSmokeProperties().getParticleOrigin();
-            Random random = level.getRandom();
+            RandomSource random = level.getRandom();
             for (int i = 0; i < random.nextInt(5); i++) {
                 ((ServerLevel) level).sendParticles(ParticleTypes.SMOKE,
                         pos.getX() + particleOrigin.x(), pos.getY() + particleOrigin.y() - 0.1, pos.getZ() + particleOrigin.z(),
@@ -132,7 +133,7 @@ public abstract class ChimneyBlock extends Block implements EntityBlock {
 
     @SuppressWarnings("unused")
     public void emitParticles(Level level, BlockPos pos, BlockState state){
-        Random random = level.getRandom();
+        RandomSource random = level.getRandom();
 
         if (random.nextFloat() > getSmokeProperties().getIntensity())
             return;
@@ -154,9 +155,9 @@ public abstract class ChimneyBlock extends Block implements EntityBlock {
 
         for (int i = 0; i < random.nextInt(maxParticles); i++) {
             level.addAlwaysVisibleParticle(ParticleTypes.CAMPFIRE_COSY_SMOKE, true,
-                    RandomOffset.offset(x, particleSpread.x(), random),
-                    RandomOffset.offset(y, particleSpread.y(), random),
-                    RandomOffset.offset(z, particleSpread.z(), random),
+                    RandomOffset.offset(x, particleSpread.x()),
+                    RandomOffset.offset(y, particleSpread.y()),
+                    RandomOffset.offset(z, particleSpread.z()),
                     xSpeed, ySpeed, zSpeed);
         }
     }
@@ -179,7 +180,7 @@ public abstract class ChimneyBlock extends Block implements EntityBlock {
     }
 
     @Override
-    public void randomTick(BlockState blockState, ServerLevel level, BlockPos pos, Random random) {
+    public void randomTick(BlockState blockState, ServerLevel level, BlockPos pos, RandomSource random) {
         if (blockState.getBlock() instanceof ISootyChimney sootyChimney
                 && sootyChimney.isClean()
                 && isEmittingSmoke(blockState)

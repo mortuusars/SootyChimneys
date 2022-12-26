@@ -46,7 +46,6 @@ public class ScalableItemStackRenderer implements IIngredientRenderer<ItemStack>
         if (ingredient != null) {
             stack.pushPose();
             {
-                stack.translate(0, 0, 0);
                 stack.scale(xScale, yScale, zScale);
                 drawItemStack(ingredient, stack, 0, 0, 16, 16, 16);
             }
@@ -64,21 +63,10 @@ public class ScalableItemStackRenderer implements IIngredientRenderer<ItemStack>
         return ((int) (yScale * 16));
     }
 
-    @SuppressWarnings("removal")
-    @Override
-    public void render(PoseStack stack, int xPosition, int yPosition, @Nullable ItemStack ingredient) {
-        stack.pushPose();
-        {
-            stack.translate(xPosition, yPosition, 0);
-            render(stack, ingredient);
-        }
-        stack.popPose();
-    }
-
     private static void drawItemStack(ItemStack itemStack, PoseStack poseStack, int xOffset, int yOffset, float xScale, float yScale, float zScale) {
         ItemRenderer itemRenderer = Minecraft.getInstance().getItemRenderer();
 
-        BakedModel bakedModel = itemRenderer.getModel(itemStack, (Level) null, (LivingEntity) null, 0);
+        BakedModel bakedModel = itemRenderer.getModel(itemStack, null, null, 0);
 
         Minecraft.getInstance().textureManager.getTexture(TextureAtlas.LOCATION_BLOCKS).setFilter(false, false);
         RenderSystem.setShaderTexture(0, TextureAtlas.LOCATION_BLOCKS);

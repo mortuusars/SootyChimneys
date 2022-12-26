@@ -11,6 +11,7 @@ import net.minecraft.world.level.storage.loot.LootContext;
 import net.minecraft.world.level.storage.loot.LootTable;
 import net.minecraft.world.level.storage.loot.parameters.LootContextParamSets;
 import net.minecraft.world.level.storage.loot.parameters.LootContextParams;
+import net.minecraftforge.registries.ForgeRegistries;
 
 import java.util.Collections;
 import java.util.List;
@@ -25,7 +26,7 @@ public class ModLootTables {
             return Collections.emptyList();
         }
 
-        String blockId  = Objects.requireNonNull(state.getBlock().getRegistryName()).getPath();
+        String blockId  = Objects.requireNonNull(ForgeRegistries.BLOCKS.getKey(state.getBlock()).getPath());
 
         try {
             LootContext lootContext = new LootContext.Builder(level)

@@ -1,6 +1,5 @@
 package io.github.mortuusars.sootychimneys.integration.jei.category;
 
-import com.mojang.blaze3d.vertex.PoseStack;
 import io.github.mortuusars.sootychimneys.SootyChimneys;
 import io.github.mortuusars.sootychimneys.block.ChimneyBlock;
 import io.github.mortuusars.sootychimneys.integration.jei.JeiRecipeTypes;
@@ -12,14 +11,12 @@ import mezz.jei.api.constants.VanillaTypes;
 import mezz.jei.api.gui.builder.IRecipeLayoutBuilder;
 import mezz.jei.api.gui.drawable.IDrawable;
 import mezz.jei.api.gui.drawable.IDrawableStatic;
-import mezz.jei.api.gui.ingredient.IRecipeSlotsView;
 import mezz.jei.api.helpers.IGuiHelper;
 import mezz.jei.api.recipe.IFocusGroup;
 import mezz.jei.api.recipe.RecipeIngredientRole;
 import mezz.jei.api.recipe.RecipeType;
 import mezz.jei.api.recipe.category.IRecipeCategory;
 import net.minecraft.network.chat.Component;
-import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
@@ -27,7 +24,7 @@ import net.minecraft.world.item.Item;
 import java.util.Map;
 
 public class SootCoveringRecipeCategory implements IRecipeCategory<SootCoveringJeiRecipe> {
-    public static final ResourceLocation UID = SootyChimneys.resource("soot_scraping");
+//    public static final ResourceLocation UID = SootyChimneys.resource("soot_scraping");
 
     public static final int BG_WIDTH = 153;
     public static final int BG_HEIGHT = 65;
@@ -49,7 +46,7 @@ public class SootCoveringRecipeCategory implements IRecipeCategory<SootCoveringJ
 
     public SootCoveringRecipeCategory(IGuiHelper helper) {
         this.helper = helper;
-        title = new TranslatableComponent("jei." + SootyChimneys.MOD_ID + ".category.soot_covering");
+        title = Component.translatable("jei." + SootyChimneys.MOD_ID + ".category.soot_covering");
 
         ResourceLocation texture = SootyChimneys.resource("textures/gui/jei/soot_covering.png");
 
@@ -108,16 +105,17 @@ public class SootCoveringRecipeCategory implements IRecipeCategory<SootCoveringJ
     public IDrawable getIcon() {
         return icon;
     }
-    @SuppressWarnings("removal")
-    @Override
-    public ResourceLocation getUid() {
-        return UID;
-    }
-    @SuppressWarnings("removal")
-    @Override
-    public Class<? extends SootCoveringJeiRecipe> getRecipeClass() {
-        return this.getRecipeType().getRecipeClass();
-    }
+
+//    @SuppressWarnings("removal")
+//    @Override
+//    public ResourceLocation getUid() {
+//        return UID;
+//    }
+//    @SuppressWarnings("removal")
+//    @Override
+//    public Class<? extends SootCoveringJeiRecipe> getRecipeClass() {
+//        return this.getRecipeType().getRecipeClass();
+//    }
     @Override
     public RecipeType<SootCoveringJeiRecipe> getRecipeType() {
         return JeiRecipeTypes.SOOT_COVERING;

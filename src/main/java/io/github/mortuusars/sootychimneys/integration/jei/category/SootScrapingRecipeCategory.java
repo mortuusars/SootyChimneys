@@ -5,8 +5,8 @@ import com.mojang.blaze3d.vertex.PoseStack;
 import io.github.mortuusars.sootychimneys.SootyChimneys;
 import io.github.mortuusars.sootychimneys.config.CommonConfig;
 import io.github.mortuusars.sootychimneys.integration.jei.JeiRecipeTypes;
-import io.github.mortuusars.sootychimneys.integration.jei.renderer.ScalableItemStackRenderer;
 import io.github.mortuusars.sootychimneys.integration.jei.recipe.SootScrapingJeiRecipe;
+import io.github.mortuusars.sootychimneys.integration.jei.renderer.ScalableItemStackRenderer;
 import mezz.jei.api.constants.VanillaTypes;
 import mezz.jei.api.gui.builder.IRecipeLayoutBuilder;
 import mezz.jei.api.gui.drawable.IDrawable;
@@ -18,7 +18,6 @@ import mezz.jei.api.recipe.RecipeIngredientRole;
 import mezz.jei.api.recipe.RecipeType;
 import mezz.jei.api.recipe.category.IRecipeCategory;
 import net.minecraft.network.chat.Component;
-import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraft.resources.ResourceLocation;
 
 import java.util.Collections;
@@ -26,13 +25,13 @@ import java.util.List;
 
 @SuppressWarnings("removal")
 public class SootScrapingRecipeCategory implements IRecipeCategory<SootScrapingJeiRecipe> {
-    public static final ResourceLocation UID = SootyChimneys.resource("soot_scraping");
+//    public static final ResourceLocation UID = SootyChimneys.resource("soot_scraping");
 
     public static final int BG_WIDTH = 153;
     public static final int BG_HEIGHT = 65;
 
     private final List<Component> BYPRODUCT_ITEMS_INFO = ImmutableList.of(
-            new TranslatableComponent("jei." + SootyChimneys.MOD_ID + ".category.soot_scraping.soot_items_info"));
+            Component.translatable("jei." + SootyChimneys.MOD_ID + ".category.soot_scraping.soot_items_info"));
 
     private final Component title;
     private final IDrawable background;
@@ -43,7 +42,7 @@ public class SootScrapingRecipeCategory implements IRecipeCategory<SootScrapingJ
     private final int byproductYPos = 37;
 
     public SootScrapingRecipeCategory(IGuiHelper helper) {
-        title = new TranslatableComponent("jei." + SootyChimneys.MOD_ID + ".category.soot_scraping");
+        title = Component.translatable("jei." + SootyChimneys.MOD_ID + ".category.soot_scraping");
 
         ResourceLocation texture = SootyChimneys.resource("textures/gui/jei/soot_scraping.png");
 
@@ -104,15 +103,15 @@ public class SootScrapingRecipeCategory implements IRecipeCategory<SootScrapingJ
         return icon;
     }
 
-    @Override
-    public ResourceLocation getUid() {
-        return UID;
-    }
-
-    @Override
-    public Class<? extends SootScrapingJeiRecipe> getRecipeClass() {
-        return this.getRecipeType().getRecipeClass();
-    }
+//    @Override
+//    public ResourceLocation getUid() {
+//        return UID;
+//    }
+//
+//    @Override
+//    public Class<? extends SootScrapingJeiRecipe> getRecipeClass() {
+//        return this.getRecipeType().getRecipeClass();
+//    }
 
     @Override
     public RecipeType<SootScrapingJeiRecipe> getRecipeType() {

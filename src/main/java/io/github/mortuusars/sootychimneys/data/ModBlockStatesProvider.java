@@ -8,6 +8,7 @@ import net.minecraft.world.level.block.Block;
 import net.minecraftforge.client.model.generators.BlockStateProvider;
 import net.minecraftforge.client.model.generators.ConfiguredModel;
 import net.minecraftforge.common.data.ExistingFileHelper;
+import net.minecraftforge.registries.RegistryObject;
 
 import java.util.Objects;
 
@@ -19,22 +20,22 @@ public class ModBlockStatesProvider extends BlockStateProvider {
 
     @Override
     protected void registerStatesAndModels() {
-        chimneyModel(ModBlocks.BRICK_CHIMNEY.get());
-        chimneyModel(ModBlocks.DIRTY_BRICK_CHIMNEY.get());
+        chimneyModel(ModBlocks.BRICK_CHIMNEY);
+        chimneyModel(ModBlocks.DIRTY_BRICK_CHIMNEY);
 
-        chimneyModel(ModBlocks.STONE_BRICK_CHIMNEY.get());
-        chimneyModel(ModBlocks.DIRTY_STONE_BRICK_CHIMNEY.get());
+        chimneyModel(ModBlocks.STONE_BRICK_CHIMNEY);
+        chimneyModel(ModBlocks.DIRTY_STONE_BRICK_CHIMNEY);
 
-        chimneyModel(ModBlocks.TERRACOTTA_CHIMNEY.get());
-        chimneyModel(ModBlocks.DIRTY_TERRACOTTA_CHIMNEY.get());
+        chimneyModel(ModBlocks.TERRACOTTA_CHIMNEY);
+        chimneyModel(ModBlocks.DIRTY_TERRACOTTA_CHIMNEY);
 
-        chimneyModel(ModBlocks.COPPER_CHIMNEY.get());
-        chimneyModel(ModBlocks.DIRTY_COPPER_CHIMNEY.get());
+        chimneyModel(ModBlocks.COPPER_CHIMNEY);
+        chimneyModel(ModBlocks.DIRTY_COPPER_CHIMNEY);
     }
 
-    private void chimneyModel(Block block){
-        String path = Objects.requireNonNull(block.getRegistryName()).getPath();
-        getVariantBuilder(block)
+    private void chimneyModel(RegistryObject<? extends Block> blockRegistry){
+        String path = Objects.requireNonNull(blockRegistry.getId()).getPath();
+        getVariantBuilder(blockRegistry.get())
                 .forAllStatesExcept(state -> ConfiguredModel.builder()
                         .modelFile(models().getExistingFile(modLoc("block/" + path)))
                         .build(), ChimneyBlock.LIT, ChimneyBlock.BLOCKED);

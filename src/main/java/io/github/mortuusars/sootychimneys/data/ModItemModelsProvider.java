@@ -16,7 +16,7 @@ public class ModItemModelsProvider extends ItemModelProvider {
     @Override
     protected void registerModels() {
         ModItems.CHIMNEYS.forEach((chimneyItem) -> {
-            String path = Objects.requireNonNull(chimneyItem.get().getRegistryName()).getPath();
+            String path = Objects.requireNonNull(chimneyItem.getId()).getPath();
             withExistingParent(path, modLoc("block/" + path));
         });
     }

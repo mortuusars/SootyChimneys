@@ -28,8 +28,8 @@ public class ModLootTablesProvider extends BaseLootTableProvider {
     protected void addTables() {
         ModBlocks.CHIMNEYS.forEach(
                 chimney -> {
+                    String path = Objects.requireNonNull(chimney.getId()).getPath();
                     Block chimneyBlock = chimney.get();
-                    String path = Objects.requireNonNull(chimneyBlock.getRegistryName()).getPath();
 
                     blockLootTables.put(chimneyBlock, createStandardTable(path, chimneyBlock, ModBlockEntities.CHIMNEY_BLOCK_ENTITY.get()));
 
