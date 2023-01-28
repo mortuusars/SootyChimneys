@@ -19,7 +19,7 @@ plugins {
 apply plugin: 'net.minecraftforge.gradle'
 apply plugin: 'org.parchmentmc.librarian.forgegradle'
 
-version = '1.0.0'
+version = '1.0.0l'
 group = 'io.github.mortuusars.sootychimneys'
 archivesBaseName = 'sootychimneys-1.19.3'
 
