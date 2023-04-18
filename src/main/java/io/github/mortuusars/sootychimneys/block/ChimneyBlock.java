@@ -7,10 +7,12 @@ import io.github.mortuusars.sootychimneys.core.Wind;
 import io.github.mortuusars.sootychimneys.core.WindGetter;
 import io.github.mortuusars.sootychimneys.loot.ModLootTables;
 import io.github.mortuusars.sootychimneys.setup.ModBlockEntities;
+import io.github.mortuusars.sootychimneys.setup.ModTags;
 import io.github.mortuusars.sootychimneys.utils.RandomOffset;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Vec3i;
 import net.minecraft.core.particles.ParticleTypes;
+import net.minecraft.core.particles.SimpleParticleType;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvents;
@@ -77,8 +79,8 @@ public abstract class ChimneyBlock extends Block implements EntityBlock {
     /**
      * Expects a ChimneyBlock block state. May fail if not Chimney.
      */
-    public boolean isEmittingSmoke(BlockState blockState) {
-        return blockState.getValue(LIT) && !blockState.getValue(BLOCKED);
+    public boolean shouldEmitSmoke(BlockState blockState, Level level, BlockPos pos) {
+        return blockState.getValue(LIT) && !blockState.getValue(BLOCKED) && !level.getBlockState(pos.above()).is(ModTags.Blocks.CHIMNEYS);
     }
 
     @Override
@@ -144,7 +146,7 @@ public abstract class ChimneyBlock extends Block implements EntityBlock {
         float z = pos.getZ() + particleOffset.z();
 
         Wind wind = WindGetter.getWind();
-        float windStrengthModifier = 0.1f;
+        double windStrengthModifier = CommonConfig.WIND_STRENGTH_MULTIPLIER.get();
         double xSpeed = (wind.getXCoordinate() * wind.getStrength()) * windStrengthModifier;
         double zSpeed = (wind.getYCoordinate() * wind.getStrength()) * windStrengthModifier;
         double ySpeed = 0.05d * getSmokeProperties().getSpeed();
@@ -154,7 +156,11 @@ public abstract class ChimneyBlock extends Block implements EntityBlock {
         int maxParticles = ((int) (4 * Math.max(getSmokeProperties().getIntensity(), 0.5f)));
 
         for (int i = 0; i < random.nextInt(maxParticles); i++) {
-            level.addAlwaysVisibleParticle(ParticleTypes.CAMPFIRE_COSY_SMOKE, true,
+            SimpleParticleType particleType = level.getBlockState(pos.below()).is(ModTags.Blocks.CHIMNEYS) ?
+                    ParticleTypes.CAMPFIRE_SIGNAL_SMOKE
+                    : ParticleTypes.CAMPFIRE_COSY_SMOKE;
+
+            level.addAlwaysVisibleParticle(particleType, true,
                     RandomOffset.offset(x, particleSpread.x()),
                     RandomOffset.offset(y, particleSpread.y()),
                     RandomOffset.offset(z, particleSpread.z()),
@@ -171,19 +177,19 @@ public abstract class ChimneyBlock extends Block implements EntityBlock {
     @Nullable
     @Override
     public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level level, BlockState state, BlockEntityType<T> type) {
-        return level.isClientSide() && isEmittingSmoke(state) && type == ModBlockEntities.CHIMNEY_BLOCK_ENTITY.get()
+        return level.isClientSide() && type == ModBlockEntities.CHIMNEY_BLOCK_ENTITY.get()
                 ? ChimneyBlockEntity::particleTick : null;
     }
 
     public boolean isRandomlyTicking(BlockState blockState) {
-        return blockState.getBlock() instanceof ISootyChimney chimney && chimney.isClean() && isEmittingSmoke(blockState);
+        return blockState.getBlock() instanceof ISootyChimney chimney && chimney.isClean();
     }
 
     @Override
     public void randomTick(BlockState blockState, ServerLevel level, BlockPos pos, RandomSource random) {
         if (blockState.getBlock() instanceof ISootyChimney sootyChimney
                 && sootyChimney.isClean()
-                && isEmittingSmoke(blockState)
+                && shouldEmitSmoke(blockState, level, pos)
                 && random.nextDouble() < CommonConfig.DIRTY_CHANCE.get()){
             level.setBlock(pos, sootyChimney.getDirtyVariant().defaultBlockState(), Block.UPDATE_CLIENTS);
         }

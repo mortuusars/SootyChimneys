@@ -14,7 +14,8 @@ public class ChimneyBlockEntity extends BlockEntity {
 
     public static <T extends BlockEntity> void particleTick(Level level, BlockPos blockPos, BlockState blockState, T ignoredT) {
         if (level.getRandom().nextDouble() < CommonConfig.SMOKE_STRENGTH.get()
-                && blockState.getBlock() instanceof ChimneyBlock chimney)
+                && blockState.getBlock() instanceof ChimneyBlock chimney
+                && chimney.shouldEmitSmoke(blockState, level, blockPos))
             chimney.emitParticles(level, blockPos, blockState);
     }
 }

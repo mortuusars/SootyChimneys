@@ -31,7 +31,7 @@ public class ModLootTablesProvider extends BaseLootTableProvider {
                     String path = Objects.requireNonNull(chimney.getId()).getPath();
                     Block chimneyBlock = chimney.get();
 
-                    blockLootTables.put(chimneyBlock, createStandardTable(path, chimneyBlock, ModBlockEntities.CHIMNEY_BLOCK_ENTITY.get()));
+                    blockLootTables.put(chimneyBlock, createSimpleTable(path, chimneyBlock));
 
                     // Soot Scraping:
                     if (chimneyBlock instanceof ISootyChimney sootyChimney && sootyChimney.isDirty())
