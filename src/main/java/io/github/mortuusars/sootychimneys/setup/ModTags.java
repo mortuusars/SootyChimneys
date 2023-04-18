@@ -9,10 +9,10 @@ import net.minecraft.world.level.block.Block;
 
 public class ModTags {
     public static class Items {
-        public static final TagKey<Item> CHIMNEY = ItemTags.create(new ResourceLocation("forge:chimney"));
+        public static final TagKey<Item> CHIMNEYS = ItemTags.create(new ResourceLocation("forge:chimneys"));
     }
 
     public static class Blocks {
-        public static final TagKey<Block> CHIMNEY = BlockTags.create(new ResourceLocation("forge:chimney"));
+        public static final TagKey<Block> CHIMNEYS = BlockTags.create(new ResourceLocation("forge:chimneys"));
     }
 }
