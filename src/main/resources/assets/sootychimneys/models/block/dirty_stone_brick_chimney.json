@@ -2,6 +2,7 @@
 	"credit": "Made with Blockbench",
 	"parent": "minecraft:block/block",
 	"textures": {
+		"particle": "sootychimneys:block/stone_brick_chimney",
 		"texture": "sootychimneys:block/dirty_stone_brick_chimney"
 	},
 	"elements": [

@@ -1,3 +1,11 @@
+### 2023-04-18 - 1.1.0
+- Chimney that has another chimney underneath will now emit a Signal Smoke (like a hay bale under a campfire)
+- Chimney that has another chimney on top of it will not be emitting smoke.
+- Slightly reduced wind effect on smoke. This setting is now configurable in config.
+- Changed tags to be inline with vanilla naming. _forge:chimney_ -> _forge:chimneys_.
+
+- Fixed Dirty Stone Brick Chimney particles.
+
 ### 2022-12-25 - 1.0.0
 - Added smoke blocking mechanic: right click chimney with an empty hand to enable/disable smoke.
 - Added JEI/REI compatibility.

@@ -17,6 +17,6 @@ public class ModItemTagsProvider extends ItemTagsProvider {
     @Override
     protected void addTags() {
         ModItems.CHIMNEYS.forEach((chimneyItem) ->
-                tag(ModTags.Items.CHIMNEY).add(chimneyItem.get()));
+                tag(ModTags.Items.CHIMNEYS).add(chimneyItem.get()));
     }
 }

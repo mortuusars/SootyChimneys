@@ -8,6 +8,7 @@ public class CommonConfig {
     public static final ForgeConfigSpec.DoubleValue SMOKE_STRENGTH;
     public static final ForgeConfigSpec.DoubleValue DIRTY_CHANCE;
     public static final ForgeConfigSpec.BooleanValue WIND_ENABLED;
+    public static final ForgeConfigSpec.DoubleValue WIND_STRENGTH_MULTIPLIER;
 
     public static final ForgeConfigSpec.BooleanValue ADD_SOOT_COVERING_TO_JEI;
     public static final ForgeConfigSpec.BooleanValue ADD_SOOT_SCRAPING_TO_JEI;
@@ -30,6 +31,10 @@ public class CommonConfig {
         WIND_ENABLED = builder
                 .comment("Enable/disable wind effect on smoke particles:")
                 .define("Wind", true);
+
+        WIND_STRENGTH_MULTIPLIER = builder
+                .comment("How much effect wind has on the smoke. Default: 0.05")
+                .defineInRange("WindStrengthMultiplier", 0.05D, 0D, 1D);
 
         builder.push("JEI");
 

@@ -1,0 +1,9 @@
+// 1.19.2	2023-04-18T15:16:51.9494772	Recipes
+6e9dbbd78cd16e84990c0ffdc665dbd991d7f824 data/minecraft/advancements/recipes/decorations/brick_chimney.json
+db6acc3b78ccd98a409c9cea3cf2b4ff07624720 data/minecraft/advancements/recipes/decorations/copper_chimney.json
+6e0785ae8d775658bd4d470014a76eacd28e4926 data/minecraft/advancements/recipes/decorations/stone_brick_chimney.json
+3205c01f8e08f58c17d4f1e4918141f21261f8f4 data/minecraft/advancements/recipes/decorations/terracotta_chimney.json
+e8cbe9628f73571701f2bb9c828722f9de6bcbda data/minecraft/recipes/brick_chimney.json
+c582a8a7c6bf245d778e78651ee6c181f3913eda data/minecraft/recipes/copper_chimney.json
+1c0ae6e1077194c56bc643ee3c628efeeb0af73e data/minecraft/recipes/stone_brick_chimney.json
+dfee36728a6226a0b223050ea20151305b496d60 data/minecraft/recipes/terracotta_chimney.json

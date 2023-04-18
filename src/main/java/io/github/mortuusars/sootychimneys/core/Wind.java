@@ -1,9 +1,10 @@
 package io.github.mortuusars.sootychimneys.core;
 
-import io.github.mortuusars.sootychimneys.utils.MathUtils;
+import net.minecraft.util.Mth;
 
 import java.util.Objects;
 
+@SuppressWarnings("unused")
 public class Wind {
     private double _angleDegrees;
     private float _strength;
@@ -27,7 +28,7 @@ public class Wind {
 
     public void update(double addDegrees, float addStrength){
         _angleDegrees = (_angleDegrees + addDegrees) % 360d;
-        _strength = MathUtils.clamp(_strength + addStrength, 0.0f, 1.0f);
+        _strength = Mth.clamp(_strength + addStrength, 0.0f, 1.0f);
 
         double _angleRadians = getAngleInRadians();
         _xCoordinate = Math.cos(_angleRadians);
