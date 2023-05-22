@@ -7,6 +7,6 @@ public class CreateIntegration {
 
     public static void registerMovingBehaviors() {
         ChimneyMovementBehaviour chimneyMovementBehaviour = new ChimneyMovementBehaviour();
-        ModBlocks.CHIMNEYS.forEach(chimneyObj -> AllMovementBehaviours.registerBehaviour(chimneyObj.get(), chimneyMovementBehaviour));
+//        ModBlocks.CHIMNEYS.forEach(chimneyObj -> AllMovementBehaviours.registerBehaviour(chimneyObj.get(), chimneyMovementBehaviour));
     }
 }
