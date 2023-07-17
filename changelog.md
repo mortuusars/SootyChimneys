@@ -1,3 +1,5 @@
+- Updated ukrainian localization.
+
 ### 2023-04-18 - 1.1.0
 - Chimney that has another chimney underneath will now emit a Signal Smoke (like a hay bale under a campfire)
 - Chimney that has another chimney on top of it will not be emitting smoke.
