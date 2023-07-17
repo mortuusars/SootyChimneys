@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:block",
+  "pools": [
+    {
+      "bonus_rolls": 0.0,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "sootychimneys:stone_brick_chimney"
+        }
+      ],
+      "name": "sootychimneys:stone_brick_chimney",
+      "rolls": 1.0
+    }
+  ]
+}

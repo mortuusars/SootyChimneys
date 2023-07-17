@@ -17,5 +17,6 @@
   ],
   "result": {
     "item": "sootychimneys:terracotta_chimney"
-  }
+  },
+  "show_notification": true
 }

@@ -8,6 +8,7 @@ import io.github.mortuusars.sootychimneys.recipe.ingredient.ChanceResult;
 import io.github.mortuusars.sootychimneys.setup.ModRecipeSerializers;
 import io.github.mortuusars.sootychimneys.setup.ModRecipeTypes;
 import net.minecraft.core.NonNullList;
+import net.minecraft.core.RegistryAccess;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.GsonHelper;
@@ -77,7 +78,7 @@ public class SootScrapingRecipe implements Recipe<RecipeWrapper> {
     }
 
     @Override
-    public @NotNull ItemStack assemble(@NotNull RecipeWrapper inv) {
+    public @NotNull ItemStack assemble(RecipeWrapper pContainer, @NotNull RegistryAccess pRegistryAccess) {
         return this.results.get(0).getStack().copy();
     }
 
@@ -87,7 +88,7 @@ public class SootScrapingRecipe implements Recipe<RecipeWrapper> {
     }
 
     @Override
-    public ItemStack getResultItem() {
+    public @NotNull ItemStack getResultItem(@NotNull RegistryAccess pRegistryAccess) {
         return this.results.get(0).getStack();
     }
 

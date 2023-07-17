@@ -134,16 +134,13 @@ public abstract class ChimneyBlock extends Block implements EntityBlock {
     }
 
     @SuppressWarnings("unused")
-    public void emitParticles(Level level, BlockPos pos, BlockState state){
+    public void emitSmokeParticles(Level level, BlockState state, double x, double y, double z, boolean signalSmoke){
         RandomSource random = level.getRandom();
 
         if (random.nextFloat() > getSmokeProperties().getIntensity())
             return;
 
         Vector3f particleOffset = getSmokeProperties().getParticleOrigin();
-        float x = pos.getX() + particleOffset.x();
-        float y = pos.getY() + particleOffset.y();
-        float z = pos.getZ() + particleOffset.z();
 
         Wind wind = WindGetter.getWind();
         double windStrengthModifier = CommonConfig.WIND_STRENGTH_MULTIPLIER.get();
@@ -156,14 +153,14 @@ public abstract class ChimneyBlock extends Block implements EntityBlock {
         int maxParticles = ((int) (4 * Math.max(getSmokeProperties().getIntensity(), 0.5f)));
 
         for (int i = 0; i < random.nextInt(maxParticles); i++) {
-            SimpleParticleType particleType = level.getBlockState(pos.below()).is(ModTags.Blocks.CHIMNEYS) ?
+            SimpleParticleType particleType = signalSmoke ?
                     ParticleTypes.CAMPFIRE_SIGNAL_SMOKE
                     : ParticleTypes.CAMPFIRE_COSY_SMOKE;
 
             level.addAlwaysVisibleParticle(particleType, true,
-                    RandomOffset.offset(x, particleSpread.x()),
-                    RandomOffset.offset(y, particleSpread.y()),
-                    RandomOffset.offset(z, particleSpread.z()),
+                    RandomOffset.offset(x + particleOffset.x(), particleSpread.x()),
+                    RandomOffset.offset(y + particleOffset.y(), particleSpread.y()),
+                    RandomOffset.offset(z + particleOffset.z(), particleSpread.z()),
                     xSpeed, ySpeed, zSpeed);
         }
     }

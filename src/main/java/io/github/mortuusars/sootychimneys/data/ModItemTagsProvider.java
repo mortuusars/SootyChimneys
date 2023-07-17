@@ -15,7 +15,7 @@ import java.util.concurrent.CompletableFuture;
 public class ModItemTagsProvider extends ItemTagsProvider {
     public ModItemTagsProvider(DataGenerator pGenerator, ModBlockTagsProvider pBlockTagsProvider, ExistingFileHelper existingFileHelper) {
         super(pGenerator.getPackOutput(), CompletableFuture.supplyAsync(VanillaRegistries::createLookup),
-                pBlockTagsProvider, SootyChimneys.MOD_ID, existingFileHelper);
+                pBlockTagsProvider.contentsGetter(), SootyChimneys.MOD_ID, existingFileHelper);
     }
 
     @Override

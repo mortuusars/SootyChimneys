@@ -20,7 +20,7 @@ public class WindGetter {
         if (!CommonConfig.WIND_ENABLED.get())
             return;
 
-        Level level = event.player.getLevel();
+        Level level = event.player.level();
         if (level.isClientSide() && level.getGameTime() % 5L == 0)
             updateWind(level);
     }

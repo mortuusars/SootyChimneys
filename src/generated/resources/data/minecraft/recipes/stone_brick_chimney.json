@@ -17,5 +17,6 @@
   ],
   "result": {
     "item": "sootychimneys:stone_brick_chimney"
-  }
+  },
+  "show_notification": true
 }

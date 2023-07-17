@@ -20,5 +20,6 @@
   ],
   "result": {
     "item": "sootychimneys:copper_chimney"
-  }
+  },
+  "show_notification": true
 }

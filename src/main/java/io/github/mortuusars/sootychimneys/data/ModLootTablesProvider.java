@@ -26,20 +26,22 @@ public class ModLootTablesProvider extends BaseLootTableProvider {
 
     @Override
     protected void addTables() {
-        ModBlocks.CHIMNEYS.forEach(
-                chimney -> {
-                    String path = Objects.requireNonNull(chimney.getId()).getPath();
-                    Block chimneyBlock = chimney.get();
+        // Loot Tables are done manually because this refuses to work.
 
-                    blockLootTables.put(chimneyBlock, createSimpleTable(path, chimneyBlock));
-
-                    // Soot Scraping:
-                    if (chimneyBlock instanceof ISootyChimney sootyChimney && sootyChimney.isDirty())
-                        customLootTables.put(
-                                new ResourceLocation(SootyChimneys.MOD_ID + ":soot_scraping/" + path),
-                                createSootLootTable(Items.BLACK_DYE, ConstantValue.exactly(1), sootyChimney.getScrapingDropChance()));
-                }
-        );
+//        ModBlocks.CHIMNEYS.forEach(
+//                chimney -> {
+//                    String path = Objects.requireNonNull(chimney.getId()).getPath();
+//                    Block chimneyBlock = chimney.get();
+//
+//                    blockLootTables.put(chimneyBlock, createSimpleTable(path, chimneyBlock));
+//
+//                    // Soot Scraping:
+//                    if (chimneyBlock instanceof ISootyChimney sootyChimney && sootyChimney.isDirty())
+//                        customLootTables.put(
+//                                new ResourceLocation(SootyChimneys.MOD_ID + ":soot_scraping/" + path),
+//                                createSootLootTable(Items.BLACK_DYE, ConstantValue.exactly(1), sootyChimney.getScrapingDropChance()));
+//                }
+//        );
     }
 
     @SuppressWarnings("SameParameterValue")

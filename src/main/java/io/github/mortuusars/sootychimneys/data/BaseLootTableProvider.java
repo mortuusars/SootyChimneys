@@ -15,9 +15,9 @@ import net.minecraft.world.item.enchantment.Enchantments;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.storage.loot.BuiltInLootTables;
+import net.minecraft.world.level.storage.loot.LootDataType;
 import net.minecraft.world.level.storage.loot.LootPool;
 import net.minecraft.world.level.storage.loot.LootTable;
-import net.minecraft.world.level.storage.loot.LootTables;
 import net.minecraft.world.level.storage.loot.entries.AlternativesEntry;
 import net.minecraft.world.level.storage.loot.entries.DynamicLoot;
 import net.minecraft.world.level.storage.loot.entries.LootItem;
@@ -30,7 +30,6 @@ import net.minecraft.world.level.storage.loot.providers.number.UniformGenerator;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import java.io.IOException;
 import java.nio.file.Path;
 import java.util.Collections;
 import java.util.HashMap;
@@ -38,16 +37,14 @@ import java.util.Map;
 import java.util.concurrent.CompletableFuture;
 
 public abstract class BaseLootTableProvider extends LootTableProvider {
-
     private static final Logger LOGGER = LogManager.getLogger();
-    private static final Gson GSON = new GsonBuilder().setPrettyPrinting().disableHtmlEscaping().create();
 
     protected final Map<Block, LootTable.Builder> blockLootTables = new HashMap<>();
     protected final Map<ResourceLocation, LootTable> customLootTables = new HashMap<>();
     private final DataGenerator generator;
 
     public BaseLootTableProvider(DataGenerator dataGeneratorIn) {
-        super(dataGeneratorIn.getPackOutput(), BuiltInLootTables.all(), Collections.EMPTY_LIST);
+        super(dataGeneratorIn.getPackOutput(), BuiltInLootTables.all(), Collections.emptyList());
         this.generator = dataGeneratorIn;
     }
 
@@ -118,7 +115,7 @@ public abstract class BaseLootTableProvider extends LootTableProvider {
         tables.forEach((key, lootTable) -> {
             Path path = outputFolder.resolve("data/" + key.getNamespace() + "/loot_tables/" + key.getPath() + ".json");
             try {
-                DataProvider.saveStable(cache, LootTables.serialize(lootTable), path);
+                DataProvider.saveStable(cache, LootDataType.TABLE.parser().toJsonTree(lootTable), path);
             } catch (Exception e) {
                 LOGGER.error("Couldn't write loot table {}", path, e);
             }

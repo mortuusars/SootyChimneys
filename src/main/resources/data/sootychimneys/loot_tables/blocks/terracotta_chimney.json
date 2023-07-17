@@ -6,10 +6,10 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "sootychimneys:brick_chimney"
+          "name": "sootychimneys:terracotta_chimney"
         }
       ],
-      "name": "brick_chimney",
+      "name": "sootychimneys:terracotta_chimney",
       "rolls": 1.0
     }
   ]

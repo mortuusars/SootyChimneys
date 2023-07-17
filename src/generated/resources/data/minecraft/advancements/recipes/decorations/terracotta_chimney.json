@@ -30,5 +30,6 @@
     "recipes": [
       "minecraft:terracotta_chimney"
     ]
-  }
+  },
+  "sends_telemetry_event": false
 }

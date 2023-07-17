@@ -8,11 +8,13 @@ import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.storage.loot.LootContext;
+import net.minecraft.world.level.storage.loot.LootParams;
 import net.minecraft.world.level.storage.loot.LootTable;
 import net.minecraft.world.level.storage.loot.parameters.LootContextParamSets;
 import net.minecraft.world.level.storage.loot.parameters.LootContextParams;
 import net.minecraftforge.registries.ForgeRegistries;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
@@ -29,12 +31,17 @@ public class ModLootTables {
         String blockId  = Objects.requireNonNull(ForgeRegistries.BLOCKS.getKey(state.getBlock()).getPath());
 
         try {
-            LootContext lootContext = new LootContext.Builder(level)
-                    .withParameter(LootContextParams.BLOCK_STATE, state)
+            LootParams lootParams = new LootParams.Builder(level).withParameter(LootContextParams.BLOCK_STATE, state)
                     .create(LootContextParamSets.EMPTY);
+            LootContext lootContext = new LootContext.Builder(lootParams)
+                    .create(null);
 
-            LootTable table = level.getServer().getLootTables().get(new ResourceLocation(SOOT_SCRAPING + "/" + blockId));
-            return table.getRandomItems(lootContext);
+            LootTable lootTable = level.getServer().getLootData()
+                    .getLootTable(new ResourceLocation(SOOT_SCRAPING + "/" + blockId));
+
+            ArrayList<ItemStack> items = new ArrayList<>();
+            lootTable.getRandomItems(lootContext, items::add);
+            return items;
         }
         catch (Exception ex) {
             LogUtils.getLogger().error("Failed to get 'soot_scraping' loot table for '{}'. - {}", blockId, ex.toString());

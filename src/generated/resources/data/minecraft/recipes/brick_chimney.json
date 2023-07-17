@@ -20,5 +20,6 @@
   ],
   "result": {
     "item": "sootychimneys:brick_chimney"
-  }
+  },
+  "show_notification": true
 }
