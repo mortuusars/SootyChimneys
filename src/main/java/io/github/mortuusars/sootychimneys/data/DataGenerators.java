@@ -22,7 +22,5 @@ public class DataGenerators {
         // Client
         generator.addProvider(event.includeClient(), new ModBlockStatesProvider(generator, event.getExistingFileHelper()));
         generator.addProvider(event.includeClient(), new ModItemModelsProvider(generator, event.getExistingFileHelper()));
-        generator.addProvider(event.includeClient(), new ModLanguageProvider(generator, "en_us"));
-        generator.addProvider(event.includeClient(), new ModLanguageProvider(generator, "uk_ua"));
     }
 }
