@@ -1,0 +1,15 @@
+{
+  "block.sootychimneys.brick_chimney": "Кирпичный дымоход",
+  "block.sootychimneys.copper_chimney": "Медный дымоход",
+  "block.sootychimneys.dirty_brick_chimney": "Грязный кирпичный дымоход",
+  "block.sootychimneys.dirty_copper_chimney": "Грязный медный дымоход",
+  "block.sootychimneys.dirty_stone_brick_chimney": "Грязный дымоход из каменного кирпича",
+  "block.sootychimneys.dirty_terracotta_chimney": "Грязный терракотовый дымоход",
+  "block.sootychimneys.stone_brick_chimney": "Дымоход из каменного кирпича",
+  "block.sootychimneys.terracotta_chimney": "Терракотовый дымоход",
+  "jei.sootychimneys.category.soot_covering": "Покрытие сажей",
+  "jei.sootychimneys.category.soot_scraping": "Снятие сажи",
+  "jei.sootychimneys.category.soot_scraping.soot_items_info": "Может произвести побочный продукт",
+  "message.sootychimneys.blocked": "Выход дыма заблокирован",
+  "message.sootychimneys.open": "Выход дыма возобновлён"
+}
