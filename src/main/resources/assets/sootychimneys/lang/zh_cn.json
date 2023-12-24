@@ -1,0 +1,15 @@
+{
+  "block.sootychimneys.brick_chimney": "红砖烟囱",
+  "block.sootychimneys.copper_chimney": "铜制烟囱",
+  "block.sootychimneys.dirty_brick_chimney": "覆灰红砖烟囱",
+  "block.sootychimneys.dirty_copper_chimney": "覆灰铜制烟囱",
+  "block.sootychimneys.dirty_stone_brick_chimney": "覆灰石砖烟囱",
+  "block.sootychimneys.dirty_terracotta_chimney": "覆灰陶瓦烟囱",
+  "block.sootychimneys.stone_brick_chimney": "石砖烟囱",
+  "block.sootychimneys.terracotta_chimney": "陶瓦烟囱",
+  "jei.sootychimneys.category.soot_covering": "煤烟沉染",
+  "jei.sootychimneys.category.soot_scraping": "烟灰刮除",
+  "jei.sootychimneys.category.soot_scraping.soot_items_info": "可能会产生副产品",
+  "message.sootychimneys.blocked": "烟雾已阻止",
+  "message.sootychimneys.open": "烟雾已开放"
+}
