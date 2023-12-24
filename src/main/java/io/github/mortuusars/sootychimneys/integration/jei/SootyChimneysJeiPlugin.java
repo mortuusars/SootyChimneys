@@ -2,7 +2,7 @@ package io.github.mortuusars.sootychimneys.integration.jei;
 
 import com.google.common.collect.ImmutableList;
 import io.github.mortuusars.sootychimneys.SootyChimneys;
-import io.github.mortuusars.sootychimneys.config.CommonConfig;
+import io.github.mortuusars.sootychimneys.config.Config;
 import io.github.mortuusars.sootychimneys.integration.jei.category.SootCoveringRecipeCategory;
 import io.github.mortuusars.sootychimneys.integration.jei.category.SootScrapingRecipeCategory;
 import io.github.mortuusars.sootychimneys.integration.jei.recipe.SootCoveringJeiRecipe;
@@ -26,10 +26,10 @@ public class SootyChimneysJeiPlugin implements IModPlugin {
 
     @Override
     public void registerCategories(IRecipeCategoryRegistration registration) {
-        if (CommonConfig.ADD_SOOT_COVERING_TO_JEI.get() && CommonConfig.DIRTY_CHANCE.get() > 0.0D)
+        if (Config.ADD_SOOT_COVERING_TO_JEI.get() && Config.DIRTY_CHANCE.get() > 0.0D)
             registration.addRecipeCategories(new SootCoveringRecipeCategory(registration.getJeiHelpers().getGuiHelper()));
 
-        if (CommonConfig.ADD_SOOT_SCRAPING_TO_JEI.get())
+        if (Config.ADD_SOOT_SCRAPING_TO_JEI.get())
             registration.addRecipeCategories(new SootScrapingRecipeCategory(registration.getJeiHelpers().getGuiHelper()));
     }
 

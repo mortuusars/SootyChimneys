@@ -1,7 +1,7 @@
 package io.github.mortuusars.sootychimneys.block;
 
 import com.mojang.math.Vector3f;
-import io.github.mortuusars.sootychimneys.config.CommonConfig;
+import io.github.mortuusars.sootychimneys.config.Config;
 import io.github.mortuusars.sootychimneys.core.ChimneySmokeProperties;
 import io.github.mortuusars.sootychimneys.core.ISootyChimney;
 import io.github.mortuusars.sootychimneys.core.Wind;
@@ -23,9 +23,10 @@ import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.item.context.UseOnContext;
+import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.EntityBlock;
@@ -38,6 +39,8 @@ import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BooleanProperty;
 import net.minecraft.world.level.material.FluidState;
 import net.minecraft.world.phys.BlockHitResult;
+import net.minecraft.world.phys.shapes.CollisionContext;
+import net.minecraft.world.phys.shapes.VoxelShape;
 import net.minecraftforge.common.ToolAction;
 import net.minecraftforge.common.ToolActions;
 import org.jetbrains.annotations.NotNull;
@@ -48,11 +51,10 @@ import java.util.List;
 /**
  * Base block for chimneys. Contains common functionality.
  */
-@SuppressWarnings({"NullableProblems", "deprecation"})
 public abstract class ChimneyBlock extends Block implements EntityBlock {
-
     public static final BooleanProperty LIT = RedstoneTorchBlock.LIT;
     public static final BooleanProperty BLOCKED = BooleanProperty.create("blocked");
+    public static final BooleanProperty STACKED = BooleanProperty.create("stacked");
 
     private final ChimneySmokeProperties smokeProperties;
 
@@ -62,29 +64,43 @@ public abstract class ChimneyBlock extends Block implements EntityBlock {
 
         this.registerDefaultState(defaultBlockState()
                 .setValue(LIT, true)
-                .setValue(BLOCKED, false));
-    }
-
-    public ChimneySmokeProperties getSmokeProperties() {
-        return this.smokeProperties;
+                .setValue(BLOCKED, false)
+                .setValue(STACKED, false));
     }
 
     @Override
     protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
-        builder
-            .add(LIT)
-            .add(BLOCKED);
+        builder.add(LIT)
+                .add(BLOCKED)
+                .add(STACKED);
+    }
+
+    @SuppressWarnings("deprecation")
+    @Override
+    public @NotNull VoxelShape getShape(BlockState state, @NotNull BlockGetter level, @NotNull BlockPos pos, @NotNull CollisionContext context) {
+        return state.getValue(ChimneyBlock.STACKED) ? getStackedShape(state, level, pos, context) : getDefaultShape(state, level, pos, context);
+    }
+
+    protected abstract VoxelShape getDefaultShape(BlockState state, BlockGetter level, BlockPos pos, CollisionContext context);
+    protected abstract VoxelShape getStackedShape(BlockState state, BlockGetter level, BlockPos pos, CollisionContext context);
+
+    public ChimneySmokeProperties getSmokeProperties() {
+        return this.smokeProperties;
     }
 
     /**
      * Expects a ChimneyBlock block state. May fail if not Chimney.
      */
     public boolean shouldEmitSmoke(BlockState blockState, Level level, BlockPos pos) {
-        return blockState.getValue(LIT) && !blockState.getValue(BLOCKED) && !level.getBlockState(pos.above()).is(ModTags.Blocks.CHIMNEYS);
+        return blockState.getValue(LIT)
+                && !blockState.getValue(BLOCKED)
+                && !blockState.getValue(STACKED)
+                && !level.getBlockState(pos.above()).is(ModTags.Blocks.SMOKE_BLOCKING);
     }
 
+    @SuppressWarnings("deprecation")
     @Override
-    public InteractionResult use(BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult blockHitResult) {
+    public @NotNull InteractionResult use(@NotNull BlockState state, @NotNull Level level, @NotNull BlockPos pos, Player player, @NotNull InteractionHand hand, @NotNull BlockHitResult blockHitResult) {
         if (!player.getItemInHand(InteractionHand.MAIN_HAND).isEmpty())
             return InteractionResult.PASS;
 
@@ -92,10 +108,8 @@ public abstract class ChimneyBlock extends Block implements EntityBlock {
 
         if (level.isClientSide) {
             String messageTranslationKey = "message.sootychimneys." + (newBlockedValue ? "blocked" : "open");
-
             player.displayClientMessage(Component.translatable(messageTranslationKey), true);
-        }
-        else {
+        } else {
             Vector3f particleOrigin = getSmokeProperties().getParticleOrigin();
             RandomSource random = level.getRandom();
             for (int i = 0; i < random.nextInt(5); i++) {
@@ -111,30 +125,36 @@ public abstract class ChimneyBlock extends Block implements EntityBlock {
         return InteractionResult.sidedSuccess(level.isClientSide);
     }
 
+    @SuppressWarnings("deprecation")
     @Override
-    public void onPlace(BlockState pState, Level pLevel, BlockPos pPos, BlockState pOldState, boolean pIsMoving) {
-        if(pLevel.isClientSide)
-            return;
-
-        boolean hasRedstoneSignal = pLevel.hasNeighborSignal(pPos);
-        if (pState.getValue(LIT) == hasRedstoneSignal)
-            pLevel.setBlock(pPos, pState.setValue(LIT, !hasRedstoneSignal), Block.UPDATE_ALL);
+    public void onPlace(@NotNull BlockState state, @NotNull Level level, @NotNull BlockPos pos, @NotNull BlockState oldState, boolean isMoving) {
+        updateState(state, level, pos);
     }
 
-    @Nullable
-    @Override
-    public BlockState getStateForPlacement(BlockPlaceContext pContext) {
-        return this.defaultBlockState()
-                .setValue(LIT, !pContext.getLevel().hasNeighborSignal(pContext.getClickedPos()));
+    @SuppressWarnings("deprecation")
+    public void neighborChanged(@NotNull BlockState state, @NotNull Level level, @NotNull BlockPos pos, @NotNull Block block, @NotNull BlockPos fromPos, boolean isMoving) {
+        updateState(state, level, pos);
     }
 
-    public void neighborChanged(BlockState pState, Level pLevel, BlockPos pPos, Block pBlock, BlockPos pFromPos, boolean pIsMoving) {
-        if (!pLevel.isClientSide)
-            pLevel.setBlock(pPos, pState.setValue(LIT, !pLevel.hasNeighborSignal(pPos)), Block.UPDATE_CLIENTS);
+    protected void updateState(BlockState state, Level level, BlockPos pos) {
+        boolean stacked = level.getBlockState(pos.above()).is(ModTags.Blocks.CHIMNEYS);
+
+        if (stacked && state.getBlock() instanceof ISootyChimney chimney && chimney.isDirty()) {
+            state = chimney.getCleanVariant().defaultBlockState();
+            chimney.spawnSootParticles(level, pos, true);
+        }
+
+        level.setBlock(pos, state
+                        .setValue(LIT, !level.hasNeighborSignal(pos))
+                        .setValue(STACKED, stacked),
+                Block.UPDATE_ALL);
     }
 
     @SuppressWarnings("unused")
-    public void emitParticles(Level level, BlockPos pos, BlockState state){
+    public void emitParticlesOnClient(Level level, BlockPos pos, BlockState state) {
+        if (!level.isClientSide)
+            return;
+
         RandomSource random = level.getRandom();
 
         if (random.nextFloat() > getSmokeProperties().getIntensity())
@@ -146,7 +166,7 @@ public abstract class ChimneyBlock extends Block implements EntityBlock {
         float z = pos.getZ() + particleOffset.z();
 
         Wind wind = WindGetter.getWind();
-        double windStrengthModifier = CommonConfig.WIND_STRENGTH_MULTIPLIER.get();
+        double windStrengthModifier = Config.WIND_STRENGTH_MULTIPLIER.get();
         double xSpeed = (wind.getXCoordinate() * wind.getStrength()) * windStrengthModifier;
         double zSpeed = (wind.getYCoordinate() * wind.getStrength()) * windStrengthModifier;
         double ySpeed = 0.05d * getSmokeProperties().getSpeed();
@@ -176,22 +196,24 @@ public abstract class ChimneyBlock extends Block implements EntityBlock {
 
     @Nullable
     @Override
-    public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level level, BlockState state, BlockEntityType<T> type) {
+    public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level level, @NotNull BlockState state, @NotNull BlockEntityType<T> type) {
         return level.isClientSide() && type == ModBlockEntities.CHIMNEY_BLOCK_ENTITY.get()
                 ? ChimneyBlockEntity::particleTick : null;
     }
 
+    @Override
     public boolean isRandomlyTicking(BlockState blockState) {
         return blockState.getBlock() instanceof ISootyChimney chimney && chimney.isClean();
     }
 
+    @SuppressWarnings("deprecation")
     @Override
-    public void randomTick(BlockState blockState, ServerLevel level, BlockPos pos, RandomSource random) {
+    public void randomTick(BlockState blockState, @NotNull ServerLevel level, @NotNull BlockPos pos, @NotNull RandomSource random) {
         if (blockState.getBlock() instanceof ISootyChimney sootyChimney
                 && sootyChimney.isClean()
                 && shouldEmitSmoke(blockState, level, pos)
-                && random.nextDouble() < CommonConfig.DIRTY_CHANCE.get()){
-            level.setBlock(pos, sootyChimney.getDirtyVariant().defaultBlockState(), Block.UPDATE_CLIENTS);
+                && random.nextDouble() < Config.DIRTY_CHANCE.get()) {
+            level.setBlock(pos, sootyChimney.getDirtyVariant().defaultBlockState(), Block.UPDATE_ALL);
         }
     }
 
@@ -199,19 +221,21 @@ public abstract class ChimneyBlock extends Block implements EntityBlock {
     @Override
     public BlockState getToolModifiedState(BlockState state, UseOnContext context, ToolAction toolAction, boolean simulate) {
         Block block = state.getBlock();
-        if (toolAction == ToolActions.AXE_SCRAPE && block instanceof ISootyChimney sootyChimney && sootyChimney.isDirty()){
-            sootyChimney.makeSootParticles(context.getLevel(), context.getClickedPos());
+        if (toolAction == ToolActions.AXE_SCRAPE && block instanceof ISootyChimney sootyChimney && sootyChimney.isDirty()) {
+            sootyChimney.spawnSootParticles(context.getLevel(), context.getClickedPos(), false);
 
-            if (!context.getLevel().isClientSide){
-                ServerLevel level = (ServerLevel)context.getLevel();
+            if (!context.getLevel().isClientSide) {
+                ServerLevel level = (ServerLevel) context.getLevel();
+
+                Item item = block.asItem();
 
                 BlockPos pos = context.getClickedPos();
                 // Offset item spawning pos, depending on clicked face, to spawn items closer to the player.
                 // Items shooting in opposite direction is not fun.
                 Vec3i faceNormal = context.getClickedFace().getNormal();
                 Vector3f itemSpawnPosition = new Vector3f(pos.getX() + 0.5f + faceNormal.getX() * 0.65f,
-                                            pos.getY() + 0.6f + faceNormal.getY() * 0.65f,
-                                            pos.getZ() + 0.5f + faceNormal.getZ() * 0.65f);
+                        pos.getY() + 0.6f + faceNormal.getY() * 0.65f,
+                        pos.getZ() + 0.5f + faceNormal.getZ() * 0.65f);
 
                 List<ItemStack> items = ModLootTables.getSootScrapingLootFor(state, level);
                 spawnSootScrapingItems(itemSpawnPosition, level, items);
@@ -222,7 +246,7 @@ public abstract class ChimneyBlock extends Block implements EntityBlock {
         return null;
     }
 
-    public void spawnSootScrapingItems(Vector3f pos, ServerLevel level, List<ItemStack> items){
+    public void spawnSootScrapingItems(Vector3f pos, ServerLevel level, List<ItemStack> items) {
         for (ItemStack itemStack : items) {
             ItemEntity entity = new ItemEntity(level, pos.x(), pos.y(), pos.z(), itemStack);
             entity.spawnAtLocation(itemStack);
@@ -233,7 +257,7 @@ public abstract class ChimneyBlock extends Block implements EntityBlock {
     public boolean onDestroyedByPlayer(BlockState state, Level level, BlockPos pos, Player player, boolean willHarvest, FluidState fluid) {
         boolean isDestroyed = super.onDestroyedByPlayer(state, level, pos, player, willHarvest, fluid);
         if (isDestroyed && state.getBlock() instanceof ISootyChimney sootyChimney && sootyChimney.isDirty())
-            sootyChimney.makeSootParticles(level, pos);
+            sootyChimney.spawnSootParticles(level, pos, false);
         return isDestroyed;
     }
 }

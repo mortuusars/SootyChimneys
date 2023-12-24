@@ -20,7 +20,6 @@ public class DataGenerators {
         generator.addProvider(event.includeServer(), new ModRecipeProvider(generator));
 
         // Client
-        generator.addProvider(event.includeClient(), new ModBlockStatesProvider(generator, event.getExistingFileHelper()));
         generator.addProvider(event.includeClient(), new ModItemModelsProvider(generator, event.getExistingFileHelper()));
     }
 }

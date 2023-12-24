@@ -3,7 +3,7 @@ package io.github.mortuusars.sootychimneys.integration.jei.category;
 import com.google.common.collect.ImmutableList;
 import com.mojang.blaze3d.vertex.PoseStack;
 import io.github.mortuusars.sootychimneys.SootyChimneys;
-import io.github.mortuusars.sootychimneys.config.CommonConfig;
+import io.github.mortuusars.sootychimneys.config.Config;
 import io.github.mortuusars.sootychimneys.integration.jei.JeiRecipeTypes;
 import io.github.mortuusars.sootychimneys.integration.jei.recipe.SootScrapingJeiRecipe;
 import io.github.mortuusars.sootychimneys.integration.jei.renderer.ScalableItemStackRenderer;
@@ -72,14 +72,14 @@ public class SootScrapingRecipeCategory implements IRecipeCategory<SootScrapingJ
 
     @Override
     public void draw(SootScrapingJeiRecipe recipe, IRecipeSlotsView recipeSlotsView, PoseStack stack, double mouseX, double mouseY) {
-        if (CommonConfig.DISPLAY_JEI_SCRAPING_BYPRODUCTS_INFO.get()) {
+        if (Config.DISPLAY_JEI_SCRAPING_BYPRODUCTS_INFO.get()) {
             byproductInfo.draw(stack, byproductXPos, byproductYPos);
         }
     }
 
     @Override
     public List<Component> getTooltipStrings(SootScrapingJeiRecipe recipe, IRecipeSlotsView recipeSlotsView, double mouseX, double mouseY) {
-        if (CommonConfig.DISPLAY_JEI_SCRAPING_BYPRODUCTS_INFO.get()) {
+        if (Config.DISPLAY_JEI_SCRAPING_BYPRODUCTS_INFO.get()) {
             if ((mouseX >= byproductXPos && mouseX < byproductXPos + byproductInfo.getWidth())
                     && (mouseY >= byproductYPos && mouseY < byproductYPos + byproductInfo.getHeight()))
                 return BYPRODUCT_ITEMS_INFO;

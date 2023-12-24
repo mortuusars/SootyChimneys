@@ -13,11 +13,10 @@ import net.minecraft.world.level.material.Material;
 import net.minecraft.world.level.material.MaterialColor;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
-import org.jetbrains.annotations.NotNull;
 
-@SuppressWarnings({"NullableProblems", "deprecation"})
 public class TerracottaChimneyBlock extends ChimneyBlock implements ISootyChimney {
-    private static final VoxelShape _shape = Block.box(5,0,5, 11,8,11);
+    private static final VoxelShape SHAPE = Block.box(5,0,5, 11,8,11);
+    private static final VoxelShape STACKED_SHAPE = Block.box(5,0,5, 11,16,11);
 
     public TerracottaChimneyBlock() {
         super(new ChimneySmokeProperties(0.5f, 0.75f, 0.5f, 0.02f, 0.05f, 0.02f)
@@ -31,8 +30,13 @@ public class TerracottaChimneyBlock extends ChimneyBlock implements ISootyChimne
     }
 
     @Override
-    public @NotNull VoxelShape getShape(BlockState pState, BlockGetter pLevel, BlockPos pPos, CollisionContext pContext) {
-        return _shape;
+    protected VoxelShape getDefaultShape(BlockState state, BlockGetter level, BlockPos pos, CollisionContext context) {
+        return SHAPE;
+    }
+
+    @Override
+    protected VoxelShape getStackedShape(BlockState state, BlockGetter level, BlockPos pos, CollisionContext context) {
+        return STACKED_SHAPE;
     }
 
     @Override

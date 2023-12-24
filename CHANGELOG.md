@@ -1,4 +1,9 @@
-- Updated ukrainian localization.
+<>
+- When chimneys are stacked, lower chimney model will be adjusted to connect them better.
+- Added `sootychimneys:smoke_blocking` block tag that controls what blocks will block the smoke if placed on top of a chimney.
+
+### 2023-05-23
+- Now supports Create 0.5.1a+
 
 ### 2023-04-18 - 1.1.0
 - Chimney that has another chimney underneath will now emit a Signal Smoke (like a hay bale under a campfire)

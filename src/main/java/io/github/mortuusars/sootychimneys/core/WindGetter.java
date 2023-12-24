@@ -1,6 +1,6 @@
 package io.github.mortuusars.sootychimneys.core;
 
-import io.github.mortuusars.sootychimneys.config.CommonConfig;
+import io.github.mortuusars.sootychimneys.config.Config;
 import net.minecraft.network.chat.Component;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.Level;
@@ -17,7 +17,7 @@ public class WindGetter {
 
     @SubscribeEvent
     public static void onPlayerTick(TickEvent.PlayerTickEvent event){
-        if (!CommonConfig.WIND_ENABLED.get())
+        if (!Config.WIND_ENABLED.get())
             return;
 
         Level level = event.player.getLevel();

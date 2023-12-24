@@ -1,70 +1,48 @@
 {
 	"credit": "Made with Blockbench",
 	"parent": "minecraft:block/block",
+	"render_type": "cutout",
+	"texture_size": [32, 32],
 	"textures": {
-		"particle": "sootychimneys:block/stone_brick_chimney",
 		"texture": "sootychimneys:block/stone_brick_chimney",
-		"sooty": "sootychimneys:block/dirty_stone_brick_chimney"
+		"particle": "block/stone_bricks"
 	},
 	"elements": [
 		{
+			"name": "base",
 			"from": [4, 0, 4],
-			"to": [12, 11, 12],
+			"to": [12, 12, 12],
 			"faces": {
-				"north": {"uv": [3, 5, 11, 16], "texture": "#texture"},
-				"east": {"uv": [3, 5, 11, 16], "texture": "#texture"},
-				"south": {"uv": [3, 5, 11, 16], "texture": "#texture"},
-				"west": {"uv": [3, 5, 11, 16], "texture": "#texture"},
-				"up": {"uv": [8, 0, 16, 8], "texture": "#sooty"},
-				"down": {"uv": [0, 0, 8, 8], "texture": "#texture", "cullface": "down"}
+				"north": {"uv": [2, 2, 6, 8], "texture": "#texture"},
+				"east": {"uv": [2, 2, 6, 8], "texture": "#texture"},
+				"south": {"uv": [2, 2, 6, 8], "texture": "#texture"},
+				"west": {"uv": [2, 2, 6, 8], "texture": "#texture"},
+				"up": {"uv": [12, 4, 16, 8], "texture": "#texture", "cullface": "up"},
+				"down": {"uv": [2, 0, 6, 4], "rotation": 180, "texture": "#texture", "cullface": "down"}
 			}
 		},
 		{
-			"from": [3, 11, 3],
-			"to": [5, 16, 13],
-			"faces": {
-				"north": {"uv": [11, 0, 13, 5], "texture": "#texture"},
-				"east": {"uv": [0, 12, 10, 7], "texture": "#sooty"},
-				"south": {"uv": [0, 0, 2, 5], "texture": "#texture"},
-				"west": {"uv": [0, 0, 10, 5], "texture": "#texture"},
-				"up": {"uv": [3, 4, 13, 6], "rotation": 90, "texture": "#texture"},
-				"down": {"uv": [0, 0, 2, 10], "texture": "#texture"}
-			}
-		},
-		{
-			"from": [11, 11, 3],
+			"name": "top",
+			"from": [3, 10, 3],
 			"to": [13, 16, 13],
 			"faces": {
-				"north": {"uv": [0, 0, 2, 5], "texture": "#texture"},
-				"east": {"uv": [0, 0, 10, 5], "texture": "#texture"},
-				"south": {"uv": [11, 0, 13, 5], "texture": "#texture"},
-				"west": {"uv": [0, 12, 10, 7], "texture": "#sooty"},
-				"up": {"uv": [2, 3, 12, 5], "rotation": 90, "texture": "#texture"},
-				"down": {"uv": [0, 0, 2, 10], "texture": "#texture"}
+				"north": {"uv": [0, 0, 5, 3], "texture": "#texture"},
+				"east": {"uv": [0, 0, 5, 3], "texture": "#texture"},
+				"south": {"uv": [0, 0, 5, 3], "texture": "#texture"},
+				"west": {"uv": [0, 0, 5, 3], "texture": "#texture"},
+				"up": {"uv": [0, 8, 5, 13], "rotation": 90, "texture": "#texture", "cullface": "up"},
+				"down": {"uv": [0, 8, 5, 13], "rotation": 90, "texture": "#texture"}
 			}
 		},
 		{
-			"from": [5, 11, 11],
-			"to": [11, 16, 13],
+			"name": "top_interior",
+			"from": [4.975, 16, 4.975],
+			"to": [11.025, 12, 11.025],
 			"faces": {
-				"north": {"uv": [0, 12, 6, 7], "texture": "#sooty"},
-				"east": {"uv": [0, 0, 2, 5], "texture": "#texture"},
-				"south": {"uv": [2, 0, 8, 5], "texture": "#texture"},
-				"west": {"uv": [0, 0, 2, 5], "texture": "#texture"},
-				"up": {"uv": [2, 1, 8, 3], "texture": "#texture"},
-				"down": {"uv": [0, 0, 6, 2], "texture": "#texture"}
-			}
-		},
-		{
-			"from": [5, 11, 3],
-			"to": [11, 16, 5],
-			"faces": {
-				"north": {"uv": [2, 0, 8, 5], "texture": "#texture"},
-				"east": {"uv": [0, 0, 2, 5], "texture": "#texture"},
-				"south": {"uv": [2, 12, 8, 7], "texture": "#sooty"},
-				"west": {"uv": [0, 0, 2, 5], "texture": "#texture"},
-				"up": {"uv": [2, 2, 8, 4], "texture": "#texture"},
-				"down": {"uv": [0, 0, 6, 2], "texture": "#texture"}
+				"north": {"uv": [12.5, 1.5, 15.525, 3.5], "texture": "#texture", "cullface": "up"},
+				"east": {"uv": [12.5, 1.5, 15.525, 3.5], "texture": "#texture", "cullface": "up"},
+				"south": {"uv": [12.5, 1.5, 15.525, 3.5], "texture": "#texture", "cullface": "up"},
+				"west": {"uv": [12.5, 1.5, 15.525, 3.5], "texture": "#texture", "cullface": "up"}
 			}
 		}
 	]

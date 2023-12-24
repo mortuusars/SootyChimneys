@@ -1,6 +1,6 @@
 package io.github.mortuusars.sootychimneys.block;
 
-import io.github.mortuusars.sootychimneys.config.CommonConfig;
+import io.github.mortuusars.sootychimneys.config.Config;
 import io.github.mortuusars.sootychimneys.setup.ModBlockEntities;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.Level;
@@ -13,9 +13,9 @@ public class ChimneyBlockEntity extends BlockEntity {
     }
 
     public static <T extends BlockEntity> void particleTick(Level level, BlockPos blockPos, BlockState blockState, T ignoredT) {
-        if (level.getRandom().nextDouble() < CommonConfig.SMOKE_STRENGTH.get()
+        if (level.getRandom().nextDouble() < Config.SMOKE_STRENGTH.get()
                 && blockState.getBlock() instanceof ChimneyBlock chimney
                 && chimney.shouldEmitSmoke(blockState, level, blockPos))
-            chimney.emitParticles(level, blockPos, blockState);
+            chimney.emitParticlesOnClient(level, blockPos, blockState);
     }
 }
