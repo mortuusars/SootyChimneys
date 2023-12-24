@@ -2,7 +2,7 @@ package io.github.mortuusars.sootychimneys.config;
 
 import net.minecraftforge.common.ForgeConfigSpec;
 
-public class CommonConfig {
+public class Config {
     public static final ForgeConfigSpec SPEC;
 
     public static final ForgeConfigSpec.DoubleValue SMOKE_STRENGTH;

@@ -10,19 +10,23 @@ import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
-import org.jetbrains.annotations.NotNull;
 
-@SuppressWarnings({"NullableProblems", "deprecation"})
 public class TerracottaChimneyBlock extends ChimneyBlock implements ISootyChimney {
-    private static final VoxelShape _shape = Block.box(5,0,5, 11,8,11);
+    private static final VoxelShape SHAPE = Block.box(5,0,5, 11,8,11);
+    private static final VoxelShape STACKED_SHAPE = Block.box(5,0,5, 11,16,11);
 
     public TerracottaChimneyBlock(ChimneySmokeProperties smokeProperties, BlockBehaviour.Properties properties) {
         super(smokeProperties, properties);
     }
 
     @Override
-    public @NotNull VoxelShape getShape(BlockState pState, BlockGetter pLevel, BlockPos pPos, CollisionContext pContext) {
-        return _shape;
+    protected VoxelShape getDefaultShape(BlockState state, BlockGetter level, BlockPos pos, CollisionContext context) {
+        return SHAPE;
+    }
+
+    @Override
+    protected VoxelShape getStackedShape(BlockState state, BlockGetter level, BlockPos pos, CollisionContext context) {
+        return STACKED_SHAPE;
     }
 
     @Override

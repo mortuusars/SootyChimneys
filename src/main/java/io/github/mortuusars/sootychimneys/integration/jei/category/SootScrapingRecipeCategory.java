@@ -1,8 +1,9 @@
 package io.github.mortuusars.sootychimneys.integration.jei.category;
 
 import com.google.common.collect.ImmutableList;
+import com.mojang.blaze3d.vertex.PoseStack;
 import io.github.mortuusars.sootychimneys.SootyChimneys;
-import io.github.mortuusars.sootychimneys.config.CommonConfig;
+import io.github.mortuusars.sootychimneys.config.Config;
 import io.github.mortuusars.sootychimneys.integration.jei.JeiRecipeTypes;
 import io.github.mortuusars.sootychimneys.integration.jei.recipe.SootScrapingJeiRecipe;
 import io.github.mortuusars.sootychimneys.integration.jei.renderer.ScalableItemStackRenderer;
@@ -16,15 +17,16 @@ import mezz.jei.api.recipe.IFocusGroup;
 import mezz.jei.api.recipe.RecipeIngredientRole;
 import mezz.jei.api.recipe.RecipeType;
 import mezz.jei.api.recipe.category.IRecipeCategory;
-import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
-import org.jetbrains.annotations.NotNull;
 
 import java.util.Collections;
 import java.util.List;
 
+@SuppressWarnings("removal")
 public class SootScrapingRecipeCategory implements IRecipeCategory<SootScrapingJeiRecipe> {
+//    public static final ResourceLocation UID = SootyChimneys.resource("soot_scraping");
+
     public static final int BG_WIDTH = 153;
     public static final int BG_HEIGHT = 65;
 
@@ -53,7 +55,7 @@ public class SootScrapingRecipeCategory implements IRecipeCategory<SootScrapingJ
     }
 
     @Override
-    public void setRecipe(IRecipeLayoutBuilder builder, SootScrapingJeiRecipe recipe, @NotNull IFocusGroup focuses) {
+    public void setRecipe(IRecipeLayoutBuilder builder, SootScrapingJeiRecipe recipe, IFocusGroup focuses) {
         builder.addSlot(RecipeIngredientRole.INPUT, 10, 18)
                 .setCustomRenderer(VanillaTypes.ITEM_STACK, new ScalableItemStackRenderer(2.5f))
                 .addItemStack(recipe.getIngredientChimney())
@@ -69,15 +71,15 @@ public class SootScrapingRecipeCategory implements IRecipeCategory<SootScrapingJ
     }
 
     @Override
-    public void draw(@NotNull SootScrapingJeiRecipe recipe, @NotNull IRecipeSlotsView recipeSlotsView, @NotNull GuiGraphics guiGraphics, double mouseX, double mouseY) {
-        if (CommonConfig.DISPLAY_JEI_SCRAPING_BYPRODUCTS_INFO.get()) {
-            byproductInfo.draw(guiGraphics, byproductXPos, byproductYPos);
+    public void draw(SootScrapingJeiRecipe recipe, IRecipeSlotsView recipeSlotsView, PoseStack stack, double mouseX, double mouseY) {
+        if (Config.DISPLAY_JEI_SCRAPING_BYPRODUCTS_INFO.get()) {
+            byproductInfo.draw(stack, byproductXPos, byproductYPos);
         }
     }
 
     @Override
-    public @NotNull List<Component> getTooltipStrings(@NotNull SootScrapingJeiRecipe recipe, @NotNull IRecipeSlotsView recipeSlotsView, double mouseX, double mouseY) {
-        if (CommonConfig.DISPLAY_JEI_SCRAPING_BYPRODUCTS_INFO.get()) {
+    public List<Component> getTooltipStrings(SootScrapingJeiRecipe recipe, IRecipeSlotsView recipeSlotsView, double mouseX, double mouseY) {
+        if (Config.DISPLAY_JEI_SCRAPING_BYPRODUCTS_INFO.get()) {
             if ((mouseX >= byproductXPos && mouseX < byproductXPos + byproductInfo.getWidth())
                     && (mouseY >= byproductYPos && mouseY < byproductYPos + byproductInfo.getHeight()))
                 return BYPRODUCT_ITEMS_INFO;
@@ -87,22 +89,32 @@ public class SootScrapingRecipeCategory implements IRecipeCategory<SootScrapingJ
     }
 
     @Override
-    public @NotNull Component getTitle() {
+    public Component getTitle() {
         return title;
     }
 
     @Override
-    public @NotNull IDrawable getBackground() {
+    public IDrawable getBackground() {
         return background;
     }
 
     @Override
-    public @NotNull IDrawable getIcon() {
+    public IDrawable getIcon() {
         return icon;
     }
 
+//    @Override
+//    public ResourceLocation getUid() {
+//        return UID;
+//    }
+//
+//    @Override
+//    public Class<? extends SootScrapingJeiRecipe> getRecipeClass() {
+//        return this.getRecipeType().getRecipeClass();
+//    }
+
     @Override
-    public @NotNull RecipeType<SootScrapingJeiRecipe> getRecipeType() {
+    public RecipeType<SootScrapingJeiRecipe> getRecipeType() {
         return JeiRecipeTypes.SOOT_SCRAPING;
     }
 }

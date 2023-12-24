@@ -2,7 +2,6 @@ package io.github.mortuusars.sootychimneys.data;
 
 import io.github.mortuusars.sootychimneys.SootyChimneys;
 import io.github.mortuusars.sootychimneys.core.ISootyChimney;
-import io.github.mortuusars.sootychimneys.setup.ModBlockEntities;
 import io.github.mortuusars.sootychimneys.setup.ModBlocks;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.resources.ResourceLocation;
