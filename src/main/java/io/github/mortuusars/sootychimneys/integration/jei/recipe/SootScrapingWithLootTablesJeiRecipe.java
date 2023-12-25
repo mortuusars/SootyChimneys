@@ -7,7 +7,7 @@ import net.minecraftforge.registries.ForgeRegistries;
 
 import java.util.List;
 
-public class SootScrapingJeiRecipe {
+public class SootScrapingWithLootTablesJeiRecipe {
 
     private final Item dirtyChimney;
     private final Item cleanChimney;
@@ -15,7 +15,7 @@ public class SootScrapingJeiRecipe {
     private final ItemStack dirtyChimneyStack;
     private final ItemStack cleanChimneyStack;
 
-    public SootScrapingJeiRecipe(Item dirtyChimney, Item cleanChimney) {
+    public SootScrapingWithLootTablesJeiRecipe(Item dirtyChimney, Item cleanChimney) {
 
         this.dirtyChimney = dirtyChimney;
         this.cleanChimney = cleanChimney;

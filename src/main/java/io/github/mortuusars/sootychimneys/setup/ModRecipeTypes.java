@@ -9,7 +9,7 @@ public class ModRecipeTypes {
     public static final RegistryObject<RecipeType<SootScrapingRecipe>> SOOT_SCRAPING = Registry.RECIPE_TYPES.register("soot_scraping",
             () -> new RecipeType<>() {
                 public String toString() {
-                    return SootyChimneys.MOD_ID + ":chopping";
+                    return SootyChimneys.MOD_ID + ":soot_scraping";
                 }
             });
 

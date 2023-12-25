@@ -5,6 +5,8 @@ import net.minecraftforge.common.ForgeConfigSpec;
 public class Config {
     public static final ForgeConfigSpec SPEC;
 
+    public static final ForgeConfigSpec.BooleanValue USE_LOOT_TABLES_FOR_SCRAPING;
+
     public static final ForgeConfigSpec.DoubleValue SMOKE_STRENGTH;
     public static final ForgeConfigSpec.DoubleValue DIRTY_CHANCE;
     public static final ForgeConfigSpec.BooleanValue WIND_ENABLED;
@@ -16,6 +18,10 @@ public class Config {
 
     static{
         ForgeConfigSpec.Builder builder = new ForgeConfigSpec.Builder();
+
+        USE_LOOT_TABLES_FOR_SCRAPING = builder
+                .comment("Loot Tables will be used for soot_scraping loot instead of recipes. Like in the good old times...")
+                .define("UseLootTablesForScraping", false);
 
         SMOKE_STRENGTH = builder
                 .comment("Chance of the smoke particle to spawn. 1.0 - full. 0.0 - no smoke.")
