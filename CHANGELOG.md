@@ -1,4 +1,7 @@
 <>
+- **Soot Scraping** is now handled through a recipe.
+  - Loot Tables way is still available and accessed through config.
+
 - When chimneys are stacked, lower chimney model will be adjusted to connect them better.
 - Added `sootychimneys:smoke_blocking` block tag that controls what blocks will block the smoke if placed on top of a chimney.
 

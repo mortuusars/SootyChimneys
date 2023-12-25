@@ -10,6 +10,7 @@
   "jei.sootychimneys.category.soot_covering": "Soot Covering",
   "jei.sootychimneys.category.soot_scraping": "Soot Scraping",
   "jei.sootychimneys.category.soot_scraping.soot_items_info": "May produce a byproduct",
+  "jei.sootychimneys.chance": "%s%% Chance",
   "message.sootychimneys.blocked": "Smoke blocked",
   "message.sootychimneys.open": "Smoke flow restored"
 }

@@ -9,8 +9,7 @@ import java.util.ArrayList;
 import java.util.function.Supplier;
 
 public class ModItems {
-
-    public static final ArrayList<RegistryObject<? extends Item>> CHIMNEYS = new ArrayList<>();
+    public static final ArrayList<RegistryObject<? extends BlockItem>> CHIMNEYS = new ArrayList<>();
 
     public static final RegistryObject<BlockItem> BRICK_CHIMNEY = chimneyBlockItem("brick_chimney",
             () -> new BlockItem(ModBlocks.BRICK_CHIMNEY.get(), new Item.Properties().tab(CreativeModeTab.TAB_DECORATIONS)));

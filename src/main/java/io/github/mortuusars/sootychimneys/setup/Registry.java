@@ -23,10 +23,14 @@ public class Registry {
         ModBlocks.init();
         ModItems.init();
         ModBlockEntities.init();
+        ModRecipeTypes.init();
+        ModRecipeSerializers.init();
 
         IEventBus bus = FMLJavaModLoadingContext.get().getModEventBus();
         BLOCKS.register(bus);
         ITEMS.register(bus);
         BLOCK_ENTITIES.register(bus);
+        RECIPE_TYPES.register(bus);
+        RECIPE_SERIALIZERS.register(bus);
     }
 }

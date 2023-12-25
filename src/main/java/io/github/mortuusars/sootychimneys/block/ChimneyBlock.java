@@ -7,7 +7,11 @@ import io.github.mortuusars.sootychimneys.core.ISootyChimney;
 import io.github.mortuusars.sootychimneys.core.Wind;
 import io.github.mortuusars.sootychimneys.core.WindGetter;
 import io.github.mortuusars.sootychimneys.loot.ModLootTables;
+import io.github.mortuusars.sootychimneys.recipe.SootScrapingRecipe;
+import io.github.mortuusars.sootychimneys.recipe.ingredient.ChanceResult;
+import io.github.mortuusars.sootychimneys.recipe.ingredient.ToolActionIngredient;
 import io.github.mortuusars.sootychimneys.setup.ModBlockEntities;
+import io.github.mortuusars.sootychimneys.setup.ModRecipeTypes;
 import io.github.mortuusars.sootychimneys.setup.ModTags;
 import io.github.mortuusars.sootychimneys.utils.RandomOffset;
 import net.minecraft.core.BlockPos;
@@ -21,9 +25,9 @@ import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
+import net.minecraft.world.SimpleContainer;
 import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.level.BlockGetter;
@@ -46,7 +50,11 @@ import net.minecraftforge.common.ToolActions;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
+import java.util.Optional;
+import java.util.function.Supplier;
 
 /**
  * Base block for chimneys. Contains common functionality.
@@ -220,14 +228,17 @@ public abstract class ChimneyBlock extends Block implements EntityBlock {
     @Nullable
     @Override
     public BlockState getToolModifiedState(BlockState state, UseOnContext context, ToolAction toolAction, boolean simulate) {
-        Block block = state.getBlock();
-        if (toolAction == ToolActions.AXE_SCRAPE && block instanceof ISootyChimney sootyChimney && sootyChimney.isDirty()) {
-            sootyChimney.spawnSootParticles(context.getLevel(), context.getClickedPos(), false);
+        if (!(state.getBlock() instanceof ISootyChimney sootyChimney) || !sootyChimney.isDirty())
+            return null;
 
-            if (!context.getLevel().isClientSide) {
-                ServerLevel level = (ServerLevel) context.getLevel();
+        Level level = context.getLevel();
+        Optional<Supplier<List<ItemStack>>> scrapingResult = getScrapingResult(state, level, context.getItemInHand(), toolAction);
+        if (scrapingResult.isEmpty())
+            return null;
 
-                Item item = block.asItem();
+        if (!simulate) {
+            if (level instanceof ServerLevel serverLevel) {
+                List<ItemStack> loot = scrapingResult.get().get();
 
                 BlockPos pos = context.getClickedPos();
                 // Offset item spawning pos, depending on clicked face, to spawn items closer to the player.
@@ -237,13 +248,48 @@ public abstract class ChimneyBlock extends Block implements EntityBlock {
                         pos.getY() + 0.6f + faceNormal.getY() * 0.65f,
                         pos.getZ() + 0.5f + faceNormal.getZ() * 0.65f);
 
-                List<ItemStack> items = ModLootTables.getSootScrapingLootFor(state, level);
-                spawnSootScrapingItems(itemSpawnPosition, level, items);
+                spawnSootScrapingItems(itemSpawnPosition, serverLevel, loot);
             }
-
-            return sootyChimney.getCleanVariant().withPropertiesOf(state);
+            else {
+                sootyChimney.spawnSootParticles(level, context.getClickedPos(), false);
+            }
         }
-        return null;
+
+        return sootyChimney.getCleanVariant().withPropertiesOf(state);
+    }
+
+    protected Optional<Supplier<List<ItemStack>>> getScrapingResult(BlockState state, Level level, ItemStack tool, ToolAction action) {
+        if (Config.USE_LOOT_TABLES_FOR_SCRAPING.get()) {
+            if (action != ToolActions.AXE_SCRAPE || !tool.canPerformAction(ToolActions.AXE_SCRAPE))
+                return Optional.empty();
+
+            return level instanceof ServerLevel serverLevel ?
+                    Optional.of(() -> ModLootTables.getSootScrapingLootFor(state, serverLevel))
+                    : Optional.of(Collections::emptyList);
+        }
+
+        SimpleContainer simpleContainer = new SimpleContainer(new ItemStack(state.getBlock().asItem()), tool);
+        Optional<SootScrapingRecipe> recipeOptional = level.getRecipeManager()
+                .getRecipeFor(ModRecipeTypes.SOOT_SCRAPING.get(), simpleContainer, level);
+
+        if (recipeOptional.isEmpty() || (recipeOptional.get().getTool() instanceof ToolActionIngredient toolActionIngredient
+            && !toolActionIngredient.toolAction.equals(action)))
+            return Optional.empty();
+
+        if (level.isClientSide)
+            return Optional.of(Collections::emptyList);
+        else {
+            return Optional.of(() -> {
+                SootScrapingRecipe recipe = recipeOptional.get();
+                List<ItemStack> items = new ArrayList<>();
+                for (ChanceResult result : recipe.getResults()) {
+                    ItemStack itemStack = result.rollOutput(level.getRandom());
+                    if (!itemStack.isEmpty())
+                        items.add(itemStack);
+                }
+                return items;
+            });
+        }
     }
 
     public void spawnSootScrapingItems(Vector3f pos, ServerLevel level, List<ItemStack> items) {

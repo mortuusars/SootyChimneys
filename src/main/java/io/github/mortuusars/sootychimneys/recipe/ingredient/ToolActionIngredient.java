@@ -4,6 +4,7 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import net.minecraft.MethodsReturnNonnullByDefault;
 import net.minecraft.network.FriendlyByteBuf;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraftforge.common.ToolAction;
@@ -44,7 +45,10 @@ public class ToolActionIngredient extends Ingredient
 	@Override
 	public JsonElement toJson() {
 		JsonObject json = new JsonObject();
-		json.addProperty("type", CraftingHelper.getID(SERIALIZER).toString());
+		@Nullable ResourceLocation id = CraftingHelper.getID(SERIALIZER);
+		if (id == null)
+			throw new IllegalStateException("ToolActionIngredient serializer is not registered");
+		json.addProperty("type", id.toString());
 		json.addProperty("action", toolAction.name());
 		return json;
 	}
