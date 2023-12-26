@@ -19,15 +19,20 @@ public class ModBlocks {
     public static final RegistryObject<StoneBrickChimneyBlock> DIRTY_STONE_BRICK_CHIMNEY =
             registerChimneyBlock("dirty_stone_brick_chimney", StoneBrickChimneyBlock::new);
 
-    public static final RegistryObject<TerracottaChimneyBlock> TERRACOTTA_CHIMNEY =
-            registerChimneyBlock("terracotta_chimney", TerracottaChimneyBlock::new);
-    public static final RegistryObject<TerracottaChimneyBlock> DIRTY_TERRACOTTA_CHIMNEY =
-            registerChimneyBlock("dirty_terracotta_chimney", TerracottaChimneyBlock::new);
+    public static final RegistryObject<MudBrickChimneyBlock> MUD_BRICK_CHIMNEY =
+            registerChimneyBlock("mud_brick_chimney", MudBrickChimneyBlock::new);
+    public static final RegistryObject<MudBrickChimneyBlock> DIRTY_MUD_BRICK_CHIMNEY =
+            registerChimneyBlock("dirty_mud_brick_chimney", MudBrickChimneyBlock::new);
 
     public static final RegistryObject<CopperChimneyBlock> COPPER_CHIMNEY =
             registerChimneyBlock("copper_chimney", CopperChimneyBlock::new);
     public static final RegistryObject<CopperChimneyBlock> DIRTY_COPPER_CHIMNEY =
             registerChimneyBlock("dirty_copper_chimney", CopperChimneyBlock::new);
+
+    public static final RegistryObject<TerracottaChimneyBlock> TERRACOTTA_CHIMNEY =
+            registerChimneyBlock("terracotta_chimney", TerracottaChimneyBlock::new);
+    public static final RegistryObject<TerracottaChimneyBlock> DIRTY_TERRACOTTA_CHIMNEY =
+            registerChimneyBlock("dirty_terracotta_chimney", TerracottaChimneyBlock::new);
 
     public static void init(){}
 

@@ -1,0 +1,10 @@
+{
+  "variants": {
+    "stacked=true": {
+      "model": "sootychimneys:block/stacked_mud_brick_chimney"
+    },
+    "stacked=false": {
+      "model": "sootychimneys:block/mud_brick_chimney"
+    }
+  }
+}

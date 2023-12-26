@@ -1,4 +1,6 @@
 <>
+- Added Mud Brick Chimney
+
 - **Soot Scraping** is now handled through a recipe.
   - Loot Tables way is still available and accessed through config.
 

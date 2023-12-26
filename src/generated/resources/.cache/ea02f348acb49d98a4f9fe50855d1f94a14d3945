@@ -1,9 +1,11 @@
-// 1.19.2	2023-04-18T15:16:51.9434706	Item Models: sootychimneys
+// 1.19.2	2023-12-26T11:40:01.2046848	Item Models: sootychimneys
 93a90e6ba5d0575e92660fb20f98d5a9358e9757 assets/sootychimneys/models/item/brick_chimney.json
 00dc5adfffede2d49d8aed00b2ca686c6ce430ae assets/sootychimneys/models/item/copper_chimney.json
 95831ada0dd1e47c29f7c2cedbc29cb175696d69 assets/sootychimneys/models/item/dirty_brick_chimney.json
 e21e65b73a492e894159d98cdda72cc3ab2d8e24 assets/sootychimneys/models/item/dirty_copper_chimney.json
+af5293270f7ce441aa743261653554bfffda9c8e assets/sootychimneys/models/item/dirty_mud_brick_chimney.json
 c2e74bde3e198d7bf245b3e71073dca4b9392c02 assets/sootychimneys/models/item/dirty_stone_brick_chimney.json
 c4bc87c5717ec5922a6c618512f228388b68ddd5 assets/sootychimneys/models/item/dirty_terracotta_chimney.json
+ef220f4f73fbe31fde6c13d4153ceb599e2bf207 assets/sootychimneys/models/item/mud_brick_chimney.json
 2df2c155c2a64cc710edc9c4cd270b8c9a3afa66 assets/sootychimneys/models/item/stone_brick_chimney.json
 f78bbe3ae665202d2bba2208f18242f25dc24073 assets/sootychimneys/models/item/terracotta_chimney.json

@@ -20,11 +20,11 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.Map;
 
 public class SootCoveringRecipeCategory implements IRecipeCategory<SootCoveringJeiRecipe> {
-//    public static final ResourceLocation UID = SootyChimneys.resource("soot_scraping");
 
     public static final int BG_WIDTH = 153;
     public static final int BG_HEIGHT = 65;
@@ -34,6 +34,8 @@ public class SootCoveringRecipeCategory implements IRecipeCategory<SootCoveringJ
             ModItems.DIRTY_BRICK_CHIMNEY.get(), 3,
             ModItems.STONE_BRICK_CHIMNEY.get(), 0,
             ModItems.DIRTY_STONE_BRICK_CHIMNEY.get(), 0,
+            ModItems.MUD_BRICK_CHIMNEY.get(), 3,
+            ModItems.DIRTY_MUD_BRICK_CHIMNEY.get(), 3,
             ModItems.TERRACOTTA_CHIMNEY.get(), 10,
             ModItems.DIRTY_TERRACOTTA_CHIMNEY.get(), 10,
             ModItems.COPPER_CHIMNEY.get(), -1,
@@ -42,7 +44,7 @@ public class SootCoveringRecipeCategory implements IRecipeCategory<SootCoveringJ
     private final Component title;
     private final IDrawable background;
     private final IDrawableStatic icon;
-    private IGuiHelper helper;
+    private final IGuiHelper helper;
 
     public SootCoveringRecipeCategory(IGuiHelper helper) {
         this.helper = helper;
@@ -57,7 +59,7 @@ public class SootCoveringRecipeCategory implements IRecipeCategory<SootCoveringJ
     }
 
     @Override
-    public void setRecipe(IRecipeLayoutBuilder builder, SootCoveringJeiRecipe recipe, IFocusGroup focuses) {
+    public void setRecipe(@NotNull IRecipeLayoutBuilder builder, @NotNull SootCoveringJeiRecipe recipe, @NotNull IFocusGroup focuses) {
         // Get smoke properties:
         ChimneySmokeAnimatedDrawable ingredientSmoke = new ChimneySmokeAnimatedDrawable(helper);
         ChimneySmokeAnimatedDrawable resultSmoke = new ChimneySmokeAnimatedDrawable(helper);
@@ -95,29 +97,18 @@ public class SootCoveringRecipeCategory implements IRecipeCategory<SootCoveringJ
     }
 
     @Override
-    public Component getTitle() {
+    public @NotNull Component getTitle() {
         return title;
     }
-    public IDrawable getBackground() {
+    public @NotNull IDrawable getBackground() {
         return background;
     }
     @Override
-    public IDrawable getIcon() {
+    public @NotNull IDrawable getIcon() {
         return icon;
     }
-
-//    @SuppressWarnings("removal")
-//    @Override
-//    public ResourceLocation getUid() {
-//        return UID;
-//    }
-//    @SuppressWarnings("removal")
-//    @Override
-//    public Class<? extends SootCoveringJeiRecipe> getRecipeClass() {
-//        return this.getRecipeType().getRecipeClass();
-//    }
     @Override
-    public RecipeType<SootCoveringJeiRecipe> getRecipeType() {
+    public @NotNull RecipeType<SootCoveringJeiRecipe> getRecipeType() {
         return JeiRecipeTypes.SOOT_COVERING;
     }
 }

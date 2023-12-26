@@ -145,7 +145,7 @@ public abstract class ChimneyBlock extends Block implements EntityBlock {
     }
 
     protected void updateState(BlockState state, Level level, BlockPos pos) {
-        boolean stacked = level.getBlockState(pos.above()).is(ModTags.Blocks.CHIMNEYS);
+        boolean stacked = level.getBlockState(pos.above()).getBlock() instanceof ISootyChimney;
 
         if (stacked && state.getBlock() instanceof ISootyChimney chimney && chimney.isDirty()) {
             state = chimney.getCleanVariant().defaultBlockState();
