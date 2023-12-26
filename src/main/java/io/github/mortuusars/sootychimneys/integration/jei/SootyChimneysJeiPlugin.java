@@ -66,6 +66,7 @@ public class SootyChimneysJeiPlugin implements IModPlugin {
         registration.addRecipes(JeiRecipeTypes.SOOT_COVERING, ImmutableList.of(
                 new SootCoveringJeiRecipe(ModItems.BRICK_CHIMNEY.get(), ModItems.DIRTY_BRICK_CHIMNEY.get()),
                 new SootCoveringJeiRecipe(ModItems.STONE_BRICK_CHIMNEY.get(), ModItems.DIRTY_STONE_BRICK_CHIMNEY.get()),
+                new SootCoveringJeiRecipe(ModItems.MUD_BRICK_CHIMNEY.get(), ModItems.DIRTY_MUD_BRICK_CHIMNEY.get()),
                 new SootCoveringJeiRecipe(ModItems.COPPER_CHIMNEY.get(), ModItems.DIRTY_COPPER_CHIMNEY.get()),
                 new SootCoveringJeiRecipe(ModItems.TERRACOTTA_CHIMNEY.get(), ModItems.DIRTY_TERRACOTTA_CHIMNEY.get())
         ));
@@ -74,6 +75,7 @@ public class SootyChimneysJeiPlugin implements IModPlugin {
             registration.addRecipes(JeiRecipeTypes.SOOT_SCRAPING_LOOT_TABLES, ImmutableList.of(
                     new SootScrapingWithLootTablesJeiRecipe(ModItems.DIRTY_BRICK_CHIMNEY.get(), ModItems.BRICK_CHIMNEY.get()),
                     new SootScrapingWithLootTablesJeiRecipe(ModItems.DIRTY_STONE_BRICK_CHIMNEY.get(), ModItems.STONE_BRICK_CHIMNEY.get()),
+                    new SootScrapingWithLootTablesJeiRecipe(ModItems.DIRTY_MUD_BRICK_CHIMNEY.get(), ModItems.MUD_BRICK_CHIMNEY.get()),
                     new SootScrapingWithLootTablesJeiRecipe(ModItems.DIRTY_COPPER_CHIMNEY.get(), ModItems.COPPER_CHIMNEY.get()),
                     new SootScrapingWithLootTablesJeiRecipe(ModItems.DIRTY_TERRACOTTA_CHIMNEY.get(), ModItems.TERRACOTTA_CHIMNEY.get())
             ));

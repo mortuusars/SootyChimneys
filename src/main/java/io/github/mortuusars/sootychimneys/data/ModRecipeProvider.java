@@ -1,7 +1,5 @@
 package io.github.mortuusars.sootychimneys.data;
 
-import com.google.gson.JsonElement;
-import com.google.gson.JsonObject;
 import io.github.mortuusars.sootychimneys.core.ISootyChimney;
 import io.github.mortuusars.sootychimneys.data.builder.SootScrapingRecipeBuilder;
 import io.github.mortuusars.sootychimneys.recipe.ingredient.ToolActionIngredient;
@@ -11,12 +9,9 @@ import net.minecraft.data.recipes.FinishedRecipe;
 import net.minecraft.data.recipes.RecipeProvider;
 import net.minecraft.data.recipes.ShapedRecipeBuilder;
 import net.minecraft.tags.ItemTags;
-import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.Ingredient;
-import net.minecraftforge.common.ToolAction;
 import net.minecraftforge.common.ToolActions;
-import net.minecraftforge.common.crafting.CraftingHelper;
 import net.minecraftforge.registries.RegistryObject;
 import org.jetbrains.annotations.NotNull;
 
@@ -50,15 +45,15 @@ public class ModRecipeProvider extends RecipeProvider {
                 .unlockedBy("has_stone", has(Items.STONE))
                 .save(recipeConsumer, "stone_brick_chimney");
 
-        ShapedRecipeBuilder.shaped(ModItems.TERRACOTTA_CHIMNEY.get())
-                .pattern("   ")
-                .pattern("T T")
-                .pattern("TCT")
-                .define('T', Items.TERRACOTTA)
+        ShapedRecipeBuilder.shaped(ModItems.MUD_BRICK_CHIMNEY.get())
+                .pattern("B B")
+                .pattern("B B")
+                .pattern("BCB")
+                .define('B', Items.MUD_BRICKS)
                 .define('C', ItemTags.COALS)
-                .group("terracotta_chimney")
-                .unlockedBy("has_terracotta", has(Items.TERRACOTTA))
-                .save(recipeConsumer, "terracotta_chimney");
+                .group("mud_brick_chimney")
+                .unlockedBy("has_mud", has(Items.STONE))
+                .save(recipeConsumer, "mud_brick_chimney");
 
         ShapedRecipeBuilder.shaped(ModItems.COPPER_CHIMNEY.get())
                 .pattern("   ")
@@ -70,6 +65,17 @@ public class ModRecipeProvider extends RecipeProvider {
                 .group("copper_chimney")
                 .unlockedBy("has_copper", has(Items.COPPER_INGOT))
                 .save(recipeConsumer, "copper_chimney");
+
+        ShapedRecipeBuilder.shaped(ModItems.TERRACOTTA_CHIMNEY.get())
+                .pattern("   ")
+                .pattern("T T")
+                .pattern("TCT")
+                .define('T', Items.TERRACOTTA)
+                .define('C', ItemTags.COALS)
+                .group("terracotta_chimney")
+                .unlockedBy("has_terracotta", has(Items.TERRACOTTA))
+                .save(recipeConsumer, "terracotta_chimney");
+
 
         // Soot Scraping
         ModItems.CHIMNEYS.stream()

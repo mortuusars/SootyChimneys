@@ -25,6 +25,7 @@ import org.jetbrains.annotations.NotNull;
 import java.util.Map;
 
 public class SootCoveringRecipeCategory implements IRecipeCategory<SootCoveringJeiRecipe> {
+
     public static final int BG_WIDTH = 153;
     public static final int BG_HEIGHT = 65;
 
@@ -33,6 +34,8 @@ public class SootCoveringRecipeCategory implements IRecipeCategory<SootCoveringJ
             ModItems.DIRTY_BRICK_CHIMNEY.get(), 3,
             ModItems.STONE_BRICK_CHIMNEY.get(), 0,
             ModItems.DIRTY_STONE_BRICK_CHIMNEY.get(), 0,
+            ModItems.MUD_BRICK_CHIMNEY.get(), 3,
+            ModItems.DIRTY_MUD_BRICK_CHIMNEY.get(), 3,
             ModItems.TERRACOTTA_CHIMNEY.get(), 10,
             ModItems.DIRTY_TERRACOTTA_CHIMNEY.get(), 10,
             ModItems.COPPER_CHIMNEY.get(), -1,
@@ -104,7 +107,6 @@ public class SootCoveringRecipeCategory implements IRecipeCategory<SootCoveringJ
     public @NotNull IDrawable getIcon() {
         return icon;
     }
-
     @Override
     public @NotNull RecipeType<SootCoveringJeiRecipe> getRecipeType() {
         return JeiRecipeTypes.SOOT_COVERING;
