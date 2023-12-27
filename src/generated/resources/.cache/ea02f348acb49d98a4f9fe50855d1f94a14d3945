@@ -1,7 +1,9 @@
-// 1.19.2	2023-12-26T17:30:29.5871274	Item Models: sootychimneys
+// 1.19.2	2023-12-27T11:42:56.6618014	Item Models: sootychimneys
 93a90e6ba5d0575e92660fb20f98d5a9358e9757 assets/sootychimneys/models/item/brick_chimney.json
+945ad13c9908de7060960cc4d441fef1c477ac9a assets/sootychimneys/models/item/cobblestone_chimney.json
 00dc5adfffede2d49d8aed00b2ca686c6ce430ae assets/sootychimneys/models/item/copper_chimney.json
 95831ada0dd1e47c29f7c2cedbc29cb175696d69 assets/sootychimneys/models/item/dirty_brick_chimney.json
+eebcce57905b0de3082692fafee88c5bfc83a953 assets/sootychimneys/models/item/dirty_cobblestone_chimney.json
 e21e65b73a492e894159d98cdda72cc3ab2d8e24 assets/sootychimneys/models/item/dirty_copper_chimney.json
 7d0732e649ef7f222fb25ff1dfaa4f01bdc00652 assets/sootychimneys/models/item/dirty_iron_chimney.json
 af5293270f7ce441aa743261653554bfffda9c8e assets/sootychimneys/models/item/dirty_mud_brick_chimney.json

@@ -1,12 +1,12 @@
 {
   "parent": "minecraft:recipes/root",
   "criteria": {
-    "has_mud": {
+    "has_cobblestone": {
       "conditions": {
         "items": [
           {
             "items": [
-              "minecraft:mud"
+              "minecraft:cobblestone"
             ]
           }
         ]
@@ -15,20 +15,20 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "minecraft:mud_brick_chimney"
+        "recipe": "minecraft:cobblestone_chimney"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
   },
   "requirements": [
     [
-      "has_mud",
+      "has_cobblestone",
       "has_the_recipe"
     ]
   ],
   "rewards": {
     "recipes": [
-      "minecraft:mud_brick_chimney"
+      "minecraft:cobblestone_chimney"
     ]
   }
 }

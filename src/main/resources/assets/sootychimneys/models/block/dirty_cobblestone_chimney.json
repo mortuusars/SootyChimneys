@@ -1,0 +1,51 @@
+{
+	"credit": "Made with Blockbench",
+	"parent": "minecraft:block/cube_all",
+	"render_type": "cutout",
+	"texture_size": [32, 32],
+	"textures": {
+		"texture": "sootychimneys:block/cobblestone_chimney",
+		"particle": "block/cobblestone",
+		"dirty_top": "sootychimneys:block/dirty_cobblestone_chimney_top"
+	},
+	"elements": [
+		{
+			"name": "top",
+			"from": [1, 4, 1],
+			"to": [15, 16, 15],
+			"faces": {
+				"north": {"uv": [0.5, 8, 7.5, 14], "texture": "#texture"},
+				"east": {"uv": [0.5, 8, 7.5, 14], "texture": "#texture"},
+				"south": {"uv": [0.5, 8, 7.5, 14], "texture": "#texture"},
+				"west": {"uv": [0.5, 8, 7.5, 14], "texture": "#texture"},
+				"up": {"uv": [1, 1, 15, 15], "texture": "#dirty_top", "cullface": "up"},
+				"down": {"uv": [0.5, 0.5, 7.5, 7.5], "texture": "#texture"}
+			}
+		},
+		{
+			"name": "top_interior",
+			"from": [3.975, 16, 3.975],
+			"to": [12.025, 8, 12.025],
+			"faces": {
+				"north": {"uv": [10, 8, 14, 12], "texture": "#texture", "cullface": "up"},
+				"east": {"uv": [10, 8, 14, 12], "texture": "#texture", "cullface": "up"},
+				"south": {"uv": [10, 8, 14, 12], "texture": "#texture", "cullface": "up"},
+				"west": {"uv": [10, 8, 14, 12], "texture": "#texture", "cullface": "up"},
+				"up": {"uv": [10, 10, 14, 14], "texture": "#texture", "cullface": "up"}
+			}
+		},
+		{
+			"name": "base",
+			"from": [3, 0, 3],
+			"to": [13, 4, 13],
+			"faces": {
+				"north": {"uv": [1.5, 14, 6.5, 16], "texture": "#texture"},
+				"east": {"uv": [1.5, 14, 6.5, 16], "texture": "#texture"},
+				"south": {"uv": [1.5, 14, 6.5, 16], "texture": "#texture"},
+				"west": {"uv": [1.5, 14, 6.5, 16], "texture": "#texture"},
+				"up": {"uv": [0, 0, 5, 5], "texture": "#texture"},
+				"down": {"uv": [1.5, 1.5, 6.5, 6.5], "texture": "#texture", "cullface": "down"}
+			}
+		}
+	]
+}

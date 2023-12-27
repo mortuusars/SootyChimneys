@@ -32,12 +32,14 @@ public class SootCoveringRecipeCategory implements IRecipeCategory<SootCoveringJ
     public static final Map<Item, Integer> CHIMNEY_SMOKE_Y_ORIGIN = new HashMap<>() {{
         put(SootyChimneys.Chimney.BRICK.getCleanItem(), 3);
         put(SootyChimneys.Chimney.BRICK.getDirtyItem(), 3);
+        put(SootyChimneys.Chimney.COBBLESTONE.getCleanItem(), 3);
+        put(SootyChimneys.Chimney.COBBLESTONE.getDirtyItem(), 3);
         put(SootyChimneys.Chimney.STONE_BRICK.getCleanItem(), 0);
         put(SootyChimneys.Chimney.STONE_BRICK.getDirtyItem(), 0);
         put(SootyChimneys.Chimney.MUD_BRICK.getCleanItem(), 3);
         put(SootyChimneys.Chimney.MUD_BRICK.getDirtyItem(), 3);
-        put(SootyChimneys.Chimney.IRON.getCleanItem(), -1);
-        put(SootyChimneys.Chimney.IRON.getDirtyItem(), -1);
+        put(SootyChimneys.Chimney.IRON.getCleanItem(), 2);
+        put(SootyChimneys.Chimney.IRON.getDirtyItem(), 2);
         put(SootyChimneys.Chimney.COPPER.getCleanItem(), -1);
         put(SootyChimneys.Chimney.COPPER.getDirtyItem(), -1);
         put(SootyChimneys.Chimney.TERRACOTTA.getCleanItem(), 10);

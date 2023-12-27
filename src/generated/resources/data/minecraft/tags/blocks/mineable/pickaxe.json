@@ -2,6 +2,8 @@
   "values": [
     "sootychimneys:brick_chimney",
     "sootychimneys:dirty_brick_chimney",
+    "sootychimneys:cobblestone_chimney",
+    "sootychimneys:dirty_cobblestone_chimney",
     "sootychimneys:stone_brick_chimney",
     "sootychimneys:dirty_stone_brick_chimney",
     "sootychimneys:mud_brick_chimney",
