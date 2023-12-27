@@ -20,6 +20,15 @@ public class ModBlocks {
                 () -> new ChimneyBlock(brick, SootyChimneys.Chimney.BRICK, ChimneyBlock.Type.CLEAN),
                 () -> new ChimneyBlock(brick, SootyChimneys.Chimney.BRICK, ChimneyBlock.Type.DIRTY));
 
+        BlockBehaviour.Properties cobblestone = BlockBehaviour.Properties.of(Material.STONE, MaterialColor.COLOR_GRAY)
+                .sound(SoundType.STONE)
+                .strength(2f, 2f)
+                .destroyTime(2f)
+                .requiresCorrectToolForDrops();
+        registerBoth(SootyChimneys.Chimney.COBBLESTONE.typeId(),
+                () -> new ChimneyBlock(cobblestone, SootyChimneys.Chimney.COBBLESTONE, ChimneyBlock.Type.CLEAN),
+                () -> new ChimneyBlock(cobblestone, SootyChimneys.Chimney.COBBLESTONE, ChimneyBlock.Type.DIRTY));
+
         BlockBehaviour.Properties stone_brick = BlockBehaviour.Properties.of(Material.STONE, MaterialColor.COLOR_GRAY)
                 .sound(SoundType.BASALT)
                 .strength(2f, 2f)

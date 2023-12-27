@@ -34,6 +34,17 @@ public class ModRecipeProvider extends RecipeProvider {
                 .unlockedBy("has_brick", has(Items.BRICK))
                 .save(recipeConsumer, SootyChimneys.Chimney.BRICK.getCleanId());
 
+        ShapedRecipeBuilder.shaped(SootyChimneys.Chimney.COBBLESTONE.getCleanItem())
+                .pattern("b b")
+                .pattern("B B")
+                .pattern("BCB")
+                .define('b', Items.COBBLESTONE_SLAB)
+                .define('B', Items.COBBLESTONE)
+                .define('C', ItemTags.COALS)
+                .group(SootyChimneys.Chimney.COBBLESTONE.getCleanId())
+                .unlockedBy("has_cobblestone", has(Items.COBBLESTONE))
+                .save(recipeConsumer, SootyChimneys.Chimney.COBBLESTONE.getCleanId());
+
         ShapedRecipeBuilder.shaped(SootyChimneys.Chimney.STONE_BRICK.getCleanItem())
                 .pattern("B B")
                 .pattern("B B")
@@ -51,7 +62,7 @@ public class ModRecipeProvider extends RecipeProvider {
                 .define('B', Items.MUD_BRICKS)
                 .define('C', ItemTags.COALS)
                 .group(SootyChimneys.Chimney.MUD_BRICK.getCleanId())
-                .unlockedBy("has_mud", has(Items.STONE))
+                .unlockedBy("has_mud", has(Items.MUD))
                 .save(recipeConsumer, SootyChimneys.Chimney.MUD_BRICK.getCleanId());
 
         ShapedRecipeBuilder.shaped(SootyChimneys.Chimney.IRON.getCleanItem())
@@ -62,7 +73,7 @@ public class ModRecipeProvider extends RecipeProvider {
                 .define('I', Tags.Items.INGOTS_IRON)
                 .define('C', ItemTags.COALS)
                 .group(SootyChimneys.Chimney.IRON.getCleanId())
-                .unlockedBy("has_copper", has(Items.COPPER_INGOT))
+                .unlockedBy("has_iron", has(Items.IRON_INGOT))
                 .save(recipeConsumer, SootyChimneys.Chimney.IRON.getCleanId());
 
         ShapedRecipeBuilder.shaped(SootyChimneys.Chimney.COPPER.getCleanItem())

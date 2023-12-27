@@ -50,11 +50,18 @@ public class SootyChimneys {
         BRICK("brick",
                 new Smoke(0.5f, 1f, 0.5f, 0.25f, 0.1f, 0.25f).setSpeed(1.2f),
                 Shapes.or(
-                        Block.box(1d, 0d, 1d, 15d, 11d, 15d),
-                        Block.box(0d, 11d, 0d, 16d, 16d, 16d)),
-                Block.box(1d, 0d, 1d, 15d, 16d, 15d),
+                        Block.box(1, 0, 1, 15, 11, 15),
+                        Block.box(0, 11, 0, 16, 16, 16)),
+                Block.box(1, 0, 1, 15, 16, 15),
                 0.75f),
-        STONE_BRICK("stone_brick", new Smoke(0.5f, 1.2f, 0.5f, 0.025f, 0.05f, 0.025f).setIntensity(0.5f),
+        COBBLESTONE("cobblestone",
+                      new Smoke(0.5f, 1.15f, 0.5f, 0.25f, 0.1f, 0.25f),
+                Shapes.or(
+                        Block.box(3, 0, 3, 13, 16, 13),
+                        Block.box(1, 4, 1, 15, 16, 15)),
+                        Block.box(3, 0, 3, 13, 16, 13),
+                        0.75f),
+        STONE_BRICK("stone_brick", new Smoke(0.5f, 1.2f, 0.5f, 0.025f, 0.05f, 0.025f).setIntensity(0.6f),
                 Shapes.or(
                         Block.box(4, 0, 4, 12, 11, 12),
                         Block.box(3, 11, 3, 13, 16, 13)),

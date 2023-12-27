@@ -1,6 +1,8 @@
 {
   "block.sootychimneys.brick_chimney": "Цегляний димохід",
   "block.sootychimneys.dirty_brick_chimney": "Сажистий цегляний димохід",
+  "block.sootychimneys.cobblestone_chimney": "Димохід з кругляку",
+  "block.sootychimneys.dirty_cobblestone_chimney": "Сажистий димохід з кругляку",
   "block.sootychimneys.stone_brick_chimney": "Димохід з кам'яної цегли",
   "block.sootychimneys.dirty_stone_brick_chimney": "Сажистий димохід з кам'яної цегли",
   "block.sootychimneys.mud_brick_chimney": "Димохід з лимпача",
