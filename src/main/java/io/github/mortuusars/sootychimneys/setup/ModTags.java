@@ -16,5 +16,6 @@ public class ModTags {
     public static class Blocks {
         public static final TagKey<Block> CHIMNEYS = BlockTags.create(new ResourceLocation("forge:chimneys"));
         public static final TagKey<Block> SMOKE_BLOCKING = BlockTags.create(SootyChimneys.resource("smoke_blocking"));
+        public static final TagKey<Block> SMOKE_BOOSTING = BlockTags.create(SootyChimneys.resource("smoke_boosting"));
     }
 }

@@ -4,7 +4,7 @@ import com.simibubi.create.content.contraptions.behaviour.MovementBehaviour;
 import com.simibubi.create.content.contraptions.behaviour.MovementContext;
 import io.github.mortuusars.sootychimneys.block.ChimneyBlock;
 import io.github.mortuusars.sootychimneys.config.Config;
-import net.minecraft.core.BlockPos;
+import net.minecraft.core.particles.ParticleOptions;
 import net.minecraft.world.level.Level;
 
 /**
@@ -15,9 +15,11 @@ public class ChimneyMovementBehaviour implements MovementBehaviour {
     public void tick(MovementContext context) {
         Level level = context.world;
         if (level != null && level.isClientSide && context.position != null
-                && context.state.getBlock() instanceof ChimneyBlock chimneyBlock && chimneyBlock.shouldEmitSmoke(context.state, context.world, context.localPos)
+                && context.state.getBlock() instanceof ChimneyBlock chimneyBlock
+                && chimneyBlock.shouldEmitSmoke(context.state, context.world, context.localPos)
                 && level.getRandom().nextDouble() < Config.SMOKE_STRENGTH.get()) {
-            chimneyBlock.emitParticlesOnClient(level, new BlockPos((int) context.position.x, (int) context.position.y, (int) context.position.z), context.state);
+            ParticleOptions particle = chimneyBlock.getParticle(context.state, context.contraption.getContraptionWorld(), context.localPos);
+            chimneyBlock.emitParticle(level, context.position.x, context.position.y, context.position.z, particle);
         }
     }
 }

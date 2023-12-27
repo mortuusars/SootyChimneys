@@ -2,12 +2,12 @@
 - Added Cobblestone Chimney
 - Added Mud Brick Chimney
 - Added Iron Chimney
-
-- `sootychimneys:smoke_blocking` block tag can now be used to control what blocks will block the smoke if placed on top of a chimney.
-
+<br><br>
+- `sootychimneys:smoke_blocking` block tag can now be used to control what blocks, besides other chimneys, will block the smoke if placed on top of a chimney.
+- `sootychimneys:smoke_boosting` block tag can now be used to control what blocks, besides other chimneys, will make a chimney emit a signal-smoke when below it.
+<br><br>
 - **Soot Scraping** is now handled through a recipe.
   - Loot Tables way is still available and accessed through config.
-
 - When chimneys are stacked, lower chimney model will be adjusted to connect them better. 
 
 ### 2023-05-23 - 1.1.1
