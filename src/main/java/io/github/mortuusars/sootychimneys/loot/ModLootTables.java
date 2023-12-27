@@ -2,7 +2,7 @@ package io.github.mortuusars.sootychimneys.loot;
 
 import com.mojang.logging.LogUtils;
 import io.github.mortuusars.sootychimneys.SootyChimneys;
-import io.github.mortuusars.sootychimneys.core.ISootyChimney;
+import io.github.mortuusars.sootychimneys.block.ChimneyBlock;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.item.ItemStack;
@@ -21,12 +21,12 @@ public class ModLootTables {
     public static final ResourceLocation SOOT_SCRAPING = new ResourceLocation(SootyChimneys.MOD_ID, "soot_scraping");
 
     public static List<ItemStack> getSootScrapingLootFor(BlockState state, ServerLevel level) {
-        if (!(state.getBlock() instanceof ISootyChimney)){
-            LogUtils.getLogger().error("Soot Scraping is only for ISootyChimney blocks.");
+        if (!(state.getBlock() instanceof ChimneyBlock)){
+            LogUtils.getLogger().error("Soot Scraping is only for ChimneyBlocks.");
             return Collections.emptyList();
         }
 
-        String blockId  = Objects.requireNonNull(ForgeRegistries.BLOCKS.getKey(state.getBlock()).getPath());
+        String blockId  = Objects.requireNonNull(Objects.requireNonNull(ForgeRegistries.BLOCKS.getKey(state.getBlock())).getPath());
 
         try {
             LootContext lootContext = new LootContext.Builder(level)

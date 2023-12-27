@@ -4,25 +4,24 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 
 public class SootCoveringJeiRecipe {
-    private final Item dirtyChimney;
     private final Item cleanChimney;
+    private final Item dirtyChimney;
 
-    private final ItemStack dirtyChimneyStack;
     private final ItemStack cleanChimneyStack;
+    private final ItemStack dirtyChimneyStack;
 
-    public SootCoveringJeiRecipe(Item dirtyChimney, Item cleanChimney) {
-
-        this.dirtyChimney = dirtyChimney;
+    public SootCoveringJeiRecipe(Item cleanChimney, Item dirtyChimney) {
         this.cleanChimney = cleanChimney;
-        this.dirtyChimneyStack = new ItemStack(dirtyChimney);
+        this.dirtyChimney = dirtyChimney;
         this.cleanChimneyStack = new ItemStack(cleanChimney);
+        this.dirtyChimneyStack = new ItemStack(dirtyChimney);
     }
 
-    public ItemStack getIngredientChimney() {
-        return dirtyChimneyStack;
-    }
-
-    public ItemStack getResultChimney() {
+    public ItemStack getCleanChimney() {
         return cleanChimneyStack;
+    }
+
+    public ItemStack getDirtyChimney() {
+        return dirtyChimneyStack;
     }
 }

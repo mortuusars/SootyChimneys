@@ -3,13 +3,13 @@
   "group": "copper_chimney",
   "key": {
     "B": {
-      "item": "minecraft:copper_block"
+      "tag": "forge:storage_blocks/copper"
     },
     "C": {
       "tag": "minecraft:coals"
     },
     "I": {
-      "item": "minecraft:copper_ingot"
+      "tag": "forge:ingots/copper"
     }
   },
   "pattern": [

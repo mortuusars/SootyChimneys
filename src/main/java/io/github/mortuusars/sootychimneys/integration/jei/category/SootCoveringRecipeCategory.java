@@ -6,7 +6,6 @@ import io.github.mortuusars.sootychimneys.integration.jei.JeiRecipeTypes;
 import io.github.mortuusars.sootychimneys.integration.jei.drawable.ChimneySmokeAnimatedDrawable;
 import io.github.mortuusars.sootychimneys.integration.jei.recipe.SootCoveringJeiRecipe;
 import io.github.mortuusars.sootychimneys.integration.jei.renderer.ScalableItemStackRenderer;
-import io.github.mortuusars.sootychimneys.setup.ModItems;
 import mezz.jei.api.constants.VanillaTypes;
 import mezz.jei.api.gui.builder.IRecipeLayoutBuilder;
 import mezz.jei.api.gui.drawable.IDrawable;
@@ -22,6 +21,7 @@ import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
 import org.jetbrains.annotations.NotNull;
 
+import java.util.HashMap;
 import java.util.Map;
 
 public class SootCoveringRecipeCategory implements IRecipeCategory<SootCoveringJeiRecipe> {
@@ -29,17 +29,20 @@ public class SootCoveringRecipeCategory implements IRecipeCategory<SootCoveringJ
     public static final int BG_WIDTH = 153;
     public static final int BG_HEIGHT = 65;
 
-    public static final Map<Item, Integer> CHIMNEY_SMOKE_Y_ORIGIN = Map.of(
-            ModItems.BRICK_CHIMNEY.get(), 3,
-            ModItems.DIRTY_BRICK_CHIMNEY.get(), 3,
-            ModItems.STONE_BRICK_CHIMNEY.get(), 0,
-            ModItems.DIRTY_STONE_BRICK_CHIMNEY.get(), 0,
-            ModItems.MUD_BRICK_CHIMNEY.get(), 3,
-            ModItems.DIRTY_MUD_BRICK_CHIMNEY.get(), 3,
-            ModItems.TERRACOTTA_CHIMNEY.get(), 10,
-            ModItems.DIRTY_TERRACOTTA_CHIMNEY.get(), 10,
-            ModItems.COPPER_CHIMNEY.get(), -1,
-            ModItems.DIRTY_COPPER_CHIMNEY.get(), -1);
+    public static final Map<Item, Integer> CHIMNEY_SMOKE_Y_ORIGIN = new HashMap<>() {{
+        put(SootyChimneys.Chimney.BRICK.getCleanItem(), 3);
+        put(SootyChimneys.Chimney.BRICK.getDirtyItem(), 3);
+        put(SootyChimneys.Chimney.STONE_BRICK.getCleanItem(), 0);
+        put(SootyChimneys.Chimney.STONE_BRICK.getDirtyItem(), 0);
+        put(SootyChimneys.Chimney.MUD_BRICK.getCleanItem(), 3);
+        put(SootyChimneys.Chimney.MUD_BRICK.getDirtyItem(), 3);
+        put(SootyChimneys.Chimney.IRON.getCleanItem(), -1);
+        put(SootyChimneys.Chimney.IRON.getDirtyItem(), -1);
+        put(SootyChimneys.Chimney.COPPER.getCleanItem(), -1);
+        put(SootyChimneys.Chimney.COPPER.getDirtyItem(), -1);
+        put(SootyChimneys.Chimney.TERRACOTTA.getCleanItem(), 10);
+        put(SootyChimneys.Chimney.TERRACOTTA.getDirtyItem(), 10);
+    }};
 
     private final Component title;
     private final IDrawable background;
@@ -65,34 +68,38 @@ public class SootCoveringRecipeCategory implements IRecipeCategory<SootCoveringJ
         ChimneySmokeAnimatedDrawable resultSmoke = new ChimneySmokeAnimatedDrawable(helper);
 
         try {
-            BlockItem ingredientChimneyBlockItem = (BlockItem) recipe.getIngredientChimney().getItem();
-            float ingredientChimneySpeed = ((ChimneyBlock)ingredientChimneyBlockItem.getBlock()).getSmokeProperties().getSpeed();
-            float ingredientChimneyIntensity = ((ChimneyBlock)ingredientChimneyBlockItem.getBlock()).getSmokeProperties().getIntensity();
+            BlockItem ingredientChimneyBlockItem = (BlockItem) recipe.getCleanChimney().getItem();
+            float ingredientChimneySpeed = ((ChimneyBlock) ingredientChimneyBlockItem.getBlock()).getSmokeProperties()
+                    .getSpeed();
+            float ingredientChimneyIntensity = ((ChimneyBlock) ingredientChimneyBlockItem.getBlock()).getSmokeProperties()
+                    .getIntensity();
 
-            BlockItem resultChimneyBlockItem = (BlockItem) recipe.getResultChimney().getItem();
-            float resultChimneySpeed = ((ChimneyBlock)resultChimneyBlockItem.getBlock()).getSmokeProperties().getSpeed();
-            float resultChimneyIntensity = ((ChimneyBlock)resultChimneyBlockItem.getBlock()).getSmokeProperties().getIntensity();
+            BlockItem resultChimneyBlockItem = (BlockItem) recipe.getDirtyChimney().getItem();
+            float resultChimneySpeed = ((ChimneyBlock) resultChimneyBlockItem.getBlock()).getSmokeProperties()
+                    .getSpeed();
+            float resultChimneyIntensity = ((ChimneyBlock) resultChimneyBlockItem.getBlock()).getSmokeProperties()
+                    .getIntensity();
 
             ingredientSmoke.setSpeed(ingredientChimneySpeed);
             ingredientSmoke.setIntensity(ingredientChimneyIntensity);
 
             resultSmoke.setSpeed(resultChimneySpeed);
             resultSmoke.setIntensity(resultChimneyIntensity);
+        } catch (Exception ignored) {
         }
-        catch (Exception ignored) {}
 
-        Integer yOffset = CHIMNEY_SMOKE_Y_ORIGIN.get(recipe.getIngredientChimney().getItem());
+        Integer yOffset = CHIMNEY_SMOKE_Y_ORIGIN.get(recipe.getCleanChimney().getItem());
         builder.addSlot(RecipeIngredientRole.INPUT, 10, 18)
                 .setCustomRenderer(VanillaTypes.ITEM_STACK, new ScalableItemStackRenderer(2.5f))
                 .setOverlay(ingredientSmoke, (int) ((16 * 2.5f) / 2 - 8), yOffset)
-                .addItemStack(recipe.getIngredientChimney())
+                .addItemStack(recipe.getCleanChimney())
                 .setSlotName("CleanChimney");
 
-        Integer yOffset1 = CHIMNEY_SMOKE_Y_ORIGIN.get(recipe.getResultChimney().getItem());
+        Integer yOffset1 = CHIMNEY_SMOKE_Y_ORIGIN.get(recipe.getDirtyChimney().getItem());
         builder.addSlot(RecipeIngredientRole.OUTPUT, 103, 18)
                 .setCustomRenderer(VanillaTypes.ITEM_STACK, new ScalableItemStackRenderer(2.5f))
                 .setOverlay(resultSmoke, (int) ((16 * 2.5f) / 2 - 8), yOffset1)
-                .addItemStack(recipe.getResultChimney())
+                .addItemStack(recipe.getDirtyChimney())
                 .setSlotName("DirtyChimney");
     }
 
@@ -100,13 +107,16 @@ public class SootCoveringRecipeCategory implements IRecipeCategory<SootCoveringJ
     public @NotNull Component getTitle() {
         return title;
     }
+
     public @NotNull IDrawable getBackground() {
         return background;
     }
+
     @Override
     public @NotNull IDrawable getIcon() {
         return icon;
     }
+
     @Override
     public @NotNull RecipeType<SootCoveringJeiRecipe> getRecipeType() {
         return JeiRecipeTypes.SOOT_COVERING;
