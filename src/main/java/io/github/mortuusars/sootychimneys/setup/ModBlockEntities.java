@@ -1,9 +1,12 @@
 package io.github.mortuusars.sootychimneys.setup;
 
+import io.github.mortuusars.sootychimneys.SootyChimneys;
 import io.github.mortuusars.sootychimneys.block.ChimneyBlockEntity;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraftforge.registries.RegistryObject;
+
+import java.util.ArrayList;
 
 @SuppressWarnings("DataFlowIssue")
 public class ModBlockEntities {
@@ -14,8 +17,12 @@ public class ModBlockEntities {
 
     public static void init(){}
 
-    private static Block[] getValidChimneys(){
-        Block[] arr = new Block[ModBlocks.CHIMNEYS.size()];
-        return ModBlocks.CHIMNEYS.stream().map(RegistryObject::get).toList().toArray(arr);
+    private static Block[] getValidChimneys() {
+        ArrayList<Block> list = new ArrayList<>();
+        for (SootyChimneys.Chimney chimney : SootyChimneys.Chimney.values()) {
+            list.add(chimney.getCleanBlock());
+            list.add(chimney.getDirtyBlock());
+        }
+        return list.toArray(Block[]::new);
     }
 }

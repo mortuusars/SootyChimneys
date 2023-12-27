@@ -4,7 +4,7 @@ import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParseException;
-import io.github.mortuusars.sootychimneys.core.ISootyChimney;
+import io.github.mortuusars.sootychimneys.block.ChimneyBlock;
 import io.github.mortuusars.sootychimneys.recipe.ingredient.ChanceResult;
 import io.github.mortuusars.sootychimneys.setup.ModRecipeSerializers;
 import io.github.mortuusars.sootychimneys.setup.ModRecipeTypes;
@@ -58,8 +58,8 @@ public class SootScrapingRecipe implements Recipe<Container> {
     public ItemStack getResultChimney() {
         for (ItemStack item : chimney.getItems()) {
             if (item.getItem() instanceof BlockItem blockItem
-                    && blockItem.getBlock() instanceof ISootyChimney sootyChimney)
-                return new ItemStack(sootyChimney.getCleanVariant().asItem());
+                    && blockItem.getBlock() instanceof ChimneyBlock sootyChimney)
+                return new ItemStack(sootyChimney.getVariant().getCleanBlock().asItem());
         }
 
         return new ItemStack(Items.BARRIER);

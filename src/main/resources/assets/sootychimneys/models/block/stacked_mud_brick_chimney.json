@@ -1,7 +1,6 @@
 {
 	"credit": "Made with Blockbench",
 	"parent": "minecraft:block/block",
-	"render_type": "cutout",
 	"texture_size": [32, 32],
 	"textures": {
 		"texture": "sootychimneys:block/mud_brick_chimney",

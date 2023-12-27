@@ -1,44 +1,73 @@
 package io.github.mortuusars.sootychimneys.setup;
 
+import io.github.mortuusars.sootychimneys.SootyChimneys;
 import io.github.mortuusars.sootychimneys.block.*;
-import net.minecraftforge.registries.RegistryObject;
+import net.minecraft.world.level.block.SoundType;
+import net.minecraft.world.level.block.state.BlockBehaviour;
+import net.minecraft.world.level.material.Material;
+import net.minecraft.world.level.material.MaterialColor;
 
-import java.util.ArrayList;
 import java.util.function.Supplier;
 
 public class ModBlocks {
-    public static final ArrayList<RegistryObject<? extends ChimneyBlock>> CHIMNEYS = new ArrayList<>();
+    public static void init() {
+        BlockBehaviour.Properties brick = BlockBehaviour.Properties.of(Material.STONE, MaterialColor.COLOR_ORANGE)
+                .sound(SoundType.DEEPSLATE_BRICKS)
+                .strength(2f, 2f)
+                .destroyTime(2.2f)
+                .requiresCorrectToolForDrops();
+        registerBoth(SootyChimneys.Chimney.BRICK.typeId(),
+                () -> new ChimneyBlock(brick, SootyChimneys.Chimney.BRICK, ChimneyBlock.Type.CLEAN),
+                () -> new ChimneyBlock(brick, SootyChimneys.Chimney.BRICK, ChimneyBlock.Type.DIRTY));
 
-    public static final RegistryObject<BrickChimneyBlock> BRICK_CHIMNEY =
-            registerChimneyBlock("brick_chimney", BrickChimneyBlock::new);
-    public static final RegistryObject<BrickChimneyBlock> DIRTY_BRICK_CHIMNEY =
-            registerChimneyBlock("dirty_brick_chimney", BrickChimneyBlock::new);
+        BlockBehaviour.Properties stone_brick = BlockBehaviour.Properties.of(Material.STONE, MaterialColor.COLOR_GRAY)
+                .sound(SoundType.BASALT)
+                .strength(2f, 2f)
+                .destroyTime(2f)
+                .requiresCorrectToolForDrops();
+        registerBoth(SootyChimneys.Chimney.STONE_BRICK.typeId(),
+                () -> new ChimneyBlock(stone_brick, SootyChimneys.Chimney.STONE_BRICK, ChimneyBlock.Type.CLEAN),
+                () -> new ChimneyBlock(stone_brick, SootyChimneys.Chimney.STONE_BRICK, ChimneyBlock.Type.DIRTY));
 
-    public static final RegistryObject<StoneBrickChimneyBlock> STONE_BRICK_CHIMNEY =
-            registerChimneyBlock("stone_brick_chimney", StoneBrickChimneyBlock::new);
-    public static final RegistryObject<StoneBrickChimneyBlock> DIRTY_STONE_BRICK_CHIMNEY =
-            registerChimneyBlock("dirty_stone_brick_chimney", StoneBrickChimneyBlock::new);
+        BlockBehaviour.Properties mud = BlockBehaviour.Properties.of(Material.STONE, MaterialColor.COLOR_BROWN)
+                .sound(SoundType.MUD_BRICKS)
+                .strength(2f, 2f)
+                .destroyTime(2f)
+                .requiresCorrectToolForDrops();
+        registerBoth(SootyChimneys.Chimney.MUD_BRICK.typeId(),
+                () -> new ChimneyBlock(mud, SootyChimneys.Chimney.MUD_BRICK, ChimneyBlock.Type.CLEAN),
+                () -> new ChimneyBlock(mud, SootyChimneys.Chimney.MUD_BRICK, ChimneyBlock.Type.DIRTY));
 
-    public static final RegistryObject<MudBrickChimneyBlock> MUD_BRICK_CHIMNEY =
-            registerChimneyBlock("mud_brick_chimney", MudBrickChimneyBlock::new);
-    public static final RegistryObject<MudBrickChimneyBlock> DIRTY_MUD_BRICK_CHIMNEY =
-            registerChimneyBlock("dirty_mud_brick_chimney", MudBrickChimneyBlock::new);
+        BlockBehaviour.Properties iron = BlockBehaviour.Properties.of(Material.STONE, MaterialColor.COLOR_GRAY)
+                .sound(SoundType.METAL)
+                .strength(2f, 2f)
+                .destroyTime(2f)
+                .requiresCorrectToolForDrops();
+        registerBoth(SootyChimneys.Chimney.IRON.typeId(),
+                () -> new ChimneyBlock(iron, SootyChimneys.Chimney.IRON, ChimneyBlock.Type.CLEAN),
+                () -> new ChimneyBlock(iron, SootyChimneys.Chimney.IRON, ChimneyBlock.Type.DIRTY));
 
-    public static final RegistryObject<CopperChimneyBlock> COPPER_CHIMNEY =
-            registerChimneyBlock("copper_chimney", CopperChimneyBlock::new);
-    public static final RegistryObject<CopperChimneyBlock> DIRTY_COPPER_CHIMNEY =
-            registerChimneyBlock("dirty_copper_chimney", CopperChimneyBlock::new);
+        BlockBehaviour.Properties copper = BlockBehaviour.Properties.of(Material.METAL, MaterialColor.COLOR_ORANGE)
+                .sound(SoundType.COPPER)
+                .strength(2f, 2f)
+                .destroyTime(2f)
+                .requiresCorrectToolForDrops();
+        registerBoth(SootyChimneys.Chimney.COPPER.typeId(),
+                () -> new ChimneyBlock(copper, SootyChimneys.Chimney.COPPER, ChimneyBlock.Type.CLEAN),
+                () -> new ChimneyBlock(copper, SootyChimneys.Chimney.COPPER, ChimneyBlock.Type.DIRTY));
 
-    public static final RegistryObject<TerracottaChimneyBlock> TERRACOTTA_CHIMNEY =
-            registerChimneyBlock("terracotta_chimney", TerracottaChimneyBlock::new);
-    public static final RegistryObject<TerracottaChimneyBlock> DIRTY_TERRACOTTA_CHIMNEY =
-            registerChimneyBlock("dirty_terracotta_chimney", TerracottaChimneyBlock::new);
+        BlockBehaviour.Properties terracotta = BlockBehaviour.Properties.of(Material.STONE, MaterialColor.COLOR_ORANGE)
+                .sound(SoundType.DRIPSTONE_BLOCK)
+                .strength(2f, 2f)
+                .destroyTime(0.6f)
+                .requiresCorrectToolForDrops();
+        registerBoth(SootyChimneys.Chimney.TERRACOTTA.typeId(),
+                () -> new ChimneyBlock(terracotta, SootyChimneys.Chimney.TERRACOTTA, ChimneyBlock.Type.CLEAN),
+                () -> new ChimneyBlock(terracotta, SootyChimneys.Chimney.TERRACOTTA, ChimneyBlock.Type.DIRTY));
+    }
 
-    public static void init(){}
-
-    private static <T extends ChimneyBlock> RegistryObject<T> registerChimneyBlock(String registryName, Supplier<T> blockSupplier){
-        RegistryObject<T> block = Registry.BLOCKS.register(registryName, blockSupplier);
-        CHIMNEYS.add(block);
-        return block;
+    private static <T extends ChimneyBlock> void registerBoth(String id, Supplier<T> cleanSupplier, Supplier<T> dirtySupplier){
+        Registry.BLOCKS.register(id + "_chimney", cleanSupplier);
+        Registry.BLOCKS.register("dirty_" + id + "_chimney", dirtySupplier);
     }
 }

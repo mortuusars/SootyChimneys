@@ -1,9 +1,9 @@
 package io.github.mortuusars.sootychimneys.block;
 
 import com.mojang.math.Vector3f;
+import io.github.mortuusars.sootychimneys.SootyChimneys;
 import io.github.mortuusars.sootychimneys.config.Config;
-import io.github.mortuusars.sootychimneys.core.ChimneySmokeProperties;
-import io.github.mortuusars.sootychimneys.core.ISootyChimney;
+import io.github.mortuusars.sootychimneys.core.Smoke;
 import io.github.mortuusars.sootychimneys.core.Wind;
 import io.github.mortuusars.sootychimneys.core.WindGetter;
 import io.github.mortuusars.sootychimneys.loot.ModLootTables;
@@ -56,19 +56,23 @@ import java.util.List;
 import java.util.Optional;
 import java.util.function.Supplier;
 
-/**
- * Base block for chimneys. Contains common functionality.
- */
-public abstract class ChimneyBlock extends Block implements EntityBlock {
+public class ChimneyBlock extends Block implements EntityBlock {
+    public enum Type {
+        CLEAN,
+        DIRTY
+    }
+
     public static final BooleanProperty LIT = RedstoneTorchBlock.LIT;
     public static final BooleanProperty BLOCKED = BooleanProperty.create("blocked");
     public static final BooleanProperty STACKED = BooleanProperty.create("stacked");
 
-    private final ChimneySmokeProperties smokeProperties;
+    protected final SootyChimneys.Chimney variant;
+    protected final Type type;
 
-    public ChimneyBlock(ChimneySmokeProperties smokeProperties, Properties properties) {
+    public ChimneyBlock(Properties properties, SootyChimneys.Chimney variant, Type type) {
         super(properties);
-        this.smokeProperties = smokeProperties;
+        this.variant = variant;
+        this.type = type;
 
         this.registerDefaultState(defaultBlockState()
                 .setValue(LIT, true)
@@ -86,14 +90,27 @@ public abstract class ChimneyBlock extends Block implements EntityBlock {
     @SuppressWarnings("deprecation")
     @Override
     public @NotNull VoxelShape getShape(BlockState state, @NotNull BlockGetter level, @NotNull BlockPos pos, @NotNull CollisionContext context) {
-        return state.getValue(ChimneyBlock.STACKED) ? getStackedShape(state, level, pos, context) : getDefaultShape(state, level, pos, context);
+        return state.getValue(ChimneyBlock.STACKED) ? variant.getStackedShape() : variant.getDefaultShape();
     }
 
-    protected abstract VoxelShape getDefaultShape(BlockState state, BlockGetter level, BlockPos pos, CollisionContext context);
-    protected abstract VoxelShape getStackedShape(BlockState state, BlockGetter level, BlockPos pos, CollisionContext context);
+    public SootyChimneys.Chimney getVariant() {
+        return variant;
+    }
 
-    public ChimneySmokeProperties getSmokeProperties() {
-        return this.smokeProperties;
+    public Type getType() {
+        return type;
+    }
+
+    public Smoke getSmokeProperties() {
+        return variant.getSmoke();
+    }
+
+    public boolean isClean() {
+        return type == Type.CLEAN;
+    }
+
+    public boolean isDirty() {
+        return type == Type.DIRTY;
     }
 
     /**
@@ -145,10 +162,10 @@ public abstract class ChimneyBlock extends Block implements EntityBlock {
     }
 
     protected void updateState(BlockState state, Level level, BlockPos pos) {
-        boolean stacked = level.getBlockState(pos.above()).getBlock() instanceof ISootyChimney;
+        boolean stacked = level.getBlockState(pos.above()).getBlock() instanceof ChimneyBlock;
 
-        if (stacked && state.getBlock() instanceof ISootyChimney chimney && chimney.isDirty()) {
-            state = chimney.getCleanVariant().defaultBlockState();
+        if (stacked && state.getBlock() instanceof ChimneyBlock chimney && chimney.isDirty()) {
+            state = chimney.getVariant().getCleanBlock().defaultBlockState();
             chimney.spawnSootParticles(level, pos, true);
         }
 
@@ -211,24 +228,24 @@ public abstract class ChimneyBlock extends Block implements EntityBlock {
 
     @Override
     public boolean isRandomlyTicking(BlockState blockState) {
-        return blockState.getBlock() instanceof ISootyChimney chimney && chimney.isClean();
+        return blockState.getBlock() instanceof ChimneyBlock chimney && chimney.isClean();
     }
 
     @SuppressWarnings("deprecation")
     @Override
     public void randomTick(BlockState blockState, @NotNull ServerLevel level, @NotNull BlockPos pos, @NotNull RandomSource random) {
-        if (blockState.getBlock() instanceof ISootyChimney sootyChimney
+        if (blockState.getBlock() instanceof ChimneyBlock sootyChimney
                 && sootyChimney.isClean()
                 && shouldEmitSmoke(blockState, level, pos)
                 && random.nextDouble() < Config.DIRTY_CHANCE.get()) {
-            level.setBlock(pos, sootyChimney.getDirtyVariant().defaultBlockState(), Block.UPDATE_ALL);
+            level.setBlock(pos, sootyChimney.getVariant().getDirtyBlock().defaultBlockState(), Block.UPDATE_ALL);
         }
     }
 
     @Nullable
     @Override
     public BlockState getToolModifiedState(BlockState state, UseOnContext context, ToolAction toolAction, boolean simulate) {
-        if (!(state.getBlock() instanceof ISootyChimney sootyChimney) || !sootyChimney.isDirty())
+        if (!(state.getBlock() instanceof ChimneyBlock sootyChimney) || !sootyChimney.isDirty())
             return null;
 
         Level level = context.getLevel();
@@ -255,7 +272,7 @@ public abstract class ChimneyBlock extends Block implements EntityBlock {
             }
         }
 
-        return sootyChimney.getCleanVariant().withPropertiesOf(state);
+        return sootyChimney.getVariant().getCleanBlock().withPropertiesOf(state);
     }
 
     protected Optional<Supplier<List<ItemStack>>> getScrapingResult(BlockState state, Level level, ItemStack tool, ToolAction action) {
@@ -302,8 +319,31 @@ public abstract class ChimneyBlock extends Block implements EntityBlock {
     @Override
     public boolean onDestroyedByPlayer(BlockState state, Level level, BlockPos pos, Player player, boolean willHarvest, FluidState fluid) {
         boolean isDestroyed = super.onDestroyedByPlayer(state, level, pos, player, willHarvest, fluid);
-        if (isDestroyed && state.getBlock() instanceof ISootyChimney sootyChimney && sootyChimney.isDirty())
+        if (isDestroyed && state.getBlock() instanceof ChimneyBlock sootyChimney && sootyChimney.isDirty())
             sootyChimney.spawnSootParticles(level, pos, false);
         return isDestroyed;
+    }
+
+    public void spawnSootParticles(Level level, BlockPos pos, boolean serverSide) {
+        RandomSource random = level.getRandom();
+        double x = pos.getX() + 0.5;
+        double y = pos.getY() + 0.5;
+        double z = pos.getZ() + 0.5;
+
+        for (int i = 0; i < random.nextInt(12, 20); i++) {
+            if (serverSide && level instanceof ServerLevel serverLevel)
+                serverLevel.sendParticles(ParticleTypes.LARGE_SMOKE,
+                        RandomOffset.offset(x, 0.8f),
+                        RandomOffset.offset(y, 0.8f),
+                        RandomOffset.offset(z, 0.8f),
+                        1, 0,0,0, 0);
+            else {
+                level.addParticle(ParticleTypes.LARGE_SMOKE,
+                        RandomOffset.offset(x, 0.8f),
+                        RandomOffset.offset(y, 0.8f),
+                        RandomOffset.offset(z, 0.8f),
+                        0,0,0);
+            }
+        }
     }
 }

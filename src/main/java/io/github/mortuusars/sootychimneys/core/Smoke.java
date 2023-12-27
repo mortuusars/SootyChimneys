@@ -3,30 +3,30 @@ package io.github.mortuusars.sootychimneys.core;
 
 import org.joml.Vector3f;
 
-public class ChimneySmokeProperties {
+public class Smoke {
     private final Vector3f particleOrigin;
     private final Vector3f particleSpread;
     private float intensity = 1f;
     private float speed = 1f;
 
     @SuppressWarnings("unused")
-    public ChimneySmokeProperties(Vector3f particleOrigin, Vector3f particleSpread) {
+    public Smoke(Vector3f particleOrigin, Vector3f particleSpread) {
         this.particleOrigin = particleOrigin;
         this.particleSpread = particleSpread;
     }
 
-    public ChimneySmokeProperties(float particleOriginX, float particleOriginY, float particleOriginZ,
-                                  float particleSpreadX, float particleSpreadY, float particleSpreadZ) {
+    public Smoke(float particleOriginX, float particleOriginY, float particleOriginZ,
+                 float particleSpreadX, float particleSpreadY, float particleSpreadZ) {
         this.particleOrigin = new Vector3f(particleOriginX, particleOriginY, particleOriginZ);
         this.particleSpread = new Vector3f(particleSpreadX, particleSpreadY, particleSpreadZ);
     }
 
-    public ChimneySmokeProperties setIntensity(float intensity) {
+    public Smoke setIntensity(float intensity) {
         this.intensity = intensity;
         return this;
     }
 
-    public ChimneySmokeProperties setSpeed(float speed) {
+    public Smoke setSpeed(float speed) {
         this.speed = speed;
         return this;
     }
