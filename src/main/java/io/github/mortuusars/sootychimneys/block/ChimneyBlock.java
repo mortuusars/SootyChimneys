@@ -16,8 +16,8 @@ import io.github.mortuusars.sootychimneys.setup.ModTags;
 import io.github.mortuusars.sootychimneys.utils.RandomOffset;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Vec3i;
+import net.minecraft.core.particles.ParticleOptions;
 import net.minecraft.core.particles.ParticleTypes;
-import net.minecraft.core.particles.SimpleParticleType;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvents;
@@ -175,8 +175,13 @@ public class ChimneyBlock extends Block implements EntityBlock {
                 Block.UPDATE_ALL);
     }
 
-    @SuppressWarnings("unused")
-    public void emitParticlesOnClient(Level level, BlockPos pos, BlockState state) {
+    public ParticleOptions getParticle(BlockState state, Level level, BlockPos pos) {
+        return state.getValue(STACKED) || level.getBlockState(pos.below()).is(ModTags.Blocks.SMOKE_BOOSTING) ?
+                ParticleTypes.CAMPFIRE_SIGNAL_SMOKE
+                : ParticleTypes.CAMPFIRE_COSY_SMOKE;
+    }
+
+    public void emitParticle(Level level, double x, double y, double z, ParticleOptions particleType) {
         if (!level.isClientSide)
             return;
 
@@ -186,9 +191,9 @@ public class ChimneyBlock extends Block implements EntityBlock {
             return;
 
         Vector3f particleOffset = getSmokeProperties().getParticleOrigin();
-        float x = pos.getX() + particleOffset.x();
-        float y = pos.getY() + particleOffset.y();
-        float z = pos.getZ() + particleOffset.z();
+        x += particleOffset.x() - 0.5;
+        y += particleOffset.y() - 0.5;
+        z += particleOffset.z() - 0.5;
 
         Wind wind = WindGetter.getWind();
         double windStrengthModifier = Config.WIND_STRENGTH_MULTIPLIER.get();
@@ -201,10 +206,6 @@ public class ChimneyBlock extends Block implements EntityBlock {
         int maxParticles = ((int) (4 * Math.max(getSmokeProperties().getIntensity(), 0.5f)));
 
         for (int i = 0; i < random.nextInt(maxParticles); i++) {
-            SimpleParticleType particleType = level.getBlockState(pos.below()).is(ModTags.Blocks.CHIMNEYS) ?
-                    ParticleTypes.CAMPFIRE_SIGNAL_SMOKE
-                    : ParticleTypes.CAMPFIRE_COSY_SMOKE;
-
             level.addAlwaysVisibleParticle(particleType, true,
                     RandomOffset.offset(x, particleSpread.x()),
                     RandomOffset.offset(y, particleSpread.y()),
