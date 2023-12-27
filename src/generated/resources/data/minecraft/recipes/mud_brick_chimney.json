@@ -1,5 +1,6 @@
 {
   "type": "minecraft:crafting_shaped",
+  "category": "misc",
   "group": "mud_brick_chimney",
   "key": {
     "B": {
@@ -16,5 +17,6 @@
   ],
   "result": {
     "item": "sootychimneys:mud_brick_chimney"
-  }
+  },
+  "show_notification": true
 }

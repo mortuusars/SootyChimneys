@@ -3,8 +3,9 @@ package io.github.mortuusars.sootychimneys.data;
 import io.github.mortuusars.sootychimneys.SootyChimneys;
 import io.github.mortuusars.sootychimneys.data.builder.SootScrapingRecipeBuilder;
 import io.github.mortuusars.sootychimneys.recipe.ingredient.ToolActionIngredient;
-import net.minecraft.data.DataGenerator;
+import net.minecraft.data.PackOutput;
 import net.minecraft.data.recipes.FinishedRecipe;
+import net.minecraft.data.recipes.RecipeCategory;
 import net.minecraft.data.recipes.RecipeProvider;
 import net.minecraft.data.recipes.ShapedRecipeBuilder;
 import net.minecraft.tags.ItemTags;
@@ -17,13 +18,13 @@ import org.jetbrains.annotations.NotNull;
 import java.util.function.Consumer;
 
 public class ModRecipeProvider extends RecipeProvider {
-    public ModRecipeProvider(DataGenerator pGenerator) {
-        super(pGenerator);
+    public ModRecipeProvider(PackOutput packOutput) {
+        super(packOutput);
     }
 
     @Override
-    protected void buildCraftingRecipes(@NotNull Consumer<FinishedRecipe> recipeConsumer) {
-        ShapedRecipeBuilder.shaped(SootyChimneys.Chimney.BRICK.getCleanItem())
+    protected void buildRecipes(@NotNull Consumer<FinishedRecipe> recipeConsumer) {
+        ShapedRecipeBuilder.shaped(RecipeCategory.DECORATIONS, SootyChimneys.Chimney.BRICK.getCleanItem())
                 .pattern("b b")
                 .pattern("B B")
                 .pattern("BCB")
@@ -34,7 +35,7 @@ public class ModRecipeProvider extends RecipeProvider {
                 .unlockedBy("has_brick", has(Items.BRICK))
                 .save(recipeConsumer, SootyChimneys.Chimney.BRICK.getCleanId());
 
-        ShapedRecipeBuilder.shaped(SootyChimneys.Chimney.COBBLESTONE.getCleanItem())
+        ShapedRecipeBuilder.shaped(RecipeCategory.DECORATIONS, SootyChimneys.Chimney.COBBLESTONE.getCleanItem())
                 .pattern("b b")
                 .pattern("B B")
                 .pattern("BCB")
@@ -45,7 +46,7 @@ public class ModRecipeProvider extends RecipeProvider {
                 .unlockedBy("has_cobblestone", has(Items.COBBLESTONE))
                 .save(recipeConsumer, SootyChimneys.Chimney.COBBLESTONE.getCleanId());
 
-        ShapedRecipeBuilder.shaped(SootyChimneys.Chimney.STONE_BRICK.getCleanItem())
+        ShapedRecipeBuilder.shaped(RecipeCategory.DECORATIONS, SootyChimneys.Chimney.STONE_BRICK.getCleanItem())
                 .pattern("B B")
                 .pattern("B B")
                 .pattern("BCB")
@@ -55,7 +56,7 @@ public class ModRecipeProvider extends RecipeProvider {
                 .unlockedBy("has_stone", has(Items.STONE))
                 .save(recipeConsumer, SootyChimneys.Chimney.STONE_BRICK.getCleanId());
 
-        ShapedRecipeBuilder.shaped(SootyChimneys.Chimney.MUD_BRICK.getCleanItem())
+        ShapedRecipeBuilder.shaped(RecipeCategory.DECORATIONS, SootyChimneys.Chimney.MUD_BRICK.getCleanItem())
                 .pattern("B B")
                 .pattern("B B")
                 .pattern("BCB")
@@ -65,7 +66,7 @@ public class ModRecipeProvider extends RecipeProvider {
                 .unlockedBy("has_mud", has(Items.MUD))
                 .save(recipeConsumer, SootyChimneys.Chimney.MUD_BRICK.getCleanId());
 
-        ShapedRecipeBuilder.shaped(SootyChimneys.Chimney.IRON.getCleanItem())
+        ShapedRecipeBuilder.shaped(RecipeCategory.DECORATIONS, SootyChimneys.Chimney.IRON.getCleanItem())
                 .pattern("I I")
                 .pattern("N N")
                 .pattern("ICI")
@@ -76,7 +77,7 @@ public class ModRecipeProvider extends RecipeProvider {
                 .unlockedBy("has_iron", has(Items.IRON_INGOT))
                 .save(recipeConsumer, SootyChimneys.Chimney.IRON.getCleanId());
 
-        ShapedRecipeBuilder.shaped(SootyChimneys.Chimney.COPPER.getCleanItem())
+        ShapedRecipeBuilder.shaped(RecipeCategory.DECORATIONS, SootyChimneys.Chimney.COPPER.getCleanItem())
                 .pattern("   ")
                 .pattern("I I")
                 .pattern("BCB")
@@ -87,7 +88,7 @@ public class ModRecipeProvider extends RecipeProvider {
                 .unlockedBy("has_copper", has(Items.COPPER_INGOT))
                 .save(recipeConsumer, SootyChimneys.Chimney.COPPER.getCleanId());
 
-        ShapedRecipeBuilder.shaped(SootyChimneys.Chimney.TERRACOTTA.getCleanItem())
+        ShapedRecipeBuilder.shaped(RecipeCategory.DECORATIONS, SootyChimneys.Chimney.TERRACOTTA.getCleanItem())
                 .pattern("   ")
                 .pattern("T T")
                 .pattern("TCT")

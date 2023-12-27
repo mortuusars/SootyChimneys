@@ -1,7 +1,6 @@
 package io.github.mortuusars.sootychimneys.event;
 
 import io.github.mortuusars.sootychimneys.SootyChimneys;
-import io.github.mortuusars.sootychimneys.setup.ModItems;
 import net.minecraft.world.item.CreativeModeTabs;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.event.BuildCreativeModeTabContentsEvent;
@@ -12,8 +11,11 @@ import net.minecraftforge.fml.common.Mod;
 public class ClientEvents {
     @SubscribeEvent
     public static void onCreativeTabsBuild(BuildCreativeModeTabContentsEvent event) {
-        if (event.getTabKey() == CreativeModeTabs.TOOLS_AND_UTILITIES) {
-            ModItems.CHIMNEYS.forEach(chimney -> event.accept(chimney.get()));
+        if (event.getTabKey() == CreativeModeTabs.FUNCTIONAL_BLOCKS) {
+            for (SootyChimneys.Chimney chimney : SootyChimneys.Chimney.values()) {
+                event.accept(chimney.getCleanItem());
+                event.accept(chimney.getDirtyItem());
+            }
         }
     }
 }

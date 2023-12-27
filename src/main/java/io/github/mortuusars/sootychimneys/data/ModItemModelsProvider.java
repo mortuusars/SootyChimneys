@@ -1,13 +1,13 @@
 package io.github.mortuusars.sootychimneys.data;
 
 import io.github.mortuusars.sootychimneys.SootyChimneys;
-import net.minecraft.data.DataGenerator;
+import net.minecraft.data.PackOutput;
 import net.minecraftforge.client.model.generators.ItemModelProvider;
 import net.minecraftforge.common.data.ExistingFileHelper;
 
 public class ModItemModelsProvider extends ItemModelProvider {
-    public ModItemModelsProvider(DataGenerator generator, ExistingFileHelper existingFileHelper) {
-        super(generator.getPackOutput(), SootyChimneys.MOD_ID, existingFileHelper);
+    public ModItemModelsProvider(PackOutput packOutput, ExistingFileHelper existingFileHelper) {
+        super(packOutput, SootyChimneys.MOD_ID, existingFileHelper);
     }
 
     @Override
@@ -18,3 +18,4 @@ public class ModItemModelsProvider extends ItemModelProvider {
         }
     }
 }
+

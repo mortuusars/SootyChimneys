@@ -3,14 +3,19 @@
   "pools": [
     {
       "bonus_rolls": 0.0,
+      "conditions": [
+        {
+          "condition": "minecraft:survives_explosion"
+        }
+      ],
       "entries": [
         {
           "type": "minecraft:item",
           "name": "sootychimneys:dirty_stone_brick_chimney"
         }
       ],
-      "name": "sootychimneys:dirty_stone_brick_chimney",
       "rolls": 1.0
     }
-  ]
+  ],
+  "random_sequence": "sootychimneys:blocks/dirty_stone_brick_chimney"
 }

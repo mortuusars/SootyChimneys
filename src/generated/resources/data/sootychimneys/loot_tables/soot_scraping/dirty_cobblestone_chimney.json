@@ -1,4 +1,5 @@
 {
+  "type": "minecraft:empty",
   "pools": [
     {
       "bonus_rolls": 0.0,
@@ -16,5 +17,6 @@
       ],
       "rolls": 1.0
     }
-  ]
+  ],
+  "random_sequence": "sootychimneys:soot_scraping/dirty_cobblestone_chimney"
 }

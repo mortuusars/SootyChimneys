@@ -53,6 +53,18 @@ Spiritual successor to campfires!
     modId="minecraft"
     mandatory=true
 # This version range declares a minimum of the current minecraft version up to but not including the next major version
-    versionRange="[1.20,1.21)"
+    versionRange="[1.20.1,1.20.2)"
+    ordering="NONE"
+    side="BOTH"
+[[dependencies.sootychimneys]]
+    modId="create"
+    mandatory=true
+    versionRange="[0.5.1.a,0.5.2)"
+    ordering="AFTER"
+    side="BOTH"
+[[dependencies.sootychimneys]]
+    modId="jei"
+    mandatory=false
+    versionRange="[15.0.0.12,)"
     ordering="NONE"
     side="BOTH"

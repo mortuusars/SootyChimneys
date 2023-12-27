@@ -3,14 +3,19 @@
   "pools": [
     {
       "bonus_rolls": 0.0,
+      "conditions": [
+        {
+          "condition": "minecraft:survives_explosion"
+        }
+      ],
       "entries": [
         {
           "type": "minecraft:item",
           "name": "sootychimneys:dirty_iron_chimney"
         }
       ],
-      "name": "dirty_iron_chimney",
       "rolls": 1.0
     }
-  ]
+  ],
+  "random_sequence": "sootychimneys:blocks/dirty_iron_chimney"
 }

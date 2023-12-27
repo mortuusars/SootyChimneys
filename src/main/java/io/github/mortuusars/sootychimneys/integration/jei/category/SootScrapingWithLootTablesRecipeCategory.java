@@ -1,7 +1,6 @@
 package io.github.mortuusars.sootychimneys.integration.jei.category;
 
 import com.google.common.collect.ImmutableList;
-import com.mojang.blaze3d.vertex.PoseStack;
 import io.github.mortuusars.sootychimneys.SootyChimneys;
 import io.github.mortuusars.sootychimneys.config.Config;
 import io.github.mortuusars.sootychimneys.integration.jei.JeiRecipeTypes;
@@ -17,6 +16,7 @@ import mezz.jei.api.recipe.IFocusGroup;
 import mezz.jei.api.recipe.RecipeIngredientRole;
 import mezz.jei.api.recipe.RecipeType;
 import mezz.jei.api.recipe.category.IRecipeCategory;
+import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import org.jetbrains.annotations.NotNull;
@@ -69,9 +69,9 @@ public class SootScrapingWithLootTablesRecipeCategory implements IRecipeCategory
     }
 
     @Override
-    public void draw(@NotNull SootScrapingWithLootTablesJeiRecipe recipe, @NotNull IRecipeSlotsView recipeSlotsView, @NotNull PoseStack stack, double mouseX, double mouseY) {
+    public void draw(@NotNull SootScrapingWithLootTablesJeiRecipe recipe, @NotNull IRecipeSlotsView recipeSlotsView, @NotNull GuiGraphics guiGraphics, double mouseX, double mouseY) {
         if (Config.DISPLAY_JEI_SCRAPING_BYPRODUCTS_INFO.get()) {
-            byproductInfo.draw(stack, byproductXPos, byproductYPos);
+            byproductInfo.draw(guiGraphics, byproductXPos, byproductYPos);
         }
     }
 

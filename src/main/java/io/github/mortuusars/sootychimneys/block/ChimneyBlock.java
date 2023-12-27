@@ -1,6 +1,5 @@
 package io.github.mortuusars.sootychimneys.block;
 
-import com.mojang.math.Vector3f;
 import io.github.mortuusars.sootychimneys.SootyChimneys;
 import io.github.mortuusars.sootychimneys.config.Config;
 import io.github.mortuusars.sootychimneys.core.Smoke;
@@ -49,6 +48,7 @@ import net.minecraftforge.common.ToolAction;
 import net.minecraftforge.common.ToolActions;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+import org.joml.Vector3f;
 
 import java.util.ArrayList;
 import java.util.Collections;

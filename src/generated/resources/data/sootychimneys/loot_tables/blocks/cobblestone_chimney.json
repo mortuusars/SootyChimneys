@@ -3,14 +3,19 @@
   "pools": [
     {
       "bonus_rolls": 0.0,
+      "conditions": [
+        {
+          "condition": "minecraft:survives_explosion"
+        }
+      ],
       "entries": [
         {
           "type": "minecraft:item",
           "name": "sootychimneys:cobblestone_chimney"
         }
       ],
-      "name": "cobblestone_chimney",
       "rolls": 1.0
     }
-  ]
+  ],
+  "random_sequence": "sootychimneys:blocks/cobblestone_chimney"
 }

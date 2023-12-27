@@ -1,5 +1,6 @@
 {
   "type": "minecraft:crafting_shaped",
+  "category": "misc",
   "group": "iron_chimney",
   "key": {
     "C": {
@@ -19,5 +20,6 @@
   ],
   "result": {
     "item": "sootychimneys:iron_chimney"
-  }
+  },
+  "show_notification": true
 }

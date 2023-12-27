@@ -5,14 +5,13 @@ import com.google.gson.JsonSyntaxException;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.JsonOps;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
-import net.minecraft.core.Registry;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.item.ItemStack;
 
 import java.util.Optional;
-import java.util.Random;
 
 /**
  * Credits to the Create team (and Farmer's Delight) for the implementation of results with chances!
@@ -21,7 +20,7 @@ import java.util.Random;
 public class ChanceResult {
     public static final Codec<ChanceResult> CODEC = RecordCodecBuilder.create(instance -> instance.group(
                     // Not using ItemStack.CODEC here. This way json is more intuitive, without one more object.
-                    Registry.ITEM.byNameCodec().fieldOf("item").forGetter(chanceResult -> chanceResult.stack.getItem()),
+                    BuiltInRegistries.ITEM.byNameCodec().fieldOf("item").forGetter(chanceResult -> chanceResult.stack.getItem()),
                     Codec.INT.optionalFieldOf("Count", 1).forGetter(chanceResult -> chanceResult.stack.getCount()),
                     CompoundTag.CODEC.optionalFieldOf("tag").forGetter(chanceResult -> Optional.ofNullable(chanceResult.stack.getTag())),
                     Codec.FLOAT.optionalFieldOf("chance", 1F).forGetter(ChanceResult::getChance))

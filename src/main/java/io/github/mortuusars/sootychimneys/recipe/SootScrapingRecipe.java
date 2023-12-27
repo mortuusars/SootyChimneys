@@ -9,6 +9,7 @@ import io.github.mortuusars.sootychimneys.recipe.ingredient.ChanceResult;
 import io.github.mortuusars.sootychimneys.setup.ModRecipeSerializers;
 import io.github.mortuusars.sootychimneys.setup.ModRecipeTypes;
 import net.minecraft.core.NonNullList;
+import net.minecraft.core.RegistryAccess;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.GsonHelper;
@@ -76,10 +77,6 @@ public class SootScrapingRecipe implements Recipe<Container> {
         return this.tool;
     }
 
-    @Override
-    public @NotNull ItemStack getResultItem() {
-        return this.results.get(0).getStack();
-    }
 
     public List<ChanceResult> getResults() {
         return results;
@@ -109,13 +106,18 @@ public class SootScrapingRecipe implements Recipe<Container> {
     }
 
     @Override
-    public @NotNull ItemStack assemble(@NotNull Container container) {
+    public @NotNull ItemStack assemble(@NotNull Container container, @NotNull RegistryAccess registryAccess) {
         return getResultChimney();
     }
 
     @Override
     public boolean canCraftInDimensions(int pWidth, int pHeight) {
         return false;
+    }
+
+    @Override
+    public @NotNull ItemStack getResultItem(@NotNull RegistryAccess registryAccess) {
+        return getResultChimney();
     }
 
     protected int getMaxInputCount() {

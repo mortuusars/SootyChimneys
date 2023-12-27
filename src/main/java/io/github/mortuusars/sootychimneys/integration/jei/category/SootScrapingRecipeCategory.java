@@ -1,6 +1,5 @@
 package io.github.mortuusars.sootychimneys.integration.jei.category;
 
-import com.mojang.blaze3d.vertex.PoseStack;
 import io.github.mortuusars.sootychimneys.SootyChimneys;
 import io.github.mortuusars.sootychimneys.integration.jei.JeiRecipeTypes;
 import io.github.mortuusars.sootychimneys.integration.jei.renderer.ScalableItemStackRenderer;
@@ -17,6 +16,7 @@ import mezz.jei.api.recipe.RecipeIngredientRole;
 import mezz.jei.api.recipe.RecipeType;
 import mezz.jei.api.recipe.category.IRecipeCategory;
 import net.minecraft.ChatFormatting;
+import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import org.jetbrains.annotations.NotNull;
@@ -88,7 +88,7 @@ public class SootScrapingRecipeCategory implements IRecipeCategory<SootScrapingR
     }
 
     @Override
-    public void draw(@NotNull SootScrapingRecipe recipe, @NotNull IRecipeSlotsView recipeSlotsView, @NotNull PoseStack stack, double mouseX, double mouseY) {
+    public void draw(@NotNull SootScrapingRecipe recipe, @NotNull IRecipeSlotsView recipeSlotsView, @NotNull GuiGraphics guiGraphics, double mouseX, double mouseY) {
         List<ChanceResult> results = recipe.getResults()
                 .stream()
                 .filter(result -> !result.getStack().isEmpty() && result.getChance() > 0)
@@ -97,16 +97,16 @@ public class SootScrapingRecipeCategory implements IRecipeCategory<SootScrapingR
         if (results.isEmpty())
             return;
 
-        dust.draw(stack, 72, 34);
+        dust.draw(guiGraphics, 72, 34);
 
         int slotX = 49 + (27 - ((results.size() * 18) / 2));
 
         for (int i = 0; i < results.size(); i++) {
             ChanceResult result = results.get(i);
             if (result.getChance() >= 1.0f)
-                slot.draw(stack, slotX + (18 * i), 46);
+                slot.draw(guiGraphics, slotX + (18 * i), 46);
             else
-                chanceSlot.draw(stack, slotX + (18 * i), 46);
+                chanceSlot.draw(guiGraphics, slotX + (18 * i), 46);
         }
     }
 

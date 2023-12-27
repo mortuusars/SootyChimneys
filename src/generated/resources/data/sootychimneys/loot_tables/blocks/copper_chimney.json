@@ -1,20 +1,21 @@
 {
+  "type": "minecraft:block",
   "pools": [
     {
       "bonus_rolls": 0.0,
       "conditions": [
         {
-          "chance": 0.75,
-          "condition": "minecraft:random_chance"
+          "condition": "minecraft:survives_explosion"
         }
       ],
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "minecraft:black_dye"
+          "name": "sootychimneys:copper_chimney"
         }
       ],
       "rolls": 1.0
     }
-  ]
+  ],
+  "random_sequence": "sootychimneys:blocks/copper_chimney"
 }

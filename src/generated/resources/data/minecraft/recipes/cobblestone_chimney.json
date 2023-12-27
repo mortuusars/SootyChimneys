@@ -1,5 +1,6 @@
 {
   "type": "minecraft:crafting_shaped",
+  "category": "misc",
   "group": "cobblestone_chimney",
   "key": {
     "B": {
@@ -19,5 +20,6 @@
   ],
   "result": {
     "item": "sootychimneys:cobblestone_chimney"
-  }
+  },
+  "show_notification": true
 }
