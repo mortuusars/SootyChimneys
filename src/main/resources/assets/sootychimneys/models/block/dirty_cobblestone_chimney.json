@@ -5,8 +5,8 @@
 	"texture_size": [32, 32],
 	"textures": {
 		"texture": "sootychimneys:block/cobblestone_chimney",
-		"particle": "block/cobblestone",
-		"dirty_top": "sootychimneys:block/dirty_cobblestone_chimney_top"
+		"dirty_top": "sootychimneys:block/dirty_cobblestone_chimney_top",
+		"particle": "block/cobblestone"
 	},
 	"elements": [
 		{
@@ -24,8 +24,8 @@
 		},
 		{
 			"name": "top_interior",
-			"from": [3.975, 16, 3.975],
-			"to": [12.025, 8, 12.025],
+			"from": [3.95, 16, 3.95],
+			"to": [12.05, 8, 12.05],
 			"faces": {
 				"north": {"uv": [10, 8, 14, 12], "texture": "#texture", "cullface": "up"},
 				"east": {"uv": [10, 8, 14, 12], "texture": "#texture", "cullface": "up"},
