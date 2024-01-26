@@ -176,7 +176,8 @@ public class ChimneyBlock extends Block implements EntityBlock {
     }
 
     public ParticleOptions getParticle(BlockState state, Level level, BlockPos pos) {
-        return state.getValue(STACKED) || level.getBlockState(pos.below()).is(ModTags.Blocks.SMOKE_BOOSTING) ?
+        BlockState stateBelow = level.getBlockState(pos.below());
+        return (stateBelow.getBlock() instanceof ChimneyBlock && stateBelow.getValue(STACKED)) || stateBelow.is(ModTags.Blocks.SMOKE_BOOSTING) ?
                 ParticleTypes.CAMPFIRE_SIGNAL_SMOKE
                 : ParticleTypes.CAMPFIRE_COSY_SMOKE;
     }
