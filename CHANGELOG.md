@@ -1,3 +1,6 @@
+2024-01-26 - 1.2.1
+- Fixed stacked chimneys not emitting signal smoke 
+
 2023-12-27 - 1.2.0
 - Added Cobblestone Chimney
 - Added Mud Brick Chimney
