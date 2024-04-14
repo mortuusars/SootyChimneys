@@ -1,0 +1,22 @@
+{
+  "block.sootychimneys.brick_chimney": "レンガの煙突",
+  "block.sootychimneys.dirty_brick_chimney": "汚れたレンガの煙突",
+  "block.sootychimneys.cobblestone_chimney": "丸石の煙突",
+  "block.sootychimneys.dirty_cobblestone_chimney": "汚れた丸石の煙突",
+  "block.sootychimneys.stone_brick_chimney": "石レンガの煙突",
+  "block.sootychimneys.dirty_stone_brick_chimney": "汚れた石レンガの煙突",
+  "block.sootychimneys.mud_brick_chimney": "泥レンガの煙突",
+  "block.sootychimneys.dirty_mud_brick_chimney": "汚れた泥レンガの煙突",
+  "block.sootychimneys.iron_chimney": "鉄の煙突",
+  "block.sootychimneys.dirty_iron_chimney": "汚れた鉄の煙突",
+  "block.sootychimneys.copper_chimney": "銅の煙突",
+  "block.sootychimneys.dirty_copper_chimney": "汚れた銅の煙突",
+  "block.sootychimneys.terracotta_chimney": "テラコッタの煙突",
+  "block.sootychimneys.dirty_terracotta_chimney": "汚れたテラコッタの煙突",
+  "jei.sootychimneys.category.soot_covering": "煤にまみれる",
+  "jei.sootychimneys.category.soot_scraping": "煤を取り除く",
+  "jei.sootychimneys.category.soot_scraping.soot_items_info": "副産物を排出する",
+  "jei.sootychimneys.chance": "%s%%の確率",
+  "message.sootychimneys.blocked": "煙突を閉じました",
+  "message.sootychimneys.open": "煙突を開きました"
+}
