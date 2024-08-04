@@ -32,6 +32,7 @@ public final class SootyChimneysNeoForge {
         RegisterImpl.COMMAND_ARGUMENT_TYPES.register(modEventBus);
         RegisterImpl.WORLD_GEN_FEATURES.register(modEventBus);
         RegisterImpl.DATA_COMPONENT_TYPES.register(modEventBus);
+        RegisterImpl.PARTICLE_TYPES.register(modEventBus);
 
         if (FMLEnvironment.dist == Dist.CLIENT) {
             SootyChimneysNeoForgeClient.init(container);

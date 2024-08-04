@@ -1,4 +1,4 @@
-package io.github.mortuusars.sootychimneys.core;
+package io.github.mortuusars.sootychimneys.core.wind;
 
 import net.minecraft.world.level.Level;
 

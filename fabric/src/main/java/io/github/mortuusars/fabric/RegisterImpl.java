@@ -9,6 +9,8 @@ import net.minecraft.advancements.CriterionTrigger;
 import net.minecraft.commands.synchronization.ArgumentTypeInfo;
 import net.minecraft.core.Registry;
 import net.minecraft.core.component.DataComponentType;
+import net.minecraft.core.particles.ParticleOptions;
+import net.minecraft.core.particles.ParticleType;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.codec.StreamCodec;
@@ -105,5 +107,10 @@ public class RegisterImpl {
         builderConsumer.accept(builder);
         var componentType = builder.build();
         return Registry.register(BuiltInRegistries.DATA_COMPONENT_TYPE, SootyChimneys.ID + name, componentType);
+    }
+
+    public static <T extends ParticleType<? extends ParticleOptions>> Supplier<T> particleType(String name, Supplier<T> supplier) {
+        T particleType = Registry.register(BuiltInRegistries.PARTICLE_TYPE, name, supplier.get());
+        return () -> particleType;
     }
 }

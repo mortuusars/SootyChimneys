@@ -6,6 +6,7 @@ import io.github.mortuusars.sootychimneys.data.Chimney;
 import io.github.mortuusars.sootychimneys.data.ChimneyTypes;
 import io.github.mortuusars.sootychimneys.recipe.SootScrapingRecipe;
 import net.minecraft.core.Registry;
+import net.minecraft.core.particles.SimpleParticleType;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceLocation;
@@ -42,6 +43,7 @@ public final class SootyChimneys {
         SoundEvents.init();
         ArgumentTypes.init();
         WorldGenFeatures.init();
+        ParticleTypes.init();
     }
 
 //    private void enqueueIMC(final InterModEnqueueEvent event) {
@@ -312,6 +314,14 @@ public final class SootyChimneys {
     }
 
     public static class ArgumentTypes {
+        public static void init() { }
+    }
+
+    public static class ParticleTypes {
+        public static final Supplier<SimpleParticleType> CHIMNEY_COSY_SMOKE =
+                Register.particleType("chimney_cosy_smoke", () -> new SimpleParticleType(true));
+        public static final Supplier<SimpleParticleType> CHIMNEY_SIGNAL_SMOKE =
+                Register.particleType("chimney_signal_smoke", () -> new SimpleParticleType(true));
         public static void init() { }
     }
 }

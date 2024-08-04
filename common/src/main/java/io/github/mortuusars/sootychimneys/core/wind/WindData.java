@@ -1,4 +1,4 @@
-package io.github.mortuusars.sootychimneys.core;
+package io.github.mortuusars.sootychimneys.core.wind;
 
 import io.github.mortuusars.sootychimneys.Config;
 import net.minecraft.util.Mth;
@@ -37,7 +37,7 @@ public class WindData {
     }
 
     public float getStrength() {
-        return (float) (strength * Config.Common.WIND_STRENGTH.get() * 0.05f);
+        return strength;
     }
 
     public double getAngleInDegrees() {

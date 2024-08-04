@@ -3,9 +3,9 @@ package io.github.mortuusars.sootychimneys.block;
 import io.github.mortuusars.sootychimneys.PlatformSpecific;
 import io.github.mortuusars.sootychimneys.SootyChimneys;
 import io.github.mortuusars.sootychimneys.Config;
+import io.github.mortuusars.sootychimneys.core.wind.Wind;
+import io.github.mortuusars.sootychimneys.core.wind.WindData;
 import io.github.mortuusars.sootychimneys.core.smoke.SmokeProperties;
-import io.github.mortuusars.sootychimneys.core.WindData;
-import io.github.mortuusars.sootychimneys.core.Wind;
 import io.github.mortuusars.sootychimneys.data.Chimney;
 import io.github.mortuusars.sootychimneys.data.ChimneyType;
 import io.github.mortuusars.sootychimneys.recipe.SootScrapingRecipe;
@@ -205,9 +205,9 @@ public class ChimneyBlock extends Block implements EntityBlock {
 
     public ParticleOptions getParticle(BlockState state, Level level, BlockPos pos) {
         BlockState stateBelow = level.getBlockState(pos.below());
-        return (stateBelow.getBlock() instanceof ChimneyBlock && stateBelow.getValue(STACKED)) || stateBelow.is(SootyChimneys.Tags.Blocks.SMOKE_BOOSTING) ?
-                ParticleTypes.CAMPFIRE_SIGNAL_SMOKE
-                : ParticleTypes.CAMPFIRE_COSY_SMOKE;
+        return (stateBelow.getBlock() instanceof ChimneyBlock && stateBelow.getValue(STACKED))
+                || stateBelow.is(SootyChimneys.Tags.Blocks.SMOKE_BOOSTING)
+                ? ParticleTypes.CAMPFIRE_SIGNAL_SMOKE : ParticleTypes.CAMPFIRE_COSY_SMOKE;
     }
 
     public void emitParticle(Level level, double x, double y, double z, ParticleOptions particleType) {
@@ -227,10 +227,13 @@ public class ChimneyBlock extends Block implements EntityBlock {
         z += particleOffset.z() - 0.5;
 
         WindData wind = Wind.getWind();
-        double windStrengthModifier = Config.Common.WIND_STRENGTH.get();
-        double xSpeed = (wind.getXCoordinate() * wind.getStrength()) * windStrengthModifier;
-        double zSpeed = (wind.getYCoordinate() * wind.getStrength()) * windStrengthModifier;
+        float strength = (wind.getStrength() * 0.1f) * Config.Common.WIND_STRENGTH.get().floatValue();
+        double xSpeed = wind.getXCoordinate() * strength;
         double ySpeed = 0.05d * smokeProperties.getSpeed();
+        double zSpeed = wind.getYCoordinate() * strength;
+
+        xSpeed += ((random.nextFloat() * strength) - (strength / 2f)) * 0.2f;
+        zSpeed += ((random.nextFloat() * strength) - (strength / 2f)) * 0.2f;
 
         Vector3f particleSpread = smokeProperties.getParticleSpread();
 

@@ -1,9 +1,9 @@
-package io.github.mortuusars.sootychimneys.core;
+package io.github.mortuusars.sootychimneys.core.wind;
 
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.Level;
 
-public class Wind {
+public class OldWind {
     private final static WindData wind = new WindData(0, 0f);
 
     public static WindData getWind() {
@@ -12,8 +12,8 @@ public class Wind {
 
     public static void update(Level level) {
         RandomSource random = level.random;
-        double addDegrees = Math.exp(random.nextDouble() * 2.5f) * (random.nextBoolean() ? -1 : 1);
-        wind.update(addDegrees, getWindStrengthChange(level) * 0.5f);
+        double addDegrees = Math.exp(random.nextDouble()) * (random.nextBoolean() ? -1 : 1);
+        wind.update(addDegrees, getWindStrengthChange(level) * 0.1f);
     }
 
     private static float getWindStrengthChange(Level level) {
