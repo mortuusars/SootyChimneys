@@ -227,7 +227,7 @@ public class ChimneyBlock extends Block implements EntityBlock {
         z += particleOffset.z() - 0.5;
 
         WindData wind = Wind.getWind();
-        float strength = (wind.getStrength() * 0.1f) * Config.Common.WIND_STRENGTH.get().floatValue();
+        float strength = wind.getAdjustedStrength();
         double xSpeed = wind.getXCoordinate() * strength;
         double ySpeed = 0.05d * smokeProperties.getSpeed();
         double zSpeed = wind.getYCoordinate() * strength;

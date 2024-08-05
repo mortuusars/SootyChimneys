@@ -36,8 +36,18 @@ public class WindData {
         yCoordinate = Math.sin(angleRadians);
     }
 
+    /**
+     * @return Untouched strength value from wind calculation.
+     */
     public float getStrength() {
         return strength;
+    }
+
+    /**
+     * @return Strength value, suitable for smoke particles. Takes into account config settings.
+     */
+    public float getAdjustedStrength() {
+        return (getStrength() * 0.1f) * Config.Common.WIND_STRENGTH.get().floatValue();
     }
 
     public double getAngleInDegrees() {

@@ -6,6 +6,7 @@
   "client": [
   ],
   "mixins": [
+    "CampfireParticleMixin"
   ],
   "injectors": {
     "defaultRequire": 1
