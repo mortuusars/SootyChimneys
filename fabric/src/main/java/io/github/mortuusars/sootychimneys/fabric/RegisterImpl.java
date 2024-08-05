@@ -1,4 +1,4 @@
-package io.github.mortuusars.fabric;
+package io.github.mortuusars.sootychimneys.fabric;
 
 import com.mojang.brigadier.arguments.ArgumentType;
 import io.github.mortuusars.sootychimneys.SootyChimneys;

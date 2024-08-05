@@ -1,4 +1,4 @@
-package io.github.mortuusars.sootychimneys.core.smoke;
+package io.github.mortuusars.sootychimneys.data.smoke;
 
 public class SmokeProperties {
     private final ParticleOrigin particleOrigin;

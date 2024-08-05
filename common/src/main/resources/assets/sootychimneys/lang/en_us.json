@@ -1,4 +1,9 @@
 {
+  "advancements.sootychimneys.adventure.just_dont_breathe_it_in.title": "Just Don't Breathe It In",
+  "advancements.sootychimneys.adventure.just_dont_breathe_it_in.description": "Scrape the soot off a chimney",
+
+  "stat.sootychimneys.soot_scraped": "Soot Scraped",
+
   "block.sootychimneys.brick_chimney": "Brick Chimney",
   "block.sootychimneys.dirty_brick_chimney": "Dirty Brick Chimney",
   "block.sootychimneys.cobblestone_chimney": "Cobblestone Chimney",
@@ -24,6 +29,7 @@
   "sootychimneys.configuration.DirtyChance": "Dirty Chance",
   "sootychimneys.configuration.Wind": "Wind",
   "sootychimneys.configuration.WindStrength": "Wind Strength",
+  "sootychimneys.configuration.WindAffectsCampfire": "Wind Affects Campfire",
 
   "sootychimneys.configuration.JEI": "JEI Integration",
   "sootychimneys.configuration.SootCoveringCategory": "Soot Covering Category",

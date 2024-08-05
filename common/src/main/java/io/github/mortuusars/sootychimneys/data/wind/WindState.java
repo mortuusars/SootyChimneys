@@ -1,4 +1,4 @@
-package io.github.mortuusars.sootychimneys.core.wind;
+package io.github.mortuusars.sootychimneys.data.wind;
 
 public enum WindState {
     CALM(0f, 0.05f),

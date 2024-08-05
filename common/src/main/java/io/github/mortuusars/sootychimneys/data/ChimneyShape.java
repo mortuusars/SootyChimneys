@@ -1,4 +1,4 @@
-package io.github.mortuusars.sootychimneys.core;
+package io.github.mortuusars.sootychimneys.data;
 
 import net.minecraft.world.phys.shapes.VoxelShape;
 

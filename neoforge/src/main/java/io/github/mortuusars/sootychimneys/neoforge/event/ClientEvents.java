@@ -2,7 +2,7 @@ package io.github.mortuusars.sootychimneys.neoforge.event;
 
 import io.github.mortuusars.sootychimneys.Config;
 import io.github.mortuusars.sootychimneys.SootyChimneys;
-import io.github.mortuusars.sootychimneys.core.wind.Wind;
+import io.github.mortuusars.sootychimneys.data.wind.Wind;
 import net.minecraft.world.item.CreativeModeTabs;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;

@@ -1,4 +1,4 @@
-package io.github.mortuusars.sootychimneys.core.wind;
+package io.github.mortuusars.sootychimneys.data.wind;
 
 import io.github.mortuusars.sootychimneys.Config;
 import net.minecraft.util.Mth;

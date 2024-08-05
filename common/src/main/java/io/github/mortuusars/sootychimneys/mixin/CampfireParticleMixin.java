@@ -1,8 +1,8 @@
 package io.github.mortuusars.sootychimneys.mixin;
 
 import io.github.mortuusars.sootychimneys.Config;
-import io.github.mortuusars.sootychimneys.core.wind.Wind;
-import io.github.mortuusars.sootychimneys.core.wind.WindData;
+import io.github.mortuusars.sootychimneys.data.wind.Wind;
+import io.github.mortuusars.sootychimneys.data.wind.WindData;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.core.particles.SimpleParticleType;

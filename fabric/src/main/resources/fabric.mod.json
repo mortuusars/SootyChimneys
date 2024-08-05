@@ -16,10 +16,10 @@
   "environment": "*",
   "entrypoints": {
     "main": [
-      "io.github.mortuusars.fabric.SootyChimneysFabric"
+      "io.github.mortuusars.sootychimneys.fabric.SootyChimneysFabric"
     ],
     "client": [
-      "io.github.mortuusars.fabric.client.SootyChimneysFabricClient"
+      "io.github.mortuusars.sootychimneys.fabric.client.SootyChimneysFabricClient"
     ]
   },
   "mixins": [

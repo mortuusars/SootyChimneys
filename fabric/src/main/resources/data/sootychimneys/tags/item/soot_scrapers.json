@@ -1,6 +1,9 @@
 {
   "values": [
     "#minecraft:axes",
-    "create:sandpaper"
+    {
+      "required": false,
+      "id": "create:sandpaper"
+    }
   ]
 }

@@ -1,4 +1,4 @@
-package io.github.mortuusars.sootychimneys.core.smoke;
+package io.github.mortuusars.sootychimneys.data.smoke;
 
 import org.joml.Vector3f;
 

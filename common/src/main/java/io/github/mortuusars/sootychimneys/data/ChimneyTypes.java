@@ -1,9 +1,8 @@
 package io.github.mortuusars.sootychimneys.data;
 
-import io.github.mortuusars.sootychimneys.core.ChimneyShape;
-import io.github.mortuusars.sootychimneys.core.smoke.ParticleOrigin;
-import io.github.mortuusars.sootychimneys.core.smoke.ParticleSpread;
-import io.github.mortuusars.sootychimneys.core.smoke.SmokeProperties;
+import io.github.mortuusars.sootychimneys.data.smoke.ParticleOrigin;
+import io.github.mortuusars.sootychimneys.data.smoke.ParticleSpread;
+import io.github.mortuusars.sootychimneys.data.smoke.SmokeProperties;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.phys.shapes.Shapes;
 

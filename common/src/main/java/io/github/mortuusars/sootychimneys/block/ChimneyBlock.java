@@ -3,20 +3,22 @@ package io.github.mortuusars.sootychimneys.block;
 import io.github.mortuusars.sootychimneys.PlatformSpecific;
 import io.github.mortuusars.sootychimneys.SootyChimneys;
 import io.github.mortuusars.sootychimneys.Config;
-import io.github.mortuusars.sootychimneys.core.wind.Wind;
-import io.github.mortuusars.sootychimneys.core.wind.WindData;
-import io.github.mortuusars.sootychimneys.core.smoke.SmokeProperties;
+import io.github.mortuusars.sootychimneys.data.wind.Wind;
+import io.github.mortuusars.sootychimneys.data.wind.WindData;
+import io.github.mortuusars.sootychimneys.data.smoke.SmokeProperties;
 import io.github.mortuusars.sootychimneys.data.Chimney;
 import io.github.mortuusars.sootychimneys.data.ChimneyType;
 import io.github.mortuusars.sootychimneys.recipe.SootScrapingRecipe;
 import io.github.mortuusars.sootychimneys.recipe.result.ChanceResult;
 import io.github.mortuusars.sootychimneys.utils.RandomOffset;
+import net.minecraft.advancements.CriteriaTriggers;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Vec3i;
 import net.minecraft.core.particles.ParticleOptions;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.RandomSource;
@@ -153,10 +155,16 @@ public class ChimneyBlock extends Block implements EntityBlock {
             return super.useItemOn(stack, state, level, pos, player, hand, hitResult);
         }
 
+        if (player instanceof ServerPlayer serverPlayer) {
+            CriteriaTriggers.ITEM_USED_ON_BLOCK.trigger(serverPlayer, pos, stack);
+        }
+
         BlockState cleanBlockState = Chimney.getCleanBlock(this).withPropertiesOf(state);
         level.setBlock(pos, cleanBlockState, Block.UPDATE_ALL);
 
         if (level instanceof ServerLevel serverLevel) {
+            player.awardStat(SootyChimneys.Stats.SOOT_SCRAPED);
+
             Optional<Supplier<List<ItemStack>>> scrapingResult = getScrapedItems(state, serverLevel);
 
             scrapingResult.ifPresent(items -> {

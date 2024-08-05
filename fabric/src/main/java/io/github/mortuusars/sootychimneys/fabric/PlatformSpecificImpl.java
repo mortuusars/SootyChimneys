@@ -1,4 +1,4 @@
-package io.github.mortuusars.fabric;
+package io.github.mortuusars.sootychimneys.fabric;
 
 import net.minecraft.world.item.ItemStack;
 

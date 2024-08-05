@@ -2,7 +2,7 @@ package io.github.mortuusars.sootychimneys.integration.jei.category;
 
 import io.github.mortuusars.sootychimneys.SootyChimneys;
 import io.github.mortuusars.sootychimneys.block.ChimneyBlock;
-import io.github.mortuusars.sootychimneys.core.smoke.SmokeProperties;
+import io.github.mortuusars.sootychimneys.data.smoke.SmokeProperties;
 import io.github.mortuusars.sootychimneys.integration.jei.JeiRecipeTypes;
 import io.github.mortuusars.sootychimneys.integration.jei.drawable.ChimneySmokeAnimatedDrawable;
 import io.github.mortuusars.sootychimneys.integration.jei.recipe.SootCoveringJeiRecipe;
