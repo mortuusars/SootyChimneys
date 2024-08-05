@@ -318,10 +318,6 @@ public final class SootyChimneys {
     }
 
     public static class ParticleTypes {
-        public static final Supplier<SimpleParticleType> CHIMNEY_COSY_SMOKE =
-                Register.particleType("chimney_cosy_smoke", () -> new SimpleParticleType(true));
-        public static final Supplier<SimpleParticleType> CHIMNEY_SIGNAL_SMOKE =
-                Register.particleType("chimney_signal_smoke", () -> new SimpleParticleType(true));
         public static void init() { }
     }
 }
