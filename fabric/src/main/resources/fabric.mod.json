@@ -20,6 +20,9 @@
     ],
     "client": [
       "io.github.mortuusars.sootychimneys.fabric.client.SootyChimneysFabricClient"
+    ],
+    "jei_mod_plugin": [
+      "io.github.mortuusars.sootychimneys.integration.jei.SootyChimneysJeiPlugin"
     ]
   },
   "mixins": [
