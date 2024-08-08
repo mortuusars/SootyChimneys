@@ -3,6 +3,7 @@
 ## UNRELEASED 1.21
 - Now has an official Fabric support.
 - Added advancement and stat for scraping soot.
+- Wind effect on a smoke is now a bit smoother.
 - Wind now also affects smoke from Campfires.
 - Soot Scraping is now only configured through recipes. Loot Tables implementation has been removed. 
 
