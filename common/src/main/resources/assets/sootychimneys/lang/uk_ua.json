@@ -1,4 +1,9 @@
 {
+  "advancements.sootychimneys.adventure.just_dont_breathe_it_in.title": "Брудна робота",
+  "advancements.sootychimneys.adventure.just_dont_breathe_it_in.description": "Зішкрібіть сажу з димоходу",
+
+  "stat.sootychimneys.soot_scraped": "Зчищено сажі",
+
   "block.sootychimneys.brick_chimney": "Цегляний димохід",
   "block.sootychimneys.dirty_brick_chimney": "Сажистий цегляний димохід",
   "block.sootychimneys.cobblestone_chimney": "Димохід з кругляку",
@@ -18,5 +23,15 @@
   "jei.sootychimneys.category.soot_scraping.soot_items_info": "Може утворювати субпродукт",
   "jei.sootychimneys.chance": "%s%% вірогідності",
   "message.sootychimneys.blocked": "Вихід диму перекрито",
-  "message.sootychimneys.open": "Вихід диму відновлено"
+  "message.sootychimneys.open": "Вихід диму відновлено",
+
+  "sootychimneys.configuration.SmokeFlow": "Кількість диму",
+  "sootychimneys.configuration.DirtyChance": "Шанс забруднення",
+  "sootychimneys.configuration.Wind": "Ефект вітру",
+  "sootychimneys.configuration.WindStrength": "Сила вітру",
+  "sootychimneys.configuration.WindAffectsCampfire": "Вітер впливає на дим від Багаття",
+
+  "sootychimneys.configuration.JEI": "Інтеграція з JEI",
+  "sootychimneys.configuration.SootCoveringCategory": "Категорія 'Покриття сажею'",
+  "sootychimneys.configuration.SootScrapingCategory": "Категорія 'Зішкрібання сажі'"
 }
