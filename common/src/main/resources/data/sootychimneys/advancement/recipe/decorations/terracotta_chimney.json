@@ -15,7 +15,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "minecraft:terracotta_chimney"
+        "recipe": "sootychimneys:terracotta_chimney"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
@@ -28,7 +28,7 @@
   ],
   "rewards": {
     "recipes": [
-      "minecraft:terracotta_chimney"
+      "sootychimneys:terracotta_chimney"
     ]
   }
 }

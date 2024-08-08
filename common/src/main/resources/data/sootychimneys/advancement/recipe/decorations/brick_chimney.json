@@ -15,7 +15,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "minecraft:brick_chimney"
+        "recipe": "sootychimneys:brick_chimney"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
@@ -28,7 +28,7 @@
   ],
   "rewards": {
     "recipes": [
-      "minecraft:brick_chimney"
+      "sootychimneys:brick_chimney"
     ]
   }
 }

@@ -15,7 +15,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "minecraft:copper_chimney"
+        "recipe": "sootychimneys:copper_chimney"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
@@ -28,7 +28,7 @@
   ],
   "rewards": {
     "recipes": [
-      "minecraft:copper_chimney"
+      "sootychimneys:copper_chimney"
     ]
   }
 }
