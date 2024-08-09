@@ -2,7 +2,7 @@ plugins {
     id 'dev.architectury.loom' version '1.7-SNAPSHOT' apply false
     id 'architectury-plugin' version '3.4-SNAPSHOT'
     id 'com.github.johnrengelman.shadow' version '8.1.1' apply false
-    id 'me.modmuss50.mod-publish-plugin' version '0.6.3'
+    id 'me.shedaniel.unified-publishing' version '0.1.+'
 }
 
 architectury {
@@ -12,14 +12,6 @@ architectury {
 allprojects {
     group = rootProject.maven_group
     version = rootProject.mod_version
-}
-
-project.ext.changelog = getLatestVersionChangelog()
-
-tasks.register('printLatestVersionChangelog') {
-    doLast {
-        println project.changelog
-    }
 }
 
 subprojects {
@@ -133,55 +125,6 @@ subprojects {
             }
         }
     }
-
-    if (project.name != "common") {
-        publishMods {
-            file = remapJar.archiveFile
-            type = STABLE
-            version = mod_version
-            changelog = rootProject.ext.changelog
-
-            if (project.name == "fabric") {
-                modLoaders.add("fabric")
-                modLoaders.add("quilt")
-            }
-            else {
-                modLoaders.add("neoforge")
-            }
-
-            dryRun = mod_version.contains("SNAPSHOT")
-
-            curseforge {
-                accessToken = System.getenv("CURSEFORGE_TOKEN")
-                projectId = mod_curseforge_project_id
-
-                if (project.name == "fabric") {
-                    displayName = "${mod_name} - Fabric ${minecraft_version} - ${mod_version}"
-                }
-                else if (project.name == "neoforge") {
-                    displayName = "${mod_name} - NeoForge ${minecraft_version} - ${mod_version}"
-                }
-                else {
-                    displayName = "${mod_name} - ${minecraft_version} - ${mod_version}"
-                }
-
-                minecraftVersions.addAll(supported_minecraft_versions.split(','))
-                javaVersions.add(JavaVersion.VERSION_21)
-
-                clientRequired = true
-                serverRequired = true
-            }
-
-            modrinth {
-                accessToken = System.getenv("MODRINTH_TOKEN")
-                projectId = mod_modrinth_project_id
-
-                displayName = "${mod_name} - ${mod_version}"
-
-                minecraftVersions.addAll(supported_minecraft_versions.split(','))
-            }
-        }
-    }
 }
 
 /**
@@ -212,5 +155,13 @@ def getLatestVersionChangelog() {
     } else {
         println("[WARN] Changelog file <${changelogFileName}> does not exist.")
         return ""
+    }
+}
+
+project.ext.changelog = getLatestVersionChangelog()
+
+task printLatestVersionChangelog {
+    doLast {
+        println project.changelog
     }
 }
