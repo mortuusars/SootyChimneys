@@ -33,5 +33,13 @@
 
   "sootychimneys.configuration.JEI": "JEI Integration",
   "sootychimneys.configuration.SootCoveringCategory": "Soot Covering Category",
-  "sootychimneys.configuration.SootScrapingCategory": "Soot Scraping Category"
+  "sootychimneys.configuration.SootScrapingCategory": "Soot Scraping Category",
+
+  "tag.item.c.chimneys": "Chimneys",
+  "tag.block.c.chimneys": "Chimneys",
+  "tag.item.sootychimneys.chimneys": "Chimneys",
+  "tag.item.sootychimneys.sooty_chimneys": "Sooty Chimneys",
+  "tag.block.sootychimneys.chimneys": "Chimneys",
+  "tag.block.sootychimneys.sooty_chimneys": "Sooty Chimneys",
+  "tag.block.sootychimneys.soot_scrapers": "Soot Scrapers"
 }

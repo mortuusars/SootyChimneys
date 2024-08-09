@@ -33,5 +33,13 @@
 
   "sootychimneys.configuration.JEI": "Інтеграція з JEI",
   "sootychimneys.configuration.SootCoveringCategory": "Категорія 'Покриття сажею'",
-  "sootychimneys.configuration.SootScrapingCategory": "Категорія 'Зішкрібання сажі'"
+  "sootychimneys.configuration.SootScrapingCategory": "Категорія 'Зішкрібання сажі'",
+
+  "tag.item.c.chimneys": "Димоходи",
+  "tag.block.c.chimneys": "Димоходи",
+  "tag.item.sootychimneys.chimneys": "Димоходи",
+  "tag.item.sootychimneys.sooty_chimneys": "Сажисті димоходи",
+  "tag.block.sootychimneys.chimneys": "Димоходи",
+  "tag.block.sootychimneys.sooty_chimneys": "Сажисті димоходи",
+  "tag.block.sootychimneys.soot_scrapers": "Зішкрібувачі сажі"
 }
