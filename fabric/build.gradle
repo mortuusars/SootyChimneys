@@ -1,5 +1,6 @@
 plugins {
     id 'com.github.johnrengelman.shadow'
+    id "me.shedaniel.unified-publishing"
 }
 
 architectury {
@@ -68,7 +69,7 @@ unifiedPublishing {
         version = mod_version // Optional, Inferred from project by default
         changelog = rootProject.ext.changelog
         releaseType = mod_release_type // Optional, use "release", "beta" or "alpha"
-        gameVersions = [minecraft_version]
+        gameVersions = Arrays.asList(supported_minecraft_versions.split(","))
         gameLoaders = ["fabric", "quilt"]
 
         mainPublication tasks.remapJar // Declares the publicated jar
@@ -80,8 +81,6 @@ unifiedPublishing {
             relations {
                 depends "fabric-api"
                 depends "forge-config-api-port-fabric"
-                optional "jei"
-                optional "create-fabric"
             }
         }
 
@@ -94,8 +93,6 @@ unifiedPublishing {
             relations {
                 depends "fabric-api"
                 depends "forge-config-api-port"
-                optional "jei"
-                optional "create-fabric"
             }
         }
     }
