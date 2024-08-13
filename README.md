@@ -10,9 +10,4 @@
 
 <br>
 <h2 align=center>Adds several variants of chimneys that emit smoke particles.</h1>
-<br>    
-    
-<div align=center>
-  <br>
-  <a href="https://www.curseforge.com/minecraft/mc-mods/sooty-chimneys"><img src="https://raw.githubusercontent.com/mortuusars/SootyChimneys/master/media/forge.png"><a>
-</div>
+<br>
