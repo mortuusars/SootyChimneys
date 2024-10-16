@@ -1,5 +1,8 @@
 # Changelog
 
+## 1.3.1 - 2024-10-16
+- Fixed axe not being damaged when soot is scraped.
+
 ## 1.3.0 - 2024-08-09
 - Now has an official Fabric support.
 - Added advancement and stat for scraping soot.

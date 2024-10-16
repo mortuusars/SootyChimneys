@@ -23,6 +23,7 @@ import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.*;
+import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.RecipeHolder;
@@ -178,6 +179,8 @@ public class ChimneyBlock extends Block implements EntityBlock {
 
                 spawnSootScrapingItems(itemSpawnPosition, serverLevel, itemStacks);
             });
+
+            stack.hurtAndBreak(1, player, hand == InteractionHand.MAIN_HAND ? EquipmentSlot.MAINHAND : EquipmentSlot.OFFHAND);
 
             level.playSound(player, pos, SoundEvents.AXE_SCRAPE, SoundSource.BLOCKS);
         } else {
