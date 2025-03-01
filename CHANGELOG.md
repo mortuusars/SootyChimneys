@@ -1,3 +1,6 @@
+2025-03-01 - 1.2.3
+- Fixed confusion with github branches.
+
 2025-03-01 - 1.2.2
 - Updated to work with Create 6.0.0
 
