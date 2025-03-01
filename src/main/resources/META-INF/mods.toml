@@ -59,7 +59,7 @@ Spiritual successor to campfires!
 [[dependencies.sootychimneys]]
     modId="create"
     mandatory=false
-    versionRange="[0.5.1.a,0.5.2)"
+    versionRange="[6.0.0,)"
     ordering="AFTER"
     side="BOTH"
 [[dependencies.sootychimneys]]
