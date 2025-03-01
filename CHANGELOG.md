@@ -1,3 +1,6 @@
+2025-03-01 - 1.2.2
+- Updated to work with Create 6.0.0
+
 2024-01-26 - 1.2.1
 - Fixed stacked chimneys not emitting signal smoke 
 
