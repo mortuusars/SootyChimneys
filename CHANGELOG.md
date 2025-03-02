@@ -1,5 +1,8 @@
 # Changelog
 
+## 1.3.2 - 2025-03-02
+- Added Create compatibility. 
+
 ## 1.3.1 - 2024-10-16
 - Fixed axe not being damaged when soot is scraped.
 
