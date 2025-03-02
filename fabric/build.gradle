@@ -1,6 +1,5 @@
 plugins {
     id 'com.github.johnrengelman.shadow'
-    id "me.shedaniel.unified-publishing"
 }
 
 architectury {
@@ -59,41 +58,4 @@ shadowJar {
 
 remapJar {
     input.set shadowJar.archiveFile
-}
-
-
-// https://github.com/shedaniel/unified-publishing
-unifiedPublishing {
-    project {
-        displayName = "${mod_name} - Fabric ${minecraft_version} - ${mod_version}" // Optional, name of the file
-        version = mod_version // Optional, Inferred from project by default
-        changelog = rootProject.ext.changelog
-        releaseType = mod_release_type // Optional, use "release", "beta" or "alpha"
-        gameVersions = Arrays.asList(supported_minecraft_versions.split(","))
-        gameLoaders = ["fabric", "quilt"]
-
-        mainPublication tasks.remapJar // Declares the publicated jar
-
-        curseforge {
-            token = System.getenv("CURSEFORGE_TOKEN")
-            id = mod_curseforge_project_id // Required, must be a string, ID of CurseForge project
-
-            relations {
-                depends "fabric-api"
-                depends "forge-config-api-port-fabric"
-            }
-        }
-
-        modrinth {
-            token = System.getenv("MODRINTH_TOKEN")
-            id = mod_modrinth_project_id // Required, must be a string, ID of Modrinth project
-
-            displayName = "${mod_name} - ${mod_version}" // Optional, name of the file
-
-            relations {
-                depends "fabric-api"
-                depends "forge-config-api-port"
-            }
-        }
-    }
 }

@@ -1,6 +1,5 @@
 plugins {
     id 'com.github.johnrengelman.shadow'
-    id "me.shedaniel.unified-publishing"
 }
 
 architectury {
@@ -58,6 +57,12 @@ dependencies {
 
     modCompileOnlyApi("mezz.jei:jei-${minecraft_version}-neoforge-api:${jei_version}") { transitive = false }
     modRuntimeOnly("mezz.jei:jei-${minecraft_version}-neoforge:${jei_version}") { transitive = false }
+
+    implementation("com.simibubi.create:create-${minecraft_version}:${create_version}") { transitive = false }
+    implementation("net.createmod.ponder:Ponder-NeoForge-${minecraft_version}:${ponder_version}")
+    compileOnly("dev.engine-room.flywheel:flywheel-neoforge-api-${minecraft_version}:${flywheel_version}")
+    runtimeOnly("dev.engine-room.flywheel:flywheel-neoforge-${minecraft_version}:${flywheel_version}")
+    implementation("com.tterrag.registrate:Registrate:${registrate_version}")
 }
 
 processResources {
@@ -75,30 +80,4 @@ shadowJar {
 
 remapJar {
     input.set shadowJar.archiveFile
-}
-
-// https://github.com/shedaniel/unified-publishing
-unifiedPublishing {
-    project {
-        displayName = "${mod_name} - NeoForge ${minecraft_version} - ${mod_version}" // Optional, name of the file
-        version = mod_version // Optional, Inferred from project by default
-        changelog = rootProject.ext.changelog
-        releaseType = mod_release_type // Optional, use "release", "beta" or "alpha"
-        gameVersions = Arrays.asList(supported_minecraft_versions.split(","))
-        gameLoaders = ["neoforge"]
-
-        mainPublication tasks.remapJar // Declares the publicated jar
-
-        curseforge {
-            token = System.getenv("CURSEFORGE_TOKEN")
-            id = mod_curseforge_project_id // Required, must be a string, ID of CurseForge project
-        }
-
-        modrinth {
-            token = System.getenv("MODRINTH_TOKEN")
-            id = mod_modrinth_project_id // Required, must be a string, ID of Modrinth project
-
-            displayName = "${mod_name} - ${mod_version}" // Optional, name of the file
-        }
-    }
 }
