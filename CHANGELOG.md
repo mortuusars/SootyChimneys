@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.3.3 - 2025-03-14
+- Chimneys on Create contraptions are now interactable (for smoke blocking/restoring)
+- Fixed Chimneys not emitting signal smoke when stacked on a Create contraption.
+
 ## 1.3.2 - 2025-03-02
 - Added Create compatibility. 
 

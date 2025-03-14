@@ -16,9 +16,9 @@ public class ChimneyMovementBehaviour implements MovementBehaviour {
         Level level = context.world;
         if (level != null && level.isClientSide && context.position != null
                 && context.state.getBlock() instanceof ChimneyBlock chimneyBlock
-                && chimneyBlock.shouldEmitSmoke(context.state, context.world, context.localPos)
+                && chimneyBlock.shouldEmitSmoke(context.state, context.contraption.getContraptionWorld(), context.localPos)
                 && level.getRandom().nextDouble() < Config.Common.SMOKE_STRENGTH.get()) {
-            ParticleOptions particle = chimneyBlock.getParticle(context.state, context.world, context.localPos);
+            ParticleOptions particle = chimneyBlock.getParticle(context.state, context.contraption.getContraptionWorld(), context.localPos);
             chimneyBlock.emitParticle(level, context.position.x, context.position.y, context.position.z, particle);
         }
     }
