@@ -1,3 +1,6 @@
+2025-03-14 - 1.2.4
+- Fixed Chimneys not emitting signal smoke when stacked on a Create contraption.
+
 2025-03-01 - 1.2.3
 - Fixed confusion with github branches.
 

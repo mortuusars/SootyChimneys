@@ -11,7 +11,6 @@ import net.minecraft.world.level.Level;
  * Used to define how blocks should behave on a moving contraption.
  */
 public class ChimneyMovementBehaviour implements MovementBehaviour {
-
     @Override
     public void tick(MovementContext context) {
         Level level = context.world;
@@ -19,7 +18,7 @@ public class ChimneyMovementBehaviour implements MovementBehaviour {
                 && context.state.getBlock() instanceof ChimneyBlock chimneyBlock
                 && chimneyBlock.shouldEmitSmoke(context.state, context.world, context.localPos)
                 && level.getRandom().nextDouble() < Config.SMOKE_STRENGTH.get()) {
-            ParticleOptions particle = chimneyBlock.getParticle(context.state, context.world, context.localPos);
+            ParticleOptions particle = chimneyBlock.getParticle(context.state, context.contraption.getContraptionWorld(), context.localPos);
             chimneyBlock.emitParticle(level, context.position.x, context.position.y, context.position.z, particle);
         }
     }
