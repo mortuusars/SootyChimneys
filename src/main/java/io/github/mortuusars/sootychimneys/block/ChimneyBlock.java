@@ -147,7 +147,7 @@ public class ChimneyBlock extends Block implements EntityBlock {
             level.setBlock(pos, state.setValue(BLOCKED, newBlockedValue), Block.UPDATE_ALL);
         }
 
-        return InteractionResult.sidedSuccess(level.isClientSide);
+        return InteractionResult.SUCCESS;
     }
 
     @SuppressWarnings("deprecation")
