@@ -1,15 +1,45 @@
 {
+  "advancements.sootychimneys.adventure.just_dont_breathe_it_in.title": "Не дышите",
+  "advancements.sootychimneys.adventure.just_dont_breathe_it_in.description": "Соскребите сажу с дымохода",
+
+  "stat.sootychimneys.soot_scraped": "Сажи соскребено",
+
   "block.sootychimneys.brick_chimney": "Кирпичный дымоход",
-  "block.sootychimneys.copper_chimney": "Медный дымоход",
-  "block.sootychimneys.dirty_brick_chimney": "Грязный кирпичный дымоход",
-  "block.sootychimneys.dirty_copper_chimney": "Грязный медный дымоход",
-  "block.sootychimneys.dirty_stone_brick_chimney": "Грязный дымоход из каменного кирпича",
-  "block.sootychimneys.dirty_terracotta_chimney": "Грязный терракотовый дымоход",
+  "block.sootychimneys.dirty_brick_chimney": "Загрязнённый кирпичный дымоход",
+  "block.sootychimneys.cobblestone_chimney": "Булыжный дымоход",
+  "block.sootychimneys.dirty_cobblestone_chimney": "Загрязнённый булыжный дымоход",
   "block.sootychimneys.stone_brick_chimney": "Дымоход из каменного кирпича",
-  "block.sootychimneys.terracotta_chimney": "Терракотовый дымоход",
+  "block.sootychimneys.dirty_stone_brick_chimney": "Загрязнённый дымоход из каменного кирпича",
+  "block.sootychimneys.mud_brick_chimney": "Саманный дымоход",
+  "block.sootychimneys.dirty_mud_brick_chimney": "Загрязнённый саманный дымоход",
+  "block.sootychimneys.iron_chimney": "Железный дымоход",
+  "block.sootychimneys.dirty_iron_chimney": "Загрязнённый железный дымоход",
+  "block.sootychimneys.copper_chimney": "Медный дымоход",
+  "block.sootychimneys.dirty_copper_chimney": "Загрязнённый медный дымоход",
+  "block.sootychimneys.terracotta_chimney": "Керамический дымоход",
+  "block.sootychimneys.dirty_terracotta_chimney": "Загрязнённый керамический дымоход",
   "jei.sootychimneys.category.soot_covering": "Покрытие сажей",
   "jei.sootychimneys.category.soot_scraping": "Снятие сажи",
   "jei.sootychimneys.category.soot_scraping.soot_items_info": "Может произвести побочный продукт",
-  "message.sootychimneys.blocked": "Выход дыма заблокирован",
-  "message.sootychimneys.open": "Выход дыма возобновлён"
+  "jei.sootychimneys.chance": "Шанс %s%%",
+  "message.sootychimneys.blocked": "Дым перекрыт",
+  "message.sootychimneys.open": "Поток дыма восстановлен",
+
+  "sootychimneys.configuration.SmokeFlow": "Поток дыма",
+  "sootychimneys.configuration.DirtyChance": "Шанс загрязнения",
+  "sootychimneys.configuration.Wind": "Ветер",
+  "sootychimneys.configuration.WindStrength": "Сила ветра",
+  "sootychimneys.configuration.WindAffectsCampfire": "Ветер влияет на костры",
+
+  "sootychimneys.configuration.JEI": "Интеграция с JEI",
+  "sootychimneys.configuration.SootCoveringCategory": "Категория покрытия сажей",
+  "sootychimneys.configuration.SootScrapingCategory": "Категория снятия сажи",
+
+  "tag.item.c.chimneys": "Дымоходы",
+  "tag.block.c.chimneys": "Дымоходы",
+  "tag.item.sootychimneys.chimneys": "Дымоходы",
+  "tag.item.sootychimneys.sooty_chimneys": "Закопчённые дымоходы",
+  "tag.block.sootychimneys.chimneys": "Дымоходы",
+  "tag.block.sootychimneys.sooty_chimneys": "Закопчённые дымоходы",
+  "tag.block.sootychimneys.soot_scrapers": "Скребки для сажи"
 }
