@@ -19,10 +19,14 @@ import net.minecraftforge.fml.config.ModConfig;
 import net.minecraftforge.fml.event.lifecycle.InterModEnqueueEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.minecraftforge.registries.ForgeRegistries;
+import net.minecraftforge.event.BuildCreativeModeTabContentsEvent;
+import net.minecraftforge.eventbus.api.SubscribeEvent;
+import net.minecraft.world.item.CreativeModeTabs;
 
 import java.util.Random;
 
 @Mod(SootyChimneys.MOD_ID)
+@Mod.EventBusSubscriber(modid = SootyChimneys.MOD_ID, bus = Mod.EventBusSubscriber.Bus.MOD)
 public class SootyChimneys {
     public static final String MOD_ID = "sootychimneys";
     public static final Random RANDOM = new Random();
@@ -153,5 +157,20 @@ public class SootyChimneys {
         public Item getDirtyItem() {
             return ForgeRegistries.ITEMS.getValue(resource(getDirtyId()));
         }
+        
+@SubscribeEvent
+public static void buildCreativeModeTabs(BuildCreativeModeTabContentsEvent event) {
+    // Add chimney items to the Building Blocks tab
+    if (event.getTabKey() == CreativeModeTabs.BUILDING_BLOCKS) {
+        // Add all your chimney items here
+        event.accept(ModItems.BRICK_CHIMNEY);
+        event.accept(ModItems.COBBLESTONE_CHIMNEY);
+        event.accept(ModItems.STONE_BRICK_CHIMNEY);
+        event.accept(ModItems.MUD_BRICK_CHIMNEY);
+        event.accept(ModItems.IRON_CHIMNEY);
+        event.accept(ModItems.COPPER_CHIMNEY);
+        event.accept(ModItems.TERRACOTTA_CHIMNEY);
+    }
+}
     }
 }
