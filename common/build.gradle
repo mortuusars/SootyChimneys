@@ -16,3 +16,11 @@ dependencies {
 
     modCompileOnlyApi("mezz.jei:jei-${minecraft_version}-common-api:${jei_version}") { transitive = false }
 }
+
+// Makes datagenerated resources usable:
+sourceSets {
+    main {
+        // We are using NeoForge to datagen, and it outputs to the 'common/src/generated' folder
+        resources.srcDir file("src/generated")
+    }
+}

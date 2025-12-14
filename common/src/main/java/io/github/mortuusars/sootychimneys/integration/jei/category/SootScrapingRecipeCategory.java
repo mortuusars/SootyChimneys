@@ -14,8 +14,8 @@ import mezz.jei.api.gui.ingredient.IRecipeSlotsView;
 import mezz.jei.api.helpers.IGuiHelper;
 import mezz.jei.api.recipe.IFocusGroup;
 import mezz.jei.api.recipe.RecipeIngredientRole;
-import mezz.jei.api.recipe.RecipeType;
 import mezz.jei.api.recipe.category.IRecipeCategory;
+import mezz.jei.api.recipe.types.IRecipeType;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.network.chat.Component;
@@ -54,16 +54,16 @@ public class SootScrapingRecipeCategory implements IRecipeCategory<SootScrapingR
     public void setRecipe(IRecipeLayoutBuilder builder, SootScrapingRecipe recipe, @NotNull IFocusGroup focuses) {
         builder.addSlot(RecipeIngredientRole.INPUT, 9, 18)
                 .setCustomRenderer(VanillaTypes.ITEM_STACK, new ScalableItemStackRenderer(2.5f))
-                .addIngredients(recipe.chimney())
+                .add(recipe.chimney())
                 .setSlotName("DirtyChimney");
 
-        builder.addSlot(RecipeIngredientRole.CATALYST, 44, 1)
+        builder.addSlot(RecipeIngredientRole.CRAFTING_STATION, 44, 1)
                 .addItemStacks(SootyChimneysJeiPlugin.getScrapingTools())
                 .setSlotName("Tool");
 
         builder.addSlot(RecipeIngredientRole.OUTPUT, 104, 18)
                 .setCustomRenderer(VanillaTypes.ITEM_STACK, new ScalableItemStackRenderer(2.5f))
-                .addItemStack(recipe.getResultChimney())
+                .add(recipe.getResultChimney())
                 .setSlotName("CleanChimney");
 
         List<ChanceResult> results = recipe.results()
@@ -77,8 +77,8 @@ public class SootScrapingRecipeCategory implements IRecipeCategory<SootScrapingR
             ChanceResult result = results.get(i);
             builder.addSlot(RecipeIngredientRole.OUTPUT, slotX + (18 * i) - 1, 47)
                     .setSlotName("Result" + i + 1)
-                    .addItemStack(result.stack())
-                    .addTooltipCallback((recipeSlotView, tooltip) -> {
+                    .add(result.stack())
+                    .addRichTooltipCallback((recipeSlotView, tooltip) -> {
                         if (result.chance() < 1.0f) {
                             float chance = result.chance() * 100;
                             String chanceString = chance < 1 ? "<1" : Integer.toString((int) chance);
@@ -116,6 +116,7 @@ public class SootScrapingRecipeCategory implements IRecipeCategory<SootScrapingR
         return title;
     }
 
+    @SuppressWarnings("removal")
     @Override
     public @NotNull IDrawable getBackground() {
         return background;
@@ -127,7 +128,7 @@ public class SootScrapingRecipeCategory implements IRecipeCategory<SootScrapingR
     }
 
     @Override
-    public @NotNull RecipeType<SootScrapingRecipe> getRecipeType() {
+    public @NotNull IRecipeType<SootScrapingRecipe> getRecipeType() {
         return JeiRecipeTypes.SOOT_SCRAPING;
     }
 }

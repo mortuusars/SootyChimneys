@@ -10,19 +10,15 @@ import io.github.mortuusars.sootychimneys.recipe.SootScrapingRecipe;
 import io.github.mortuusars.sootychimneys.recipe.result.ChanceResult;
 import mezz.jei.api.IModPlugin;
 import mezz.jei.api.JeiPlugin;
-import mezz.jei.api.registration.IModInfoRegistration;
 import mezz.jei.api.registration.IRecipeCategoryRegistration;
 import mezz.jei.api.registration.IRecipeRegistration;
-import net.minecraft.client.Minecraft;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.crafting.RecipeHolder;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 
 @JeiPlugin
 public class SootyChimneysJeiPlugin implements IModPlugin {
@@ -57,12 +53,7 @@ public class SootyChimneysJeiPlugin implements IModPlugin {
                     new SootCoveringJeiRecipe(SootyChimneys.Items.TERRACOTTA_CHIMNEY.get(), SootyChimneys.Items.DIRTY_TERRACOTTA_CHIMNEY.get())));
         }
 
-        List<SootScrapingRecipe> recipes = new ArrayList<>(new ArrayList<>(Objects.requireNonNull(Minecraft.getInstance().level)
-                .getRecipeManager()
-                .getAllRecipesFor(SootyChimneys.RecipeTypes.SOOT_SCRAPING.get()))
-                .stream()
-                .map(RecipeHolder::value)
-                .toList());
+        List<SootScrapingRecipe> recipes = new ArrayList<>(SootScrapingRecipe.clientKnownRecipes);
 
         recipes.sort((r, r1) -> {
             List<ChanceResult> results = r.results();

@@ -1,28 +1,10 @@
 plugins {
-    id 'com.github.johnrengelman.shadow'
+    id "com.gradleup.shadow"
 }
 
 architectury {
     platformSetupLoomIde()
     neoForge()
-}
-
-loom {
-    accessWidenerPath = project(":common").loom.accessWidenerPath
-
-    runs {
-        create("client2") {
-            inherit(getByName("client"))
-
-            name("Second Client")
-            programArgs("--username", "AnotherDev")
-
-            property 'mixin.env.remapRefMap', 'true'
-            property 'mixin.env.refMapRemappingFile', "${projectDir}/build/createSrgToMcp/output.srg"
-
-            client()
-        }
-    }
 }
 
 configurations {
@@ -42,6 +24,31 @@ configurations {
     }
 }
 
+loom {
+    accessWidenerPath = project(":common").loom.accessWidenerPath
+
+    runs {
+        create("client2") {
+            inherit(getByName("client"))
+
+            name("Second Client")
+            programArgs("--username", "AnotherDev")
+
+            property 'mixin.env.remapRefMap', 'true'
+            property 'mixin.env.refMapRemappingFile', "${projectDir}/build/createSrgToMcp/output.srg"
+
+            client()
+        }
+
+        data {
+            serverData()
+            programArgs "--all", "--mod", "${mod_id}"
+            programArgs "--output", project(':common').file("src/generated").absolutePath // Outputs to common project
+            programArgs "--existing", project(':common').file("src/main/resources").absolutePath // Makes datagen see resources from common folder
+        }
+    }
+}
+
 repositories {
     maven {
         name = 'NeoForged'
@@ -57,12 +64,6 @@ dependencies {
 
     modCompileOnlyApi("mezz.jei:jei-${minecraft_version}-neoforge-api:${jei_version}") { transitive = false }
     modRuntimeOnly("mezz.jei:jei-${minecraft_version}-neoforge:${jei_version}") { transitive = false }
-
-    implementation("com.simibubi.create:create-${minecraft_version}:${create_version}:slim") { transitive = false }
-    implementation("net.createmod.ponder:Ponder-NeoForge-${minecraft_version}:${ponder_version}")
-    compileOnly("dev.engine-room.flywheel:flywheel-neoforge-api-${minecraft_version}:${flywheel_version}")
-    runtimeOnly("dev.engine-room.flywheel:flywheel-neoforge-${minecraft_version}:${flywheel_version}")
-    implementation("com.tterrag.registrate:Registrate:${registrate_version}")
 }
 
 processResources {
@@ -74,10 +75,13 @@ processResources {
 }
 
 shadowJar {
+    exclude("architectury.common.json")
     configurations = [project.configurations.shadowBundle]
     archiveClassifier = 'dev-shadow'
 }
 
 remapJar {
-    input.set shadowJar.archiveFile
+    injectAccessWidener = true
+    atAccessWideners.add(loom.accessWidenerPath.get().asFile.name)
+    inputFile.set shadowJar.archiveFile
 }

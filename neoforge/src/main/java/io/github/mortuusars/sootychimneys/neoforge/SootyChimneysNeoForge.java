@@ -30,9 +30,9 @@ public final class SootyChimneysNeoForge {
 
         assert modEventBus != null;
         RegisterImpl.BLOCKS.register(modEventBus);
+        RegisterImpl.ITEMS.register(modEventBus);
         RegisterImpl.BLOCK_ENTITY_TYPES.register(modEventBus);
         RegisterImpl.ENTITY_TYPES.register(modEventBus);
-        RegisterImpl.ITEMS.register(modEventBus);
         RegisterImpl.MENU_TYPES.register(modEventBus);
         RegisterImpl.RECIPE_TYPES.register(modEventBus);
         RegisterImpl.RECIPE_SERIALIZERS.register(modEventBus);

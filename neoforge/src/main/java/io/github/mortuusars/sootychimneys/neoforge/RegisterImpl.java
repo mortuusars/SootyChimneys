@@ -9,8 +9,8 @@ import net.minecraft.commands.synchronization.ArgumentTypeInfos;
 import net.minecraft.core.component.DataComponentType;
 import net.minecraft.core.particles.ParticleOptions;
 import net.minecraft.core.particles.ParticleType;
-import net.minecraft.core.particles.SimpleParticleType;
 import net.minecraft.core.registries.Registries;
+import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.world.entity.Entity;
@@ -30,6 +30,7 @@ import net.neoforged.neoforge.common.extensions.IMenuTypeExtension;
 import net.neoforged.neoforge.registries.DeferredRegister;
 
 import java.util.function.Consumer;
+import java.util.function.Function;
 import java.util.function.Supplier;
 
 public class RegisterImpl {
@@ -44,12 +45,12 @@ public class RegisterImpl {
     public static final DeferredRegister<CriterionTrigger<?>> CRITERION_TRIGGERS = DeferredRegister.create(Registries.TRIGGER_TYPE, SootyChimneys.ID);
     public static final DeferredRegister<ArgumentTypeInfo<?, ?>> COMMAND_ARGUMENT_TYPES = DeferredRegister.create(Registries.COMMAND_ARGUMENT_TYPE, SootyChimneys.ID);
     public static final DeferredRegister<Feature<?>> WORLD_GEN_FEATURES = DeferredRegister.create(Registries.FEATURE, SootyChimneys.ID);
-    public static final DeferredRegister.DataComponents DATA_COMPONENT_TYPES = DeferredRegister.createDataComponents(SootyChimneys.ID);
+    public static final DeferredRegister.DataComponents DATA_COMPONENT_TYPES = DeferredRegister.createDataComponents(Registries.DATA_COMPONENT_TYPE, SootyChimneys.ID);
     public static final DeferredRegister<ParticleType<?>> PARTICLE_TYPES = DeferredRegister.create(Registries.PARTICLE_TYPE, SootyChimneys.ID);
     public static final DeferredRegister<ResourceLocation> CUSTOM_STATS = DeferredRegister.create(Registries.CUSTOM_STAT, SootyChimneys.ID);
 
-    public static <T extends Block> Supplier<T> block(String id, Supplier<T> supplier) {
-        return BLOCKS.register(id, supplier);
+    public static <T extends Block> Supplier<T> block(String id, Function<ResourceLocation, T> func) {
+        return BLOCKS.register(id, func);
     }
 
     public static <T extends BlockEntityType<E>, E extends BlockEntity> Supplier<T> blockEntityType(String id, Supplier<T> sup) {
@@ -57,11 +58,11 @@ public class RegisterImpl {
     }
 
     public static <T extends BlockEntity> BlockEntityType<T> newBlockEntityType(Register.BlockEntitySupplier<T> blockEntitySupplier, Block... validBlocks) {
-        return BlockEntityType.Builder.of(blockEntitySupplier::create, validBlocks).build(null);
+        return new BlockEntityType<>(blockEntitySupplier::create, validBlocks);
     }
 
-    public static <T extends Item> Supplier<T> item(String id, Supplier<T> supplier) {
-        return ITEMS.register(id, supplier);
+    public static <T extends Item> Supplier<T> item(String id, Function<ResourceLocation, T> func) {
+        return ITEMS.register(id, func);
     }
 
     public static <T extends Entity> Supplier<EntityType<T>> entityType(String id, EntityType.EntityFactory<T> factory, MobCategory category,
@@ -71,7 +72,7 @@ public class RegisterImpl {
                 .clientTrackingRange(clientTrackingRange)
                 .setShouldReceiveVelocityUpdates(velocityUpdates)
                 .updateInterval(updateInterval)
-                .build(id));
+                .build(ResourceKey.create(Registries.ENTITY_TYPE, SootyChimneys.resource(id))));
     }
 
     public static <T extends SoundEvent> Supplier<T> soundEvent(String id, Supplier<T> supplier) {

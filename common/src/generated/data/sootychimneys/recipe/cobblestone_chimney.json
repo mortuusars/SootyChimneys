@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "B": "minecraft:cobblestone",
+    "C": "#minecraft:coals",
+    "b": "minecraft:cobblestone_slab"
+  },
+  "pattern": [
+    "b b",
+    "B B",
+    "BCB"
+  ],
+  "result": {
+    "count": 1,
+    "id": "sootychimneys:cobblestone_chimney"
+  }
+}

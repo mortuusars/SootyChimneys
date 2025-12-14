@@ -14,8 +14,8 @@ import mezz.jei.api.gui.drawable.IDrawableStatic;
 import mezz.jei.api.helpers.IGuiHelper;
 import mezz.jei.api.recipe.IFocusGroup;
 import mezz.jei.api.recipe.RecipeIngredientRole;
-import mezz.jei.api.recipe.RecipeType;
 import mezz.jei.api.recipe.category.IRecipeCategory;
+import mezz.jei.api.recipe.types.IRecipeType;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.BlockItem;
@@ -71,7 +71,7 @@ public class SootCoveringRecipeCategory implements IRecipeCategory<SootCoveringJ
         builder.addSlot(RecipeIngredientRole.INPUT, 10, 18)
                 .setCustomRenderer(VanillaTypes.ITEM_STACK, new ScalableItemStackRenderer(2.5f))
                 .setOverlay(ingredientSmoke, (int) ((16 * 2.5f) / 2 - 8), yOffset)
-                .addItemStack(recipe.getCleanChimney())
+                .add(recipe.getCleanChimney())
                 .setSlotName("CleanChimney");
 
         ChimneySmokeAnimatedDrawable resultSmoke = createSmokeDrawable(recipe.getDirtyChimney());
@@ -79,7 +79,7 @@ public class SootCoveringRecipeCategory implements IRecipeCategory<SootCoveringJ
         builder.addSlot(RecipeIngredientRole.OUTPUT, 103, 18)
                 .setCustomRenderer(VanillaTypes.ITEM_STACK, new ScalableItemStackRenderer(2.5f))
                 .setOverlay(resultSmoke, (int) ((16 * 2.5f) / 2 - 8), yOffset1)
-                .addItemStack(recipe.getDirtyChimney())
+                .add(recipe.getDirtyChimney())
                 .setSlotName("DirtyChimney");
     }
 
@@ -101,6 +101,7 @@ public class SootCoveringRecipeCategory implements IRecipeCategory<SootCoveringJ
         return title;
     }
 
+    @SuppressWarnings("removal")
     public @NotNull IDrawable getBackground() {
         return background;
     }
@@ -111,7 +112,7 @@ public class SootCoveringRecipeCategory implements IRecipeCategory<SootCoveringJ
     }
 
     @Override
-    public @NotNull RecipeType<SootCoveringJeiRecipe> getRecipeType() {
+    public @NotNull IRecipeType<SootCoveringJeiRecipe> getRecipeType() {
         return JeiRecipeTypes.SOOT_COVERING;
     }
 }

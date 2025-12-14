@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "B": "#c:storage_blocks/copper",
+    "C": "#minecraft:coals",
+    "I": "#c:ingots/copper"
+  },
+  "pattern": [
+    "   ",
+    "I I",
+    "BCB"
+  ],
+  "result": {
+    "count": 1,
+    "id": "sootychimneys:copper_chimney"
+  }
+}

@@ -1,13 +1,11 @@
 {
   "parent": "minecraft:recipes/root",
   "criteria": {
-    "has_terracotta": {
+    "has_iron": {
       "conditions": {
         "items": [
           {
-            "items": [
-              "minecraft:terracotta"
-            ]
+            "items": "#c:nuggets/iron"
           }
         ]
       },
@@ -15,20 +13,20 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "sootychimneys:terracotta_chimney"
+        "recipe": "sootychimneys:iron_chimney"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
   },
   "requirements": [
     [
-      "has_terracotta",
-      "has_the_recipe"
+      "has_the_recipe",
+      "has_iron"
     ]
   ],
   "rewards": {
     "recipes": [
-      "sootychimneys:terracotta_chimney"
+      "sootychimneys:iron_chimney"
     ]
   }
 }

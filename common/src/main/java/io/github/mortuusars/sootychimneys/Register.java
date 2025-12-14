@@ -9,6 +9,7 @@ import net.minecraft.core.component.DataComponentType;
 import net.minecraft.core.particles.ParticleOptions;
 import net.minecraft.core.particles.ParticleType;
 import net.minecraft.network.RegistryFriendlyByteBuf;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
@@ -30,16 +31,17 @@ import net.minecraft.world.level.levelgen.feature.configurations.FeatureConfigur
 import org.jetbrains.annotations.NotNull;
 
 import java.util.function.Consumer;
+import java.util.function.Function;
 import java.util.function.Supplier;
 
 public class Register {
     @ExpectPlatform
-    public static <T extends Block> Supplier<T> block(String id, Supplier<T> supplier) {
+    public static <T extends Block> Supplier<T> block(String id, Function<ResourceLocation, T> supplier) {
         throw new AssertionError();
     }
 
     @ExpectPlatform
-    public static <T extends BlockEntityType<E>, E extends BlockEntity> Supplier<T> blockEntityType(String id, Supplier<T> sup) {
+    public static <T extends BlockEntityType<E>, E extends BlockEntity> Supplier<T> blockEntityType(String id, Supplier<T> func) {
         throw new AssertionError();
     }
 
@@ -50,12 +52,12 @@ public class Register {
 
     @FunctionalInterface
     public interface BlockEntitySupplier<T extends BlockEntity> {
-
-        @NotNull T create(BlockPos pos, BlockState state);
+        @NotNull
+        T create(BlockPos pos, BlockState state);
     }
 
     @ExpectPlatform
-    public static <T extends Item> Supplier<T> item(String id, Supplier<T> supplier) {
+    public static <T extends Item> Supplier<T> item(String id, Function<ResourceLocation, T> func) {
         throw new AssertionError();
     }
 
@@ -78,7 +80,8 @@ public class Register {
 
     @FunctionalInterface
     public interface MenuTypeSupplier<T extends AbstractContainerMenu> {
-        @NotNull T create(int windowId, Inventory playerInv, RegistryFriendlyByteBuf extraData);
+        @NotNull
+        T create(int windowId, Inventory playerInv, RegistryFriendlyByteBuf extraData);
     }
 
     @ExpectPlatform
@@ -87,7 +90,7 @@ public class Register {
     }
 
     @ExpectPlatform
-    public static Supplier<RecipeSerializer<?>> recipeSerializer(String name, Supplier<RecipeSerializer<?>> supplier) {
+    public static <T extends Recipe<?>> Supplier<RecipeSerializer<T>> recipeSerializer(String name, Supplier<RecipeSerializer<T>> supplier) {
         throw new AssertionError();
     }
 
@@ -98,7 +101,7 @@ public class Register {
 
     @ExpectPlatform
     public static <A extends ArgumentType<?>, T extends ArgumentTypeInfo.Template<A>, I extends ArgumentTypeInfo<A, T>>
-            Supplier<ArgumentTypeInfo<A, T>> commandArgumentType(String id, Class<A> infoClass, I argumentTypeInfo) {
+    Supplier<ArgumentTypeInfo<A, T>> commandArgumentType(String id, Class<A> infoClass, I argumentTypeInfo) {
         throw new AssertionError();
     }
 

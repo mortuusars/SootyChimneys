@@ -143,11 +143,11 @@ public class ChimneyBlock extends Block implements EntityBlock {
             player.displayClientMessage(Component.translatable(messageTranslationKey), true);
         }
 
-        return InteractionResult.sidedSuccess(level.isClientSide);
+        return InteractionResult.SUCCESS;
     }
 
     @Override
-    protected @NotNull ItemInteractionResult useItemOn(ItemStack stack, BlockState state, Level level, BlockPos pos,
+    protected @NotNull InteractionResult useItemOn(ItemStack stack, BlockState state, Level level, BlockPos pos,
                                                        Player player, InteractionHand hand, BlockHitResult hitResult) {
         //noinspection ConstantValue
         if (!(state.getBlock() instanceof ChimneyBlock chimney)
@@ -172,7 +172,7 @@ public class ChimneyBlock extends Block implements EntityBlock {
                 List<ItemStack> itemStacks = items.get();
                 // Offset item spawning pos, depending on clicked face, to spawn items closer to the player.
                 // Items shooting in opposite direction is not fun.
-                Vec3i faceNormal = hitResult.getDirection().getNormal();
+                Vec3i faceNormal = hitResult.getDirection().getUnitVec3i();
                 Vector3f itemSpawnPosition = new Vector3f(pos.getX() + 0.5f + faceNormal.getX() * 0.65f,
                         pos.getY() + 0.6f + faceNormal.getY() * 0.65f,
                         pos.getZ() + 0.5f + faceNormal.getZ() * 0.65f);
@@ -188,7 +188,7 @@ public class ChimneyBlock extends Block implements EntityBlock {
             chimney.spawnSootParticles(level, pos, false);
         }
 
-        return ItemInteractionResult.SUCCESS;
+        return InteractionResult.SUCCESS;
     }
 
     @Override
@@ -290,7 +290,7 @@ public class ChimneyBlock extends Block implements EntityBlock {
     protected Optional<Supplier<List<ItemStack>>> getScrapedItems(BlockState state, ServerLevel level) {
         SingleRecipeInput input = new SingleRecipeInput(new ItemStack(state.getBlock().asItem()));
 
-        Optional<RecipeHolder<SootScrapingRecipe>> recipeOptional = level.getRecipeManager()
+        Optional<RecipeHolder<SootScrapingRecipe>> recipeOptional = level.recipeAccess()
                 .getRecipeFor(SootyChimneys.RecipeTypes.SOOT_SCRAPING.get(), input, level);
 
         return recipeOptional.map(recipeHolder -> () -> {

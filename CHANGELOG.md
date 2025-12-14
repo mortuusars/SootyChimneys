@@ -1,5 +1,8 @@
 # Changelog
 
+## 1.3.3 - 1.21.4 - 2025-12-14
+- Port to 1.21.4
+
 ## 1.3.3 - 2025-03-14
 - [NeoForge] Chimneys on Create contraptions are now interactable (for smoke blocking/restoring)
 - [NeoForge] Fixed Chimneys not emitting signal smoke when stacked on a Create contraption.

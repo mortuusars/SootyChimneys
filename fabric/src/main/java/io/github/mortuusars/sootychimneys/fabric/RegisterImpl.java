@@ -4,6 +4,7 @@ import com.mojang.brigadier.arguments.ArgumentType;
 import io.github.mortuusars.sootychimneys.SootyChimneys;
 import io.github.mortuusars.sootychimneys.Register;
 import net.fabricmc.fabric.api.command.v2.ArgumentTypeRegistry;
+import net.fabricmc.fabric.api.object.builder.v1.block.entity.FabricBlockEntityTypeBuilder;
 import net.fabricmc.fabric.api.screenhandler.v1.ExtendedScreenHandlerType;
 import net.minecraft.advancements.CriterionTrigger;
 import net.minecraft.commands.synchronization.ArgumentTypeInfo;
@@ -12,8 +13,11 @@ import net.minecraft.core.component.DataComponentType;
 import net.minecraft.core.particles.ParticleOptions;
 import net.minecraft.core.particles.ParticleType;
 import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.core.registries.Registries;
 import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.codec.StreamCodec;
+import net.minecraft.resources.ResourceKey;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
@@ -30,11 +34,13 @@ import net.minecraft.world.level.levelgen.feature.Feature;
 import net.minecraft.world.level.levelgen.feature.configurations.FeatureConfiguration;
 
 import java.util.function.Consumer;
+import java.util.function.Function;
 import java.util.function.Supplier;
 
 public class RegisterImpl {
-    public static <T extends Block> Supplier<T> block(String id, Supplier<T> supplier) {
-        T obj = Registry.register(BuiltInRegistries.BLOCK, SootyChimneys.resource(id), supplier.get());
+    public static <T extends Block> Supplier<T> block(String id, Function<ResourceLocation, T> supplier) {
+        ResourceLocation rl = SootyChimneys.resource(id);
+        T obj = Registry.register(BuiltInRegistries.BLOCK, rl, supplier.apply(rl));
         return () -> obj;
     }
 
@@ -44,11 +50,12 @@ public class RegisterImpl {
     }
 
     public static <T extends BlockEntity> BlockEntityType<T> newBlockEntityType(Register.BlockEntitySupplier<T> blockEntitySupplier, Block... validBlocks) {
-        return BlockEntityType.Builder.of(blockEntitySupplier::create, validBlocks).build();
+        return FabricBlockEntityTypeBuilder.create(blockEntitySupplier::create, validBlocks).build();
     }
 
-    public static <T extends Item> Supplier<T> item(String id, Supplier<T> supplier) {
-        T obj = Registry.register(BuiltInRegistries.ITEM, SootyChimneys.resource(id), supplier.get());
+    public static <T extends Item> Supplier<T> item(String id, Function<ResourceLocation, T> func) {
+        ResourceLocation rl = SootyChimneys.resource(id);
+        T obj = Registry.register(BuiltInRegistries.ITEM, rl, func.apply(rl));
         return () -> obj;
     }
 
@@ -61,7 +68,7 @@ public class RegisterImpl {
                         .clientTrackingRange(clientTrackingRange)
                         .alwaysUpdateVelocity(velocityUpdates)
                         .updateInterval(updateInterval)
-                        .build());
+                        .build(ResourceKey.create(Registries.ENTITY_TYPE, SootyChimneys.resource(id))));
         return () -> type;
     }
 

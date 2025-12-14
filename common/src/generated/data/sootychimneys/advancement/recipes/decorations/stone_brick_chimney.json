@@ -1,13 +1,11 @@
 {
   "parent": "minecraft:recipes/root",
   "criteria": {
-    "has_brick": {
+    "has_stone": {
       "conditions": {
         "items": [
           {
-            "items": [
-              "minecraft:brick"
-            ]
+            "items": "minecraft:stone"
           }
         ]
       },
@@ -15,20 +13,20 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "sootychimneys:brick_chimney"
+        "recipe": "sootychimneys:stone_brick_chimney"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
   },
   "requirements": [
     [
-      "has_brick",
-      "has_the_recipe"
+      "has_the_recipe",
+      "has_stone"
     ]
   ],
   "rewards": {
     "recipes": [
-      "sootychimneys:brick_chimney"
+      "sootychimneys:stone_brick_chimney"
     ]
   }
 }

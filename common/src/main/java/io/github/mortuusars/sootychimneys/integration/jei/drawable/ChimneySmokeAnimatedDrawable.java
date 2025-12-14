@@ -88,7 +88,7 @@ public class ChimneySmokeAnimatedDrawable implements IDrawableAnimated {
                 particlesToRemove.add(particle);
         }
 
-        particlesToRemove.forEach(particleToRemove -> currentParticles.remove(particleToRemove));
+        particlesToRemove.forEach(currentParticles::remove);
     }
 
     private void calculateAnimationTick() {

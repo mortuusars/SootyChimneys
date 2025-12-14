@@ -1,8 +1,6 @@
 {
   "type": "sootychimneys:soot_scraping",
-  "chimney": {
-    "item": "sootychimneys:dirty_mud_brick_chimney"
-  },
+  "chimney": "sootychimneys:dirty_mud_brick_chimney",
   "results": [
     {
       "chance": 0.5,

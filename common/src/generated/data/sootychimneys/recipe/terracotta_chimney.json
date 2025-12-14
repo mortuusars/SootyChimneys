@@ -1,13 +1,9 @@
 {
   "type": "minecraft:crafting_shaped",
-  "group": "terracotta_chimney",
+  "category": "misc",
   "key": {
-    "C": {
-      "tag": "minecraft:coals"
-    },
-    "T": {
-      "item": "minecraft:terracotta"
-    }
+    "C": "#minecraft:coals",
+    "T": "minecraft:terracotta"
   },
   "pattern": [
     "   ",
@@ -15,6 +11,7 @@
     "TCT"
   ],
   "result": {
+    "count": 1,
     "id": "sootychimneys:terracotta_chimney"
   }
 }

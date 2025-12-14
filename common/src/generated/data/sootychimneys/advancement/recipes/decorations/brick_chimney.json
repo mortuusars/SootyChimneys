@@ -1,13 +1,11 @@
 {
   "parent": "minecraft:recipes/root",
   "criteria": {
-    "has_cobblestone": {
+    "has_brick": {
       "conditions": {
         "items": [
           {
-            "items": [
-              "minecraft:cobblestone"
-            ]
+            "items": "minecraft:brick"
           }
         ]
       },
@@ -15,20 +13,20 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "sootychimneys:cobblestone_chimney"
+        "recipe": "sootychimneys:brick_chimney"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
   },
   "requirements": [
     [
-      "has_cobblestone",
-      "has_the_recipe"
+      "has_the_recipe",
+      "has_brick"
     ]
   ],
   "rewards": {
     "recipes": [
-      "sootychimneys:cobblestone_chimney"
+      "sootychimneys:brick_chimney"
     ]
   }
 }

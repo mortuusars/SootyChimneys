@@ -1,8 +1,6 @@
 {
   "type": "sootychimneys:soot_scraping",
-  "chimney": {
-    "item": "sootychimneys:dirty_terracotta_chimney"
-  },
+  "chimney": "sootychimneys:dirty_terracotta_chimney",
   "results": [
     {
       "chance": 0.5,
