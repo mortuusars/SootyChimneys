@@ -1,6 +1,6 @@
 package io.github.mortuusars.sootychimneys.fabric;
 
-import fuzs.forgeconfigapiport.fabric.api.neoforge.v4.NeoForgeConfigRegistry;
+import fuzs.forgeconfigapiport.fabric.api.v5.ConfigRegistry;
 import io.github.mortuusars.sootychimneys.Config;
 import net.fabricmc.api.ModInitializer;
 
@@ -17,8 +17,8 @@ public final class SootyChimneysFabric implements ModInitializer {
     public void onInitialize() {
         SootyChimneys.init();
 
-        NeoForgeConfigRegistry.INSTANCE.register(SootyChimneys.ID, ModConfig.Type.COMMON, Config.Common.SPEC);
-        NeoForgeConfigRegistry.INSTANCE.register(SootyChimneys.ID, ModConfig.Type.CLIENT, Config.Client.SPEC);
+        ConfigRegistry.INSTANCE.register(SootyChimneys.ID, ModConfig.Type.COMMON, Config.Common.SPEC);
+        ConfigRegistry.INSTANCE.register(SootyChimneys.ID, ModConfig.Type.CLIENT, Config.Client.SPEC);
 
         ItemGroupEvents.modifyEntriesEvent(CreativeModeTabs.FUNCTIONAL_BLOCKS).register(content -> {
             content.accept(SootyChimneys.Items.BRICK_CHIMNEY.get());

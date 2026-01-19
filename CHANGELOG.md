@@ -1,5 +1,8 @@
 # Changelog
 
+## 1.3.4 - 1.21.5 - 2026-01-19
+- Port to 1.21.5.
+
 ## 1.3.4 - 2026-01-19
 - Fixed chimneys not stacking properly.
 
