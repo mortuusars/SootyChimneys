@@ -2,7 +2,7 @@ plugins {
     id 'dev.architectury.loom' version '1.7-SNAPSHOT' apply false
     id 'architectury-plugin' version '3.4-SNAPSHOT'
     id 'com.github.johnrengelman.shadow' version '8.1.1' apply false
-    id "me.modmuss50.mod-publish-plugin" version "0.8.4"
+    id "me.modmuss50.mod-publish-plugin" version "1.1.0"
 }
 
 architectury {
@@ -99,7 +99,6 @@ subprojects {
         inputs.properties(expandProps)
     }
 
-    // Configure Maven publishing.
     publishing {
         publications {
             maven(MavenPublication) {
@@ -109,13 +108,20 @@ subprojects {
             }
         }
 
-        // See https://docs.gradle.org/current/userguide/publishing_maven.html for information on how to set up publishing.
         repositories {
-            var path = System.getenv("LOCAL_MAVEN")
-            if (path != null) {
+            var localPath = System.getenv("MAVEN_LOCAL")
+            if (localPath != null) {
                 maven {
-                    name = 'local'
-                    url = uri(path + "/maven")
+                    name = 'mortuusarsLocal'
+                    url = uri(localPath + "/maven")
+                }
+            }
+
+            var resourcesPath = System.getenv("MAVEN_GITHUB_RESOURCES")
+            if (resourcesPath != null) {
+                maven {
+                    name = 'mortuusarsGithubResources'
+                    url = uri(resourcesPath + "/maven")
                 }
             }
         }
@@ -194,7 +200,7 @@ publishMods {
         modLoaders.add("fabric")
         displayName = "${mod_name} - Fabric ${minecraft_version} - ${mod_version}"
         requires("fabric-api")
-        requires("forge-config-api-port-fabric")
+        requires("forge-config-api-port")
     }
 
     modrinth("modrinthNeoForge") {
