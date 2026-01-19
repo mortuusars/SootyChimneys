@@ -1,10 +1,6 @@
 package io.github.mortuusars.sootychimneys.neoforge;
 
 import io.github.mortuusars.sootychimneys.Config;
-import net.minecraft.core.Registry;
-import net.minecraft.core.registries.BuiltInRegistries;
-import net.minecraft.core.registries.Registries;
-import net.minecraft.stats.StatType;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.fml.ModContainer;
@@ -44,7 +40,7 @@ public final class SootyChimneysNeoForge {
         RegisterImpl.PARTICLE_TYPES.register(modEventBus);
         RegisterImpl.CUSTOM_STATS.register(modEventBus);
 
-        if (FMLEnvironment.dist == Dist.CLIENT) {
+        if (FMLEnvironment.getDist() == Dist.CLIENT) {
             SootyChimneysNeoForgeClient.init(container);
         }
     }

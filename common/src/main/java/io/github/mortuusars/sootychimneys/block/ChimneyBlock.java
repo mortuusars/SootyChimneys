@@ -127,7 +127,7 @@ public class ChimneyBlock extends Block implements EntityBlock {
 
         boolean newBlockedValue = !state.getValue(BLOCKED);
 
-        if (!level.isClientSide && level.setBlock(pos, state.setValue(BLOCKED, newBlockedValue), Block.UPDATE_ALL)) {
+        if (!level.isClientSide() && level.setBlock(pos, state.setValue(BLOCKED, newBlockedValue), Block.UPDATE_ALL)) {
             RandomSource random = level.getRandom();
 
             level.playSound(null, pos, newBlockedValue ? SoundEvents.LANTERN_FALL : SoundEvents.LANTERN_HIT, SoundSource.BLOCKS,
@@ -224,7 +224,7 @@ public class ChimneyBlock extends Block implements EntityBlock {
     }
 
     public void emitParticle(Level level, double x, double y, double z, ParticleOptions particleType) {
-        if (!level.isClientSide)
+        if (!level.isClientSide())
             return;
 
         SmokeProperties smokeProperties = getType().smokeProperties();

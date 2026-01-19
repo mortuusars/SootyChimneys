@@ -14,7 +14,7 @@ public class ChimneyMovementBehaviour /*implements MovementBehaviour*/ {
 //    @Override
 //    public void tick(MovementContext context) {
 //        Level level = context.world;
-//        if (level != null && level.isClientSide && context.position != null
+//        if (level != null && level.isClientSide() && context.position != null
 //                && context.state.getBlock() instanceof ChimneyBlock chimneyBlock
 //                && chimneyBlock.shouldEmitSmoke(context.state, context.contraption.getContraptionWorld(), context.localPos)
 //                && level.getRandom().nextDouble() < Config.Common.SMOKE_STRENGTH.get()) {

@@ -14,7 +14,7 @@ package io.github.mortuusars.sootychimneys.integration.create;
 //    @Override
 //    public void tick(MovementContext context) {
 //        Level level = context.world;
-//        if (level != null && level.isClientSide && context.position != null
+//        if (level != null && level.isClientSide() && context.position != null
 //                && context.state.getBlock() instanceof ChimneyBlock chimneyBlock
 //                && chimneyBlock.shouldEmitSmoke(context.state, context.world, context.localPos)
 //                && level.getRandom().nextDouble() < Config.SMOKE_STRENGTH.get()) {
