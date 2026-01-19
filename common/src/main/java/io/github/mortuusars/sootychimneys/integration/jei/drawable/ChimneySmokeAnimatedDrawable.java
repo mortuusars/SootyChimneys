@@ -63,7 +63,7 @@ public class ChimneySmokeAnimatedDrawable implements IDrawableAnimated {
 
             IDrawable particleFrame = smokeParticles.get(index);
 
-            guiGraphics.pose().translate(0, 0, 100); // increase z-index so smoke renders above other things
+//            guiGraphics.pose().translate(0, 0, 100); // increase z-index so smoke renders above other things
 
             particleFrame.draw(guiGraphics, (int) (xOffset + pos.x), (int) (yOffset + pos.y));
         }

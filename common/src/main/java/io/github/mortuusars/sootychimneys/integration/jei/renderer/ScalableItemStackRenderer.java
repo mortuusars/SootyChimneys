@@ -29,12 +29,12 @@ public class ScalableItemStackRenderer implements IIngredientRenderer<ItemStack>
     @Override
     public void render(GuiGraphics guiGraphics, ItemStack ingredient) {
         if (ingredient != null) {
-            guiGraphics.pose().pushPose();
+//            guiGraphics.pose().pushPose();
             {
-                guiGraphics.pose().scale(xScale, yScale, zScale);
+                guiGraphics.pose().scale(xScale, yScale);
                 guiGraphics.renderItem(ingredient, 0, 0);
             }
-            guiGraphics.pose().popPose();
+//            guiGraphics.pose().popPose();
         }
     }
 
