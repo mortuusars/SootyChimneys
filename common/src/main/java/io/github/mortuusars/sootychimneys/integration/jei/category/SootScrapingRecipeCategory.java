@@ -9,6 +9,7 @@ import io.github.mortuusars.sootychimneys.recipe.result.ChanceResult;
 import mezz.jei.api.constants.VanillaTypes;
 import mezz.jei.api.gui.builder.IRecipeLayoutBuilder;
 import mezz.jei.api.gui.drawable.IDrawable;
+import mezz.jei.api.gui.drawable.IDrawableBuilder;
 import mezz.jei.api.gui.drawable.IDrawableStatic;
 import mezz.jei.api.gui.ingredient.IRecipeSlotsView;
 import mezz.jei.api.helpers.IGuiHelper;
@@ -19,8 +20,9 @@ import mezz.jei.api.recipe.types.IRecipeType;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.network.chat.Component;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import org.jetbrains.annotations.NotNull;
+import org.jspecify.annotations.NonNull;
 
 import java.util.List;
 
@@ -29,8 +31,8 @@ public class SootScrapingRecipeCategory implements IRecipeCategory<SootScrapingR
     public static final int BG_HEIGHT = 65;
 
     private final Component title;
-    private final IDrawable background;
     private final IDrawableStatic icon;
+    private final IDrawableStatic background;
     private final IDrawableStatic dust;
     private final IDrawableStatic slot;
     private final IDrawableStatic chanceSlot;
@@ -38,12 +40,13 @@ public class SootScrapingRecipeCategory implements IRecipeCategory<SootScrapingR
     public SootScrapingRecipeCategory(IGuiHelper helper) {
         title = Component.translatable("jei.sootychimneys.category.soot_scraping");
 
-        ResourceLocation texture = SootyChimneys.resource("textures/gui/jei/soot_scraping.png");
+        Identifier texture = SootyChimneys.resource("textures/gui/jei/soot_scraping.png");
 
-        background = helper.createDrawable(texture, 0, 0, BG_WIDTH, BG_HEIGHT);
         icon = helper.drawableBuilder(SootyChimneys.resource("textures/gui/jei/soot_scraping_icon.png"), 0, 0, 16, 16)
                 .setTextureSize(16, 16)
                 .build();
+
+        background = helper.createDrawable(texture, 0, 0, BG_WIDTH, BG_HEIGHT);
 
         dust = helper.createDrawable(texture, 155, 0, 10, 12);
         slot = helper.createDrawable(texture, 0, 65, 18, 18);
@@ -89,7 +92,9 @@ public class SootScrapingRecipeCategory implements IRecipeCategory<SootScrapingR
     }
 
     @Override
-    public void draw(SootScrapingRecipe recipe, IRecipeSlotsView recipeSlotsView, GuiGraphics guiGraphics, double mouseX, double mouseY) {
+    public void draw(SootScrapingRecipe recipe, @NonNull IRecipeSlotsView recipeSlotsView, @NonNull GuiGraphics guiGraphics, double mouseX, double mouseY) {
+        background.draw(guiGraphics);
+
         List<ChanceResult> results = recipe.results()
                 .stream()
                 .filter(result -> !result.stack().isEmpty() && result.chance() > 0)
@@ -116,10 +121,14 @@ public class SootScrapingRecipeCategory implements IRecipeCategory<SootScrapingR
         return title;
     }
 
-    @SuppressWarnings("removal")
     @Override
-    public @NotNull IDrawable getBackground() {
-        return background;
+    public int getWidth() {
+        return BG_WIDTH;
+    }
+
+    @Override
+    public int getHeight() {
+        return BG_HEIGHT;
     }
 
     @Override

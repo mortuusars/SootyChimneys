@@ -17,7 +17,7 @@ import net.minecraft.core.registries.Registries;
 import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.resources.ResourceKey;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
@@ -38,8 +38,8 @@ import java.util.function.Function;
 import java.util.function.Supplier;
 
 public class RegisterImpl {
-    public static <T extends Block> Supplier<T> block(String id, Function<ResourceLocation, T> supplier) {
-        ResourceLocation rl = SootyChimneys.resource(id);
+    public static <T extends Block> Supplier<T> block(String id, Function<Identifier, T> supplier) {
+        Identifier rl = SootyChimneys.resource(id);
         T obj = Registry.register(BuiltInRegistries.BLOCK, rl, supplier.apply(rl));
         return () -> obj;
     }
@@ -53,8 +53,8 @@ public class RegisterImpl {
         return FabricBlockEntityTypeBuilder.create(blockEntitySupplier::create, validBlocks).build();
     }
 
-    public static <T extends Item> Supplier<T> item(String id, Function<ResourceLocation, T> func) {
-        ResourceLocation rl = SootyChimneys.resource(id);
+    public static <T extends Item> Supplier<T> item(String id, Function<Identifier, T> func) {
+        Identifier rl = SootyChimneys.resource(id);
         T obj = Registry.register(BuiltInRegistries.ITEM, rl, func.apply(rl));
         return () -> obj;
     }

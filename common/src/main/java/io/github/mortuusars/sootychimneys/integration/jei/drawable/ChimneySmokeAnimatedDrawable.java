@@ -7,7 +7,7 @@ import mezz.jei.api.gui.drawable.IDrawableStatic;
 import mezz.jei.api.helpers.IGuiHelper;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.util.Tuple;
 import net.minecraft.world.phys.Vec2;
 
@@ -35,18 +35,18 @@ public class ChimneySmokeAnimatedDrawable implements IDrawableAnimated {
         currentParticles = new ArrayList<>();
 
         // Add 11 and 10 to start from smaller particles and create smoother animation:
-        IDrawableStatic particle11 = helper.drawableBuilder(ResourceLocation.withDefaultNamespace("textures/particle/big_smoke_11.png"), 0, 0, 16, 16)
+        IDrawableStatic particle11 = helper.drawableBuilder(Identifier.withDefaultNamespace("textures/particle/big_smoke_11.png"), 0, 0, 16, 16)
                 .setTextureSize(16, 16)
                 .build();
         smokeParticles.add(particle11);
 
-        IDrawableStatic particle10 = helper.drawableBuilder(ResourceLocation.withDefaultNamespace("textures/particle/big_smoke_10.png"), 0, 0, 16, 16)
+        IDrawableStatic particle10 = helper.drawableBuilder(Identifier.withDefaultNamespace("textures/particle/big_smoke_10.png"), 0, 0, 16, 16)
                 .setTextureSize(16, 16)
                 .build();
         smokeParticles.add(particle10);
 
         for (int i = 0; i < 12; i++) {
-            IDrawableStatic particle = helper.drawableBuilder(ResourceLocation.withDefaultNamespace("textures/particle/big_smoke_" + i + ".png"), 0, 0, 16, 16)
+            IDrawableStatic particle = helper.drawableBuilder(Identifier.withDefaultNamespace("textures/particle/big_smoke_" + i + ".png"), 0, 0, 16, 16)
                     .setTextureSize(16, 16)
                     .build();
             smokeParticles.add(particle);

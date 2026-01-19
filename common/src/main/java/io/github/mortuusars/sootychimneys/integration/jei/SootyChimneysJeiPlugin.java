@@ -13,7 +13,7 @@ import mezz.jei.api.JeiPlugin;
 import mezz.jei.api.registration.IRecipeCategoryRegistration;
 import mezz.jei.api.registration.IRecipeRegistration;
 import net.minecraft.core.registries.BuiltInRegistries;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.world.item.ItemStack;
 import org.jetbrains.annotations.NotNull;
 
@@ -22,10 +22,10 @@ import java.util.List;
 
 @JeiPlugin
 public class SootyChimneysJeiPlugin implements IModPlugin {
-    private static final ResourceLocation UID = SootyChimneys.resource("jei_plugin");
+    private static final Identifier UID = SootyChimneys.resource("jei_plugin");
 
     @Override
-    public @NotNull ResourceLocation getPluginUid() {
+    public @NotNull Identifier getPluginUid() {
         return UID;
     }
 

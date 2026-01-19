@@ -47,6 +47,7 @@ import net.minecraft.world.phys.shapes.VoxelShape;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.joml.Vector3f;
+import org.jspecify.annotations.NonNull;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -119,8 +120,8 @@ public class ChimneyBlock extends Block implements EntityBlock {
     }
 
     @Override
-    protected @NotNull InteractionResult useWithoutItem(BlockState state, Level level, BlockPos pos,
-                                                        Player player, BlockHitResult hitResult) {
+    protected @NotNull InteractionResult useWithoutItem(@NonNull BlockState state, @NonNull Level level, @NonNull BlockPos pos,
+                                                        Player player, @NonNull BlockHitResult hitResult) {
         if (!player.getMainHandItem().isEmpty()) {
             return super.useWithoutItem(state, level, pos, player, hitResult);
         }
@@ -148,8 +149,8 @@ public class ChimneyBlock extends Block implements EntityBlock {
     }
 
     @Override
-    protected @NotNull InteractionResult useItemOn(ItemStack stack, BlockState state, Level level, BlockPos pos,
-                                                       Player player, InteractionHand hand, BlockHitResult hitResult) {
+    protected @NotNull InteractionResult useItemOn(@NonNull ItemStack stack, BlockState state, @NonNull Level level, @NonNull BlockPos pos,
+                                                   @NonNull Player player, @NonNull InteractionHand hand, @NonNull BlockHitResult hitResult) {
         //noinspection ConstantValue
         if (!(state.getBlock() instanceof ChimneyBlock chimney)
                 || !chimney.isDirty()
@@ -198,7 +199,7 @@ public class ChimneyBlock extends Block implements EntityBlock {
     }
 
     @Override
-    protected void neighborChanged(BlockState state, Level level, BlockPos pos, Block neighborBlock, @Nullable Orientation orientation, boolean movedByPiston) {
+    protected void neighborChanged(@NonNull BlockState state, @NonNull Level level, @NonNull BlockPos pos, @NonNull Block neighborBlock, @Nullable Orientation orientation, boolean movedByPiston) {
         updateState(state, level, pos);
     }
 
@@ -314,7 +315,7 @@ public class ChimneyBlock extends Block implements EntityBlock {
     }
 
     @Override
-    public void destroy(LevelAccessor level, BlockPos pos, BlockState state) {
+    public void destroy(@NonNull LevelAccessor level, @NonNull BlockPos pos, @NonNull BlockState state) {
         if (level instanceof Level lvl && state.getBlock() instanceof ChimneyBlock chimney && chimney.isDirty())
             chimney.spawnSootParticles(lvl, pos, false);
     }

@@ -1,5 +1,7 @@
 package io.github.mortuusars.sootychimneys.data.wind;
 
+import net.minecraft.core.BlockPos;
+import net.minecraft.world.attribute.EnvironmentAttributes;
 import net.minecraft.world.level.Level;
 
 public enum TimeOfDay {
@@ -20,6 +22,6 @@ public enum TimeOfDay {
     }
 
     public static TimeOfDay of(Level level){
-        return fromSunAngle((level.getSunAngle(level.getDayTime()) * 180/Math.PI));
+        return fromSunAngle(level.environmentAttributes().getValue(EnvironmentAttributes.SUN_ANGLE, BlockPos.ZERO));
     }
 }

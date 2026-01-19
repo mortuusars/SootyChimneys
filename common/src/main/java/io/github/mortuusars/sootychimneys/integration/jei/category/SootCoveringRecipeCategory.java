@@ -11,17 +11,19 @@ import mezz.jei.api.constants.VanillaTypes;
 import mezz.jei.api.gui.builder.IRecipeLayoutBuilder;
 import mezz.jei.api.gui.drawable.IDrawable;
 import mezz.jei.api.gui.drawable.IDrawableStatic;
+import mezz.jei.api.gui.ingredient.IRecipeSlotsView;
 import mezz.jei.api.helpers.IGuiHelper;
 import mezz.jei.api.recipe.IFocusGroup;
 import mezz.jei.api.recipe.RecipeIngredientRole;
 import mezz.jei.api.recipe.category.IRecipeCategory;
 import mezz.jei.api.recipe.types.IRecipeType;
+import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.network.chat.Component;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import org.jetbrains.annotations.NotNull;
+import org.jspecify.annotations.NonNull;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -48,20 +50,21 @@ public class SootCoveringRecipeCategory implements IRecipeCategory<SootCoveringJ
     }};
 
     private final Component title;
-    private final IDrawable background;
     private final IDrawableStatic icon;
+    private final IDrawableStatic background;
     private final IGuiHelper helper;
 
     public SootCoveringRecipeCategory(IGuiHelper helper) {
         this.helper = helper;
         title = Component.translatable("jei.sootychimneys.category.soot_covering");
 
-        ResourceLocation texture = SootyChimneys.resource("textures/gui/jei/soot_covering.png");
+//        Identifier texture = SootyChimneys.resource("textures/gui/jei/soot_covering.png");
 
-        background = helper.createDrawable(texture, 0, 0, BG_WIDTH, BG_HEIGHT);
         icon = helper.drawableBuilder(SootyChimneys.resource("textures/gui/jei/soot_covering_icon.png"), 0, 0, 16, 16)
                 .setTextureSize(16, 16)
                 .build();
+
+        background = helper.createDrawable(SootyChimneys.resource("textures/gui/jei/soot_covering.png"), 0, 0, BG_WIDTH, BG_HEIGHT);
     }
 
     @Override
@@ -97,13 +100,23 @@ public class SootCoveringRecipeCategory implements IRecipeCategory<SootCoveringJ
     }
 
     @Override
+    public void draw(SootCoveringJeiRecipe recipe, @NonNull IRecipeSlotsView recipeSlotsView, @NonNull GuiGraphics guiGraphics, double mouseX, double mouseY) {
+        background.draw(guiGraphics);
+    }
+
+    @Override
     public @NotNull Component getTitle() {
         return title;
     }
 
-    @SuppressWarnings("removal")
-    public @NotNull IDrawable getBackground() {
-        return background;
+    @Override
+    public int getWidth() {
+        return BG_WIDTH;
+    }
+
+    @Override
+    public int getHeight() {
+        return BG_HEIGHT;
     }
 
     @Override

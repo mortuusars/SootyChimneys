@@ -11,7 +11,7 @@ import net.minecraft.core.particles.ParticleOptions;
 import net.minecraft.core.particles.ParticleType;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceKey;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
@@ -47,9 +47,9 @@ public class RegisterImpl {
     public static final DeferredRegister<Feature<?>> WORLD_GEN_FEATURES = DeferredRegister.create(Registries.FEATURE, SootyChimneys.ID);
     public static final DeferredRegister.DataComponents DATA_COMPONENT_TYPES = DeferredRegister.createDataComponents(Registries.DATA_COMPONENT_TYPE, SootyChimneys.ID);
     public static final DeferredRegister<ParticleType<?>> PARTICLE_TYPES = DeferredRegister.create(Registries.PARTICLE_TYPE, SootyChimneys.ID);
-    public static final DeferredRegister<ResourceLocation> CUSTOM_STATS = DeferredRegister.create(Registries.CUSTOM_STAT, SootyChimneys.ID);
+    public static final DeferredRegister<Identifier> CUSTOM_STATS = DeferredRegister.create(Registries.CUSTOM_STAT, SootyChimneys.ID);
 
-    public static <T extends Block> Supplier<T> block(String id, Function<ResourceLocation, T> func) {
+    public static <T extends Block> Supplier<T> block(String id, Function<Identifier, T> func) {
         return BLOCKS.register(id, func);
     }
 
@@ -61,7 +61,7 @@ public class RegisterImpl {
         return new BlockEntityType<>(blockEntitySupplier::create, validBlocks);
     }
 
-    public static <T extends Item> Supplier<T> item(String id, Function<ResourceLocation, T> func) {
+    public static <T extends Item> Supplier<T> item(String id, Function<Identifier, T> func) {
         return ITEMS.register(id, func);
     }
 

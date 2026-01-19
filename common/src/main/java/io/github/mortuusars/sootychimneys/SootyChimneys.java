@@ -8,8 +8,9 @@ import io.github.mortuusars.sootychimneys.recipe.SootScrapingRecipe;
 import net.minecraft.core.Registry;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
+import net.minecraft.resources.Identifier;
 import net.minecraft.resources.ResourceKey;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.stats.StatFormatter;
 import net.minecraft.tags.TagKey;
@@ -49,8 +50,8 @@ public final class SootyChimneys {
     /**
      * Creates resource location in the mod namespace with the given path.
      */
-    public static ResourceLocation resource(String path) {
-        return ResourceLocation.fromNamespaceAndPath(ID, path);
+    public static Identifier resource(String path) {
+        return Identifier.fromNamespaceAndPath(ID, path);
     }
 
     public static class Blocks {
@@ -254,12 +255,12 @@ public final class SootyChimneys {
     }
 
     public static class Stats {
-        public static final Map<ResourceLocation, StatFormatter> STATS = new HashMap<>();
+        public static final Map<Identifier, StatFormatter> STATS = new HashMap<>();
 
-        public static final ResourceLocation SOOT_SCRAPED = register(resource("soot_scraped"), StatFormatter.DEFAULT);
+        public static final Identifier SOOT_SCRAPED = register(resource("soot_scraped"), StatFormatter.DEFAULT);
 
         @SuppressWarnings("SameParameterValue")
-        private static ResourceLocation register(ResourceLocation location, StatFormatter formatter) {
+        private static Identifier register(Identifier location, StatFormatter formatter) {
             STATS.put(location, formatter);
             return location;
         }
@@ -288,13 +289,13 @@ public final class SootyChimneys {
         public static class Items {
             public static final TagKey<Item> CHIMNEYS = TagKey.create(Registries.ITEM, resource("chimneys"));
             public static final TagKey<Item> SOOTY_CHIMNEYS = TagKey.create(Registries.ITEM, resource("sooty_chimneys"));
-            public static final TagKey<Item> C_CHIMNEYS = TagKey.create(Registries.ITEM, ResourceLocation.parse("c:chimneys"));
+            public static final TagKey<Item> C_CHIMNEYS = TagKey.create(Registries.ITEM, Identifier.parse("c:chimneys"));
         }
 
         public static class Blocks {
             public static final TagKey<Block> CHIMNEYS = TagKey.create(Registries.BLOCK, resource("chimneys"));
             public static final TagKey<Block> SOOTY_CHIMNEYS = TagKey.create(Registries.BLOCK, resource("sooty_chimneys"));
-            public static final TagKey<Block> C_CHIMNEYS = TagKey.create(Registries.BLOCK, ResourceLocation.parse("c:chimneys"));
+            public static final TagKey<Block> C_CHIMNEYS = TagKey.create(Registries.BLOCK, Identifier.parse("c:chimneys"));
             public static final TagKey<Block> SMOKE_BLOCKING = TagKey.create(Registries.BLOCK, SootyChimneys.resource("smoke_blocking"));
             public static final TagKey<Block> SMOKE_BOOSTING = TagKey.create(Registries.BLOCK, SootyChimneys.resource("smoke_boosting"));
         }

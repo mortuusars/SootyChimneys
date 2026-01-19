@@ -9,7 +9,7 @@ import net.minecraft.core.component.DataComponentType;
 import net.minecraft.core.particles.ParticleOptions;
 import net.minecraft.core.particles.ParticleType;
 import net.minecraft.network.RegistryFriendlyByteBuf;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
@@ -36,7 +36,7 @@ import java.util.function.Supplier;
 
 public class Register {
     @ExpectPlatform
-    public static <T extends Block> Supplier<T> block(String id, Function<ResourceLocation, T> supplier) {
+    public static <T extends Block> Supplier<T> block(String id, Function<Identifier, T> supplier) {
         throw new AssertionError();
     }
 
@@ -57,7 +57,7 @@ public class Register {
     }
 
     @ExpectPlatform
-    public static <T extends Item> Supplier<T> item(String id, Function<ResourceLocation, T> func) {
+    public static <T extends Item> Supplier<T> item(String id, Function<Identifier, T> func) {
         throw new AssertionError();
     }
 
