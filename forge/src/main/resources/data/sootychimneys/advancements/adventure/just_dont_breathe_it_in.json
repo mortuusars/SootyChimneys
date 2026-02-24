@@ -24,7 +24,7 @@
             "condition": "minecraft:match_tool",
             "predicate": {
               "predicates": {
-                "neoforge:item_ability": "axe_scrape"
+                "forge:tool_action": "axe_scrape"
               }
             }
           }

@@ -17,5 +17,7 @@
     "I I",
     "BCB"
   ],
-  "result": "sootychimneys:copper_chimney"
+  "result": {
+    "item": "sootychimneys:copper_chimney"
+  }
 }

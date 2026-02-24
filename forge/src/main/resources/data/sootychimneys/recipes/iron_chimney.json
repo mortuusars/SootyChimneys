@@ -17,5 +17,7 @@
     "N N",
     "ICI"
   ],
-  "result": "sootychimneys:iron_chimney"
+  "result": {
+    "item": "sootychimneys:iron_chimney"
+  }
 }

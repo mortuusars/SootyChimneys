@@ -31,11 +31,3 @@ mandatory=true
 versionRange = "${minecraft_version_range}"
 ordering = "NONE"
 side = "BOTH"
-
-[[dependencies.${mod_id}]]
-modId = "create"
-mandatory=false
-reason = "${create_version_range_reason}"
-versionRange = "${create_version_range}"
-ordering = "NONE"
-side = "BOTH"

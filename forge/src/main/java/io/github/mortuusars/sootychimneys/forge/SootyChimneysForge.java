@@ -3,7 +3,6 @@ package io.github.mortuusars.sootychimneys.forge;
 import io.github.mortuusars.sootychimneys.Config;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.eventbus.api.IEventBus;
-import net.minecraftforge.fml.ModContainer;
 import net.minecraftforge.fml.ModLoadingContext;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.config.ModConfig;
@@ -14,7 +13,7 @@ import io.github.mortuusars.sootychimneys.SootyChimneys;
 
 @Mod(SootyChimneys.ID)
 public final class SootyChimneysForge {
-    public SootyChimneysForge(ModContainer container) {
+    public SootyChimneysForge() {
         SootyChimneys.init();
 
         SootyChimneys.Stats.STATS.forEach((location, formatter) -> {
@@ -41,7 +40,7 @@ public final class SootyChimneysForge {
         RegisterImpl.CUSTOM_STATS.register(modEventBus);
 
         if (FMLEnvironment.dist == Dist.CLIENT) {
-            SootyChimneysForgeClient.init(container);
+            SootyChimneysForgeClient.init();
         }
     }
 }

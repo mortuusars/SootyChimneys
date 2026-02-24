@@ -64,7 +64,7 @@ public class SootyChimneysJeiPlugin implements IModPlugin {
             if (results1.isEmpty())
                 return 1;
 
-            return Float.compare(results1.getFirst().getChance(), results.getFirst().getChance());
+            return Float.compare(results1.get(0).getChance(), results.get(0).getChance());
         });
 
         registration.addRecipes(JeiRecipeTypes.SOOT_SCRAPING, recipes);

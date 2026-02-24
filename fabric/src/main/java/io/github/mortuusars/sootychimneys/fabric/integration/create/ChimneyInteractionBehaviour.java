@@ -1,4 +1,4 @@
-package io.github.mortuusars.sootychimneys.forge.integration.create;
+package io.github.mortuusars.sootychimneys.fabric.integration.create;
 
 import com.simibubi.create.api.behaviour.interaction.MovingInteractionBehaviour;
 import com.simibubi.create.content.contraptions.AbstractContraptionEntity;

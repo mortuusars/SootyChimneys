@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.3.4 - 1.20.1 - 2026-02-24
+- Parity with 1.21.1.
+- [Fabric] Official support for fabric on 1.20.1.
+
 ## 1.3.4 - 2026-01-19
 - Updated localization files.
 
