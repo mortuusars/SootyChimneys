@@ -1,0 +1,39 @@
+{
+  "schemaVersion": 1,
+  "id": "${mod_id}",
+  "version": "${mod_version}",
+  "name": "${mod_name}",
+  "description": "${mod_description}",
+  "authors": [
+    "${mod_authors}"
+  ],
+  "contact": {
+    "homepage": "${mod_page}",
+    "sources": "${mod_github}"
+  },
+  "license": "${mod_license}",
+  "icon": "icon.png",
+  "environment": "*",
+  "entrypoints": {
+    "main": [
+      "io.github.mortuusars.sootychimneys.fabric.SootyChimneysFabric"
+    ],
+    "client": [
+      "io.github.mortuusars.sootychimneys.fabric.client.SootyChimneysFabricClient"
+    ],
+    "jei_mod_plugin": [
+      "io.github.mortuusars.sootychimneys.integration.jei.SootyChimneysJeiPlugin"
+    ]
+  },
+  "mixins": [
+    "${mod_id}.common.mixins.json",
+    "${mod_id}.fabric.mixins.json"
+  ],
+  "depends": {
+    "fabricloader": ">=0.16.0",
+    "minecraft": ">=1.20.1",
+    "java": ">=17",
+    "fabric-api": "*",
+    "forgeconfigapiport": ">=8.0.0"
+  }
+}

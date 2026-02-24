@@ -1,0 +1,45 @@
+{
+  "advancements.sootychimneys.adventure.just_dont_breathe_it_in.title": "Не дышите",
+  "advancements.sootychimneys.adventure.just_dont_breathe_it_in.description": "Соскребите сажу с дымохода",
+
+  "stat.sootychimneys.soot_scraped": "Сажи соскребено",
+
+  "block.sootychimneys.brick_chimney": "Кирпичный дымоход",
+  "block.sootychimneys.dirty_brick_chimney": "Закопчённый кирпичный дымоход",
+  "block.sootychimneys.cobblestone_chimney": "Булыжный дымоход",
+  "block.sootychimneys.dirty_cobblestone_chimney": "Закопчённый булыжный дымоход",
+  "block.sootychimneys.stone_brick_chimney": "Дымоход из каменного кирпича",
+  "block.sootychimneys.dirty_stone_brick_chimney": "Закопчённый дымоход из каменного кирпича",
+  "block.sootychimneys.mud_brick_chimney": "Саманный дымоход",
+  "block.sootychimneys.dirty_mud_brick_chimney": "Закопчённый саманный дымоход",
+  "block.sootychimneys.iron_chimney": "Железный дымоход",
+  "block.sootychimneys.dirty_iron_chimney": "Закопчённый железный дымоход",
+  "block.sootychimneys.copper_chimney": "Медный дымоход",
+  "block.sootychimneys.dirty_copper_chimney": "Закопчённый медный дымоход",
+  "block.sootychimneys.terracotta_chimney": "Керамический дымоход",
+  "block.sootychimneys.dirty_terracotta_chimney": "Закопчённый керамический дымоход",
+  "jei.sootychimneys.category.soot_covering": "Покрытие сажей",
+  "jei.sootychimneys.category.soot_scraping": "Снятие сажи",
+  "jei.sootychimneys.category.soot_scraping.soot_items_info": "Может произвести побочный продукт",
+  "jei.sootychimneys.chance": "Шанс: %s%%",
+  "message.sootychimneys.blocked": "Поток дыма перекрыт",
+  "message.sootychimneys.open": "Поток дыма восстановлен",
+
+  "sootychimneys.configuration.SmokeFlow": "Поток дыма",
+  "sootychimneys.configuration.DirtyChance": "Шанс закопчения",
+  "sootychimneys.configuration.Wind": "Ветер",
+  "sootychimneys.configuration.WindStrength": "Сила ветра",
+  "sootychimneys.configuration.WindAffectsCampfire": "Влияние ветра на костры",
+
+  "sootychimneys.configuration.JEI": "Интеграция с JEI",
+  "sootychimneys.configuration.SootCoveringCategory": "Категория покрытия сажей",
+  "sootychimneys.configuration.SootScrapingCategory": "Категория снятия сажи",
+
+  "tag.item.c.chimneys": "Дымоходы",
+  "tag.block.c.chimneys": "Дымоходы",
+  "tag.item.sootychimneys.chimneys": "Дымоходы",
+  "tag.item.sootychimneys.sooty_chimneys": "Закопчённые дымоходы",
+  "tag.block.sootychimneys.chimneys": "Дымоходы",
+  "tag.block.sootychimneys.sooty_chimneys": "Закопчённые дымоходы",
+  "tag.block.sootychimneys.soot_scrapers": "Инструменты для соскребания сажи"
+}

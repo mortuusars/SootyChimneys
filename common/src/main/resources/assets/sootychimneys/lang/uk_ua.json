@@ -1,0 +1,45 @@
+{
+  "advancements.sootychimneys.adventure.just_dont_breathe_it_in.title": "Брудна робота",
+  "advancements.sootychimneys.adventure.just_dont_breathe_it_in.description": "Зішкрібіть сажу з димоходу",
+
+  "stat.sootychimneys.soot_scraped": "Зчищено сажі",
+
+  "block.sootychimneys.brick_chimney": "Цегляний димохід",
+  "block.sootychimneys.dirty_brick_chimney": "Сажистий цегляний димохід",
+  "block.sootychimneys.cobblestone_chimney": "Димохід з кругляку",
+  "block.sootychimneys.dirty_cobblestone_chimney": "Сажистий димохід з кругляку",
+  "block.sootychimneys.stone_brick_chimney": "Димохід з кам'яної цегли",
+  "block.sootychimneys.dirty_stone_brick_chimney": "Сажистий димохід з кам'яної цегли",
+  "block.sootychimneys.mud_brick_chimney": "Димохід з лимпача",
+  "block.sootychimneys.dirty_mud_brick_chimney": "Сажистий димохід з лимпача",
+  "block.sootychimneys.iron_chimney": "Залізний димохід",
+  "block.sootychimneys.dirty_iron_chimney": "Сажистий залізний димохід",
+  "block.sootychimneys.copper_chimney": "Мідний димохід",
+  "block.sootychimneys.dirty_copper_chimney": "Сажистий мідний димохід",
+  "block.sootychimneys.terracotta_chimney": "Керамічний димохід",
+  "block.sootychimneys.dirty_terracotta_chimney": "Сажистий керамічний димохід",
+  "jei.sootychimneys.category.soot_covering": "Вкриття сажею",
+  "jei.sootychimneys.category.soot_scraping": "Зішкрібання сажі",
+  "jei.sootychimneys.category.soot_scraping.soot_items_info": "Може утворювати субпродукт",
+  "jei.sootychimneys.chance": "%s%% вірогідності",
+  "message.sootychimneys.blocked": "Вихід диму перекрито",
+  "message.sootychimneys.open": "Вихід диму відновлено",
+
+  "sootychimneys.configuration.SmokeFlow": "Кількість диму",
+  "sootychimneys.configuration.DirtyChance": "Шанс забруднення",
+  "sootychimneys.configuration.Wind": "Ефект вітру",
+  "sootychimneys.configuration.WindStrength": "Сила вітру",
+  "sootychimneys.configuration.WindAffectsCampfire": "Вітер впливає на дим від Багаття",
+
+  "sootychimneys.configuration.JEI": "Інтеграція з JEI",
+  "sootychimneys.configuration.SootCoveringCategory": "Категорія 'Покриття сажею'",
+  "sootychimneys.configuration.SootScrapingCategory": "Категорія 'Зішкрібання сажі'",
+
+  "tag.item.c.chimneys": "Димоходи",
+  "tag.block.c.chimneys": "Димоходи",
+  "tag.item.sootychimneys.chimneys": "Димоходи",
+  "tag.item.sootychimneys.sooty_chimneys": "Сажисті димоходи",
+  "tag.block.sootychimneys.chimneys": "Димоходи",
+  "tag.block.sootychimneys.sooty_chimneys": "Сажисті димоходи",
+  "tag.block.sootychimneys.soot_scrapers": "Зішкрібувачі сажі"
+}

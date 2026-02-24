@@ -1,0 +1,14 @@
+{
+  "required": true,
+  "package": "io.github.mortuusars.sootychimneys.mixin",
+  "compatibilityLevel": "JAVA_17",
+  "minVersion": "0.8",
+  "client": [
+  ],
+  "mixins": [
+    "CampfireParticleMixin"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}

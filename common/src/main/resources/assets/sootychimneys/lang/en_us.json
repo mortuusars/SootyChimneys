@@ -1,0 +1,45 @@
+{
+  "advancements.sootychimneys.adventure.just_dont_breathe_it_in.title": "Just Don't Breathe It In",
+  "advancements.sootychimneys.adventure.just_dont_breathe_it_in.description": "Scrape the soot off a chimney",
+
+  "stat.sootychimneys.soot_scraped": "Soot Scraped",
+
+  "block.sootychimneys.brick_chimney": "Brick Chimney",
+  "block.sootychimneys.dirty_brick_chimney": "Dirty Brick Chimney",
+  "block.sootychimneys.cobblestone_chimney": "Cobblestone Chimney",
+  "block.sootychimneys.dirty_cobblestone_chimney": "Dirty Cobblestone Chimney",
+  "block.sootychimneys.stone_brick_chimney": "Stone Brick Chimney",
+  "block.sootychimneys.dirty_stone_brick_chimney": "Dirty Stone Brick Chimney",
+  "block.sootychimneys.mud_brick_chimney": "Mud Brick Chimney",
+  "block.sootychimneys.dirty_mud_brick_chimney": "Dirty Mud Brick Chimney",
+  "block.sootychimneys.iron_chimney": "Iron Chimney",
+  "block.sootychimneys.dirty_iron_chimney": "Dirty Iron Chimney",
+  "block.sootychimneys.copper_chimney": "Copper Chimney",
+  "block.sootychimneys.dirty_copper_chimney": "Dirty Copper Chimney",
+  "block.sootychimneys.terracotta_chimney": "Terracotta Chimney",
+  "block.sootychimneys.dirty_terracotta_chimney": "Dirty Terracotta Chimney",
+  "jei.sootychimneys.category.soot_covering": "Soot Covering",
+  "jei.sootychimneys.category.soot_scraping": "Soot Scraping",
+  "jei.sootychimneys.category.soot_scraping.soot_items_info": "May produce a byproduct",
+  "jei.sootychimneys.chance": "%s%% Chance",
+  "message.sootychimneys.blocked": "Smoke blocked",
+  "message.sootychimneys.open": "Smoke flow restored",
+
+  "sootychimneys.configuration.SmokeFlow": "Smoke Flow",
+  "sootychimneys.configuration.DirtyChance": "Dirty Chance",
+  "sootychimneys.configuration.Wind": "Wind",
+  "sootychimneys.configuration.WindStrength": "Wind Strength",
+  "sootychimneys.configuration.WindAffectsCampfire": "Wind Affects Campfire",
+
+  "sootychimneys.configuration.JEI": "JEI Integration",
+  "sootychimneys.configuration.SootCoveringCategory": "Soot Covering Category",
+  "sootychimneys.configuration.SootScrapingCategory": "Soot Scraping Category",
+
+  "tag.item.c.chimneys": "Chimneys",
+  "tag.block.c.chimneys": "Chimneys",
+  "tag.item.sootychimneys.chimneys": "Chimneys",
+  "tag.item.sootychimneys.sooty_chimneys": "Sooty Chimneys",
+  "tag.block.sootychimneys.chimneys": "Chimneys",
+  "tag.block.sootychimneys.sooty_chimneys": "Sooty Chimneys",
+  "tag.block.sootychimneys.soot_scrapers": "Soot Scrapers"
+}
