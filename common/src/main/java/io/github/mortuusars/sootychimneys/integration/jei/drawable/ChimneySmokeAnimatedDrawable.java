@@ -1,6 +1,5 @@
 package io.github.mortuusars.sootychimneys.integration.jei.drawable;
 
-import com.mojang.blaze3d.vertex.PoseStack;
 import mezz.jei.api.gui.drawable.IDrawable;
 import mezz.jei.api.gui.drawable.IDrawableAnimated;
 import mezz.jei.api.gui.drawable.IDrawableStatic;
@@ -35,20 +34,20 @@ public class ChimneySmokeAnimatedDrawable implements IDrawableAnimated {
         currentParticles = new ArrayList<>();
 
         // Add 11 and 10 to start from smaller particles and create smoother animation:
-        IDrawableStatic particle11 = helper.drawableBuilder(ResourceLocation.withDefaultNamespace("textures/particle/big_smoke_11.png"), 0, 0, 16, 16)
-                .setTextureSize(16, 16)
-                .build();
+        IDrawableStatic particle11 = helper.drawableBuilder(new ResourceLocation("minecraft:textures/particle/big_smoke_11.png"), 0, 0, 16, 16)
+              .setTextureSize(16, 16)
+              .build();
         smokeParticles.add(particle11);
 
-        IDrawableStatic particle10 = helper.drawableBuilder(ResourceLocation.withDefaultNamespace("textures/particle/big_smoke_10.png"), 0, 0, 16, 16)
-                .setTextureSize(16, 16)
-                .build();
+        IDrawableStatic particle10 = helper.drawableBuilder(new ResourceLocation("minecraft:textures/particle/big_smoke_10.png"), 0, 0, 16, 16)
+              .setTextureSize(16, 16)
+              .build();
         smokeParticles.add(particle10);
 
         for (int i = 0; i < 12; i++) {
-            IDrawableStatic particle = helper.drawableBuilder(ResourceLocation.withDefaultNamespace("textures/particle/big_smoke_" + i + ".png"), 0, 0, 16, 16)
-                    .setTextureSize(16, 16)
-                    .build();
+            IDrawableStatic particle = helper.drawableBuilder(new ResourceLocation("minecraft:textures/particle/big_smoke_" + i + ".png"), 0, 0, 16, 16)
+                  .setTextureSize(16, 16)
+                  .build();
             smokeParticles.add(particle);
         }
     }
@@ -73,7 +72,7 @@ public class ChimneySmokeAnimatedDrawable implements IDrawableAnimated {
         particleAddDelay--;
 
         if (particleAddDelay <= 0 && currentParticles.size() < (int) (11 * getIntensity())) {
-            particleAddDelay = random.nextInt(4, (int)(11 - 5 * getIntensity()));
+            particleAddDelay = random.nextInt(4, (int) (11 - 5 * getIntensity()));
             currentParticles.add(new Tuple<>(new Vec2((float) random.nextGaussian(), (float) -(random.nextDouble() * 5)), 0));
         }
 
@@ -88,7 +87,7 @@ public class ChimneySmokeAnimatedDrawable implements IDrawableAnimated {
                 particlesToRemove.add(particle);
         }
 
-        particlesToRemove.forEach(particleToRemove -> currentParticles.remove(particleToRemove));
+        particlesToRemove.forEach(currentParticles::remove);
     }
 
     private void calculateAnimationTick() {
@@ -98,6 +97,7 @@ public class ChimneySmokeAnimatedDrawable implements IDrawableAnimated {
             previousGameTime = gameTime;
         }
     }
+
     @Override
     public int getWidth() {
         return 16;
@@ -111,18 +111,23 @@ public class ChimneySmokeAnimatedDrawable implements IDrawableAnimated {
     public int getAnimationSpeedTicks() {
         return animationSpeedTicks;
     }
+
     public void setAnimationSpeedTicks(int ticks) {
         animationSpeedTicks = ticks;
     }
+
     public float getSpeed() {
         return speed;
     }
+
     public void setSpeed(float speed) {
         this.speed = speed;
     }
+
     public float getIntensity() {
         return intensity;
     }
+
     public void setIntensity(float strength) {
         this.intensity = strength;
     }

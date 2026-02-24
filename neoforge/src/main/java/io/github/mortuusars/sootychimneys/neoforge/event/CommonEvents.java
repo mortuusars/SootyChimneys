@@ -1,7 +1,7 @@
-package io.github.mortuusars.sootychimneys.neoforge.event;
+package io.github.mortuusars.sootychimneys.forge.event;
 
 import io.github.mortuusars.sootychimneys.SootyChimneys;
-import io.github.mortuusars.sootychimneys.neoforge.integration.create.CreateIntegration;
+import io.github.mortuusars.sootychimneys.forge.integration.create.CreateIntegration;
 import net.minecraft.stats.Stats;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.ModList;

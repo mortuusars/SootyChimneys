@@ -1,4 +1,4 @@
-package io.github.mortuusars.sootychimneys.neoforge;
+package io.github.mortuusars.sootychimneys.forge;
 
 import net.neoforged.fml.ModContainer;
 import net.neoforged.neoforge.client.gui.ConfigurationScreen;

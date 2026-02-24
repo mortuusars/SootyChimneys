@@ -1,8 +1,8 @@
 plugins {
-    id 'dev.architectury.loom' version '1.7-SNAPSHOT' apply false
-    id 'architectury-plugin' version '3.4-SNAPSHOT'
-    id 'com.github.johnrengelman.shadow' version '8.1.1' apply false
+    id "dev.architectury.loom" version "1.13-SNAPSHOT" apply false
+    id "architectury-plugin" version "3.4-SNAPSHOT"
     id "me.modmuss50.mod-publish-plugin" version "1.1.0"
+    id 'com.gradleup.shadow' version '8.3.6' apply false
 }
 
 architectury {
@@ -79,9 +79,11 @@ subprojects {
         var expandProps = [
                 minecraft_version            : minecraft_version,
                 minecraft_version_range      : minecraft_version_range,
-                neoforge_version             : neoforge_version,
-                neoforge_version_range       : neoforge_version_range,
-                neoforge_loader_version_range: neoforge_loader_version_range,
+                forge_version                : forge_version,
+                forge_version_range          : forge_version_range,
+                forge_loader_version_range   : forge_loader_version_range,
+                create_version_range         : create_version_range,
+                create_version_range_reason  : create_version_range_reason,
                 mod_id                       : mod_id,
                 mod_name                     : mod_name,
                 mod_version                  : mod_version,
@@ -187,11 +189,11 @@ publishMods {
         minecraftVersions.add("${minecraft_version}")
     }
 
-    curseforge("curseforgeNeoForge") {
+    curseforge("curseforgeForge") {
         from cfOptions
-        file project(":neoforge")
-        modLoaders.add("neoforge")
-        displayName = "${mod_name} - NeoForge ${minecraft_version} - ${mod_version}"
+        file project(":forge")
+        modLoaders.add("forge")
+        displayName = "${mod_name} - Forge ${minecraft_version} - ${mod_version}"
     }
 
     curseforge("curseforgeFabric") {
@@ -203,10 +205,10 @@ publishMods {
         requires("forge-config-api-port")
     }
 
-    modrinth("modrinthNeoForge") {
+    modrinth("modrinthForge") {
         from mrOptions
-        file project(":neoforge")
-        modLoaders.add("neoforge")
+        file project(":forge")
+        modLoaders.add("forge")
         displayName = "${mod_name} - ${mod_version}"
     }
 

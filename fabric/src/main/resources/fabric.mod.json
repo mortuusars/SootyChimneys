@@ -26,14 +26,14 @@
     ]
   },
   "mixins": [
-    "${mod_id}.mixins.json",
+    "${mod_id}.common.mixins.json",
     "${mod_id}.fabric.mixins.json"
   ],
   "depends": {
     "fabricloader": ">=0.16.0",
-    "minecraft": "~1.21",
-    "java": ">=21",
+    "minecraft": ">=1.20.1",
+    "java": ">=17",
     "fabric-api": "*",
-    "forgeconfigapiport": ">=21.0.0"
+    "forgeconfigapiport": ">=8.0.0"
   }
 }

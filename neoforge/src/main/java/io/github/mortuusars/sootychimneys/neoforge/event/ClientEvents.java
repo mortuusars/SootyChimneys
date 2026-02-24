@@ -1,4 +1,4 @@
-package io.github.mortuusars.sootychimneys.neoforge.event;
+package io.github.mortuusars.sootychimneys.forge.event;
 
 import io.github.mortuusars.sootychimneys.Config;
 import io.github.mortuusars.sootychimneys.SootyChimneys;

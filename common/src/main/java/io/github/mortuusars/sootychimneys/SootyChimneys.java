@@ -45,17 +45,11 @@ public final class SootyChimneys {
         ParticleTypes.init();
     }
 
-//    private void enqueueIMC(final InterModEnqueueEvent event) {
-//        if (ModList.get().isLoaded("create")) {
-//            CreateIntegration.registerMovingBehaviors();
-//        }
-//    }
-
     /**
      * Creates resource location in the mod namespace with the given path.
      */
     public static ResourceLocation resource(String path) {
-        return ResourceLocation.fromNamespaceAndPath(ID, path);
+        return new ResourceLocation(ID, path);
     }
 
     public static class Blocks {
@@ -279,13 +273,14 @@ public final class SootyChimneys {
         public static class Items {
             public static final TagKey<Item> CHIMNEYS = TagKey.create(Registries.ITEM, resource("chimneys"));
             public static final TagKey<Item> SOOTY_CHIMNEYS = TagKey.create(Registries.ITEM, resource("sooty_chimneys"));
-            public static final TagKey<Item> C_CHIMNEYS = TagKey.create(Registries.ITEM, ResourceLocation.parse("c:chimneys"));
+            public static final TagKey<Item> C_CHIMNEYS = TagKey.create(Registries.ITEM, new ResourceLocation("c:chimneys"));
+            public static final TagKey<Item> SOOT_SCRAPERS = TagKey.create(Registries.ITEM, resource("soot_scrapers"));
         }
 
         public static class Blocks {
             public static final TagKey<Block> CHIMNEYS = TagKey.create(Registries.BLOCK, resource("chimneys"));
             public static final TagKey<Block> SOOTY_CHIMNEYS = TagKey.create(Registries.BLOCK, resource("sooty_chimneys"));
-            public static final TagKey<Block> C_CHIMNEYS = TagKey.create(Registries.BLOCK, ResourceLocation.parse("c:chimneys"));
+            public static final TagKey<Block> C_CHIMNEYS = TagKey.create(Registries.BLOCK, new ResourceLocation("c:chimneys"));
             public static final TagKey<Block> SMOKE_BLOCKING = TagKey.create(Registries.BLOCK, SootyChimneys.resource("smoke_blocking"));
             public static final TagKey<Block> SMOKE_BOOSTING = TagKey.create(Registries.BLOCK, SootyChimneys.resource("smoke_boosting"));
         }

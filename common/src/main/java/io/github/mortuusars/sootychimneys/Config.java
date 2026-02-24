@@ -1,19 +1,20 @@
 package io.github.mortuusars.sootychimneys;
 
-import net.neoforged.neoforge.common.ModConfigSpec;
+
+import net.minecraftforge.common.ForgeConfigSpec;
 
 public class Config {
     public static class Common {
-        public static final ModConfigSpec.DoubleValue SMOKE_STRENGTH;
-        public static final ModConfigSpec.DoubleValue DIRTY_CHANCE;
-        public static final ModConfigSpec.BooleanValue WIND_ENABLED;
-        public static final ModConfigSpec.DoubleValue WIND_STRENGTH;
-        public static final ModConfigSpec.BooleanValue WIND_AFFECTS_CAMPFIRE;
+        public static final ForgeConfigSpec.DoubleValue SMOKE_STRENGTH;
+        public static final ForgeConfigSpec.DoubleValue DIRTY_CHANCE;
+        public static final ForgeConfigSpec.BooleanValue WIND_ENABLED;
+        public static final ForgeConfigSpec.DoubleValue WIND_STRENGTH;
+        public static final ForgeConfigSpec.BooleanValue WIND_AFFECTS_CAMPFIRE;
 
-        public static final ModConfigSpec SPEC;
+        public static final ForgeConfigSpec SPEC;
 
         static {
-            ModConfigSpec.Builder builder = new ModConfigSpec.Builder();
+            ForgeConfigSpec.Builder builder = new ForgeConfigSpec.Builder();
 
             SMOKE_STRENGTH = builder
                     .comment("Chance of the smoke particle to spawn. 1.0 - full. 0.0 - no smoke. Default: 0.75")
@@ -46,13 +47,13 @@ public class Config {
     }
 
     public static class Client {
-        public static final ModConfigSpec SPEC;
+        public static final ForgeConfigSpec SPEC;
 
-        public static final ModConfigSpec.BooleanValue ADD_SOOT_COVERING_TO_JEI;
-        public static final ModConfigSpec.BooleanValue ADD_SOOT_SCRAPING_TO_JEI;
+        public static final ForgeConfigSpec.BooleanValue ADD_SOOT_COVERING_TO_JEI;
+        public static final ForgeConfigSpec.BooleanValue ADD_SOOT_SCRAPING_TO_JEI;
 
         static {
-            ModConfigSpec.Builder builder = new ModConfigSpec.Builder();
+            ForgeConfigSpec.Builder builder = new ForgeConfigSpec.Builder();
 
             builder.push("JEI");
 

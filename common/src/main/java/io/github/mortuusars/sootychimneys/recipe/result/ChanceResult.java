@@ -1,52 +1,55 @@
-package io.github.mortuusars.sootychimneys.recipe.result;
+package io.github.mortuusars.sootychimneys.recipe.ingredient;
 
-import com.google.common.base.Preconditions;
-import com.mojang.datafixers.util.Either;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonSyntaxException;
 import com.mojang.serialization.Codec;
-import com.mojang.serialization.DataResult;
+import com.mojang.serialization.JsonOps;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
-import net.minecraft.network.RegistryFriendlyByteBuf;
-import net.minecraft.network.codec.ByteBufCodecs;
-import net.minecraft.network.codec.StreamCodec;
+import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.item.ItemStack;
 
-public record ChanceResult(ItemStack stack, float chance) {
-    public static final Codec<ChanceResult> CHANCE_RESULT_ONLY_CODEC = RecordCodecBuilder.create(instance -> instance.group(
-                    ItemStack.CODEC.fieldOf("item").forGetter(ChanceResult::stack),
-                    Codec.FLOAT
-                            .optionalFieldOf("chance", 1F)
-                            .validate(chance -> {
-                                if (Float.isNaN(chance)) {
-                                    return DataResult.error(() -> "'chance' cannot be NaN.");
-                                } else if (chance <= 0.0)
-                                    return DataResult.error(() -> "'chance' '{" + chance + "}' is not valid. Should be larger than 0.");
-                                return DataResult.success(chance);
-                            })
-                            .forGetter(ChanceResult::chance))
-            .apply(instance, ChanceResult::new));
+import java.util.Optional;
 
-    public static final Codec<ChanceResult> CODEC = Codec.either(ItemStack.CODEC, CHANCE_RESULT_ONLY_CODEC).xmap(
-            itemStackOrChanceResult -> Either.unwrap(itemStackOrChanceResult.mapLeft(ChanceResult::new)),
-            chanceResult -> chanceResult.chance() >= 1f ? Either.left(chanceResult.stack()) : Either.right(chanceResult)
-    );
+/**
+ * Credits to the Create team (and Farmer's Delight) for the implementation of results with chances!
+ */
+@SuppressWarnings({"deprecation", "ClassCanBeRecord", "Convert2MethodRef"})
+public class ChanceResult {
+    public static final Codec<ChanceResult> CODEC = RecordCodecBuilder.create(instance -> instance.group(
+                // Not using ItemStack.CODEC here. This way json is more intuitive, without one more object.
+                BuiltInRegistries.ITEM.byNameCodec().fieldOf("item").forGetter(chanceResult -> chanceResult.stack.getItem()),
+                Codec.INT.optionalFieldOf("Count", 1).forGetter(chanceResult -> chanceResult.stack.getCount()),
+                CompoundTag.CODEC.optionalFieldOf("tag").forGetter(chanceResult -> Optional.ofNullable(chanceResult.stack.getTag())),
+                Codec.FLOAT.optionalFieldOf("chance", 1F).forGetter(ChanceResult::getChance))
+          .apply(instance, (item, count, compoundTag, chance) -> {
+              ItemStack stack = new ItemStack(item, count);
+              compoundTag.ifPresent(tag -> stack.setTag(tag));
+              return new ChanceResult(stack, chance);
+          }));
 
-    public static final StreamCodec<RegistryFriendlyByteBuf, ChanceResult> STREAM_CODEC = StreamCodec.composite(
-            ItemStack.STREAM_CODEC, ChanceResult::stack,
-            ByteBufCodecs.FLOAT, ChanceResult::chance,
-            ChanceResult::new
-    );
+    public static final ChanceResult EMPTY = new ChanceResult(ItemStack.EMPTY, 1);
+
+    private final ItemStack stack;
+    private final float chance;
 
     public ChanceResult(ItemStack stack, float chance) {
-        Preconditions.checkArgument(!stack.isEmpty(), "Item Stack cannot be empty.");
         this.stack = stack;
-        Preconditions.checkArgument(!Float.isNaN(chance), "Chance '{}' is not valid. Should not be NaN.", chance);
-        Preconditions.checkArgument(chance > 0.0, "Chance '{}' is not valid. Should be larger than 0.", chance);
+
+        if (chance == 0 || Float.isNaN(chance))
+            throw new IllegalArgumentException("Chance cannot be 0 or NaN.\n" + this.toJson().toString());
+
         this.chance = chance;
     }
 
-    public ChanceResult(ItemStack stack) {
-        this(stack, 1f);
+    public ItemStack getStack() {
+        return stack;
+    }
+
+    public float getChance() {
+        return chance;
     }
 
     public ItemStack rollOutput(RandomSource rand) {
@@ -59,5 +62,27 @@ public record ChanceResult(ItemStack stack, float chance) {
         ItemStack out = stack.copy();
         out.setCount(outputAmount);
         return out;
+    }
+
+    public JsonElement toJson() {
+        return CODEC.encodeStart(JsonOps.INSTANCE, this).getOrThrow(false,
+              (String error) -> { throw new IllegalStateException(error); });
+    }
+
+    public static ChanceResult fromJson(JsonElement jsonElement) {
+        if (!jsonElement.isJsonObject())
+            throw new JsonSyntaxException("Must be a json object");
+
+        return CODEC.decode(JsonOps.INSTANCE, jsonElement).getOrThrow(false,
+              (String error) -> { throw new IllegalStateException(error); }).getFirst();
+    }
+
+    public void toBuffer(FriendlyByteBuf buf) {
+        buf.writeItem(getStack());
+        buf.writeFloat(getChance());
+    }
+
+    public static ChanceResult fromBuffer(FriendlyByteBuf buf) {
+        return new ChanceResult(buf.readItem(), buf.readFloat());
     }
 }

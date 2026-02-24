@@ -9,7 +9,7 @@ import io.github.mortuusars.sootychimneys.data.smoke.SmokeProperties;
 import io.github.mortuusars.sootychimneys.data.Chimney;
 import io.github.mortuusars.sootychimneys.data.ChimneyType;
 import io.github.mortuusars.sootychimneys.recipe.SootScrapingRecipe;
-import io.github.mortuusars.sootychimneys.recipe.result.ChanceResult;
+import io.github.mortuusars.sootychimneys.recipe.ingredient.ChanceResult;
 import io.github.mortuusars.sootychimneys.utils.RandomOffset;
 import net.minecraft.advancements.CriteriaTriggers;
 import net.minecraft.core.BlockPos;
@@ -21,13 +21,12 @@ import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
+import net.minecraft.tags.ItemTags;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.*;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.crafting.RecipeHolder;
-import net.minecraft.world.item.crafting.SingleRecipeInput;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelAccessor;
@@ -52,6 +51,7 @@ import java.util.List;
 import java.util.Optional;
 import java.util.function.Supplier;
 
+@SuppressWarnings("deprecation")
 public class ChimneyBlock extends Block implements EntityBlock {
     public static final BooleanProperty LIT = BlockStateProperties.LIT;
     public static final BooleanProperty BLOCKED = BooleanProperty.create("blocked");
@@ -66,16 +66,16 @@ public class ChimneyBlock extends Block implements EntityBlock {
         this.type = type;
 
         this.registerDefaultState(defaultBlockState()
-                .setValue(LIT, true)
-                .setValue(BLOCKED, false)
-                .setValue(STACKED, false));
+              .setValue(LIT, true)
+              .setValue(BLOCKED, false)
+              .setValue(STACKED, false));
     }
 
     @Override
     protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
         builder.add(LIT)
-                .add(BLOCKED)
-                .add(STACKED);
+              .add(BLOCKED)
+              .add(STACKED);
     }
 
     @Override
@@ -112,48 +112,43 @@ public class ChimneyBlock extends Block implements EntityBlock {
      */
     public boolean shouldEmitSmoke(BlockState blockState, Level level, BlockPos pos) {
         return blockState.getValue(LIT)
-                && !blockState.getValue(BLOCKED)
-                && !blockState.getValue(STACKED)
-                && !level.getBlockState(pos.above()).is(SootyChimneys.Tags.Blocks.SMOKE_BLOCKING);
+              && !blockState.getValue(BLOCKED)
+              && !blockState.getValue(STACKED)
+              && !level.getBlockState(pos.above()).is(SootyChimneys.Tags.Blocks.SMOKE_BLOCKING);
     }
 
+    @SuppressWarnings("deprecation")
     @Override
-    protected @NotNull InteractionResult useWithoutItem(BlockState state, Level level, BlockPos pos,
-                                                        Player player, BlockHitResult hitResult) {
-        if (!player.getMainHandItem().isEmpty()) {
-            return super.useWithoutItem(state, level, pos, player, hitResult);
-        }
+    public @NotNull InteractionResult use(BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hit) {
+        if (hand == InteractionHand.MAIN_HAND && player.getMainHandItem().isEmpty()) {
+            boolean newBlockedValue = !state.getValue(BLOCKED);
 
-        boolean newBlockedValue = !state.getValue(BLOCKED);
+            if (!level.isClientSide && level.setBlock(pos, state.setValue(BLOCKED, newBlockedValue), Block.UPDATE_ALL)) {
+                RandomSource random = level.getRandom();
 
-        if (!level.isClientSide && level.setBlock(pos, state.setValue(BLOCKED, newBlockedValue), Block.UPDATE_ALL)) {
-            RandomSource random = level.getRandom();
+                level.playSound(null, pos, newBlockedValue ? SoundEvents.LANTERN_FALL : SoundEvents.LANTERN_HIT, SoundSource.BLOCKS,
+                      0.8f, 0.85f + random.nextFloat() * 0.05f);
 
-            level.playSound(null, pos, newBlockedValue ? SoundEvents.LANTERN_FALL : SoundEvents.LANTERN_HIT, SoundSource.BLOCKS,
-                    0.8f, 0.85f + random.nextFloat() * 0.05f);
+                Vector3f particleOrigin = getType().smokeProperties().getParticleOrigin();
+                for (int i = 0; i < random.nextInt(5); i++) {
+                    ((ServerLevel) level).sendParticles(ParticleTypes.SMOKE,
+                          pos.getX() + particleOrigin.x(), pos.getY() + particleOrigin.y() - 0.1, pos.getZ() + particleOrigin.z(),
+                          1, random.nextGaussian() * 0.1d, random.nextGaussian() * 0.1d, random.nextGaussian() * 0.1d, 0);
+                }
 
-            Vector3f particleOrigin = getType().smokeProperties().getParticleOrigin();
-            for (int i = 0; i < random.nextInt(5); i++) {
-                ((ServerLevel) level).sendParticles(ParticleTypes.SMOKE,
-                        pos.getX() + particleOrigin.x(), pos.getY() + particleOrigin.y() - 0.1, pos.getZ() + particleOrigin.z(),
-                        1, random.nextGaussian() * 0.1d, random.nextGaussian() * 0.1d, random.nextGaussian() * 0.1d, 0);
+                String messageTranslationKey = "message.sootychimneys." + (newBlockedValue ? "blocked" : "open");
+                player.displayClientMessage(Component.translatable(messageTranslationKey), true);
             }
 
-            String messageTranslationKey = "message.sootychimneys." + (newBlockedValue ? "blocked" : "open");
-            player.displayClientMessage(Component.translatable(messageTranslationKey), true);
+            return InteractionResult.sidedSuccess(level.isClientSide);
         }
 
-        return InteractionResult.sidedSuccess(level.isClientSide);
-    }
+        ItemStack stack = player.getItemInHand(hand);
 
-    @Override
-    protected @NotNull ItemInteractionResult useItemOn(ItemStack stack, BlockState state, Level level, BlockPos pos,
-                                                       Player player, InteractionHand hand, BlockHitResult hitResult) {
-        //noinspection ConstantValue
         if (!(state.getBlock() instanceof ChimneyBlock chimney)
-                || !chimney.isDirty()
-                || !PlatformSpecific.canBeUsedToScrapeSoot(stack)) {
-            return super.useItemOn(stack, state, level, pos, player, hand, hitResult);
+              || !chimney.isDirty()
+              || !stack.is(SootyChimneys.Tags.Items.SOOT_SCRAPERS)) {
+            return InteractionResult.PASS;
         }
 
         if (player instanceof ServerPlayer serverPlayer) {
@@ -172,15 +167,16 @@ public class ChimneyBlock extends Block implements EntityBlock {
                 List<ItemStack> itemStacks = items.get();
                 // Offset item spawning pos, depending on clicked face, to spawn items closer to the player.
                 // Items shooting in opposite direction is not fun.
-                Vec3i faceNormal = hitResult.getDirection().getNormal();
+                Vec3i faceNormal = hit.getDirection().getNormal();
                 Vector3f itemSpawnPosition = new Vector3f(pos.getX() + 0.5f + faceNormal.getX() * 0.65f,
-                        pos.getY() + 0.6f + faceNormal.getY() * 0.65f,
-                        pos.getZ() + 0.5f + faceNormal.getZ() * 0.65f);
+                      pos.getY() + 0.6f + faceNormal.getY() * 0.65f,
+                      pos.getZ() + 0.5f + faceNormal.getZ() * 0.65f);
 
                 spawnSootScrapingItems(itemSpawnPosition, serverLevel, itemStacks);
             });
 
-            stack.hurtAndBreak(1, player, hand == InteractionHand.MAIN_HAND ? EquipmentSlot.MAINHAND : EquipmentSlot.OFFHAND);
+            stack.hurtAndBreak(1, player, pl ->
+                  player.broadcastBreakEvent(hand == InteractionHand.MAIN_HAND ? EquipmentSlot.MAINHAND : EquipmentSlot.OFFHAND));
 
             level.playSound(player, pos, SoundEvents.AXE_SCRAPE, SoundSource.BLOCKS);
         } else {
@@ -188,7 +184,7 @@ public class ChimneyBlock extends Block implements EntityBlock {
             chimney.spawnSootParticles(level, pos, false);
         }
 
-        return ItemInteractionResult.SUCCESS;
+        return InteractionResult.SUCCESS;
     }
 
     @Override
@@ -209,16 +205,16 @@ public class ChimneyBlock extends Block implements EntityBlock {
         }
 
         level.setBlock(pos, state
-                        .setValue(LIT, !level.hasNeighborSignal(pos))
-                        .setValue(STACKED, stacked),
-                Block.UPDATE_ALL);
+                    .setValue(LIT, !level.hasNeighborSignal(pos))
+                    .setValue(STACKED, stacked),
+              Block.UPDATE_ALL);
     }
 
     public ParticleOptions getParticle(BlockState state, Level level, BlockPos pos) {
         BlockState stateBelow = level.getBlockState(pos.below());
         return (stateBelow.getBlock() instanceof ChimneyBlock && stateBelow.getValue(STACKED))
-                || stateBelow.is(SootyChimneys.Tags.Blocks.SMOKE_BOOSTING)
-                ? ParticleTypes.CAMPFIRE_SIGNAL_SMOKE : ParticleTypes.CAMPFIRE_COSY_SMOKE;
+              || stateBelow.is(SootyChimneys.Tags.Blocks.SMOKE_BOOSTING)
+              ? ParticleTypes.CAMPFIRE_SIGNAL_SMOKE : ParticleTypes.CAMPFIRE_COSY_SMOKE;
     }
 
     public void emitParticle(Level level, double x, double y, double z, ParticleOptions particleType) {
@@ -252,10 +248,10 @@ public class ChimneyBlock extends Block implements EntityBlock {
 
         for (int i = 0; i < random.nextInt(maxParticles); i++) {
             level.addAlwaysVisibleParticle(particleType, true,
-                    RandomOffset.offset(x, particleSpread.x()),
-                    RandomOffset.offset(y, particleSpread.y()),
-                    RandomOffset.offset(z, particleSpread.z()),
-                    xSpeed, ySpeed, zSpeed);
+                  RandomOffset.offset(x, particleSpread.x()),
+                  RandomOffset.offset(y, particleSpread.y()),
+                  RandomOffset.offset(z, particleSpread.z()),
+                  xSpeed, ySpeed, zSpeed);
         }
     }
 
@@ -269,7 +265,7 @@ public class ChimneyBlock extends Block implements EntityBlock {
     @Override
     public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level level, @NotNull BlockState state, @NotNull BlockEntityType<T> type) {
         return level.isClientSide() && type == SootyChimneys.BlockEntityTypes.CHIMNEY.get()
-                ? ChimneyBlockEntity::particleTick : null;
+              ? ChimneyBlockEntity::particleTick : null;
     }
 
     @Override
@@ -280,23 +276,22 @@ public class ChimneyBlock extends Block implements EntityBlock {
     @Override
     public void randomTick(BlockState blockState, @NotNull ServerLevel level, @NotNull BlockPos pos, @NotNull RandomSource random) {
         if (blockState.getBlock() instanceof ChimneyBlock chimney
-                && chimney.isClean()
-                && shouldEmitSmoke(blockState, level, pos)
-                && random.nextDouble() < Config.Common.DIRTY_CHANCE.get()) {
+              && chimney.isClean()
+              && shouldEmitSmoke(blockState, level, pos)
+              && random.nextDouble() < Config.Common.DIRTY_CHANCE.get()) {
             level.setBlock(pos, Chimney.getDirtyBlock(chimney).defaultBlockState(), Block.UPDATE_ALL);
         }
     }
 
     protected Optional<Supplier<List<ItemStack>>> getScrapedItems(BlockState state, ServerLevel level) {
-        SingleRecipeInput input = new SingleRecipeInput(new ItemStack(state.getBlock().asItem()));
+        Container input = new SimpleContainer(new ItemStack(state.getBlock().asItem()));
 
-        Optional<RecipeHolder<SootScrapingRecipe>> recipeOptional = level.getRecipeManager()
-                .getRecipeFor(SootyChimneys.RecipeTypes.SOOT_SCRAPING.get(), input, level);
+        Optional<SootScrapingRecipe> recipeOptional = level.getRecipeManager()
+              .getRecipeFor(SootyChimneys.RecipeTypes.SOOT_SCRAPING.get(), input, level);
 
-        return recipeOptional.map(recipeHolder -> () -> {
-            SootScrapingRecipe recipe = recipeHolder.value();
+        return recipeOptional.map(recipe -> () -> {
             List<ItemStack> items = new ArrayList<>();
-            for (ChanceResult result : recipe.results()) {
+            for (ChanceResult result : recipe.getResults()) {
                 ItemStack itemStack = result.rollOutput(level.getRandom());
                 if (!itemStack.isEmpty())
                     items.add(itemStack);
@@ -326,16 +321,16 @@ public class ChimneyBlock extends Block implements EntityBlock {
         for (int i = 0; i < random.nextInt(12, 20); i++) {
             if (serverSide && level instanceof ServerLevel serverLevel)
                 serverLevel.sendParticles(ParticleTypes.LARGE_SMOKE,
-                        RandomOffset.offset(x, 0.8f),
-                        RandomOffset.offset(y, 0.8f),
-                        RandomOffset.offset(z, 0.8f),
-                        1, 0, 0, 0, 0);
+                      RandomOffset.offset(x, 0.8f),
+                      RandomOffset.offset(y, 0.8f),
+                      RandomOffset.offset(z, 0.8f),
+                      1, 0, 0, 0, 0);
             else {
                 level.addParticle(ParticleTypes.LARGE_SMOKE,
-                        RandomOffset.offset(x, 0.8f),
-                        RandomOffset.offset(y, 0.8f),
-                        RandomOffset.offset(z, 0.8f),
-                        0, 0, 0);
+                      RandomOffset.offset(x, 0.8f),
+                      RandomOffset.offset(y, 0.8f),
+                      RandomOffset.offset(z, 0.8f),
+                      0, 0, 0);
             }
         }
     }

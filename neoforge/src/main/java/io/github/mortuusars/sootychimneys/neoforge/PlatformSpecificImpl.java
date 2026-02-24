@@ -1,4 +1,4 @@
-package io.github.mortuusars.sootychimneys.neoforge;
+package io.github.mortuusars.sootychimneys.forge;
 
 import net.minecraft.world.item.ItemStack;
 import net.neoforged.neoforge.common.ItemAbilities;

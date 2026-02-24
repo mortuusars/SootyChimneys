@@ -1,23 +1,18 @@
 package io.github.mortuusars.sootychimneys.integration.jei;
 
-import io.github.mortuusars.sootychimneys.PlatformSpecific;
 import io.github.mortuusars.sootychimneys.SootyChimneys;
 import io.github.mortuusars.sootychimneys.Config;
 import io.github.mortuusars.sootychimneys.integration.jei.category.SootCoveringRecipeCategory;
 import io.github.mortuusars.sootychimneys.integration.jei.category.SootScrapingRecipeCategory;
 import io.github.mortuusars.sootychimneys.integration.jei.recipe.SootCoveringJeiRecipe;
 import io.github.mortuusars.sootychimneys.recipe.SootScrapingRecipe;
-import io.github.mortuusars.sootychimneys.recipe.result.ChanceResult;
+import io.github.mortuusars.sootychimneys.recipe.ingredient.ChanceResult;
 import mezz.jei.api.IModPlugin;
 import mezz.jei.api.JeiPlugin;
-import mezz.jei.api.registration.IModInfoRegistration;
 import mezz.jei.api.registration.IRecipeCategoryRegistration;
 import mezz.jei.api.registration.IRecipeRegistration;
 import net.minecraft.client.Minecraft;
-import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.crafting.RecipeHolder;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
@@ -57,31 +52,21 @@ public class SootyChimneysJeiPlugin implements IModPlugin {
                     new SootCoveringJeiRecipe(SootyChimneys.Items.TERRACOTTA_CHIMNEY.get(), SootyChimneys.Items.DIRTY_TERRACOTTA_CHIMNEY.get())));
         }
 
-        List<SootScrapingRecipe> recipes = new ArrayList<>(new ArrayList<>(Objects.requireNonNull(Minecraft.getInstance().level)
+        List<SootScrapingRecipe> recipes = new ArrayList<>(Objects.requireNonNull(Minecraft.getInstance().level)
                 .getRecipeManager()
-                .getAllRecipesFor(SootyChimneys.RecipeTypes.SOOT_SCRAPING.get()))
-                .stream()
-                .map(RecipeHolder::value)
-                .toList());
+                .getAllRecipesFor(SootyChimneys.RecipeTypes.SOOT_SCRAPING.get()));
 
         recipes.sort((r, r1) -> {
-            List<ChanceResult> results = r.results();
-            List<ChanceResult> results1 = r1.results();
+            List<ChanceResult> results = r.getResults();
+            List<ChanceResult> results1 = r1.getResults();
             if (results.isEmpty())
                 return results1.isEmpty() ? -1 : 0;
             if (results1.isEmpty())
                 return 1;
 
-            return Float.compare(results1.getFirst().chance(), results.getFirst().chance());
+            return Float.compare(results1.getFirst().getChance(), results.getFirst().getChance());
         });
 
         registration.addRecipes(JeiRecipeTypes.SOOT_SCRAPING, recipes);
-    }
-
-    public static List<ItemStack> getScrapingTools() {
-        return BuiltInRegistries.ITEM.stream()
-                .map(ItemStack::new)
-                .filter(PlatformSpecific::canBeUsedToScrapeSoot)
-                .toList();
     }
 }

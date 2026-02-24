@@ -1,4 +1,4 @@
-package io.github.mortuusars.sootychimneys.neoforge;
+package io.github.mortuusars.sootychimneys.forge;
 
 import io.github.mortuusars.sootychimneys.Config;
 import net.minecraft.core.Registry;

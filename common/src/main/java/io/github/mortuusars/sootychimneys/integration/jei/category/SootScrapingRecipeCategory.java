@@ -5,7 +5,7 @@ import io.github.mortuusars.sootychimneys.integration.jei.JeiRecipeTypes;
 import io.github.mortuusars.sootychimneys.integration.jei.SootyChimneysJeiPlugin;
 import io.github.mortuusars.sootychimneys.integration.jei.renderer.ScalableItemStackRenderer;
 import io.github.mortuusars.sootychimneys.recipe.SootScrapingRecipe;
-import io.github.mortuusars.sootychimneys.recipe.result.ChanceResult;
+import io.github.mortuusars.sootychimneys.recipe.ingredient.ChanceResult;
 import mezz.jei.api.constants.VanillaTypes;
 import mezz.jei.api.gui.builder.IRecipeLayoutBuilder;
 import mezz.jei.api.gui.drawable.IDrawable;
@@ -20,6 +20,7 @@ import net.minecraft.ChatFormatting;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.item.crafting.Ingredient;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
@@ -50,15 +51,16 @@ public class SootScrapingRecipeCategory implements IRecipeCategory<SootScrapingR
         chanceSlot = helper.createDrawable(texture, 18, 65, 18, 18);
     }
 
+    @SuppressWarnings("removal")
     @Override
     public void setRecipe(IRecipeLayoutBuilder builder, SootScrapingRecipe recipe, @NotNull IFocusGroup focuses) {
         builder.addSlot(RecipeIngredientRole.INPUT, 9, 18)
                 .setCustomRenderer(VanillaTypes.ITEM_STACK, new ScalableItemStackRenderer(2.5f))
-                .addIngredients(recipe.chimney())
+                .addIngredients(recipe.getIngredientChimney())
                 .setSlotName("DirtyChimney");
 
         builder.addSlot(RecipeIngredientRole.CATALYST, 44, 1)
-                .addItemStacks(SootyChimneysJeiPlugin.getScrapingTools())
+                .addIngredients(Ingredient.of(SootyChimneys.Tags.Items.SOOT_SCRAPERS))
                 .setSlotName("Tool");
 
         builder.addSlot(RecipeIngredientRole.OUTPUT, 104, 18)
@@ -66,9 +68,9 @@ public class SootScrapingRecipeCategory implements IRecipeCategory<SootScrapingR
                 .addItemStack(recipe.getResultChimney())
                 .setSlotName("CleanChimney");
 
-        List<ChanceResult> results = recipe.results()
+        List<ChanceResult> results = recipe.getResults()
                 .stream()
-                .filter(result -> !result.stack().isEmpty() && result.chance() > 0)
+                .filter(result -> !result.getStack().isEmpty() && result.getChance() > 0)
                 .toList();
 
         int slotX = 51 + (27 - ((results.size() * 18) / 2));
@@ -77,10 +79,10 @@ public class SootScrapingRecipeCategory implements IRecipeCategory<SootScrapingR
             ChanceResult result = results.get(i);
             builder.addSlot(RecipeIngredientRole.OUTPUT, slotX + (18 * i) - 1, 47)
                     .setSlotName("Result" + i + 1)
-                    .addItemStack(result.stack())
+                    .addItemStack(result.getStack())
                     .addTooltipCallback((recipeSlotView, tooltip) -> {
-                        if (result.chance() < 1.0f) {
-                            float chance = result.chance() * 100;
+                        if (result.getChance() < 1.0f) {
+                            float chance = result.getChance() * 100;
                             String chanceString = chance < 1 ? "<1" : Integer.toString((int) chance);
                             tooltip.add(Component.translatable("jei.sootychimneys.chance", chanceString).withStyle(ChatFormatting.GOLD));
                         }
@@ -90,9 +92,9 @@ public class SootScrapingRecipeCategory implements IRecipeCategory<SootScrapingR
 
     @Override
     public void draw(SootScrapingRecipe recipe, IRecipeSlotsView recipeSlotsView, GuiGraphics guiGraphics, double mouseX, double mouseY) {
-        List<ChanceResult> results = recipe.results()
+        List<ChanceResult> results = recipe.getResults()
                 .stream()
-                .filter(result -> !result.stack().isEmpty() && result.chance() > 0)
+                .filter(result -> !result.getStack().isEmpty() && result.getChance() > 0)
                 .toList();
 
         if (results.isEmpty())
@@ -104,7 +106,7 @@ public class SootScrapingRecipeCategory implements IRecipeCategory<SootScrapingR
 
         for (int i = 0; i < results.size(); i++) {
             ChanceResult result = results.get(i);
-            if (result.chance() >= 1.0f)
+            if (result.getChance() >= 1.0f)
                 slot.draw(guiGraphics, slotX + (18 * i), 46);
             else
                 chanceSlot.draw(guiGraphics, slotX + (18 * i), 46);
@@ -116,6 +118,7 @@ public class SootScrapingRecipeCategory implements IRecipeCategory<SootScrapingR
         return title;
     }
 
+    @SuppressWarnings("removal")
     @Override
     public @NotNull IDrawable getBackground() {
         return background;

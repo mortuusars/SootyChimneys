@@ -1,24 +1,26 @@
 package io.github.mortuusars.sootychimneys.fabric;
 
-import fuzs.forgeconfigapiport.fabric.api.neoforge.v4.NeoForgeConfigRegistry;
+import fuzs.forgeconfigapiport.api.config.v2.ForgeConfigRegistry;
 import io.github.mortuusars.sootychimneys.Config;
 import net.fabricmc.api.ModInitializer;
 
 import io.github.mortuusars.sootychimneys.SootyChimneys;
 import net.fabricmc.fabric.api.itemgroup.v1.ItemGroupEvents;
+import net.fabricmc.fabric.api.tag.convention.v1.ConventionalItemTags;
 import net.minecraft.core.registries.Registries;
+import net.minecraft.tags.ItemTags;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.CreativeModeTabs;
 import net.minecraft.world.item.Item;
-import net.neoforged.fml.config.ModConfig;
+import net.minecraftforge.fml.config.ModConfig;
 
 public final class SootyChimneysFabric implements ModInitializer {
     @Override
     public void onInitialize() {
         SootyChimneys.init();
 
-        NeoForgeConfigRegistry.INSTANCE.register(SootyChimneys.ID, ModConfig.Type.COMMON, Config.Common.SPEC);
-        NeoForgeConfigRegistry.INSTANCE.register(SootyChimneys.ID, ModConfig.Type.CLIENT, Config.Client.SPEC);
+        ForgeConfigRegistry.INSTANCE.register(SootyChimneys.ID, ModConfig.Type.COMMON, Config.Common.SPEC);
+        ForgeConfigRegistry.INSTANCE.register(SootyChimneys.ID, ModConfig.Type.CLIENT, Config.Client.SPEC);
 
         ItemGroupEvents.modifyEntriesEvent(CreativeModeTabs.FUNCTIONAL_BLOCKS).register(content -> {
             content.accept(SootyChimneys.Items.BRICK_CHIMNEY.get());

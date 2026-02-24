@@ -1,33 +1,17 @@
 package io.github.mortuusars.sootychimneys.integration.jei.renderer;
 
-import com.mojang.blaze3d.platform.GlStateManager;
-import com.mojang.blaze3d.platform.Lighting;
-import com.mojang.blaze3d.systems.RenderSystem;
-import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.logging.LogUtils;
 import mezz.jei.api.ingredients.IIngredientRenderer;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
-import net.minecraft.client.renderer.MultiBufferSource;
-import net.minecraft.client.renderer.block.model.ItemTransforms;
-import net.minecraft.client.renderer.entity.ItemRenderer;
-import net.minecraft.client.renderer.texture.OverlayTexture;
-import net.minecraft.client.renderer.texture.TextureAtlas;
-import net.minecraft.client.resources.model.BakedModel;
 import net.minecraft.network.chat.Component;
-import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.inventory.InventoryMenu;
-import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
-import net.minecraft.world.level.Level;
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 
 import java.util.Collections;
 import java.util.List;
-import java.util.Objects;
 
 public class ScalableItemStackRenderer implements IIngredientRenderer<ItemStack> {
     private final float xScale;
@@ -108,12 +92,13 @@ public class ScalableItemStackRenderer implements IIngredientRenderer<ItemStack>
 //        RenderSystem.applyModelViewMatrix();
     }
 
+    @SuppressWarnings("removal")
     @Override
     public @NotNull List<Component> getTooltip(ItemStack ingredient, TooltipFlag tooltipFlag) {
         Minecraft minecraft = Minecraft.getInstance();
         Player player = minecraft.player;
         try {
-            return ingredient.getTooltipLines(Item.TooltipContext.of(Objects.requireNonNull(player).level()), player, tooltipFlag);
+            return ingredient.getTooltipLines(player, tooltipFlag);
         } catch (Exception e) {
             LogUtils.getLogger().error("Failed to get tooltip: {}", ingredient, e);
             return Collections.emptyList();
