@@ -1,5 +1,6 @@
 {
   "type": "minecraft:crafting_shaped",
+  "category": "misc",
   "group": "stone_brick_chimney",
   "key": {
     "B": {
@@ -16,5 +17,6 @@
   ],
   "result": {
     "item": "sootychimneys:stone_brick_chimney"
-  }
+  },
+  "show_notification": true
 }

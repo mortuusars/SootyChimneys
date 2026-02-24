@@ -1,0 +1,10 @@
+{
+  "variants": {
+    "stacked=true": {
+      "model": "sootychimneys:block/stacked_cobblestone_chimney"
+    },
+    "stacked=false": {
+      "model": "sootychimneys:block/cobblestone_chimney"
+    }
+  }
+}

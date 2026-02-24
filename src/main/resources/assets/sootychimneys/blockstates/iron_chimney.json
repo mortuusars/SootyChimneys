@@ -1,0 +1,10 @@
+{
+  "variants": {
+    "stacked=true": {
+      "model": "sootychimneys:block/stacked_iron_chimney"
+    },
+    "stacked=false": {
+      "model": "sootychimneys:block/iron_chimney"
+    }
+  }
+}
