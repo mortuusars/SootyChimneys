@@ -116,3 +116,4 @@ run/
 !gradle-wrapper.jar
 
 /extra-mods*/
+/.architectury-transformer/
