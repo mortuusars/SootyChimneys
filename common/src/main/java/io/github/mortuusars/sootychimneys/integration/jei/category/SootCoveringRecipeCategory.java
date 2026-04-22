@@ -17,7 +17,7 @@ import mezz.jei.api.recipe.IFocusGroup;
 import mezz.jei.api.recipe.RecipeIngredientRole;
 import mezz.jei.api.recipe.category.IRecipeCategory;
 import mezz.jei.api.recipe.types.IRecipeType;
-import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.client.gui.GuiGraphicsExtractor;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
@@ -60,11 +60,11 @@ public class SootCoveringRecipeCategory implements IRecipeCategory<SootCoveringJ
 
 //        Identifier texture = SootyChimneys.resource("textures/gui/jei/soot_covering.png");
 
-        icon = helper.drawableBuilder(SootyChimneys.resource("textures/gui/jei/soot_covering_icon.png"), 0, 0, 16, 16)
+        icon = helper.drawableBuilder(SootyChimneys.identifier("textures/gui/jei/soot_covering_icon.png"), 0, 0, 16, 16)
                 .setTextureSize(16, 16)
                 .build();
 
-        background = helper.createDrawable(SootyChimneys.resource("textures/gui/jei/soot_covering.png"), 0, 0, BG_WIDTH, BG_HEIGHT);
+        background = helper.createDrawable(SootyChimneys.identifier("textures/gui/jei/soot_covering.png"), 0, 0, BG_WIDTH, BG_HEIGHT);
     }
 
     @Override
@@ -100,7 +100,7 @@ public class SootCoveringRecipeCategory implements IRecipeCategory<SootCoveringJ
     }
 
     @Override
-    public void draw(SootCoveringJeiRecipe recipe, @NonNull IRecipeSlotsView recipeSlotsView, @NonNull GuiGraphics guiGraphics, double mouseX, double mouseY) {
+    public void draw(SootCoveringJeiRecipe recipe, @NonNull IRecipeSlotsView recipeSlotsView, @NonNull GuiGraphicsExtractor guiGraphics, double mouseX, double mouseY) {
         background.draw(guiGraphics);
     }
 

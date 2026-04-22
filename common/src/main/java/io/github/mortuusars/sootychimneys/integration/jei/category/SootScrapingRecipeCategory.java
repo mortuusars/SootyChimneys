@@ -9,7 +9,6 @@ import io.github.mortuusars.sootychimneys.recipe.result.ChanceResult;
 import mezz.jei.api.constants.VanillaTypes;
 import mezz.jei.api.gui.builder.IRecipeLayoutBuilder;
 import mezz.jei.api.gui.drawable.IDrawable;
-import mezz.jei.api.gui.drawable.IDrawableBuilder;
 import mezz.jei.api.gui.drawable.IDrawableStatic;
 import mezz.jei.api.gui.ingredient.IRecipeSlotsView;
 import mezz.jei.api.helpers.IGuiHelper;
@@ -18,7 +17,7 @@ import mezz.jei.api.recipe.RecipeIngredientRole;
 import mezz.jei.api.recipe.category.IRecipeCategory;
 import mezz.jei.api.recipe.types.IRecipeType;
 import net.minecraft.ChatFormatting;
-import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.client.gui.GuiGraphicsExtractor;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.Identifier;
 import org.jetbrains.annotations.NotNull;
@@ -40,11 +39,11 @@ public class SootScrapingRecipeCategory implements IRecipeCategory<SootScrapingR
     public SootScrapingRecipeCategory(IGuiHelper helper) {
         title = Component.translatable("jei.sootychimneys.category.soot_scraping");
 
-        Identifier texture = SootyChimneys.resource("textures/gui/jei/soot_scraping.png");
+        Identifier texture = SootyChimneys.identifier("textures/gui/jei/soot_scraping.png");
 
-        icon = helper.drawableBuilder(SootyChimneys.resource("textures/gui/jei/soot_scraping_icon.png"), 0, 0, 16, 16)
-                .setTextureSize(16, 16)
-                .build();
+        icon = helper.drawableBuilder(SootyChimneys.identifier("textures/gui/jei/soot_scraping_icon.png"), 0, 0, 16, 16)
+              .setTextureSize(16, 16)
+              .build();
 
         background = helper.createDrawable(texture, 0, 0, BG_WIDTH, BG_HEIGHT);
 
@@ -56,63 +55,63 @@ public class SootScrapingRecipeCategory implements IRecipeCategory<SootScrapingR
     @Override
     public void setRecipe(IRecipeLayoutBuilder builder, SootScrapingRecipe recipe, @NotNull IFocusGroup focuses) {
         builder.addSlot(RecipeIngredientRole.INPUT, 9, 18)
-                .setCustomRenderer(VanillaTypes.ITEM_STACK, new ScalableItemStackRenderer(2.5f))
-                .add(recipe.chimney())
-                .setSlotName("DirtyChimney");
+              .setCustomRenderer(VanillaTypes.ITEM_STACK, new ScalableItemStackRenderer(2.5f))
+              .add(recipe.chimney())
+              .setSlotName("DirtyChimney");
 
         builder.addSlot(RecipeIngredientRole.CRAFTING_STATION, 44, 1)
-                .addItemStacks(SootyChimneysJeiPlugin.getScrapingTools())
-                .setSlotName("Tool");
+              .addItemStacks(SootyChimneysJeiPlugin.getScrapingTools())
+              .setSlotName("Tool");
 
         builder.addSlot(RecipeIngredientRole.OUTPUT, 104, 18)
-                .setCustomRenderer(VanillaTypes.ITEM_STACK, new ScalableItemStackRenderer(2.5f))
-                .add(recipe.getResultChimney())
-                .setSlotName("CleanChimney");
+              .setCustomRenderer(VanillaTypes.ITEM_STACK, new ScalableItemStackRenderer(2.5f))
+              .add(recipe.getResultChimney())
+              .setSlotName("CleanChimney");
 
         List<ChanceResult> results = recipe.results()
-                .stream()
-                .filter(result -> !result.stack().isEmpty() && result.chance() > 0)
-                .toList();
+              .stream()
+              .filter(result -> result.chance() > 0)
+              .toList();
 
         int slotX = 51 + (27 - ((results.size() * 18) / 2));
 
         for (int i = 0; i < Math.min(results.size(), SootScrapingRecipe.MAX_RESULTS); i++) {
             ChanceResult result = results.get(i);
             builder.addSlot(RecipeIngredientRole.OUTPUT, slotX + (18 * i) - 1, 47)
-                    .setSlotName("Result" + i + 1)
-                    .add(result.stack())
-                    .addRichTooltipCallback((recipeSlotView, tooltip) -> {
-                        if (result.chance() < 1.0f) {
-                            float chance = result.chance() * 100;
-                            String chanceString = chance < 1 ? "<1" : Integer.toString((int) chance);
-                            tooltip.add(Component.translatable("jei.sootychimneys.chance", chanceString).withStyle(ChatFormatting.GOLD));
-                        }
-                    });
+                  .setSlotName("Result" + i + 1)
+                  .add(result.stack().create())
+                  .addRichTooltipCallback((_, tooltip) -> {
+                      if (result.chance() < 1.0f) {
+                          float chance = result.chance() * 100;
+                          String chanceString = chance < 1 ? "<1" : Integer.toString((int) chance);
+                          tooltip.add(Component.translatable("jei.sootychimneys.chance", chanceString).withStyle(ChatFormatting.GOLD));
+                      }
+                  });
         }
     }
 
     @Override
-    public void draw(SootScrapingRecipe recipe, @NonNull IRecipeSlotsView recipeSlotsView, @NonNull GuiGraphics guiGraphics, double mouseX, double mouseY) {
-        background.draw(guiGraphics);
+    public void draw(SootScrapingRecipe recipe, @NonNull IRecipeSlotsView recipeSlotsView, @NonNull GuiGraphicsExtractor graphics, double mouseX, double mouseY) {
+        background.draw(graphics);
 
         List<ChanceResult> results = recipe.results()
-                .stream()
-                .filter(result -> !result.stack().isEmpty() && result.chance() > 0)
-                .toList();
+              .stream()
+              .filter(result -> result.chance() > 0)
+              .toList();
 
         if (results.isEmpty())
             return;
 
-        dust.draw(guiGraphics, 72, 34);
+        dust.draw(graphics, 72, 34);
 
         int slotX = 49 + (27 - ((results.size() * 18) / 2));
 
         for (int i = 0; i < results.size(); i++) {
             ChanceResult result = results.get(i);
             if (result.chance() >= 1.0f)
-                slot.draw(guiGraphics, slotX + (18 * i), 46);
+                slot.draw(graphics, slotX + (18 * i), 46);
             else
-                chanceSlot.draw(guiGraphics, slotX + (18 * i), 46);
+                chanceSlot.draw(graphics, slotX + (18 * i), 46);
         }
     }
 
@@ -141,4 +140,3 @@ public class SootScrapingRecipeCategory implements IRecipeCategory<SootScrapingR
         return JeiRecipeTypes.SOOT_SCRAPING;
     }
 }
-

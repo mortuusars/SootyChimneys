@@ -3,13 +3,14 @@ package io.github.mortuusars.sootychimneys.integration.jei.renderer;
 import com.mojang.logging.LogUtils;
 import mezz.jei.api.ingredients.IIngredientRenderer;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.client.gui.GuiGraphicsExtractor;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
 import org.jetbrains.annotations.NotNull;
+import org.jspecify.annotations.NonNull;
 
 import java.util.Collections;
 import java.util.List;
@@ -27,14 +28,10 @@ public class ScalableItemStackRenderer implements IIngredientRenderer<ItemStack>
     }
 
     @Override
-    public void render(GuiGraphics guiGraphics, ItemStack ingredient) {
+    public void render(@NonNull GuiGraphicsExtractor graphics, ItemStack ingredient) {
         if (ingredient != null) {
-//            guiGraphics.pose().pushPose();
-            {
-                guiGraphics.pose().scale(xScale, yScale);
-                guiGraphics.renderItem(ingredient, 0, 0);
-            }
-//            guiGraphics.pose().popPose();
+            graphics.pose().scale(xScale, yScale);
+            graphics.item(ingredient, 0, 0);
         }
     }
 
@@ -49,7 +46,7 @@ public class ScalableItemStackRenderer implements IIngredientRenderer<ItemStack>
     }
 
     @Override
-    public @NotNull List<Component> getTooltip(ItemStack ingredient, TooltipFlag tooltipFlag) {
+    public @NotNull List<Component> getTooltip(ItemStack ingredient, @NonNull TooltipFlag tooltipFlag) {
         Minecraft minecraft = Minecraft.getInstance();
         Player player = minecraft.player;
         try {

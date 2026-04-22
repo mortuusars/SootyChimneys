@@ -1,62 +1,28 @@
-plugins {
-    id 'com.gradleup.shadow'
-}
-
 architectury {
     platformSetupLoomIde()
     fabric()
 }
 
-loom {
-    accessWidenerPath = project(":common").loom.accessWidenerPath
-}
-
 configurations {
-    common {
-        canBeResolved = true
-        canBeConsumed = false
-    }
-    compileClasspath.extendsFrom common
-    runtimeClasspath.extendsFrom common
     developmentFabric.extendsFrom common
-
-    // Files in this configuration will be bundled into your mod using the Shadow plugin.
-    // Don't use the `shadow` configuration from the plugin itself as it's meant for excluding files.
-    shadowBundle {
-        canBeResolved = true
-        canBeConsumed = false
-    }
 }
 
 dependencies {
-    modImplementation "net.fabricmc:fabric-loader:$rootProject.fabric_loader_version"
+    implementation "net.fabricmc:fabric-loader:${fabric_loader_version}"
+    api "net.fabricmc.fabric-api:fabric-api:${fabric_api_version}"
 
-    // Fabric API. This is technically optional, but you probably want it anyway.
-    modImplementation "net.fabricmc.fabric-api:fabric-api:$rootProject.fabric_api_version"
+    implementation("net.fabricmc.fabric-api:fabric-api:${fabric_api_version}")
+    implementation("fuzs.forgeconfigapiport:forgeconfigapiport-fabric:${forge_config_api_port_version}")
 
-    modImplementation "fuzs.forgeconfigapiport:forgeconfigapiport-fabric:${forge_config_api_port_version}"
+    localRuntime("mezz.jei:jei-${minecraft_version}-fabric:${jei_version}") { transitive = false }
+    localRuntime("maven.modrinth:jade:${jade_version}+fabric") { transitive = false }
 
-    // modCompileOnlyApi("mezz.jei:jei-${minecraft_version}-fabric-api:${jei_version}") { transitive = false }
-    // modRuntimeOnly("mezz.jei:jei-${minecraft_version}-fabric:${jei_version}") { transitive = false }
-
-    common(project(path: ':common', configuration: 'namedElements')) { transitive false }
-    shadowBundle project(path: ':common', configuration: 'transformProductionFabric')
+    common(project(path: ":common")) { transitive false }
+    shadowCommon(project(path: ":common", configuration: "transformProductionFabric")) { transitive false }
 }
 
-processResources {
-    inputs.property 'version', project.version
-
-    filesMatching('fabric.mod.json') {
-        expand version: project.version
-    }
-}
-
-shadowJar {
-    configurations = [project.configurations.shadowBundle]
-    archiveClassifier = 'dev-shadow'
-}
-
-remapJar {
-    injectAccessWidener = true
-    input.set shadowJar.archiveFile
+sourcesJar {
+    def commonSources = project(':common').sourcesJar
+    dependsOn commonSources
+    from commonSources.archiveFile.map { zipTree(it) }
 }

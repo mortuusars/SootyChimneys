@@ -5,7 +5,9 @@ import io.github.mortuusars.sootychimneys.Config;
 import net.fabricmc.api.ModInitializer;
 
 import io.github.mortuusars.sootychimneys.SootyChimneys;
-import net.fabricmc.fabric.api.itemgroup.v1.ItemGroupEvents;
+import net.fabricmc.fabric.api.creativetab.v1.CreativeModeTabEvents;
+import net.fabricmc.fabric.api.recipe.v1.sync.RecipeSynchronization;
+import net.minecraft.client.Minecraft;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.CreativeModeTabs;
@@ -20,7 +22,7 @@ public final class SootyChimneysFabric implements ModInitializer {
         ConfigRegistry.INSTANCE.register(SootyChimneys.ID, ModConfig.Type.COMMON, Config.Common.SPEC);
         ConfigRegistry.INSTANCE.register(SootyChimneys.ID, ModConfig.Type.CLIENT, Config.Client.SPEC);
 
-        ItemGroupEvents.modifyEntriesEvent(CreativeModeTabs.FUNCTIONAL_BLOCKS).register(content -> {
+        CreativeModeTabEvents.modifyOutputEvent(CreativeModeTabs.FUNCTIONAL_BLOCKS).register(content -> {
             content.accept(SootyChimneys.Items.BRICK_CHIMNEY.get());
             content.accept(SootyChimneys.Items.DIRTY_BRICK_CHIMNEY.get());
             content.accept(SootyChimneys.Items.COBBLESTONE_CHIMNEY.get());
@@ -38,11 +40,13 @@ public final class SootyChimneysFabric implements ModInitializer {
         });
 
         SootyChimneys.Stats.register();
+
+        RecipeSynchronization.synchronizeRecipeSerializer(SootyChimneys.RecipeSerializers.SOOT_SCRAPING.get());
     }
 
     public static class Tags {
         public static class Items {
-            public static final TagKey<Item> SOOT_SCRAPERS = TagKey.create(Registries.ITEM, SootyChimneys.resource("soot_scrapers"));
+            public static final TagKey<Item> SOOT_SCRAPERS = TagKey.create(Registries.ITEM, SootyChimneys.identifier("soot_scrapers"));
         }
     }
 }

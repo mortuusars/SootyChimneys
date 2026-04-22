@@ -19,6 +19,7 @@ import net.minecraft.world.entity.MobCategory;
 import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.inventory.MenuType;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.item.crafting.Recipe;
 import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.item.crafting.RecipeType;
 import net.minecraft.world.level.block.Block;
@@ -72,7 +73,7 @@ public class RegisterImpl {
                 .clientTrackingRange(clientTrackingRange)
                 .setShouldReceiveVelocityUpdates(velocityUpdates)
                 .updateInterval(updateInterval)
-                .build(ResourceKey.create(Registries.ENTITY_TYPE, SootyChimneys.resource(id))));
+                .build(ResourceKey.create(Registries.ENTITY_TYPE, SootyChimneys.identifier(id))));
     }
 
     public static <T extends SoundEvent> Supplier<T> soundEvent(String id, Supplier<T> supplier) {
@@ -87,8 +88,8 @@ public class RegisterImpl {
         return RECIPE_TYPES.register(id, supplier);
     }
 
-    public static Supplier<RecipeSerializer<?>> recipeSerializer(String id, Supplier<RecipeSerializer<?>> supplier) {
-        return RECIPE_SERIALIZERS.register(id, supplier);
+    public static <T extends Recipe<?>> Supplier<RecipeSerializer<T>> recipeSerializer(String name, Supplier<RecipeSerializer<T>> supplier) {
+        return RECIPE_SERIALIZERS.register(name, supplier);
     }
 
     public static <T extends CriterionTrigger<?>> Supplier<T> criterionTrigger(String name, Supplier<T> supplier) {

@@ -16,12 +16,8 @@ import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.MobCategory;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.inventory.AbstractContainerMenu;
-import net.minecraft.world.inventory.MenuType;
 import net.minecraft.world.item.Item;
-import net.minecraft.world.item.crafting.Recipe;
-import net.minecraft.world.item.crafting.RecipeInput;
-import net.minecraft.world.item.crafting.RecipeSerializer;
-import net.minecraft.world.item.crafting.RecipeType;
+import net.minecraft.world.item.crafting.*;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
@@ -36,12 +32,12 @@ import java.util.function.Supplier;
 
 public class Register {
     @ExpectPlatform
-    public static <T extends Block> Supplier<T> block(String id, Function<Identifier, T> supplier) {
+    public static <T extends Block> Supplier<T> block(String id, Function<Identifier, T> func) {
         throw new AssertionError();
     }
 
     @ExpectPlatform
-    public static <T extends BlockEntityType<E>, E extends BlockEntity> Supplier<T> blockEntityType(String id, Supplier<T> func) {
+    public static <T extends BlockEntityType<E>, E extends BlockEntity> Supplier<T> blockEntityType(String id, Supplier<T> sup) {
         throw new AssertionError();
     }
 
@@ -52,8 +48,8 @@ public class Register {
 
     @FunctionalInterface
     public interface BlockEntitySupplier<T extends BlockEntity> {
-        @NotNull
-        T create(BlockPos pos, BlockState state);
+
+        @NotNull T create(BlockPos pos, BlockState state);
     }
 
     @ExpectPlatform
@@ -69,19 +65,19 @@ public class Register {
     }
 
     @ExpectPlatform
-    public static <T extends SoundEvent> Supplier<T> soundEvent(String id, Supplier<T> supplier) {
+    public static <T extends Entity> Supplier<EntityType<T>> entityType(String id, EntityType.EntityFactory<T> factory, MobCategory category,
+                                                                        boolean receiveVelocityUpdates, Consumer<EntityType.Builder<T>> typeBuilder) {
         throw new AssertionError();
     }
 
     @ExpectPlatform
-    public static <T extends MenuType<E>, E extends AbstractContainerMenu> Supplier<T> menuType(String id, MenuTypeSupplier<E> supplier) {
+    public static <T extends SoundEvent> Supplier<T> soundEvent(String id, Supplier<T> supplier) {
         throw new AssertionError();
     }
 
     @FunctionalInterface
     public interface MenuTypeSupplier<T extends AbstractContainerMenu> {
-        @NotNull
-        T create(int windowId, Inventory playerInv, RegistryFriendlyByteBuf extraData);
+        @NotNull T create(int windowId, Inventory playerInv, RegistryFriendlyByteBuf extraData);
     }
 
     @ExpectPlatform

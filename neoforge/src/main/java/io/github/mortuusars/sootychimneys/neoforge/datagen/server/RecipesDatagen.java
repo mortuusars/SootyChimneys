@@ -1,15 +1,25 @@
 package io.github.mortuusars.sootychimneys.neoforge.datagen.server;
 
 import io.github.mortuusars.sootychimneys.SootyChimneys;
+import io.github.mortuusars.sootychimneys.recipe.SootScrapingRecipe;
+import io.github.mortuusars.sootychimneys.recipe.result.ChanceResult;
 import net.minecraft.core.HolderLookup;
+import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.core.registries.Registries;
 import net.minecraft.data.PackOutput;
 import net.minecraft.data.recipes.*;
+import net.minecraft.resources.Identifier;
+import net.minecraft.resources.ResourceKey;
 import net.minecraft.tags.ItemTags;
+import net.minecraft.world.item.ItemStackTemplate;
 import net.minecraft.world.item.Items;
+import net.minecraft.world.item.crafting.Ingredient;
+import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.block.Blocks;
 import net.neoforged.neoforge.common.Tags;
 import org.jetbrains.annotations.NotNull;
 
+import java.util.List;
 import java.util.concurrent.CompletableFuture;
 
 public class RecipesDatagen extends RecipeProvider {
@@ -85,6 +95,23 @@ public class RecipesDatagen extends RecipeProvider {
               .pattern("TCT")
               .unlockedBy("has_terracotta", has(Blocks.TERRACOTTA))
               .save(output);
+
+        sootScraping(SootyChimneys.Items.DIRTY_BRICK_CHIMNEY.get(), 0.75f);
+        sootScraping(SootyChimneys.Items.DIRTY_COBBLESTONE_CHIMNEY.get(), 0.75f);
+        sootScraping(SootyChimneys.Items.DIRTY_STONE_BRICK_CHIMNEY.get(), 0.75f);
+        sootScraping(SootyChimneys.Items.DIRTY_MUD_BRICK_CHIMNEY.get(), 0.5f);
+        sootScraping(SootyChimneys.Items.DIRTY_IRON_CHIMNEY.get(), 0.5f);
+        sootScraping(SootyChimneys.Items.DIRTY_COPPER_CHIMNEY.get(), 0.5f);
+        sootScraping(SootyChimneys.Items.DIRTY_TERRACOTTA_CHIMNEY.get(), 0.5f);
+    }
+
+    public void sootScraping(ItemLike chimney, float chance) {
+        Identifier id = BuiltInRegistries.ITEM.getKey(chimney.asItem()).withPrefix("soot_scraping/");
+        output.accept(
+              ResourceKey.create(Registries.RECIPE, id),
+              new SootScrapingRecipe(Ingredient.of(chimney), List.of(new ChanceResult(new ItemStackTemplate(Items.BLACK_DYE), chance))),
+              null
+        );
     }
 
     public static class Runner extends RecipeProvider.Runner {

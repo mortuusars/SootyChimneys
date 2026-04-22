@@ -7,7 +7,7 @@ import mezz.jei.api.recipe.types.IRecipeType;
 
 public class JeiRecipeTypes {
     public static final IRecipeType<SootCoveringJeiRecipe> SOOT_COVERING =
-          IRecipeType.create(SootyChimneys.resource("soot_covering"), SootCoveringJeiRecipe.class);
+          IRecipeType.create(SootyChimneys.identifier("soot_covering"), SootCoveringJeiRecipe.class);
     public static final IRecipeType<SootScrapingRecipe> SOOT_SCRAPING =
-          IRecipeType.create(SootyChimneys.resource("soot_scraping"), SootScrapingRecipe.class);
+          IRecipeType.create(SootyChimneys.identifier("soot_scraping"), SootScrapingRecipe.class);
 }

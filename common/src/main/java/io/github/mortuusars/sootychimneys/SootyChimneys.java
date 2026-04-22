@@ -10,7 +10,6 @@ import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.Identifier;
 import net.minecraft.resources.ResourceKey;
-import net.minecraft.resources.Identifier;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.stats.StatFormatter;
 import net.minecraft.tags.TagKey;
@@ -50,200 +49,205 @@ public final class SootyChimneys {
     /**
      * Creates resource location in the mod namespace with the given path.
      */
-    public static Identifier resource(String path) {
+    public static Identifier identifier(String path) {
         return Identifier.fromNamespaceAndPath(ID, path);
     }
 
     public static class Blocks {
         public static final Supplier<ChimneyBlock> BRICK_CHIMNEY = Register.block("brick_chimney",
-                id -> new ChimneyBlock(BlockBehaviour.Properties.of()
-                        .setId(ResourceKey.create(Registries.BLOCK, id))
-                        .mapColor(MapColor.COLOR_ORANGE)
-                        .sound(SoundType.DEEPSLATE_BRICKS)
-                        .strength(2f, 2f)
-                        .destroyTime(2.2f)
-                        .requiresCorrectToolForDrops(), Chimney.State.CLEAN, ChimneyTypes.BRICK));
+              id -> new ChimneyBlock(BlockBehaviour.Properties.of()
+                    .setId(ResourceKey.create(Registries.BLOCK, id))
+                    .mapColor(MapColor.COLOR_ORANGE)
+                    .sound(SoundType.DEEPSLATE_BRICKS)
+                    .strength(2f, 2f)
+                    .destroyTime(2.2f)
+                    .requiresCorrectToolForDrops(), Chimney.State.CLEAN, ChimneyTypes.BRICK));
 
         public static final Supplier<ChimneyBlock> DIRTY_BRICK_CHIMNEY = Register.block("dirty_brick_chimney",
-                id -> new ChimneyBlock(BlockBehaviour.Properties.of()
-                        .setId(ResourceKey.create(Registries.BLOCK, id))
-                        .mapColor(MapColor.COLOR_ORANGE)
-                        .sound(SoundType.DEEPSLATE_BRICKS)
-                        .strength(2f, 2f)
-                        .destroyTime(2.2f)
-                        .requiresCorrectToolForDrops(), Chimney.State.DIRTY, ChimneyTypes.BRICK));
+              id -> new ChimneyBlock(BlockBehaviour.Properties.of()
+                    .setId(ResourceKey.create(Registries.BLOCK, id))
+                    .mapColor(MapColor.COLOR_ORANGE)
+                    .sound(SoundType.DEEPSLATE_BRICKS)
+                    .strength(2f, 2f)
+                    .destroyTime(2.2f)
+                    .requiresCorrectToolForDrops(), Chimney.State.DIRTY, ChimneyTypes.BRICK));
 
         public static final Supplier<ChimneyBlock> COBBLESTONE_CHIMNEY = Register.block("cobblestone_chimney",
-                id -> new ChimneyBlock(BlockBehaviour.Properties.of()
-                        .setId(ResourceKey.create(Registries.BLOCK, id))
-                        .mapColor(MapColor.COLOR_GRAY)
-                        .sound(SoundType.STONE)
-                        .strength(2f, 2f)
-                        .destroyTime(2.2f)
-                        .requiresCorrectToolForDrops(), Chimney.State.CLEAN, ChimneyTypes.COBBLESTONE));
+              id -> new ChimneyBlock(BlockBehaviour.Properties.of()
+                    .setId(ResourceKey.create(Registries.BLOCK, id))
+                    .mapColor(MapColor.COLOR_GRAY)
+                    .sound(SoundType.STONE)
+                    .strength(2f, 2f)
+                    .destroyTime(2.2f)
+                    .requiresCorrectToolForDrops(), Chimney.State.CLEAN, ChimneyTypes.COBBLESTONE));
 
         public static final Supplier<ChimneyBlock> DIRTY_COBBLESTONE_CHIMNEY = Register.block("dirty_cobblestone_chimney",
-                id -> new ChimneyBlock(BlockBehaviour.Properties.of()
-                        .setId(ResourceKey.create(Registries.BLOCK, id))
-                        .mapColor(MapColor.COLOR_GRAY)
-                        .sound(SoundType.STONE)
-                        .strength(2f, 2f)
-                        .destroyTime(2.2f)
-                        .requiresCorrectToolForDrops(), Chimney.State.DIRTY, ChimneyTypes.COBBLESTONE));
+              id -> new ChimneyBlock(BlockBehaviour.Properties.of()
+                    .setId(ResourceKey.create(Registries.BLOCK, id))
+                    .mapColor(MapColor.COLOR_GRAY)
+                    .sound(SoundType.STONE)
+                    .strength(2f, 2f)
+                    .destroyTime(2.2f)
+                    .requiresCorrectToolForDrops(), Chimney.State.DIRTY, ChimneyTypes.COBBLESTONE));
 
         public static final Supplier<ChimneyBlock> STONE_BRICK_CHIMNEY = Register.block("stone_brick_chimney",
-                id -> new ChimneyBlock(BlockBehaviour.Properties.of()
-                        .setId(ResourceKey.create(Registries.BLOCK, id))
-                        .mapColor(MapColor.COLOR_GRAY)
-                        .sound(SoundType.BASALT)
-                        .strength(2f, 2f)
-                        .destroyTime(2.2f)
-                        .requiresCorrectToolForDrops(), Chimney.State.CLEAN, ChimneyTypes.STONE_BRICK));
+              id -> new ChimneyBlock(BlockBehaviour.Properties.of()
+                    .setId(ResourceKey.create(Registries.BLOCK, id))
+                    .mapColor(MapColor.COLOR_GRAY)
+                    .sound(SoundType.BASALT)
+                    .strength(2f, 2f)
+                    .destroyTime(2.2f)
+                    .requiresCorrectToolForDrops(), Chimney.State.CLEAN, ChimneyTypes.STONE_BRICK));
 
         public static final Supplier<ChimneyBlock> DIRTY_STONE_BRICK_CHIMNEY = Register.block("dirty_stone_brick_chimney",
-                id -> new ChimneyBlock(BlockBehaviour.Properties.of()
-                        .setId(ResourceKey.create(Registries.BLOCK, id))
-                        .mapColor(MapColor.COLOR_GRAY)
-                        .sound(SoundType.BASALT)
-                        .strength(2f, 2f)
-                        .destroyTime(2f)
-                        .requiresCorrectToolForDrops(), Chimney.State.DIRTY, ChimneyTypes.STONE_BRICK));
+              id -> new ChimneyBlock(BlockBehaviour.Properties.of()
+                    .setId(ResourceKey.create(Registries.BLOCK, id))
+                    .mapColor(MapColor.COLOR_GRAY)
+                    .sound(SoundType.BASALT)
+                    .strength(2f, 2f)
+                    .destroyTime(2f)
+                    .requiresCorrectToolForDrops(), Chimney.State.DIRTY, ChimneyTypes.STONE_BRICK));
 
         public static final Supplier<ChimneyBlock> MUD_BRICK_CHIMNEY = Register.block("mud_brick_chimney",
-                id -> new ChimneyBlock(BlockBehaviour.Properties.of()
-                        .setId(ResourceKey.create(Registries.BLOCK, id))
-                        .mapColor(MapColor.COLOR_BROWN)
-                        .sound(SoundType.MUD_BRICKS)
-                        .strength(2f, 2f)
-                        .destroyTime(2.2f)
-                        .requiresCorrectToolForDrops(), Chimney.State.CLEAN, ChimneyTypes.MUD_BRICK));
+              id -> new ChimneyBlock(BlockBehaviour.Properties.of()
+                    .setId(ResourceKey.create(Registries.BLOCK, id))
+                    .mapColor(MapColor.COLOR_BROWN)
+                    .sound(SoundType.MUD_BRICKS)
+                    .strength(2f, 2f)
+                    .destroyTime(2.2f)
+                    .requiresCorrectToolForDrops(), Chimney.State.CLEAN, ChimneyTypes.MUD_BRICK));
 
         public static final Supplier<ChimneyBlock> DIRTY_MUD_BRICK_CHIMNEY = Register.block("dirty_mud_brick_chimney",
-                id -> new ChimneyBlock(BlockBehaviour.Properties.of()
-                        .setId(ResourceKey.create(Registries.BLOCK, id))
-                        .mapColor(MapColor.COLOR_BROWN)
-                        .sound(SoundType.MUD_BRICKS)
-                        .strength(2f, 2f)
-                        .destroyTime(2f)
-                        .requiresCorrectToolForDrops(), Chimney.State.DIRTY, ChimneyTypes.MUD_BRICK));
+              id -> new ChimneyBlock(BlockBehaviour.Properties.of()
+                    .setId(ResourceKey.create(Registries.BLOCK, id))
+                    .mapColor(MapColor.COLOR_BROWN)
+                    .sound(SoundType.MUD_BRICKS)
+                    .strength(2f, 2f)
+                    .destroyTime(2f)
+                    .requiresCorrectToolForDrops(), Chimney.State.DIRTY, ChimneyTypes.MUD_BRICK));
 
         public static final Supplier<ChimneyBlock> IRON_CHIMNEY = Register.block("iron_chimney",
-                id -> new ChimneyBlock(BlockBehaviour.Properties.of()
-                        .setId(ResourceKey.create(Registries.BLOCK, id))
-                        .mapColor(MapColor.COLOR_GRAY)
-                        .sound(SoundType.METAL)
-                        .strength(2f, 2f)
-                        .destroyTime(2.2f)
-                        .requiresCorrectToolForDrops(), Chimney.State.CLEAN, ChimneyTypes.IRON));
+              id -> new ChimneyBlock(BlockBehaviour.Properties.of()
+                    .setId(ResourceKey.create(Registries.BLOCK, id))
+                    .mapColor(MapColor.COLOR_GRAY)
+                    .sound(SoundType.METAL)
+                    .strength(2f, 2f)
+                    .destroyTime(2.2f)
+                    .requiresCorrectToolForDrops(), Chimney.State.CLEAN, ChimneyTypes.IRON));
 
         public static final Supplier<ChimneyBlock> DIRTY_IRON_CHIMNEY = Register.block("dirty_iron_chimney",
-                id -> new ChimneyBlock(BlockBehaviour.Properties.of()
-                        .setId(ResourceKey.create(Registries.BLOCK, id))
-                        .mapColor(MapColor.COLOR_GRAY)
-                        .sound(SoundType.METAL)
-                        .strength(2f, 2f)
-                        .destroyTime(2f)
-                        .requiresCorrectToolForDrops(), Chimney.State.DIRTY, ChimneyTypes.IRON));
+              id -> new ChimneyBlock(BlockBehaviour.Properties.of()
+                    .setId(ResourceKey.create(Registries.BLOCK, id))
+                    .mapColor(MapColor.COLOR_GRAY)
+                    .sound(SoundType.METAL)
+                    .strength(2f, 2f)
+                    .destroyTime(2f)
+                    .requiresCorrectToolForDrops(), Chimney.State.DIRTY, ChimneyTypes.IRON));
 
         public static final Supplier<ChimneyBlock> COPPER_CHIMNEY = Register.block("copper_chimney",
-                id -> new ChimneyBlock(BlockBehaviour.Properties.of()
-                        .setId(ResourceKey.create(Registries.BLOCK, id))
-                        .mapColor(MapColor.COLOR_ORANGE)
-                        .sound(SoundType.COPPER)
-                        .strength(2f, 2f)
-                        .destroyTime(2.2f)
-                        .requiresCorrectToolForDrops(), Chimney.State.CLEAN, ChimneyTypes.COPPER));
+              id -> new ChimneyBlock(BlockBehaviour.Properties.of()
+                    .setId(ResourceKey.create(Registries.BLOCK, id))
+                    .mapColor(MapColor.COLOR_ORANGE)
+                    .sound(SoundType.COPPER)
+                    .strength(2f, 2f)
+                    .destroyTime(2.2f)
+                    .requiresCorrectToolForDrops(), Chimney.State.CLEAN, ChimneyTypes.COPPER));
 
         public static final Supplier<ChimneyBlock> DIRTY_COPPER_CHIMNEY = Register.block("dirty_copper_chimney",
-                id -> new ChimneyBlock(BlockBehaviour.Properties.of()
-                        .setId(ResourceKey.create(Registries.BLOCK, id))
-                        .mapColor(MapColor.COLOR_ORANGE)
-                        .sound(SoundType.COPPER)
-                        .strength(2f, 2f)
-                        .destroyTime(2f)
-                        .requiresCorrectToolForDrops(), Chimney.State.DIRTY, ChimneyTypes.COPPER));
+              id -> new ChimneyBlock(BlockBehaviour.Properties.of()
+                    .setId(ResourceKey.create(Registries.BLOCK, id))
+                    .mapColor(MapColor.COLOR_ORANGE)
+                    .sound(SoundType.COPPER)
+                    .strength(2f, 2f)
+                    .destroyTime(2f)
+                    .requiresCorrectToolForDrops(), Chimney.State.DIRTY, ChimneyTypes.COPPER));
 
         public static final Supplier<ChimneyBlock> TERRACOTTA_CHIMNEY = Register.block("terracotta_chimney",
-                id -> new ChimneyBlock(BlockBehaviour.Properties.of()
-                        .setId(ResourceKey.create(Registries.BLOCK, id))
-                        .mapColor(MapColor.COLOR_ORANGE)
-                        .sound(SoundType.DRIPSTONE_BLOCK)
-                        .strength(2f, 2f)
-                        .destroyTime(2.2f)
-                        .requiresCorrectToolForDrops(), Chimney.State.CLEAN, ChimneyTypes.TERRACOTTA));
+              id -> new ChimneyBlock(BlockBehaviour.Properties.of()
+                    .setId(ResourceKey.create(Registries.BLOCK, id))
+                    .mapColor(MapColor.COLOR_ORANGE)
+                    .sound(SoundType.DRIPSTONE_BLOCK)
+                    .strength(2f, 2f)
+                    .destroyTime(2.2f)
+                    .requiresCorrectToolForDrops(), Chimney.State.CLEAN, ChimneyTypes.TERRACOTTA));
 
         public static final Supplier<ChimneyBlock> DIRTY_TERRACOTTA_CHIMNEY = Register.block("dirty_terracotta_chimney",
-                id -> new ChimneyBlock(BlockBehaviour.Properties.of()
-                        .setId(ResourceKey.create(Registries.BLOCK, id))
-                        .mapColor(MapColor.COLOR_ORANGE)
-                        .sound(SoundType.DRIPSTONE_BLOCK)
-                        .strength(2f, 2f)
-                        .destroyTime(2f)
-                        .requiresCorrectToolForDrops(), Chimney.State.DIRTY, ChimneyTypes.TERRACOTTA));
+              id -> new ChimneyBlock(BlockBehaviour.Properties.of()
+                    .setId(ResourceKey.create(Registries.BLOCK, id))
+                    .mapColor(MapColor.COLOR_ORANGE)
+                    .sound(SoundType.DRIPSTONE_BLOCK)
+                    .strength(2f, 2f)
+                    .destroyTime(2f)
+                    .requiresCorrectToolForDrops(), Chimney.State.DIRTY, ChimneyTypes.TERRACOTTA));
 
-        static void init() { }
+        static void init() {
+        }
     }
 
     public static class BlockEntityTypes {
         public static final Supplier<BlockEntityType<ChimneyBlockEntity>> CHIMNEY = Register.blockEntityType("chimney",
-                () -> Register.newBlockEntityType(ChimneyBlockEntity::new,
-                        Blocks.BRICK_CHIMNEY.get(),
-                        Blocks.DIRTY_BRICK_CHIMNEY.get(),
-                        Blocks.COBBLESTONE_CHIMNEY.get(),
-                        Blocks.DIRTY_COBBLESTONE_CHIMNEY.get(),
-                        Blocks.STONE_BRICK_CHIMNEY.get(),
-                        Blocks.DIRTY_STONE_BRICK_CHIMNEY.get(),
-                        Blocks.MUD_BRICK_CHIMNEY.get(),
-                        Blocks.DIRTY_MUD_BRICK_CHIMNEY.get(),
-                        Blocks.IRON_CHIMNEY.get(),
-                        Blocks.DIRTY_IRON_CHIMNEY.get(),
-                        Blocks.COPPER_CHIMNEY.get(),
-                        Blocks.DIRTY_COPPER_CHIMNEY.get(),
-                        Blocks.TERRACOTTA_CHIMNEY.get(),
-                        Blocks.DIRTY_TERRACOTTA_CHIMNEY.get()));
+              () -> Register.newBlockEntityType(ChimneyBlockEntity::new,
+                    Blocks.BRICK_CHIMNEY.get(),
+                    Blocks.DIRTY_BRICK_CHIMNEY.get(),
+                    Blocks.COBBLESTONE_CHIMNEY.get(),
+                    Blocks.DIRTY_COBBLESTONE_CHIMNEY.get(),
+                    Blocks.STONE_BRICK_CHIMNEY.get(),
+                    Blocks.DIRTY_STONE_BRICK_CHIMNEY.get(),
+                    Blocks.MUD_BRICK_CHIMNEY.get(),
+                    Blocks.DIRTY_MUD_BRICK_CHIMNEY.get(),
+                    Blocks.IRON_CHIMNEY.get(),
+                    Blocks.DIRTY_IRON_CHIMNEY.get(),
+                    Blocks.COPPER_CHIMNEY.get(),
+                    Blocks.DIRTY_COPPER_CHIMNEY.get(),
+                    Blocks.TERRACOTTA_CHIMNEY.get(),
+                    Blocks.DIRTY_TERRACOTTA_CHIMNEY.get()));
 
-        static void init() { }
+        static void init() {
+        }
     }
 
     public static class Items {
         public static final Supplier<BlockItem> BRICK_CHIMNEY = Register.item("brick_chimney",
-                id -> new BlockItem(Blocks.BRICK_CHIMNEY.get(), new Item.Properties().setId(ResourceKey.create(Registries.ITEM, id))));
+              id -> new BlockItem(Blocks.BRICK_CHIMNEY.get(), new Item.Properties().setId(ResourceKey.create(Registries.ITEM, id))));
         public static final Supplier<BlockItem> DIRTY_BRICK_CHIMNEY = Register.item("dirty_brick_chimney",
-                id -> new BlockItem(Blocks.DIRTY_BRICK_CHIMNEY.get(), new Item.Properties().setId(ResourceKey.create(Registries.ITEM, id))));
+              id -> new BlockItem(Blocks.DIRTY_BRICK_CHIMNEY.get(), new Item.Properties().setId(ResourceKey.create(Registries.ITEM, id))));
         public static final Supplier<BlockItem> COBBLESTONE_CHIMNEY = Register.item("cobblestone_chimney",
-                id -> new BlockItem(Blocks.COBBLESTONE_CHIMNEY.get(), new Item.Properties().setId(ResourceKey.create(Registries.ITEM, id))));
+              id -> new BlockItem(Blocks.COBBLESTONE_CHIMNEY.get(), new Item.Properties().setId(ResourceKey.create(Registries.ITEM, id))));
         public static final Supplier<BlockItem> DIRTY_COBBLESTONE_CHIMNEY = Register.item("dirty_cobblestone_chimney",
-                id -> new BlockItem(Blocks.DIRTY_COBBLESTONE_CHIMNEY.get(), new Item.Properties().setId(ResourceKey.create(Registries.ITEM, id))));
+              id -> new BlockItem(Blocks.DIRTY_COBBLESTONE_CHIMNEY.get(), new Item.Properties().setId(ResourceKey.create(Registries.ITEM, id))));
         public static final Supplier<BlockItem> STONE_BRICK_CHIMNEY = Register.item("stone_brick_chimney",
-                id -> new BlockItem(Blocks.STONE_BRICK_CHIMNEY.get(), new Item.Properties().setId(ResourceKey.create(Registries.ITEM, id))));
+              id -> new BlockItem(Blocks.STONE_BRICK_CHIMNEY.get(), new Item.Properties().setId(ResourceKey.create(Registries.ITEM, id))));
         public static final Supplier<BlockItem> DIRTY_STONE_BRICK_CHIMNEY = Register.item("dirty_stone_brick_chimney",
-                id -> new BlockItem(Blocks.DIRTY_STONE_BRICK_CHIMNEY.get(), new Item.Properties().setId(ResourceKey.create(Registries.ITEM, id))));
+              id -> new BlockItem(Blocks.DIRTY_STONE_BRICK_CHIMNEY.get(), new Item.Properties().setId(ResourceKey.create(Registries.ITEM, id))));
         public static final Supplier<BlockItem> MUD_BRICK_CHIMNEY = Register.item("mud_brick_chimney",
-                id -> new BlockItem(Blocks.MUD_BRICK_CHIMNEY.get(), new Item.Properties().setId(ResourceKey.create(Registries.ITEM, id))));
+              id -> new BlockItem(Blocks.MUD_BRICK_CHIMNEY.get(), new Item.Properties().setId(ResourceKey.create(Registries.ITEM, id))));
         public static final Supplier<BlockItem> DIRTY_MUD_BRICK_CHIMNEY = Register.item("dirty_mud_brick_chimney",
-                id -> new BlockItem(Blocks.DIRTY_MUD_BRICK_CHIMNEY.get(), new Item.Properties().setId(ResourceKey.create(Registries.ITEM, id))));
+              id -> new BlockItem(Blocks.DIRTY_MUD_BRICK_CHIMNEY.get(), new Item.Properties().setId(ResourceKey.create(Registries.ITEM, id))));
         public static final Supplier<BlockItem> IRON_CHIMNEY = Register.item("iron_chimney",
-                id -> new BlockItem(Blocks.IRON_CHIMNEY.get(), new Item.Properties().setId(ResourceKey.create(Registries.ITEM, id))));
+              id -> new BlockItem(Blocks.IRON_CHIMNEY.get(), new Item.Properties().setId(ResourceKey.create(Registries.ITEM, id))));
         public static final Supplier<BlockItem> DIRTY_IRON_CHIMNEY = Register.item("dirty_iron_chimney",
-                id -> new BlockItem(Blocks.DIRTY_IRON_CHIMNEY.get(), new Item.Properties().setId(ResourceKey.create(Registries.ITEM, id))));
+              id -> new BlockItem(Blocks.DIRTY_IRON_CHIMNEY.get(), new Item.Properties().setId(ResourceKey.create(Registries.ITEM, id))));
         public static final Supplier<BlockItem> COPPER_CHIMNEY = Register.item("copper_chimney",
-                id -> new BlockItem(Blocks.COPPER_CHIMNEY.get(), new Item.Properties().setId(ResourceKey.create(Registries.ITEM, id))));
+              id -> new BlockItem(Blocks.COPPER_CHIMNEY.get(), new Item.Properties().setId(ResourceKey.create(Registries.ITEM, id))));
         public static final Supplier<BlockItem> DIRTY_COPPER_CHIMNEY = Register.item("dirty_copper_chimney",
-                id -> new BlockItem(Blocks.DIRTY_COPPER_CHIMNEY.get(), new Item.Properties().setId(ResourceKey.create(Registries.ITEM, id))));
+              id -> new BlockItem(Blocks.DIRTY_COPPER_CHIMNEY.get(), new Item.Properties().setId(ResourceKey.create(Registries.ITEM, id))));
         public static final Supplier<BlockItem> TERRACOTTA_CHIMNEY = Register.item("terracotta_chimney",
-                id -> new BlockItem(Blocks.TERRACOTTA_CHIMNEY.get(), new Item.Properties().setId(ResourceKey.create(Registries.ITEM, id))));
+              id -> new BlockItem(Blocks.TERRACOTTA_CHIMNEY.get(), new Item.Properties().setId(ResourceKey.create(Registries.ITEM, id))));
         public static final Supplier<BlockItem> DIRTY_TERRACOTTA_CHIMNEY = Register.item("dirty_terracotta_chimney",
-                id -> new BlockItem(Blocks.DIRTY_TERRACOTTA_CHIMNEY.get(), new Item.Properties().setId(ResourceKey.create(Registries.ITEM, id))));
+              id -> new BlockItem(Blocks.DIRTY_TERRACOTTA_CHIMNEY.get(), new Item.Properties().setId(ResourceKey.create(Registries.ITEM, id))));
 
-        static void init() { }
+        static void init() {
+        }
     }
 
     public static class DataComponents {
-        static void init() { }
+        static void init() {
+        }
     }
 
     public static class MenuTypes {
-        static void init() { }
+        static void init() {
+        }
     }
 
     public static class LootTables {
@@ -257,7 +261,7 @@ public final class SootyChimneys {
     public static class Stats {
         public static final Map<Identifier, StatFormatter> STATS = new HashMap<>();
 
-        public static final Identifier SOOT_SCRAPED = register(resource("soot_scraped"), StatFormatter.DEFAULT);
+        public static final Identifier SOOT_SCRAPED = register(identifier("soot_scraped"), StatFormatter.DEFAULT);
 
         @SuppressWarnings("SameParameterValue")
         private static Identifier register(Identifier location, StatFormatter formatter) {
@@ -276,10 +280,11 @@ public final class SootyChimneys {
     public static class SoundEvents {
         private static Supplier<SoundEvent> registerBlockSound(String name) {
             return Register.soundEvent("block." + ID + "." + name,
-                    () -> SoundEvent.createVariableRangeEvent(SootyChimneys.resource("block." + ID + "." + name)));
+                  () -> SoundEvent.createVariableRangeEvent(SootyChimneys.identifier("block." + ID + "." + name)));
         }
 
-        static void init() { }
+        static void init() {
+        }
     }
 
     public static class SoundTypes {
@@ -287,52 +292,59 @@ public final class SootyChimneys {
 
     public static class Tags {
         public static class Items {
-            public static final TagKey<Item> CHIMNEYS = TagKey.create(Registries.ITEM, resource("chimneys"));
-            public static final TagKey<Item> SOOTY_CHIMNEYS = TagKey.create(Registries.ITEM, resource("sooty_chimneys"));
+            public static final TagKey<Item> CHIMNEYS = TagKey.create(Registries.ITEM, identifier("chimneys"));
+            public static final TagKey<Item> SOOTY_CHIMNEYS = TagKey.create(Registries.ITEM, identifier("sooty_chimneys"));
             public static final TagKey<Item> C_CHIMNEYS = TagKey.create(Registries.ITEM, Identifier.parse("c:chimneys"));
         }
 
         public static class Blocks {
-            public static final TagKey<Block> CHIMNEYS = TagKey.create(Registries.BLOCK, resource("chimneys"));
-            public static final TagKey<Block> SOOTY_CHIMNEYS = TagKey.create(Registries.BLOCK, resource("sooty_chimneys"));
+            public static final TagKey<Block> CHIMNEYS = TagKey.create(Registries.BLOCK, identifier("chimneys"));
+            public static final TagKey<Block> SOOTY_CHIMNEYS = TagKey.create(Registries.BLOCK, identifier("sooty_chimneys"));
             public static final TagKey<Block> C_CHIMNEYS = TagKey.create(Registries.BLOCK, Identifier.parse("c:chimneys"));
-            public static final TagKey<Block> SMOKE_BLOCKING = TagKey.create(Registries.BLOCK, SootyChimneys.resource("smoke_blocking"));
-            public static final TagKey<Block> SMOKE_BOOSTING = TagKey.create(Registries.BLOCK, SootyChimneys.resource("smoke_boosting"));
+            public static final TagKey<Block> SMOKE_BLOCKING = TagKey.create(Registries.BLOCK, SootyChimneys.identifier("smoke_blocking"));
+            public static final TagKey<Block> SMOKE_BOOSTING = TagKey.create(Registries.BLOCK, SootyChimneys.identifier("smoke_boosting"));
         }
     }
 
     public static class EntityTypes {
-        static void init() { }
+        static void init() {
+        }
     }
 
     public static class RecipeTypes {
         public static final Supplier<RecipeType<SootScrapingRecipe>> SOOT_SCRAPING = Register.recipeType("soot_scraping",
-                () -> new RecipeType<>() {
-                    @Override
-                    public String toString() {
-                        return ID + ":soot_scraping";
-                    }
-                });
+              () -> new RecipeType<>() {
+                  @Override
+                  public String toString() {
+                      return ID + ":soot_scraping";
+                  }
+              });
 
-        static void init() { }
+        static void init() {
+        }
     }
 
     public static class RecipeSerializers {
         public static final Supplier<RecipeSerializer<SootScrapingRecipe>> SOOT_SCRAPING =
-                Register.recipeSerializer("soot_scraping", SootScrapingRecipe.Serializer::new);
+              Register.recipeSerializer("soot_scraping",
+                    () -> new RecipeSerializer<>(SootScrapingRecipe.CODEC, SootScrapingRecipe.STREAM_CODEC));
 
-        static void init() { }
+        static void init() {
+        }
     }
 
     public static class WorldGenFeatures {
-        static void init() { }
+        static void init() {
+        }
     }
 
     public static class ArgumentTypes {
-        public static void init() { }
+        public static void init() {
+        }
     }
 
     public static class ParticleTypes {
-        public static void init() { }
+        public static void init() {
+        }
     }
 }

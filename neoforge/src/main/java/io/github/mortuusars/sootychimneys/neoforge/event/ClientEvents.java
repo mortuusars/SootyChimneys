@@ -3,6 +3,7 @@ package io.github.mortuusars.sootychimneys.neoforge.event;
 import io.github.mortuusars.sootychimneys.Config;
 import io.github.mortuusars.sootychimneys.SootyChimneys;
 import io.github.mortuusars.sootychimneys.data.wind.Wind;
+import io.github.mortuusars.sootychimneys.neoforge.PlatformSpecificClientImpl;
 import io.github.mortuusars.sootychimneys.recipe.SootScrapingRecipe;
 import net.minecraft.world.item.CreativeModeTabs;
 import net.minecraft.world.item.crafting.RecipeHolder;
@@ -40,11 +41,8 @@ public class ClientEvents {
 
     @SubscribeEvent
     public static void onRecipe(RecipesReceivedEvent event) {
-        SootScrapingRecipe.clientKnownRecipes = event.getRecipeMap()
-              .byType(SootyChimneys.RecipeTypes.SOOT_SCRAPING.get())
-              .stream()
-              .map(RecipeHolder::value)
-              .toList();
+        PlatformSpecificClientImpl.sootScrapingRecipes = event.getRecipeMap()
+              .byType(SootyChimneys.RecipeTypes.SOOT_SCRAPING.get());
     }
 
     @SubscribeEvent

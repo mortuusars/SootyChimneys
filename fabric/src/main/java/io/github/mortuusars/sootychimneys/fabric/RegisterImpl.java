@@ -5,7 +5,6 @@ import io.github.mortuusars.sootychimneys.SootyChimneys;
 import io.github.mortuusars.sootychimneys.Register;
 import net.fabricmc.fabric.api.command.v2.ArgumentTypeRegistry;
 import net.fabricmc.fabric.api.object.builder.v1.block.entity.FabricBlockEntityTypeBuilder;
-import net.fabricmc.fabric.api.screenhandler.v1.ExtendedScreenHandlerType;
 import net.minecraft.advancements.CriterionTrigger;
 import net.minecraft.commands.synchronization.ArgumentTypeInfo;
 import net.minecraft.core.Registry;
@@ -14,17 +13,15 @@ import net.minecraft.core.particles.ParticleOptions;
 import net.minecraft.core.particles.ParticleType;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
-import net.minecraft.network.RegistryFriendlyByteBuf;
-import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.Identifier;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.MobCategory;
-import net.minecraft.world.inventory.AbstractContainerMenu;
-import net.minecraft.world.inventory.MenuType;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.item.crafting.CustomRecipe;
+import net.minecraft.world.item.crafting.Recipe;
 import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.item.crafting.RecipeType;
 import net.minecraft.world.level.block.Block;
@@ -38,14 +35,14 @@ import java.util.function.Function;
 import java.util.function.Supplier;
 
 public class RegisterImpl {
-    public static <T extends Block> Supplier<T> block(String id, Function<Identifier, T> supplier) {
-        Identifier rl = SootyChimneys.resource(id);
-        T obj = Registry.register(BuiltInRegistries.BLOCK, rl, supplier.apply(rl));
+    public static <T extends Block> Supplier<T> block(String id, Function<Identifier, T> func) {
+        Identifier rl = SootyChimneys.identifier(id);
+        T obj = Registry.register(BuiltInRegistries.BLOCK, rl, func.apply(rl));
         return () -> obj;
     }
 
     public static <T extends BlockEntityType<E>, E extends BlockEntity> Supplier<T> blockEntityType(String id, Supplier<T> supplier) {
-        T obj = Registry.register(BuiltInRegistries.BLOCK_ENTITY_TYPE, SootyChimneys.resource(id), supplier.get());
+        T obj = Registry.register(BuiltInRegistries.BLOCK_ENTITY_TYPE, SootyChimneys.identifier(id), supplier.get());
         return () -> obj;
     }
 
@@ -54,7 +51,7 @@ public class RegisterImpl {
     }
 
     public static <T extends Item> Supplier<T> item(String id, Function<Identifier, T> func) {
-        Identifier rl = SootyChimneys.resource(id);
+        Identifier rl = SootyChimneys.identifier(id);
         T obj = Registry.register(BuiltInRegistries.ITEM, rl, func.apply(rl));
         return () -> obj;
     }
@@ -62,45 +59,47 @@ public class RegisterImpl {
     public static <T extends Entity> Supplier<EntityType<T>> entityType(String id, EntityType.EntityFactory<T> factory,
                                                                         MobCategory category, float width, float height,
                                                                         int clientTrackingRange, boolean velocityUpdates, int updateInterval) {
-        EntityType<T> type = Registry.register(BuiltInRegistries.ENTITY_TYPE, SootyChimneys.resource(id),
-                EntityType.Builder.of(factory, category)
-                        .sized(width, height)
-                        .clientTrackingRange(clientTrackingRange)
-                        .alwaysUpdateVelocity(velocityUpdates)
-                        .updateInterval(updateInterval)
-                        .build(ResourceKey.create(Registries.ENTITY_TYPE, SootyChimneys.resource(id))));
+        EntityType<T> type = Registry.register(BuiltInRegistries.ENTITY_TYPE, SootyChimneys.identifier(id),
+              EntityType.Builder.of(factory, category)
+                    .sized(width, height)
+                    .clientTrackingRange(clientTrackingRange)
+                    .alwaysUpdateVelocity(velocityUpdates)
+                    .updateInterval(updateInterval)
+                    .build(ResourceKey.create(Registries.ENTITY_TYPE, SootyChimneys.identifier(id))));
+        return () -> type;
+    }
+
+    public static <T extends Entity> Supplier<EntityType<T>> entityType(String id, EntityType.EntityFactory<T> factory, MobCategory category, boolean receiveVelocityUpdates, Consumer<EntityType.Builder<T>> typeBuilder) {
+        EntityType.Builder<T> builder = EntityType.Builder.of(factory, category);
+        typeBuilder.accept(builder);
+        builder.alwaysUpdateVelocity(receiveVelocityUpdates);
+        EntityType<T> type = Registry.register(BuiltInRegistries.ENTITY_TYPE, SootyChimneys.identifier(id), builder.build(ResourceKey.create(Registries.ENTITY_TYPE, SootyChimneys.identifier(id))));
         return () -> type;
     }
 
     public static <T extends SoundEvent> Supplier<T> soundEvent(String id, Supplier<T> supplier) {
-        T obj = Registry.register(BuiltInRegistries.SOUND_EVENT, SootyChimneys.resource(id), supplier.get());
+        T obj = Registry.register(BuiltInRegistries.SOUND_EVENT, SootyChimneys.identifier(id), supplier.get());
         return () -> obj;
-    }
-
-    public static <T extends MenuType<E>, E extends AbstractContainerMenu> Supplier<MenuType<E>> menuType(String id, Register.MenuTypeSupplier<E> supplier, StreamCodec<RegistryFriendlyByteBuf, RegistryFriendlyByteBuf> packetCodec) {
-        ExtendedScreenHandlerType<E, RegistryFriendlyByteBuf> type = Registry.register(BuiltInRegistries.MENU, SootyChimneys.resource(id),
-                new ExtendedScreenHandlerType<>(supplier::create, packetCodec));
-        return () -> type;
     }
 
     public static Supplier<RecipeType<?>> recipeType(String id, Supplier<RecipeType<?>> supplier) {
-        RecipeType<?> obj = Registry.register(BuiltInRegistries.RECIPE_TYPE, SootyChimneys.resource(id), supplier.get());
+        RecipeType<?> obj = Registry.register(BuiltInRegistries.RECIPE_TYPE, SootyChimneys.identifier(id), supplier.get());
         return () -> obj;
     }
 
-    public static Supplier<RecipeSerializer<?>> recipeSerializer(String id, Supplier<RecipeSerializer<?>> supplier) {
-        RecipeSerializer<?> obj = Registry.register(BuiltInRegistries.RECIPE_SERIALIZER, SootyChimneys.resource(id), supplier.get());
+    public static <T extends Recipe<?>> Supplier<RecipeSerializer<T>> recipeSerializer(String name, Supplier<RecipeSerializer<T>> supplier) {
+        RecipeSerializer<T> obj = Registry.register(BuiltInRegistries.RECIPE_SERIALIZER, SootyChimneys.identifier(name), supplier.get());
         return () -> obj;
     }
 
     public static <T extends CriterionTrigger<?>> Supplier<T> criterionTrigger(String name, Supplier<T> supplier) {
-        T obj = Registry.register(BuiltInRegistries.TRIGGER_TYPES, SootyChimneys.resource(name), supplier.get());
+        T obj = Registry.register(BuiltInRegistries.TRIGGER_TYPES, SootyChimneys.identifier(name), supplier.get());
         return () -> obj;
     }
 
     public static <A extends ArgumentType<?>, T extends ArgumentTypeInfo.Template<A>, I extends ArgumentTypeInfo<A, T>>
-            Supplier<ArgumentTypeInfo<A, T>> commandArgumentType(String id, Class<A> infoClass, I argumentTypeInfo) {
-        ArgumentTypeRegistry.registerArgumentType(SootyChimneys.resource(id), infoClass, argumentTypeInfo);
+    Supplier<ArgumentTypeInfo<A, T>> commandArgumentType(String id, Class<A> infoClass, I argumentTypeInfo) {
+        ArgumentTypeRegistry.registerArgumentType(SootyChimneys.identifier(id), infoClass, argumentTypeInfo);
         return () -> argumentTypeInfo;
     }
 
@@ -113,7 +112,7 @@ public class RegisterImpl {
         var builder = DataComponentType.<T>builder();
         builderConsumer.accept(builder);
         var componentType = builder.build();
-        return Registry.register(BuiltInRegistries.DATA_COMPONENT_TYPE, SootyChimneys.ID + name, componentType);
+        return Registry.register(BuiltInRegistries.DATA_COMPONENT_TYPE, SootyChimneys.identifier(name), componentType);
     }
 
     public static <T extends ParticleType<? extends ParticleOptions>> Supplier<T> particleType(String name, Supplier<T> supplier) {

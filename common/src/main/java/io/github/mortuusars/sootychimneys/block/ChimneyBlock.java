@@ -142,7 +142,7 @@ public class ChimneyBlock extends Block implements EntityBlock {
             }
 
             String messageTranslationKey = "message.sootychimneys." + (newBlockedValue ? "blocked" : "open");
-            player.displayClientMessage(Component.translatable(messageTranslationKey), true);
+            player.sendOverlayMessage(Component.translatable(messageTranslationKey));
         }
 
         return InteractionResult.SUCCESS;

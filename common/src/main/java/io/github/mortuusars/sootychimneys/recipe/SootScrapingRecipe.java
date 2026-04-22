@@ -1,6 +1,5 @@
 package io.github.mortuusars.sootychimneys.recipe;
 
-import com.mojang.serialization.DataResult;
 import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import io.github.mortuusars.sootychimneys.SootyChimneys;
@@ -8,7 +7,6 @@ import io.github.mortuusars.sootychimneys.block.ChimneyBlock;
 import io.github.mortuusars.sootychimneys.data.Chimney;
 import io.github.mortuusars.sootychimneys.recipe.result.ChanceResult;
 import net.minecraft.core.Holder;
-import net.minecraft.core.HolderLookup;
 import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.codec.ByteBufCodecs;
 import net.minecraft.network.codec.StreamCodec;
@@ -20,14 +18,28 @@ import net.minecraft.world.item.crafting.*;
 import net.minecraft.world.level.Level;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+import org.jspecify.annotations.NonNull;
 
-import java.util.Collections;
 import java.util.List;
 
 public class SootScrapingRecipe implements Recipe<SingleRecipeInput> {
     public static final int MAX_RESULTS = 6;
 
-    public static List<SootScrapingRecipe> clientKnownRecipes = Collections.emptyList();
+    public static final MapCodec<SootScrapingRecipe> CODEC = RecordCodecBuilder.mapCodec(instance -> instance.group(
+                Ingredient.CODEC
+                      .fieldOf("chimney")
+                      .forGetter(SootScrapingRecipe::chimney),
+                ChanceResult.CHANCE_RESULT_ONLY_CODEC.listOf(0, MAX_RESULTS)
+                      .fieldOf("results")
+                      .forGetter(SootScrapingRecipe::results))
+          .apply(instance, SootScrapingRecipe::new));
+
+    public static final StreamCodec<RegistryFriendlyByteBuf, SootScrapingRecipe> STREAM_CODEC =
+          StreamCodec.composite(
+                Ingredient.CONTENTS_STREAM_CODEC, SootScrapingRecipe::chimney,
+                ChanceResult.STREAM_CODEC.apply(ByteBufCodecs.list(MAX_RESULTS)), SootScrapingRecipe::results,
+                SootScrapingRecipe::new
+          );
 
     private final Ingredient chimney;
     private final List<ChanceResult> results;
@@ -41,6 +53,16 @@ public class SootScrapingRecipe implements Recipe<SingleRecipeInput> {
     @Override
     public boolean isSpecial() {
         return true;
+    }
+
+    @Override
+    public boolean showNotification() {
+        return false;
+    }
+
+    @Override
+    public @NonNull String group() {
+        return "";
     }
 
     public ItemStack getResultChimney() {
@@ -76,7 +98,7 @@ public class SootScrapingRecipe implements Recipe<SingleRecipeInput> {
     }
 
     @Override
-    public @NotNull ItemStack assemble(SingleRecipeInput input, HolderLookup.Provider registries) {
+    public @NotNull ItemStack assemble(SingleRecipeInput input) {
         return getResultChimney();
     }
 
@@ -96,36 +118,5 @@ public class SootScrapingRecipe implements Recipe<SingleRecipeInput> {
 
     public List<ChanceResult> results() {
         return results;
-    }
-
-    public static class Serializer implements RecipeSerializer<SootScrapingRecipe> {
-        public static final MapCodec<SootScrapingRecipe> CODEC = RecordCodecBuilder.mapCodec(instance -> instance.group(
-                    Ingredient.CODEC
-                          .fieldOf("chimney")
-                          .forGetter(SootScrapingRecipe::chimney),
-                    ChanceResult.CODEC.listOf(0, 3)
-                          .validate(list -> list.size() <= MAX_RESULTS
-                                ? DataResult.success(list)
-                                : DataResult.error(() -> "SootScrapingRecipe should have at most " + MAX_RESULTS + " results."))
-                          .fieldOf("results")
-                          .forGetter(SootScrapingRecipe::results))
-              .apply(instance, SootScrapingRecipe::new));
-
-        public static final StreamCodec<RegistryFriendlyByteBuf, SootScrapingRecipe> STREAM_CODEC =
-              StreamCodec.composite(
-                    Ingredient.CONTENTS_STREAM_CODEC, SootScrapingRecipe::chimney,
-                    ChanceResult.STREAM_CODEC.apply(ByteBufCodecs.list(MAX_RESULTS)), SootScrapingRecipe::results,
-                    SootScrapingRecipe::new
-              );
-
-        @Override
-        public @NotNull MapCodec<SootScrapingRecipe> codec() {
-            return CODEC;
-        }
-
-        @Override
-        public @NotNull StreamCodec<RegistryFriendlyByteBuf, SootScrapingRecipe> streamCodec() {
-            return STREAM_CODEC;
-        }
     }
 }
