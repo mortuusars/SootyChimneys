@@ -208,8 +208,12 @@ public class ChimneyBlock extends Block implements EntityBlock {
             chimney.spawnSootParticles(level, pos, true);
         }
 
+        BlockState stateBelow = level.getBlockState(pos.below());
+        boolean isDisabledChimneyBelow = (stateBelow.getBlock() instanceof ChimneyBlock && !stateBelow.getValue(LIT));
+        boolean lit = !level.hasNeighborSignal(pos) && !isDisabledChimneyBelow;
+
         level.setBlock(pos, state
-                        .setValue(LIT, !level.hasNeighborSignal(pos))
+                        .setValue(LIT, lit)
                         .setValue(STACKED, stacked),
                 Block.UPDATE_ALL);
     }
