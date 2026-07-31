@@ -1,5 +1,8 @@
 # Changelog
 
+## 1.3.5 - 2026-07-31
+- Port to 26.2.
+
 ## 1.3.5 - 2026-05-12
 - Stacked chimneys carry the "lit" state.
   - Powering any of the bottom chimneys with redstone will disable the smoke on the top. 

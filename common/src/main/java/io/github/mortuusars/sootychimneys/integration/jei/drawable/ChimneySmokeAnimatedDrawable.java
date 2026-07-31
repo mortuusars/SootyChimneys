@@ -1,6 +1,6 @@
 package io.github.mortuusars.sootychimneys.integration.jei.drawable;
 
-import com.mojang.blaze3d.vertex.PoseStack;
+import io.github.mortuusars.sootychimneys.utils.Tuple;
 import mezz.jei.api.gui.drawable.IDrawable;
 import mezz.jei.api.gui.drawable.IDrawableAnimated;
 import mezz.jei.api.gui.drawable.IDrawableStatic;
@@ -8,7 +8,6 @@ import mezz.jei.api.helpers.IGuiHelper;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphicsExtractor;
 import net.minecraft.resources.Identifier;
-import net.minecraft.util.Tuple;
 import net.minecraft.world.phys.Vec2;
 
 import java.util.ArrayList;
@@ -58,12 +57,10 @@ public class ChimneySmokeAnimatedDrawable implements IDrawableAnimated {
         calculateAnimationTick();
 
         for (Tuple<Vec2, Integer> particle : currentParticles) {
-            Vec2 pos = particle.getA();
-            int index = particle.getB();
+            Vec2 pos = particle.getFirst();
+            int index = particle.getSecond();
 
             IDrawable particleFrame = smokeParticles.get(index);
-
-//            guiGraphics.pose().translate(0, 0, 100); // increase z-index so smoke renders above other things
 
             particleFrame.draw(guiGraphics, (int) (xOffset + pos.x), (int) (yOffset + pos.y));
         }
@@ -81,10 +78,10 @@ public class ChimneySmokeAnimatedDrawable implements IDrawableAnimated {
 
         for (Tuple<Vec2, Integer> particle : currentParticles) {
             // Update smoke frame and position
-            particle.setB(particle.getB() + 1);
-            particle.setA(particle.getA().add(new Vec2(random.nextInt(0, 2), -2 * getSpeed())));
+            particle.setFirst(particle.getFirst().add(new Vec2(random.nextInt(0, 2), -2 * getSpeed())));
+            particle.setSecond(particle.getSecond() + 1);
 
-            if (particle.getB() >= smokeParticles.size())
+            if (particle.getSecond() >= smokeParticles.size())
                 particlesToRemove.add(particle);
         }
 

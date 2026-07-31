@@ -109,7 +109,7 @@ public class RecipesDatagen extends RecipeProvider {
         Identifier id = BuiltInRegistries.ITEM.getKey(chimney.asItem()).withPrefix("soot_scraping/");
         output.accept(
               ResourceKey.create(Registries.RECIPE, id),
-              new SootScrapingRecipe(Ingredient.of(chimney), List.of(new ChanceResult(new ItemStackTemplate(Items.BLACK_DYE), chance))),
+              new SootScrapingRecipe(Ingredient.of(chimney), List.of(new ChanceResult(new ItemStackTemplate(Items.DYE.black()), chance))),
               null
         );
     }

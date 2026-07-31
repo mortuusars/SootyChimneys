@@ -11,7 +11,7 @@ import io.github.mortuusars.sootychimneys.data.ChimneyType;
 import io.github.mortuusars.sootychimneys.recipe.SootScrapingRecipe;
 import io.github.mortuusars.sootychimneys.recipe.result.ChanceResult;
 import io.github.mortuusars.sootychimneys.utils.RandomOffset;
-import net.minecraft.advancements.CriteriaTriggers;
+import net.minecraft.advancements.triggers.CriteriaTriggers;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Vec3i;
 import net.minecraft.core.particles.ParticleOptions;
