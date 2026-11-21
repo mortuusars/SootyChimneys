@@ -1,5 +1,11 @@
 # Changelog
 
+## 1.3.5 - 2026-11-21
+- Port to 26.3.
+- Bundled Mortaar library with the mod
+  - Mortaar is a library mod that will be used to aid in mod development and reduce code duplication
+  - As a player, you will not see any difference, apart from an additional mod in the mod menu
+
 ## 1.3.5 - 2026-07-31
 - Port to 26.2.
 

@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "sootychimneys:iron_chimney"
+        "recipes": "sootychimneys:iron_chimney"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

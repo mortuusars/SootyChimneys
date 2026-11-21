@@ -16,10 +16,11 @@ configurations {
 dependencies {
     neoForge "net.neoforged:neoforge:${neoforge_version}"
 
-    localRuntime("mezz.jei:jei-${minecraft_version}-neoforge:${jei_version}") { transitive = false }
+    implementation(include("io.github.mortuusars.mortaar:mortaar-${minecraft_version}-neoforge:${mortaar_version}"))
 
     localRuntime("mezz.jei:jei-${minecraft_version}-neoforge:${jei_version}") { transitive = false }
     localRuntime("maven.modrinth:jade:${jade_version}+neoforge") { transitive = false }
+    localRuntime("maven.modrinth:sodium:${sodium_version}-neoforge")
 
     common(project(path: ":common")) { transitive false }
     shadowCommon(project(path: ":common", configuration: "transformProductionNeoForge")) { transitive = false }
@@ -30,7 +31,7 @@ loom {
         data {
             serverData()
             programArgs "--all", "--mod", "${mod_id}"
-            programArgs "--output", project(':common').file("src/generated").absolutePath // Outputs to common project
+            programArgs "--output", project(':common').file("src/generated/resources").absolutePath // Outputs to common project
             programArgs "--existing", project(':common').file("src/main/resources").absolutePath
             // Makes datagen see resources from common folder
         }

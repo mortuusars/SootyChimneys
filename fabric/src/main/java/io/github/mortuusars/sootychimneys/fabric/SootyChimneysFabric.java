@@ -7,11 +7,7 @@ import net.fabricmc.api.ModInitializer;
 import io.github.mortuusars.sootychimneys.SootyChimneys;
 import net.fabricmc.fabric.api.creativetab.v1.CreativeModeTabEvents;
 import net.fabricmc.fabric.api.recipe.v1.sync.RecipeSynchronization;
-import net.minecraft.client.Minecraft;
-import net.minecraft.core.registries.Registries;
-import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.CreativeModeTabs;
-import net.minecraft.world.item.Item;
 import net.neoforged.fml.config.ModConfig;
 
 public final class SootyChimneysFabric implements ModInitializer {
@@ -39,14 +35,6 @@ public final class SootyChimneysFabric implements ModInitializer {
             content.accept(SootyChimneys.Items.DIRTY_TERRACOTTA_CHIMNEY.get());
         });
 
-        SootyChimneys.Stats.register();
-
         RecipeSynchronization.synchronizeRecipeSerializer(SootyChimneys.RecipeSerializers.SOOT_SCRAPING.get());
-    }
-
-    public static class Tags {
-        public static class Items {
-            public static final TagKey<Item> SOOT_SCRAPERS = TagKey.create(Registries.ITEM, SootyChimneys.identifier("soot_scrapers"));
-        }
     }
 }

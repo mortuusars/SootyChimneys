@@ -1,0 +1,15 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "key": {
+    "C": "#minecraft:coals",
+    "T": "minecraft:terracotta"
+  },
+  "pattern": [
+    "   ",
+    "T T",
+    "TCT"
+  ],
+  "result": {
+    "id": "sootychimneys:terracotta_chimney"
+  }
+}

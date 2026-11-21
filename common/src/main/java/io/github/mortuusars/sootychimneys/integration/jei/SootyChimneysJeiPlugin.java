@@ -1,6 +1,5 @@
 package io.github.mortuusars.sootychimneys.integration.jei;
 
-import io.github.mortuusars.sootychimneys.PlatformSpecific;
 import io.github.mortuusars.sootychimneys.PlatformSpecificClient;
 import io.github.mortuusars.sootychimneys.SootyChimneys;
 import io.github.mortuusars.sootychimneys.Config;
@@ -77,7 +76,7 @@ public class SootyChimneysJeiPlugin implements IModPlugin {
     public static List<ItemStack> getScrapingTools() {
         return BuiltInRegistries.ITEM.stream()
                 .map(ItemStack::new)
-                .filter(PlatformSpecific::canBeUsedToScrapeSoot)
+                .filter(stack -> stack.is(SootyChimneys.Tags.Items.SOOT_SCRAPERS))
                 .toList();
     }
 }

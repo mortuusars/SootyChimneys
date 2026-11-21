@@ -11,11 +11,15 @@ dependencies {
     implementation "net.fabricmc:fabric-loader:${fabric_loader_version}"
     api "net.fabricmc.fabric-api:fabric-api:${fabric_api_version}"
 
+    implementation(include("io.github.mortuusars.mortaar:mortaar-${minecraft_version}-fabric:${mortaar_version}"))
+
     implementation("net.fabricmc.fabric-api:fabric-api:${fabric_api_version}")
     implementation("fuzs.forgeconfigapiport:forgeconfigapiport-fabric:${forge_config_api_port_version}")
 
-    localRuntime("mezz.jei:jei-${minecraft_version}-fabric:${jei_version}") { transitive = false }
-    localRuntime("maven.modrinth:jade:${jade_version}+fabric") { transitive = false }
+    localRuntime("mezz.jei:jei-${minecraft_version}-fabric:${jei_version}")
+    localRuntime("maven.modrinth:modmenu:${modmenu_version}")
+    localRuntime("maven.modrinth:jade:${jade_version}+fabric")
+    localRuntime("maven.modrinth:sodium:${sodium_version}-fabric")
 
     common(project(path: ":common")) { transitive false }
     shadowCommon(project(path: ":common", configuration: "transformProductionFabric")) { transitive false }

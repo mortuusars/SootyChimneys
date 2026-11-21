@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "sootychimneys:mud_brick_chimney"
+        "recipes": "sootychimneys:mud_brick_chimney"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

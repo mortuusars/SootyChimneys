@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "key": {
+    "B": "minecraft:bricks",
+    "C": "#minecraft:coals",
+    "b": "minecraft:brick"
+  },
+  "pattern": [
+    "b b",
+    "B B",
+    "BCB"
+  ],
+  "result": {
+    "id": "sootychimneys:brick_chimney"
+  }
+}

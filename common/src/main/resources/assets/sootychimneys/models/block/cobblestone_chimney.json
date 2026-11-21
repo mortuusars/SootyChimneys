@@ -1,6 +1,6 @@
 {
 	"credit": "Made with Blockbench",
-	"parent": "minecraft:block/cube_all",
+	"parent": "minecraft:block/block",
 	"render_type": "cutout",
 	"texture_size": [32, 32],
 	"textures": {

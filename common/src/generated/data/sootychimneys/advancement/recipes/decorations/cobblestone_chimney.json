@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "sootychimneys:cobblestone_chimney"
+        "recipes": "sootychimneys:cobblestone_chimney"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

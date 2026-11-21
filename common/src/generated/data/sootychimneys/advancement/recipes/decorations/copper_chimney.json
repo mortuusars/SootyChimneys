@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "sootychimneys:copper_chimney"
+        "recipes": "sootychimneys:copper_chimney"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
